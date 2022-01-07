@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		428C6311E3CFE19C2B1A6B8C /* Pods_Beforeget_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A69965FD313A2A81790285D /* Pods_Beforeget_iOS.framework */; };
+		5B304B71278824C80054314A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B70278824C80054314A /* swiftgen.yml */; };
+		5B304B752788257F0054314A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B742788257E0054314A /* Colors.xcassets */; };
+		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
+		5B304B792788304B0054314A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B782788304B0054314A /* Fonts.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37527880B820018CC34 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37427880B820018CC34 /* MainViewController.swift */; };
@@ -42,6 +47,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A69965FD313A2A81790285D /* Pods_Beforeget_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beforeget_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CB252B1E01F2B473FBDEC59 /* Pods-Beforeget-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		5B304B70278824C80054314A /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		5B304B742788257E0054314A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
+		5B304B782788304B0054314A /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,17 +95,39 @@
 				927AF3C927881B7B0018CC34 /* Moya in Frameworks */,
 				927AF3D227881BF30018CC34 /* Then in Frameworks */,
 				927AF3D827881C860018CC34 /* IQKeyboardManagerSwift in Frameworks */,
+				428C6311E3CFE19C2B1A6B8C /* Pods_Beforeget_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B304B722788251A0054314A /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				5B304B782788304B0054314A /* Fonts.swift */,
+				5B304B7627882AF30054314A /* Assets+Generated.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		8BE74230A796E431079FC61E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CB252B1E01F2B473FBDEC59 /* Pods-Beforeget-iOS.debug.xcconfig */,
+				771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		927AF36427880B820018CC34 = {
 			isa = PBXGroup;
 			children = (
+				5B304B70278824C80054314A /* swiftgen.yml */,
 				927AF36F27880B820018CC34 /* Beforeget-iOS */,
 				927AF36E27880B820018CC34 /* Products */,
+				8BE74230A796E431079FC61E /* Pods */,
+				F0FEFA1EFB61C49406456B9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,8 +172,9 @@
 		927AF38627880CF00018CC34 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				927AF3D927881D9E0018CC34 /* Protocol */,
+				5B304B722788251A0054314A /* Constant */,
 				927AF39D278811420018CC34 /* Extension */,
+				927AF3D927881D9E0018CC34 /* Protocol */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -195,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				927AF37927880B830018CC34 /* Assets.xcassets */,
+				5B304B742788257E0054314A /* Colors.xcassets */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -323,6 +359,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A69965FD313A2A81790285D /* Pods_Beforeget_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,6 +374,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 927AF38127880B830018CC34 /* Build configuration list for PBXNativeTarget "Beforeget-iOS" */;
 			buildPhases = (
+				4EBE4130549634A8B3709756 /* [CP] Check Pods Manifest.lock */,
+				5B304B73278825470054314A /* ShellScript */,
 				927AF36927880B820018CC34 /* Sources */,
 				927AF36A27880B820018CC34 /* Frameworks */,
 				927AF36B27880B820018CC34 /* Resources */,
@@ -398,6 +444,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				927AF3B7278817E40018CC34 /* Pretendard-Medium.otf in Resources */,
+				5B304B71278824C80054314A /* swiftgen.yml in Resources */,
+				5B304B752788257F0054314A /* Colors.xcassets in Resources */,
 				927AF37D27880B830018CC34 /* LaunchScreen.storyboard in Resources */,
 				927AF3B9278817E80018CC34 /* PPNeueMachina-Ultrabold.otf in Resources */,
 				927AF3B4278817E40018CC34 /* Pretendard-Bold.otf in Resources */,
@@ -410,6 +458,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4EBE4130549634A8B3709756 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Beforeget-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B304B73278825470054314A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		927AF36927880B820018CC34 /* Sources */ = {
@@ -430,8 +520,10 @@
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
+				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,6 +668,7 @@
 		};
 		927AF38227880B830018CC34 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CB252B1E01F2B473FBDEC59 /* Pods-Beforeget-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -589,7 +682,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -605,6 +698,7 @@
 		};
 		927AF38327880B830018CC34 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -618,7 +712,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
