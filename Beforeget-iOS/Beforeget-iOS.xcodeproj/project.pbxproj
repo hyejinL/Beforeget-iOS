@@ -12,6 +12,8 @@
 		5B304B752788257F0054314A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B742788257E0054314A /* Colors.xcassets */; };
 		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
 		5B304B792788304B0054314A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B782788304B0054314A /* Fonts.swift */; };
+		924A3E2E2788390E006482B1 /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* Temp.swift */; };
+		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37527880B820018CC34 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37427880B820018CC34 /* MainViewController.swift */; };
@@ -54,6 +56,8 @@
 		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
 		5B304B782788304B0054314A /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		924A3E2D2788390E006482B1 /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
+		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +124,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		924A3E2927883834006482B1 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				924A3E2C27883864006482B1 /* UIComponet */,
+				924A3E2A2788383D006482B1 /* Font */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		924A3E2A2788383D006482B1 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				924A3E2F27883994006482B1 /* BDSFont.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		924A3E2C27883864006482B1 /* UIComponet */ = {
+			isa = PBXGroup;
+			children = (
+				924A3E2D2788390E006482B1 /* Temp.swift */,
+			);
+			path = UIComponet;
+			sourceTree = "<group>";
+		};
 		927AF36427880B820018CC34 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +201,7 @@
 		927AF38627880CF00018CC34 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				924A3E2927883834006482B1 /* DesignSystem */,
 				5B304B722788251A0054314A /* Constant */,
 				927AF39D278811420018CC34 /* Extension */,
 				927AF3D927881D9E0018CC34 /* Protocol */,
@@ -513,6 +543,8 @@
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				927AF37527880B820018CC34 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
+				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
+				924A3E2E2788390E006482B1 /* Temp.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
