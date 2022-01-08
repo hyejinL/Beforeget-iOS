@@ -1,14 +1,11 @@
 //
-//  Temp.swift
+//  BDSButton.swift
 //  Beforeget-iOS
 //
 //  Created by soyeon on 2022/01/07.
 //
 
 import UIKit
-
-import SnapKit
-import Then
 
 final class BDSButton: UIButton {
     
