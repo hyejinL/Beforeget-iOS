@@ -46,7 +46,7 @@ final class MainViewController: UIViewController {
     // MARK: - Properties
     
     private let topBarView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = Asset.Colors.white.color
     }
     
     private let logoImageView = UIImageView().then {
@@ -70,16 +70,14 @@ final class MainViewController: UIViewController {
     }
     
     private let writingView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = Asset.Colors.white.color
         $0.layer.cornerRadius = 15
-        $0.makeShadow(Asset.Colors.black200.color, 0.125, CGSize(width: 0, height: 4), 21)
     }
     
-    // 이미지 나오면 고칠 것!!
-    private let mediaImageView = UIView().then {
-        $0.backgroundColor = Asset.Colors.gray300.color
+    private let mediaImageView = UIImageView().then {
+        $0.backgroundColor = .white
     }
-
+    
     private let messageLabel = UILabel().then {
         $0.text = "오늘은 어떤 미디어를\n감상하셨나요?"
         $0.textColor = Asset.Colors.black200.color
@@ -141,7 +139,7 @@ final class MainViewController: UIViewController {
     }
     
     private lazy var recordCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = Asset.Colors.white.color
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = true
         
@@ -160,6 +158,14 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        writingView.makeShadow(Asset.Colors.black200.color, 0.2, CGSize(width: 0, height: 4), 21)
+        writingView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
+                                                        y: writingView.bounds.maxY - writingView.layer.shadowRadius,
+                                                        width: writingView.bounds.width,
+                                                        height: writingView.layer.shadowRadius)).cgPath
     }
     
     // MARK: - InitUI
