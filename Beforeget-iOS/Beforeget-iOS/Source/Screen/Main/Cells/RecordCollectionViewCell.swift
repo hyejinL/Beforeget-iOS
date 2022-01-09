@@ -10,8 +10,8 @@ import UIKit
 class RecordCollectionViewCell: UICollectionViewCell {
     static let identifier = "RecordCollectionViewCell"
     
-    private let boxView = UIView().then {
-        $0.backgroundColor = .white
+    private let mediaImageView = UIImageView().then {
+        $0.backgroundColor = Asset.Colors.white.color
     }
     
     private let countLabel = UILabel().then {
@@ -45,11 +45,11 @@ class RecordCollectionViewCell: UICollectionViewCell {
     }
     
     func setupLayout() {
-        [boxView, mediaStackView].forEach {
+        [mediaImageView, mediaStackView].forEach {
             contentView.addSubview($0)
         }
         
-        boxView.snp.makeConstraints {
+        mediaImageView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(17)
             $0.width.height.equalTo(36)
         }
