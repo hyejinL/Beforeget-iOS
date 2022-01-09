@@ -10,7 +10,7 @@ import UIKit
 public enum BDSFont {
     static let title1 = FontFamily.Pretendard.medium.font(size: 23)
     static let title2 = FontFamily.Pretendard.regular.font(size: 23)
-    static let title3 = FontFamily.Pretendard.semiBold.font(size: 22)
+    static let title3 = FontFamily.Pretendard.semiBold.font(size: 21)
     static let title4 = FontFamily.Pretendard.semiBold.font(size: 19)
     static let title5 = FontFamily.Pretendard.medium.font(size: 19)
     static let title6 = FontFamily.Pretendard.semiBold.font(size: 17)
