@@ -23,7 +23,6 @@
 		927AF399278810480018CC34 /* BaseResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF398278810480018CC34 /* BaseResponseType.swift */; };
 		927AF39C278810D50018CC34 /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39B278810D50018CC34 /* MockParser.swift */; };
 		927AF39F278812D50018CC34 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39E278812D50018CC34 /* UILabel+.swift */; };
-		927AF3A1278813110018CC34 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A0278813110018CC34 /* UIColor+.swift */; };
 		927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A2278813A60018CC34 /* UIScreen+.swift */; };
 		927AF3A5278813C00018CC34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A4278813C00018CC34 /* UIView+.swift */; };
 		927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A6278813E00018CC34 /* UIViewController+.swift */; };
@@ -46,6 +45,15 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
+		92B70FBD2789CAEF009B7763 /* ReportLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FBC2789CAEF009B7763 /* ReportLabelViewController.swift */; };
+		92B70FBF2789F297009B7763 /* ReportGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FBE2789F297009B7763 /* ReportGraphViewController.swift */; };
+		92B70FC12789F2B1009B7763 /* ReportRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC02789F2B1009B7763 /* ReportRankingViewController.swift */; };
+		92B70FC32789F38F009B7763 /* ReportSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC22789F38F009B7763 /* ReportSentenceViewController.swift */; };
+		92B70FC52789F3A1009B7763 /* ReportOnePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC42789F3A1009B7763 /* ReportOnePageViewController.swift */; };
+		92B70FC8278A11F7009B7763 /* ReportTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC7278A11F7009B7763 /* ReportTopView.swift */; };
+		92B70FCA278A1B82009B7763 /* ReportDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC9278A1B82009B7763 /* ReportDescriptionView.swift */; };
+		92B70FCC278AB993009B7763 /* RespondingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FCB278AB993009B7763 /* RespondingButton.swift */; };
+		92B70FCE278ACBB3009B7763 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FCD278ACBB3009B7763 /* MonthYearPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +83,6 @@
 		927AF398278810480018CC34 /* BaseResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseType.swift; sourceTree = "<group>"; };
 		927AF39B278810D50018CC34 /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
 		927AF39E278812D50018CC34 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
-		927AF3A0278813110018CC34 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		927AF3A2278813A60018CC34 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		927AF3A4278813C00018CC34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		927AF3A6278813E00018CC34 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -86,6 +93,15 @@
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		92B70FBC2789CAEF009B7763 /* ReportLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportLabelViewController.swift; sourceTree = "<group>"; };
+		92B70FBE2789F297009B7763 /* ReportGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGraphViewController.swift; sourceTree = "<group>"; };
+		92B70FC02789F2B1009B7763 /* ReportRankingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRankingViewController.swift; sourceTree = "<group>"; };
+		92B70FC22789F38F009B7763 /* ReportSentenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceViewController.swift; sourceTree = "<group>"; };
+		92B70FC42789F3A1009B7763 /* ReportOnePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportOnePageViewController.swift; sourceTree = "<group>"; };
+		92B70FC7278A11F7009B7763 /* ReportTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTopView.swift; sourceTree = "<group>"; };
+		92B70FC9278A1B82009B7763 /* ReportDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionView.swift; sourceTree = "<group>"; };
+		92B70FCB278AB993009B7763 /* RespondingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespondingButton.swift; sourceTree = "<group>"; };
+		92B70FCD278ACBB3009B7763 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				927AF39E278812D50018CC34 /* UILabel+.swift */,
-				927AF3A0278813110018CC34 /* UIColor+.swift */,
 				927AF3A2278813A60018CC34 /* UIScreen+.swift */,
 				927AF3A4278813C00018CC34 /* UIView+.swift */,
 				927AF3A6278813E00018CC34 /* UIViewController+.swift */,
@@ -351,6 +366,7 @@
 		927AF3AA2788156E0018CC34 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				92B70FC6278A11A8009B7763 /* Views */,
 				927AF3B12788164C0018CC34 /* Controllers */,
 			);
 			path = Report;
@@ -376,6 +392,11 @@
 			isa = PBXGroup;
 			children = (
 				927AF3B22788165B0018CC34 /* ReportViewController.swift */,
+				92B70FBC2789CAEF009B7763 /* ReportLabelViewController.swift */,
+				92B70FBE2789F297009B7763 /* ReportGraphViewController.swift */,
+				92B70FC02789F2B1009B7763 /* ReportRankingViewController.swift */,
+				92B70FC22789F38F009B7763 /* ReportSentenceViewController.swift */,
+				92B70FC42789F3A1009B7763 /* ReportOnePageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -387,6 +408,17 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		92B70FC6278A11A8009B7763 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92B70FC7278A11F7009B7763 /* ReportTopView.swift */,
+				92B70FC9278A1B82009B7763 /* ReportDescriptionView.swift */,
+				92B70FCB278AB993009B7763 /* RespondingButton.swift */,
+				92B70FCD278ACBB3009B7763 /* MonthYearPickerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -538,24 +570,32 @@
 			files = (
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */,
-				927AF3A1278813110018CC34 /* UIColor+.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
+				92B70FBF2789F297009B7763 /* ReportGraphViewController.swift in Sources */,
+				92B70FCA278A1B82009B7763 /* ReportDescriptionView.swift in Sources */,
 				927AF37527880B820018CC34 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				924A3E2E2788390E006482B1 /* Temp.swift in Sources */,
+				92B70FC8278A11F7009B7763 /* ReportTopView.swift in Sources */,
+				92B70FBD2789CAEF009B7763 /* ReportLabelViewController.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
+				92B70FC52789F3A1009B7763 /* ReportOnePageViewController.swift in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
+				92B70FC12789F2B1009B7763 /* ReportRankingViewController.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
+				92B70FC32789F38F009B7763 /* ReportSentenceViewController.swift in Sources */,
+				92B70FCE278ACBB3009B7763 /* MonthYearPickerView.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
+				92B70FCC278AB993009B7763 /* RespondingButton.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,7 +673,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -688,7 +728,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -714,7 +754,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -744,7 +784,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
