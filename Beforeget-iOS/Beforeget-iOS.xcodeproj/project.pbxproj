@@ -46,6 +46,8 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
+		E2E27794278A077E0083AFF5 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27793278A077D0083AFF5 /* RecordCollectionViewCell.swift */; };
+		E2E27797278A0C560083AFF5 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27796278A0C560083AFF5 /* Media.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		E2E27793278A077D0083AFF5 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2E27796278A0C560083AFF5 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +255,8 @@
 		927AF38B27880DA50018CC34 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E2E27795278A0C2A0083AFF5 /* Models */,
+				E2E27792278A074E0083AFF5 /* Cells */,
 				927AF39627880F0B0018CC34 /* Controllers */,
 			);
 			path = Main;
@@ -387,6 +393,22 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E2E27792278A074E0083AFF5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E2E27793278A077D0083AFF5 /* RecordCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E2E27795278A0C2A0083AFF5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2E27796278A0C560083AFF5 /* Media.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -542,6 +564,7 @@
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				927AF37527880B820018CC34 /* MainViewController.swift in Sources */,
+				E2E27797278A0C560083AFF5 /* Media.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				924A3E2E2788390E006482B1 /* Temp.swift in Sources */,
@@ -555,6 +578,7 @@
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
+				E2E27794278A077E0083AFF5 /* RecordCollectionViewCell.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
 			);
