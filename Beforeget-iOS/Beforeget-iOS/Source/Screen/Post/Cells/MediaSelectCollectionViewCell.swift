@@ -6,13 +6,13 @@
 //
 
 import UIKit
+
 import Then
 import SnapKit
 
-class MediaSelectCollectionViewCell: UICollectionViewCell {
+final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
-    static let identifier = "MediaSelectCollectionViewCell"
     
     private let mediaBackgroundView = UIView().then {
         $0.makeRound(radius: 5)
@@ -27,6 +27,16 @@ class MediaSelectCollectionViewCell: UICollectionViewCell {
     private let mediaLabel = UILabel().then {
         $0.font = BDSFont.body4
         $0.textColor = Asset.Colors.black200.color
+    }
+    
+    var isMediaSelected: Bool = false {
+        didSet {
+            if isSelected {
+                mediaBackgroundView.layer.borderColor = Asset.Colors.black200.color.cgColor
+            } else {
+                mediaBackgroundView.layer.borderColor = Asset.Colors.gray300.color.cgColor
+            }
+        }
     }
     
     // MARK: - InitUI

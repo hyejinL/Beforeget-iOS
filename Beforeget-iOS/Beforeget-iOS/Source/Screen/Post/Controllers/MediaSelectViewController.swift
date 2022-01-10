@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class MediaSelectViewController: UIViewController {
+final class MediaSelectViewController: UIViewController {
     
     enum MediaType: Int, CustomStringConvertible {
         case movie
@@ -44,6 +44,7 @@ class MediaSelectViewController: UIViewController {
         $0.setTitleColor(Asset.Colors.white.color, for: .normal)
         $0.backgroundColor = Asset.Colors.gray300.color
         $0.layer.cornerRadius = 4
+        $0.isEnabled = false
     }
     
     private let messageLabel = UILabel().then {
@@ -63,7 +64,7 @@ class MediaSelectViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.white.color
         $0.isScrollEnabled = false
         
-        $0.register(MediaSelectCollectionViewCell.self, forCellWithReuseIdentifier: MediaSelectCollectionViewCell.identifier)
+        MediaSelectCollectionViewCell.register(target: $0)
         $0.delegate = self
         $0.dataSource = self
     }
@@ -119,7 +120,10 @@ class MediaSelectViewController: UIViewController {
     }
     
     // MARK: - Custom Method
-    
+    private func activateNextButton() {
+        nextButton.isEnabled = true
+        nextButton.backgroundColor = Asset.Colors.black200.color
+    }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -138,7 +142,7 @@ extension MediaSelectViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaSelectCollectionViewCell.identifier, for: indexPath) as? MediaSelectCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaSelectCollectionViewCell.className, for: indexPath) as? MediaSelectCollectionViewCell
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
@@ -146,5 +150,24 @@ extension MediaSelectViewController: UICollectionViewDataSource {
         cell.config("\(media)")
         
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension MediaSelectViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MediaSelectCollectionViewCell
+        else { return }
+        
+        cell.isMediaSelected.toggle()
+        activateNextButton()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MediaSelectCollectionViewCell
+        else { return }
+        
+        cell.isMediaSelected.toggle()
     }
 }
