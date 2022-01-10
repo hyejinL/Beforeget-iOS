@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 extension UIViewController {
     func setupStatusBar(_ color: UIColor) {
         let margin = view.layoutMarginsGuide
@@ -16,12 +18,12 @@ extension UIViewController {
         view.addSubview(statusbarView)
         statusbarView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
-            statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
-            statusbarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            statusbarView.bottomAnchor.constraint(equalTo: margin.topAnchor)
-        ])
+        statusbarView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalTo(margin.snp.top)
+            make.width.equalTo(view.snp.width).multipliedBy(1.0)
+            make.centerX.equalToSuperview()
+        }
     }
     
     static var className: String {

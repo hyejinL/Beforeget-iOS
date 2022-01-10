@@ -12,7 +12,18 @@ import Then
 
 final class BDSNavigationBar: UIView {
     
-    // MARK: - Enum
+    // MARK: - Metric Enum
+    
+    public enum Metric {
+        static let navigationHeight: CGFloat = 50
+        static let titleTop: CGFloat = 19
+        static let buttonTop: CGFloat = 6
+        static let buttonLeading: CGFloat = 4
+        static let buttonTrailing: CGFloat = 7
+        static let buttonSize: CGFloat = 44
+    }
+    
+    // MARK: - PageView Enum
     
     public enum PageView {
         case report
@@ -29,34 +40,34 @@ final class BDSNavigationBar: UIView {
             }
         }
     }
-
+    
     // MARK: - Properties
     
-    private var vc: UIViewController?
-    
-    private lazy var backButton = BackButton(root: vc ?? UIViewController())
-    private lazy var closeButton = CloseButton(root: vc ?? UIViewController())
+    private var viewController = UIViewController()
+    private var backButton = BackButton()
+    private var closeButton = CloseButton()
     
     private var titleLabel = UILabel().then {
-        $0.font = BDSFont.enHead1
+        $0.font = BDSFont.enHead2
         $0.textColor = Asset.Colors.black200.color
         $0.textAlignment = .center
     }
     
-    private var view: PageView = .record {
+    private var viewType: PageView = .record {
         didSet {
             configUI()
         }
     }
-        
+    
     // MARK: - Initializer
     
-    public init(vc: UIViewController,
+    public init(_ viewController: UIViewController,
                 view: PageView,
                 isHidden: Bool) {
         super.init(frame: .zero)
-        self.vc = vc
-        self.view = view
+        self.backButton = BackButton(root: viewController)
+        self.closeButton = CloseButton(root: viewController)
+        viewType = view
         configUI()
         setupLayout()
         setupBackButton(isHidden: isHidden)
@@ -70,37 +81,34 @@ final class BDSNavigationBar: UIView {
     
     private func configUI() {
         backgroundColor = .white
-        
-        switch view {
-        case .report, .record, .write, .none:
-            titleLabel.text = view.title
-        }
+        titleLabel.text = viewType.title
     }
     
     private func setupLayout() {
-        self.addSubviews([backButton,
-                          titleLabel,
-                          closeButton])
+        addSubviews([backButton,
+                     titleLabel,
+                     closeButton])
         
-        self.snp.makeConstraints { make in
-            make.height.equalTo(50)
+        snp.makeConstraints { make in
+            make.height.equalTo(Metric.navigationHeight)
         }
         
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(6)
-            make.leading.equalToSuperview().inset(4)
-            make.width.height.equalTo(44)
+            make.top.equalToSuperview().inset(Metric.buttonTop)
+            make.leading.equalToSuperview().inset(Metric.buttonLeading)
+            make.width.height.equalTo(Metric.buttonSize)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(19)
+            make.top.equalToSuperview().inset(Metric.titleTop)
             make.centerX.equalToSuperview()
+            
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(6)
-            make.trailing.equalToSuperview().inset(7)
-            make.width.height.equalTo(44)
+            make.top.equalToSuperview().inset(Metric.buttonTop)
+            make.trailing.equalToSuperview().inset(Metric.buttonTrailing)
+            make.width.height.equalTo(Metric.buttonSize)
         }
     }
     
