@@ -15,6 +15,7 @@
 		5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F7F278A2A8F00202230 /* BackButton.swift */; };
 		5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F81278A2BCF00202230 /* CloseButton.swift */; };
 		5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
+		5B7BD0F9278C4F69000BC0FA /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BD0F8278C4F69000BC0FA /* RecordTableViewCell.swift */; };
 		924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* BDSButton.swift */; };
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		5B6D7F7F278A2A8F00202230 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5B6D7F81278A2BCF00202230 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSNavigationBar.swift; sourceTree = "<group>"; };
+		5B7BD0F8278C4F69000BC0FA /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		924A3E2D2788390E006482B1 /* BDSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSButton.swift; sourceTree = "<group>"; };
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
@@ -117,6 +119,22 @@
 				5B304B7627882AF30054314A /* Assets+Generated.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		5B7BD0F7278C49DC000BC0FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B7BD0FA278C6908000BC0FA /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B7BD0FA278C6908000BC0FA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5B7BD0F8278C4F69000BC0FA /* RecordTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8BE74230A796E431079FC61E /* Pods */ = {
@@ -349,6 +367,7 @@
 		927AF3A92788155E0018CC34 /* MyRecord */ = {
 			isa = PBXGroup;
 			children = (
+				5B7BD0F7278C49DC000BC0FA /* Views */,
 				927AF3AE278816340018CC34 /* Controllers */,
 			);
 			path = MyRecord;
@@ -556,6 +575,7 @@
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
+				5B7BD0F9278C4F69000BC0FA /* RecordTableViewCell.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,

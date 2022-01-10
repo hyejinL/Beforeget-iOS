@@ -7,23 +7,73 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 class MyRecordViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    // MARK: - Properties
+    
+    private lazy var navigationBar = BDSNavigationBar(
+        self, view: .record, isHidden: false)
+    
+    private lazy var searchButton = UIButton().then {
+        $0.setImage(
+            Asset.Assets.btnSearch.image,
+            for: .normal)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private lazy var plusButton = UIButton().then {
+        $0.setImage(
+            Asset.Assets.btnPlus.image,
+            for: .normal)
     }
-    */
+    
+    private lazy var recordTableView = UITableView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        RecordTableViewCell.register(target: $0)
+    }
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configUI()
+        setupLayout()
+    }
+    
+    // MARK: - InitUI
+    
+    private func configUI() {
+        view.backgroundColor = .white
+    }
+    
+    private func setupLayout() {
+        
+    }
+    
+    // MARK: - Custom Method
+    
+    
+}
 
+// MARK: - UITableViewDelegate
+
+extension MyRecordViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension MyRecordViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
 }
