@@ -10,34 +10,31 @@ import UIKit
 import SnapKit
 import Then
 
-class ReportLabelViewController: UIViewController {
+final class ReportLabelViewController: UIViewController {
     
     // MARK: - Properties
     
+    private lazy var naviBar = UIView().then {
+        $0.backgroundColor = .gray
+    }
     private lazy var reportTopView = ReportTopView()
-    
     private lazy var typeImageView = UIImageView().then {
         $0.image = UIImage(named: " ")
         $0.contentMode = .scaleAspectFill
     }
-    
     private lazy var reportDescriptionView = ReportDescriptionView()
-    
     private lazy var monthPicker = MonthYearPickerView()
     
-//    private lazy var monthPicker = UIDatePicker().then {
-//        $0.preferredDatePickerStyle = .wheels
-//        $0.datePickerMode = .date
-//        $0.locale = Locale(identifier: "ko")
-//        $0.maximumDate = Date()
-//    }
-    
     // MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.backgroundColor = .systemGray2
         configUI()
         setupLayout()
         bind()
@@ -47,11 +44,13 @@ class ReportLabelViewController: UIViewController {
     
     private func configUI() {
         reportTopView.monthButton.inputAccessoryView = createToolbar()
+        reportTopView.monthButton.inputView = monthPicker
         
-        // MARK: TODO REMOVE
-        reportTopView.month = "12"
-        reportDescriptionView.type = "티키타카 뮤지션"
-        reportDescriptionView.typeDescription = """
+        reportTopView.reportTitle = "12월의 땅콩님은?"
+        reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
+        
+        reportDescriptionView.descriptionTitle = "티키타카 뮤지션"
+        reportDescriptionView.descriptionContent = """
                                                 하루의 시작과 끝을 음악과 함께하시는군요!
                                                 이번 달 음악 기록이 가장 많은 당신,
                                                 오늘은 어떤 음악이 당신의 하루를 채웠나요?
@@ -60,10 +59,16 @@ class ReportLabelViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([reportTopView, typeImageView, reportDescriptionView])
+        view.addSubviews([naviBar, reportTopView, typeImageView, reportDescriptionView])
+        
+        naviBar.snp.makeConstraints {
+            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(50)
+        }
         
         reportTopView.snp.makeConstraints {
-            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(naviBar.snp.bottom)
             $0.height.equalTo(151)
         }
         
@@ -84,8 +89,6 @@ class ReportLabelViewController: UIViewController {
     
     private func bind() {
         reportTopView.delegate = self
-        
-        reportTopView.monthButton.inputView = monthPicker
     }
     
     private func createToolbar() -> UIToolbar {
@@ -106,7 +109,7 @@ class ReportLabelViewController: UIViewController {
     @objc
     func touchUpDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-        self.view.endEditing(true)
+       view.endEditing(true)
     }
 }
 

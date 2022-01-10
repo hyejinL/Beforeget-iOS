@@ -12,10 +12,102 @@ import Then
 
 class ReportGraphViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    private lazy var naviBar = UIView().then {
+        $0.backgroundColor = .gray
+    }
+    private lazy var reportTopView = ReportTopView()
+    private lazy var reportGraphView = ReportGraphView()
+    private lazy var reportDescriptionView = ReportDescriptionView()
+    private lazy var monthPicker = MonthYearPickerView()
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .systemGray2
+        configUI()
+        setupLayout()
     }
     
+    // MARK: - InitUI
+    
+    private func configUI() {
+        reportTopView.monthButton.inputAccessoryView = createToolbar()
+        reportTopView.monthButton.inputView = monthPicker
+        
+        reportTopView.reportTitle = "12월의 땅콩님은?"
+        reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
+        
+        reportDescriptionView.descriptionTitle = "13개의 기록을 남겼어요"
+        reportDescriptionView.descriptionContent = """
+                                                지난달 보다 4개가 늘었네요!
+                                                8월부터 5개월간 가장 많은 기록을 남긴 달은
+                                                10월로, 30개의 기록을 남겼어요!
+                                                다음 달 나의 그래프는 어떤 모양일까요?
+                                                """
+    }
+    
+    private func setupLayout() {
+        view.addSubviews([naviBar, reportTopView, reportGraphView, reportDescriptionView])
+        
+        naviBar.snp.makeConstraints {
+            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(50)
+        }
+        
+        reportTopView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(naviBar.snp.bottom)
+            $0.height.equalTo(151)
+        }
+        
+        reportGraphView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(reportTopView.snp.bottom).offset(22)
+            $0.height.equalTo(290)
+        }
+        
+        reportDescriptionView.snp.makeConstraints {
+            $0.top.equalTo(reportGraphView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(157)
+        }
+    }
+    
+    // MARK: - Custom Method
+    
+    private func bind() {
+        reportTopView.delegate = self
+    }
+    
+    private func createToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.backgroundColor = .white
+        toolbar.tintColor = Asset.Colors.black200.color
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchUpDoneButton))
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        
+        return toolbar
+    }
+    
+    // MARK: - @objc
+
+    @objc
+    func touchUpDoneButton() {
+        reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
+       view.endEditing(true)
+    }
+}
+
+// MARK: - ReportTopView Delegate
+
+extension ReportGraphViewController: ReportTopViewDelegate {
+    func touchUpMonthButton() {
+        reportTopView.monthButton.responder = true
+        reportTopView.monthButton.becomeFirstResponder()
+    }
 }
