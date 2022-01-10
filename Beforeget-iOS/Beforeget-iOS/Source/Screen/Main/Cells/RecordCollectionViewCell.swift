@@ -7,21 +7,20 @@
 
 import UIKit
 
-class RecordCollectionViewCell: UICollectionViewCell {
-    static let identifier = "RecordCollectionViewCell"
+final class RecordCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
+    
+    // MARK: - Properties
     
     private let mediaImageView = UIImageView().then {
         $0.backgroundColor = Asset.Colors.white.color
     }
     
     private let countLabel = UILabel().then {
-        $0.text = "6"
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody2
     }
     
     private let mediaLabel = UILabel().then {
-        $0.text = "Movie"
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.body1
     }
@@ -30,24 +29,27 @@ class RecordCollectionViewCell: UICollectionViewCell {
         $0.axis = .vertical
         $0.alignment = .leading
         $0.distribution = .fill
-        $0.addArrangedSubview(countLabel)
-        $0.addArrangedSubview(mediaLabel)
+        $0.addArrangedSubviews([countLabel, mediaLabel])
     }
+    
+    // MARK: - InitUI
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configUI()
         setupLayout()
-        contentView.backgroundColor = .black
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupLayout() {
-        [mediaImageView, mediaStackView].forEach {
-            contentView.addSubview($0)
-        }
+    private func configUI() {
+        contentView.backgroundColor = Asset.Colors.black200.color
+    }
+    
+    private func setupLayout() {
+        contentView.addSubviews([mediaImageView, mediaStackView])
         
         mediaImageView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(17)
@@ -55,10 +57,12 @@ class RecordCollectionViewCell: UICollectionViewCell {
         }
         
         mediaStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(21)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
+    
+    // MARK: - Custom Method
     
     func config(_ count: Int, _ media: String) {
         countLabel.text = "\(count)"

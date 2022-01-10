@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  Beforeget-iOS
 //
-//  Created by soyeon on 2022/01/07.
+//  Created by 배은서 on 2022/01/07.
 //
 
 import UIKit
@@ -49,8 +49,17 @@ final class MainViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.white.color
     }
     
+    private let writingBackgroundView = UIView().then {
+        $0.backgroundColor = Asset.Colors.white.color
+        $0.layer.cornerRadius = 15
+    }
+    
     private let logoImageView = UIImageView().then {
         $0.image = Asset.Assets.icnLogoMain.image
+    }
+    
+    private let mediaImageView = UIImageView().then {
+        $0.backgroundColor = Asset.Colors.gray300.color
     }
     
     private let statisticsButton = UIButton().then {
@@ -61,21 +70,12 @@ final class MainViewController: UIViewController {
         $0.setImage(Asset.Assets.btnSetting.image, for: .normal)
     }
     
-    private lazy var topBarRightButtonStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.alignment = .fill
-        $0.distribution = .fill
-        $0.spacing = 3
-        $0.addArrangedSubviews([statisticsButton, settingButton])
+    private let writingButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnWriting.image, for: .normal)
     }
     
-    private let writingView = UIView().then {
-        $0.backgroundColor = Asset.Colors.white.color
-        $0.layer.cornerRadius = 15
-    }
-    
-    private let mediaImageView = UIImageView().then {
-        $0.backgroundColor = .white
+    private let viewAllRecordsButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnAll.image, for: .normal)
     }
     
     private let messageLabel = UILabel().then {
@@ -87,9 +87,23 @@ final class MainViewController: UIViewController {
     }
     
     private let nameLabel = UILabel().then {
-        $0.text = "은서"
+        $0.text = "홍길동"
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body3
+    }
+    
+    private let recordCountLabel = UILabel().then {
+        $0.text = "30"
+        $0.textColor = Asset.Colors.gray200.color
+        $0.font = BDSFont.title5
+    }
+    
+    private lazy var topBarRightButtonStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 3
+        $0.addArrangedSubviews([statisticsButton, settingButton])
     }
     
     private lazy var descriptionStackView = UIStackView().then {
@@ -103,16 +117,6 @@ final class MainViewController: UIViewController {
         $0.alignment = .fill
         $0.distribution = .fill
         $0.addArrangedSubviews([nameLabel, label])
-    }
-    
-    private let writingButton = UIButton().then {
-        $0.setImage(Asset.Assets.btnWriting.image, for: .normal)
-    }
-    
-    private let recordCountLabel = UILabel().then {
-        $0.text = "30"
-        $0.textColor = Asset.Colors.gray200.color
-        $0.font = BDSFont.title5
     }
     
     private lazy var recordStackView = UIStackView().then {
@@ -129,10 +133,6 @@ final class MainViewController: UIViewController {
         $0.addArrangedSubviews([label, recordCountLabel])
     }
     
-    private let viewAllRecordsButton = UIButton().then {
-        $0.setImage(Asset.Assets.btnAll.image, for: .normal)
-    }
-    
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 4
@@ -143,7 +143,7 @@ final class MainViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = true
         
-        $0.register(RecordCollectionViewCell.self, forCellWithReuseIdentifier: RecordCollectionViewCell.identifier)
+        RecordCollectionViewCell.register(target: $0)
         $0.delegate = self
         $0.dataSource = self
     }
@@ -161,11 +161,11 @@ final class MainViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        writingView.makeShadow(Asset.Colors.black200.color, 0.2, CGSize(width: 0, height: 4), 21)
-        writingView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                        y: writingView.bounds.maxY - writingView.layer.shadowRadius,
-                                                        width: writingView.bounds.width,
-                                                        height: writingView.layer.shadowRadius)).cgPath
+        writingBackgroundView.makeShadow(Asset.Colors.black200.color, 0.2, CGSize(width: 0, height: 4), 21)
+        writingBackgroundView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
+                                                                           y: writingBackgroundView.bounds.maxY - writingBackgroundView.layer.shadowRadius,
+                                                                           width: writingBackgroundView.bounds.width,
+                                                                           height: writingBackgroundView.layer.shadowRadius)).cgPath
     }
     
     // MARK: - InitUI
@@ -182,7 +182,7 @@ final class MainViewController: UIViewController {
         view.addSubviews([topBarView,
                           logoImageView,
                           topBarRightButtonStackView,
-                          writingView,
+                          writingBackgroundView,
                           mediaImageView,
                           messageLabel,
                           descriptionStackView,
@@ -193,36 +193,37 @@ final class MainViewController: UIViewController {
         
         topBarView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(64)
+            $0.height.equalTo(50)
         }
         
         logoImageView.snp.makeConstraints {
-            $0.top.equalTo(topBarView.snp.top).inset(10)
+            $0.top.equalTo(topBarView.snp.top).inset(7)
             $0.leading.equalTo(topBarView.snp.leading).inset(20)
         }
         
         topBarRightButtonStackView.snp.makeConstraints {
-            $0.top.trailing.equalTo(topBarView).inset(10)
+            $0.top.equalTo(topBarView).inset(6)
+            $0.trailing.equalTo(topBarView).inset(10)
         }
         
-        writingView.snp.makeConstraints {
+        writingBackgroundView.snp.makeConstraints {
             $0.top.equalTo(topBarView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(363)
+            $0.height.equalTo(397)
         }
         
         mediaImageView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(writingView)
-            $0.height.equalTo(131)
+            $0.top.leading.trailing.equalTo(writingBackgroundView)
+            $0.height.equalTo(145)
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(mediaImageView.snp.bottom).offset(7)
+            $0.top.equalTo(mediaImageView.snp.bottom).offset(9)
             $0.centerX.equalToSuperview()
         }
         
         descriptionStackView.snp.makeConstraints {
-            $0.top.equalTo(messageLabel.snp.bottom).offset(15)
+            $0.top.equalTo(messageLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
         }
         
@@ -232,7 +233,7 @@ final class MainViewController: UIViewController {
         }
         
         recordStackView.snp.makeConstraints {
-            $0.top.equalTo(writingView.snp.bottom).offset(29)
+            $0.top.equalTo(writingBackgroundView.snp.bottom).offset(28)
             $0.leading.equalToSuperview().inset(20)
         }
         
@@ -242,15 +243,14 @@ final class MainViewController: UIViewController {
         }
         
         recordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(recordStackView.snp.bottom).offset(18)
+            $0.top.equalTo(recordStackView.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(11)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
-    // MARK: - Custom Method
-    
 }
+
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -258,13 +258,15 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - UICollectionViewDataSource
+
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.identifier, for: indexPath) as? RecordCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCollectionViewCell.className, for: indexPath) as? RecordCollectionViewCell
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
