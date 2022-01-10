@@ -423,11 +423,19 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		92B70FC6278A11A8009B7763 /* Views */ = {
+		929CFAA1278C696E00FCA541 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				92B70FCB278AB993009B7763 /* RespondingButton.swift */,
 				92B70FCD278ACBB3009B7763 /* MonthYearPickerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		92B70FC6278A11A8009B7763 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				929CFAA1278C696E00FCA541 /* Components */,
 				92B70FC7278A11F7009B7763 /* ReportTopView.swift */,
 				92B70FC9278A1B82009B7763 /* ReportDescriptionView.swift */,
 				929CFA9F278C1A4F00FCA541 /* ReportGraphView.swift */,

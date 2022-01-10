@@ -14,9 +14,6 @@ class ReportRankingViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var naviBar = UIView().then {
-        $0.backgroundColor = .gray
-    }
     private lazy var reportTopView = ReportTopView()
     private lazy var reportRankingView = ReportRankingView()
     private lazy var reportDescriptionView = ReportDescriptionView()
@@ -24,20 +21,18 @@ class ReportRankingViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        bind()
     }
     
     // MARK: - InitUI
     
     private func configUI() {
+        setupStatusBar(.white)
+        
         reportTopView.monthButton.inputAccessoryView = createToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -50,25 +45,27 @@ class ReportRankingViewController: UIViewController {
                                                 다음으로 많은 기록을 남긴 유형 음악과 영화는
                                                 각각 10개, 7개 기록했어요.
                                                 """
+        
+        reportRankingView.firstCount = 22
+        reportRankingView.firstType = "Book"
+        reportRankingView.secondCount = 10
+        reportRankingView.secondType = "Music"
+        reportRankingView.thirdCount = 7
+        reportRankingView.thirdType = "Movie"
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, reportTopView, reportRankingView, reportDescriptionView])
-        
-        naviBar.snp.makeConstraints {
-            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
-        }
+        view.addSubviews([reportTopView, reportRankingView, reportDescriptionView])
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(naviBar.snp.bottom)
-            $0.height.equalTo(151)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.height.equalTo(146)
         }
         
         reportRankingView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(reportTopView.snp.bottom).offset(22)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.top.equalTo(reportTopView.snp.bottom)
             $0.height.equalTo(290)
         }
         
@@ -104,7 +101,7 @@ class ReportRankingViewController: UIViewController {
     @objc
     func touchUpDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-       view.endEditing(true)
+        view.endEditing(true)
     }
 }
 
