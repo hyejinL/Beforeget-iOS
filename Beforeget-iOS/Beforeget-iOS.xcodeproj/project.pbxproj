@@ -47,6 +47,8 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
+		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
+		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
+		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +342,7 @@
 		927AF3A8278814ED0018CC34 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				E2E2779A278B67590083AFF5 /* Cells */,
 				927AF3AB2788161B0018CC34 /* Controllers */,
 			);
 			path = Post;
@@ -363,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				927AF3AC2788162E0018CC34 /* PostViewController.swift */,
+				E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -390,6 +396,14 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E2E2779A278B67590083AFF5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -540,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
+				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
@@ -551,6 +566,7 @@
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
+				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,

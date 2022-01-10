@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: scene)
         self.window?.backgroundColor = .systemBackground
         
-        self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        self.window?.rootViewController = UINavigationController(rootViewController: MediaSelectViewController())
         self.window?.makeKeyAndVisible()
     }
 
