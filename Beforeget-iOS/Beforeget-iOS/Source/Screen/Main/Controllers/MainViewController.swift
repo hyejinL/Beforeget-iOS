@@ -43,12 +43,6 @@ final class MainViewController: UIViewController {
             case .youtube: return media.youtube
             }
         }
-        
-        func recordTotal(_ media: Media) -> Int {
-            let sum = MediaType.allCases.map { $0.recordCount(media) }
-                                        .reduce(0) { $0 + $1 }
-            return sum
-        }
     }
     
     // MARK: - Properties
@@ -101,6 +95,7 @@ final class MainViewController: UIViewController {
     }
     
     private lazy var recordTotalLabel = UILabel().then {
+        $0.text = "\(recordTotal)"
         $0.textColor = Asset.Colors.gray200.color
         $0.font = BDSFont.title5
     }
@@ -159,7 +154,8 @@ final class MainViewController: UIViewController {
         Media(book: 6, music: 6, movie: 6, tv: 6, youtube: 6, webtoon: 6)
     ]
     
-    private var recordTotal: Int = 0
+    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(dummyData[0]) }
+                                                     .reduce(0) { $0 + $1 }
     
     // MARK: - Life Cycle
     
@@ -175,7 +171,6 @@ final class MainViewController: UIViewController {
                                                                            y: writingBackgroundView.bounds.maxY - writingBackgroundView.layer.shadowRadius,
                                                                            width: writingBackgroundView.bounds.width,
                                                                            height: writingBackgroundView.layer.shadowRadius)).cgPath
-        recordTotalLabel.text = "\(recordTotal)"
     }
     
     // MARK: - InitUI
@@ -280,7 +275,6 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
-        recordTotal = media.recordTotal(dummyData[0])
         
         cell.config(media.recordCount(dummyData[0]), "\(media)")
         
