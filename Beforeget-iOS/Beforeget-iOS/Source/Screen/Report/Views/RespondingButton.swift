@@ -44,11 +44,10 @@ class RespondingButton: UIButton {
         }
     }
     
-    // MARK: - Initializers
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -56,12 +55,5 @@ class RespondingButton: UIButton {
     }
 
     // MARK: - Custom Methods
-    
-    private func configure() {
-        configuration = .plain()
-        configuration?.contentInsets = NSDirectionalEdgeInsets(top: 9, leading: 16, bottom: 7, trailing: 16)
-        
-        translatesAutoresizingMaskIntoConstraints = false
-    }
         
 }

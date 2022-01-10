@@ -33,28 +33,32 @@ class ReportTopView: UIView {
         $0.contentMode = .scaleAspectFill
     }
     
-    private lazy var titleLabel = UILabel().then {
+    private lazy var reportTitleLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.title4
-        $0.addLetterSpacing()
     }
     
-    private lazy var descriptionLabel = UILabel().then {
+    private lazy var reportDescriptionLabel = UILabel().then {
         $0.text = "이번 달 나의 소비 유형을 알아보세요"
         $0.textColor = Asset.Colors.gray100.color
         $0.font = BDSFont.body2
-        $0.addLetterSpacing()
     }
     
-    var month: String = "" {
+    var reportTitle: String = "" {
         didSet {
-            titleLabel.text = "\(month)월의 땅콩님은?"
+            reportTitleLabel.text = "\(reportTitle)"
+        }
+    }
+    
+    var reportDescription: String = "" {
+        didSet {
+            reportDescriptionLabel.text = "\(reportDescription)"
         }
     }
     
     var delegate: ReportTopViewDelegate?
     
-    // MARK: - Initializers
+    // MARK: - Initializer
     
     init() {
         super.init(frame: .zero)
@@ -79,7 +83,7 @@ class ReportTopView: UIView {
     }
     
     private func setupLayout() {
-        addSubviews([monthButton, starImageView, titleLabel, descriptionLabel])
+        addSubviews([monthButton, starImageView, reportTitleLabel, reportDescriptionLabel])
         
         monthButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(23)
@@ -93,14 +97,14 @@ class ReportTopView: UIView {
             $0.width.height.equalTo(18)
         }
         
-        titleLabel.snp.makeConstraints {
+        reportTitleLabel.snp.makeConstraints {
             $0.leading.equalTo(starImageView.snp.trailing).offset(8)
             $0.centerY.equalTo(starImageView)
         }
         
-        descriptionLabel.snp.makeConstraints {
+        reportDescriptionLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(7)
+            $0.top.equalTo(reportTitleLabel.snp.bottom).offset(7)
         }
     }
     

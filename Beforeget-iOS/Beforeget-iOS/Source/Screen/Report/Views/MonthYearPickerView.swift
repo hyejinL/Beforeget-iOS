@@ -12,6 +12,8 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     var years = [Int]()
     var months = [String]()
     
+    var minMonth: Int = 0
+    
     var month = Calendar.current.component(.month, from: Date()) {
         didSet {
             selectRow(month - 1, inComponent: 1, animated: false)

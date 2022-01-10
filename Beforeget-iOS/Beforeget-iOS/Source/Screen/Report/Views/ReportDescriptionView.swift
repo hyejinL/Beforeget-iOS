@@ -14,33 +14,34 @@ class ReportDescriptionView: UIView {
 
     // MARK: - Properties
     
-    private lazy var typeLabel = UILabel().then {
+    private lazy var descriptionTitleLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.title3
-        $0.addLetterSpacing()
     }
     
-    private lazy var typeDescriptionLabel = UILabel().then {
+    private lazy var descriptionContentLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body1
         $0.numberOfLines = 4
         $0.textAlignment = .left
-        $0.addLetterSpacing()
     }
     
-    var type: String = "" {
+    var descriptionTitle: String = "" {
         didSet {
-            typeLabel.text = "\(type)"
+            descriptionTitleLabel.text = "\(descriptionTitle)"
+            descriptionTitleLabel.addLetterSpacing()
         }
     }
     
-    var typeDescription: String = "" {
+    var descriptionContent: String = "" {
         didSet {
-            typeDescriptionLabel.text = "\(typeDescription)"
+            descriptionContentLabel.text = "\(descriptionContent)"
+            descriptionContentLabel.addLineSpacing(spacing: 25)
+            descriptionTitleLabel.addLetterSpacing()
         }
     }
     
-    // MARK: - Initializers
+    // MARK: - Initializer
     
     init() {
         super.init(frame: .zero)
@@ -60,16 +61,16 @@ class ReportDescriptionView: UIView {
     }
     
     private func setupLayout() {
-        addSubviews([typeLabel, typeDescriptionLabel])
+        addSubviews([descriptionTitleLabel, descriptionContentLabel])
         
-        typeLabel.snp.makeConstraints {
+        descriptionTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(26)
         }
         
-        typeDescriptionLabel.snp.makeConstraints {
+        descriptionContentLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(typeLabel.snp.bottom).offset(11)
+            $0.top.equalTo(descriptionTitleLabel.snp.bottom).offset(11)
         }
     }
 }
