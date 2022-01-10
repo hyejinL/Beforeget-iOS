@@ -49,7 +49,7 @@ final class BDSNavigationBar: UIView {
         }
     }
         
-    // MARK: - Life Cycle
+    // MARK: - Initializer
     
     public init(vc: UIViewController,
                 view: PageView,
