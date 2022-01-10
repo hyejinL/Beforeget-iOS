@@ -263,8 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E27795278A0C2A0083AFF5 /* Models */,
-				E2E27792278A074E0083AFF5 /* Cells */,
 				927AF39627880F0B0018CC34 /* Controllers */,
+				E2986573278C980300618861 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -399,6 +399,14 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E2986573278C980300618861 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E2E27792278A074E0083AFF5 /* Cells */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E2E27792278A074E0083AFF5 /* Cells */ = {
