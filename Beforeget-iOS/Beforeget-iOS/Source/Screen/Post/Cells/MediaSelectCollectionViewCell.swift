@@ -29,14 +29,6 @@ class MediaSelectCollectionViewCell: UICollectionViewCell {
         $0.textColor = Asset.Colors.black200.color
     }
     
-    private lazy var mediaStackView = UIStackView().then {
-        $0.axis = .vertical
-        $0.alignment = .center
-        $0.distribution = .fill
-        $0.spacing = 9
-        $0.addSubviews([mediaImageView, mediaLabel])
-    }
-    
     // MARK: - InitUI
     
     override init(frame: CGRect) {
@@ -54,17 +46,28 @@ class MediaSelectCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        contentView.addSubviews([mediaBackgroundView,
+                                 mediaImageView,
+                                 mediaLabel])
+        
         mediaBackgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        mediaStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        mediaImageView.snp.makeConstraints {
+            $0.top.equalTo(mediaBackgroundView.snp.top).inset(42)
+            $0.centerX.equalTo(mediaBackgroundView)
+            $0.width.height.equalTo(20)
+        }
+        
+        mediaLabel.snp.makeConstraints {
+            $0.top.equalTo(mediaImageView.snp.bottom).offset(9)
+            $0.centerX.equalTo(mediaBackgroundView)
         }
     }
     
     // MARK: - Custom Method
-    func config() {
-        
+    func config(_ mediaName: String) {
+        mediaLabel.text = mediaName
     }
 }
