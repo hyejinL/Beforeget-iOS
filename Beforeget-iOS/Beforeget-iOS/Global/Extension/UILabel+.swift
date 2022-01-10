@@ -16,12 +16,7 @@ extension UILabel {
             attributedString.addAttribute(NSAttributedString.Key.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))
             attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
             attributedText = attributedString
-            
-            if #available(iOS 14.0, *) {
-                lineBreakStrategy = .hangulWordPriority
-            } else {
-                lineBreakMode = .byWordWrapping
-            }
+            lineBreakStrategy = .hangulWordPriority
         }
     }
     

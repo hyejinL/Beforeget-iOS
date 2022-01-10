@@ -7,25 +7,22 @@
 
 import UIKit
 
+import SnapKit
+
 extension UIViewController {
     func setupStatusBar(_ color: UIColor) {
-        if #available(iOS 13.0, *) {
-            let margin = view.layoutMarginsGuide
-            let statusbarView = UIView()
-            statusbarView.backgroundColor = color
-            statusbarView.frame = CGRect.zero
-            view.addSubview(statusbarView)
-            statusbarView.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
-                statusbarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
-                statusbarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                statusbarView.bottomAnchor.constraint(equalTo: margin.topAnchor)
-            ])
-        } else {
-            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = color
+        let margin = view.layoutMarginsGuide
+        let statusbarView = UIView()
+        statusbarView.backgroundColor = color
+        statusbarView.frame = CGRect.zero
+        view.addSubview(statusbarView)
+        statusbarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        statusbarView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalTo(margin.snp.top)
+            make.width.equalTo(view.snp.width).multipliedBy(1.0)
+            make.centerX.equalToSuperview()
         }
     }
     
