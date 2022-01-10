@@ -14,9 +14,6 @@ final class ReportLabelViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var naviBar = UIView().then {
-        $0.backgroundColor = .gray
-    }
     private lazy var reportTopView = ReportTopView()
     private lazy var typeImageView = UIImageView().then {
         $0.image = UIImage(named: " ")
@@ -27,14 +24,8 @@ final class ReportLabelViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configUI()
         setupLayout()
         bind()
@@ -43,6 +34,8 @@ final class ReportLabelViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
+        setupStatusBar(.white)
+        
         reportTopView.monthButton.inputAccessoryView = createToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -59,22 +52,17 @@ final class ReportLabelViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, reportTopView, typeImageView, reportDescriptionView])
-        
-        naviBar.snp.makeConstraints {
-            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
-        }
+        view.addSubviews([reportTopView, typeImageView, reportDescriptionView])
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(naviBar.snp.bottom)
-            $0.height.equalTo(151)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.height.equalTo(146)
         }
         
         typeImageView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(reportTopView.snp.bottom).offset(22)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.top.equalTo(reportTopView.snp.bottom)
             $0.height.equalTo(290)
         }
         

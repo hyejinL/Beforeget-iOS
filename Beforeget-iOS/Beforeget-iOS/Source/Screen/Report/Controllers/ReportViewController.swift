@@ -11,15 +11,46 @@ class ReportViewController: UIPageViewController {
     
     // MARK: - Properties
     
+    private lazy var naviBar = BDSNavigationBar(self, view: .report, isHidden: false)
     private var pages = [UIViewController]()
     private let initialPage = 0
-    let pageControl = UIPageControl()
+
+    private let paginationStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.spacing = 15
+        $0.distribution = .fillEqually
+    }
+    
+    private let pageImageView1 = UIImageView().then {
+        $0.image = UIImage(named: "page_active")
+    }
+    
+    private let pageImageView2 = UIImageView().then {
+        $0.image = UIImage(named: "page_inactive")
+    }
+    
+    private let pageImageView3 = UIImageView().then {
+        $0.image = UIImage(named: "page_inactive")
+    }
+    
+    private let pageImageView4 = UIImageView().then {
+        $0.image = UIImage(named: "page_inactive")
+    }
+    
+    private let pageImageView5 = UIImageView().then {
+        $0.image = UIImage(named: "page_inactive")
+    }
     
     // MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configUI()
         setupLayout()
         setupControllers()
@@ -28,17 +59,24 @@ class ReportViewController: UIPageViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        
+        setupStatusBar(.white)
     }
     
     private func setupLayout() {
-        view.addSubview(pageControl)
+        view.addSubviews([naviBar, paginationStackView])
         
-        pageControl.snp.makeConstraints {
+        naviBar.snp.makeConstraints {
+            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(50)
+        }
+        
+        paginationStackView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(145)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(17)
             $0.height.equalTo(6)
         }
+        
+        paginationStackView.addArrangedSubviews([pageImageView1, pageImageView2, pageImageView3, pageImageView4, pageImageView5])
     }
     
     private func setupControllers() {
@@ -57,7 +95,6 @@ class ReportViewController: UIPageViewController {
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: - UIPageViewControllerDelegate
@@ -92,8 +129,38 @@ extension ReportViewController: UIPageViewControllerDelegate {
         guard let viewControllers = pageViewController.viewControllers else { return }
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
         
-        pageControl.currentPage = currentIndex
-        print(currentIndex)
+        switch currentIndex {
+        case 0:
+            pageImageView1.image = UIImage(named: "page_active")
+            [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        case 1:
+            pageImageView2.image = UIImage(named: "page_active")
+            [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        case 2:
+            pageImageView3.image = UIImage(named: "page_active")
+            [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        case 3:
+            pageImageView4.image = UIImage(named: "page_active")
+            [pageImageView1, pageImageView2, pageImageView3, pageImageView5].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        case 4:
+            pageImageView5.image = UIImage(named: "page_active")
+            [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        default:
+            pageImageView1.image = UIImage(named: "page_active")
+            [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
+                $0.image = UIImage(named: "page_inactive")
+            }
+        }
     }
 }
 
