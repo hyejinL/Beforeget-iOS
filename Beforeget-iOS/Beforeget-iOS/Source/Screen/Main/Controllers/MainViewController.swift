@@ -12,13 +12,15 @@ import CoreMedia
 
 final class MainViewController: UIViewController {
     
-    enum MediaType: Int, CustomStringConvertible {
+    enum MediaType: Int, CustomStringConvertible, CaseIterable {
         case movie
         case book
         case tv
         case music
         case webtoon
         case youtube
+        
+        static let count: Int = MediaType.allCases.count
         
         var description: String {
             switch self {
@@ -31,7 +33,7 @@ final class MainViewController: UIViewController {
             }
         }
         
-        func count(_ media: Media) -> Int {
+        func recordCount(_ media: Media) -> Int {
             switch self {
             case .movie: return media.movie
             case .book: return media.book
@@ -40,6 +42,12 @@ final class MainViewController: UIViewController {
             case .webtoon: return media.webtoon
             case .youtube: return media.youtube
             }
+        }
+        
+        func recordTotal(_ media: Media) -> Int {
+            let sum = MediaType.allCases.map { $0.recordCount(media) }
+                                        .reduce(0) { $0 + $1 }
+            return sum
         }
     }
     
@@ -92,8 +100,7 @@ final class MainViewController: UIViewController {
         $0.font = BDSFont.body3
     }
     
-    private let recordCountLabel = UILabel().then {
-        $0.text = "30"
+    private lazy var recordTotalLabel = UILabel().then {
         $0.textColor = Asset.Colors.gray200.color
         $0.font = BDSFont.title5
     }
@@ -130,7 +137,7 @@ final class MainViewController: UIViewController {
         $0.alignment = .fill
         $0.distribution = .fill
         $0.spacing = 7
-        $0.addArrangedSubviews([label, recordCountLabel])
+        $0.addArrangedSubviews([label, recordTotalLabel])
     }
     
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
@@ -148,9 +155,11 @@ final class MainViewController: UIViewController {
         $0.dataSource = self
     }
     
-    let dummyData: [Media] = [
+    private let dummyData: [Media] = [
         Media(book: 6, music: 6, movie: 6, tv: 6, youtube: 6, webtoon: 6)
     ]
+    
+    private var recordTotal: Int = 0
     
     // MARK: - Life Cycle
     
@@ -166,6 +175,7 @@ final class MainViewController: UIViewController {
                                                                            y: writingBackgroundView.bounds.maxY - writingBackgroundView.layer.shadowRadius,
                                                                            width: writingBackgroundView.bounds.width,
                                                                            height: writingBackgroundView.layer.shadowRadius)).cgPath
+        recordTotalLabel.text = "\(recordTotal)"
     }
     
     // MARK: - InitUI
@@ -262,7 +272,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return MediaType.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -270,8 +280,9 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
+        recordTotal = media.recordTotal(dummyData[0])
         
-        cell.config(media.count(dummyData[0]), "\(media)")
+        cell.config(media.recordCount(dummyData[0]), "\(media)")
         
         return cell
     }
