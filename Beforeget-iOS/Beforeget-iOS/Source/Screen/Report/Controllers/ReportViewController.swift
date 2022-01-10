@@ -13,18 +13,35 @@ class ReportViewController: UIPageViewController {
     
     private var pages = [UIViewController]()
     private let initialPage = 0
+    let pageControl = UIPageControl()
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+        configUI()
+        setupLayout()
+        setupControllers()
     }
     
-    // MARK: - Custom Methods
+    // MARK: - InitUI
     
-    private func setup() {
+    private func configUI() {
+        
+    }
+    
+    private func setupLayout() {
+        view.addSubview(pageControl)
+        
+        pageControl.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(145)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(17)
+            $0.height.equalTo(6)
+        }
+    }
+    
+    private func setupControllers() {
         dataSource = self
         delegate = self
         
@@ -60,7 +77,7 @@ extension ReportViewController: UIPageViewControllerDataSource {
         guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
-       
+        
         if currentIndex < pages.count - 1 {
             return pages[currentIndex + 1]
         } else {
@@ -70,10 +87,13 @@ extension ReportViewController: UIPageViewControllerDataSource {
 }
 
 extension ReportViewController: UIPageViewControllerDelegate {
-    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         guard let viewControllers = pageViewController.viewControllers else { return }
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
+        
+        pageControl.currentPage = currentIndex
+        print(currentIndex)
     }
 }
+
