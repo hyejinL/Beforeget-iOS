@@ -10,10 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-final class MyRecordViewController: UIViewController {
+final class MyRecordViewController: UIViewController,
+                                    DateFilterDelegate,
+                                    MediaFilterDelegate,
+                                    StarFilterDelegate {
     
     // MARK: - Properties
-        
+    
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .record, isHidden: false)
     
@@ -25,7 +28,11 @@ final class MyRecordViewController: UIViewController {
         $0.setImage(Asset.Assets.btnPlus.image, for: .normal)
     }
     
-    private let filterView = FilterView()
+    private lazy var filterView = FilterView().then {
+        $0.dateDelegate = self
+        $0.mediaDelegate = self
+        $0.starDelegate = self
+    }
     
     private lazy var recordTableView = UITableView().then {
         $0.delegate = self
@@ -88,7 +95,17 @@ final class MyRecordViewController: UIViewController {
     
     // MARK: - Custom Method
     
+    public func clickDateButton() {
+        print("데이트버튼")
+    }
     
+    public func clickMediaButton() {
+        print("미디어버튼")
+    }
+    
+    public func clickStarButton() {
+        print("스타버튼")
+    }
 }
 
 // MARK: - UITableViewDelegate
