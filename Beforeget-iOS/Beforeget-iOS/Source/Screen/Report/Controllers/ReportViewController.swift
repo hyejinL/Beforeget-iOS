@@ -15,6 +15,13 @@ final class ReportViewController: UIPageViewController {
     // MARK: - Properties
     
     private lazy var naviBar = BDSNavigationBar(self, view: .report, isHidden: false)
+    
+    private lazy var downLoadButton = UIButton().then {
+        $0.setTitle("", for: .normal)
+        $0.setImage(Asset.Assets.btnDownload.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupDownLoadButton), for: .touchUpInside)
+    }
+    
     private var pages = [UIViewController]()
     private let initialPage = 0
     
@@ -67,10 +74,17 @@ final class ReportViewController: UIPageViewController {
     
     private func setupLayout() {
         view.addSubviews([naviBar, paginationStackView])
+        naviBar.addSubview(downLoadButton)
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(50)
+        }
+        
+        downLoadButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview()
+            $0.width.height.equalTo(44)
         }
         
         paginationStackView.snp.makeConstraints {
@@ -101,6 +115,11 @@ final class ReportViewController: UIPageViewController {
         }
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    // MARK: - @objc
+    @objc func touchupDownLoadButton() {
+        
     }
 }
 
