@@ -479,6 +479,52 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E25CCC3A278DE09500CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC59278DE1A300CB7018 /* Cells */,
+			);
+			name = Views;
+			path = ../../../../../../../Desktop/Views;
+			sourceTree = "<group>";
+		};
+		E25CCC3E278DE15400CB7018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC3F278DE15400CB7018 /* Media.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E25CCC41278DE15E00CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */,
+				E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */,
+				E25CCC44278DE15E00CB7018 /* Components */,
+				E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */,
+				E25CCC48278DE15E00CB7018 /* ReportTopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E25CCC44278DE15E00CB7018 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */,
+				E25CCC46278DE15E00CB7018 /* RespondingButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E25CCC59278DE1A300CB7018 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25CCC40278DE15400CB7018 /* Media.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
@@ -660,9 +707,12 @@
 				92B70FD4278C11CA009B7763 /* (null) in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */,
+				E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				92B70FC12789F2B1009B7763 /* (null) in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
+				E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				E2E27794278A077E0083AFF5 /* (null) in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
@@ -675,6 +725,7 @@
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				92B70FCC278AB993009B7763 /* (null) in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
+				E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
