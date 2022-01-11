@@ -27,7 +27,6 @@
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
-		927AF37527880B820018CC34 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37427880B820018CC34 /* MainViewController.swift */; };
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
 		927AF37A27880B830018CC34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37927880B830018CC34 /* Assets.xcassets */; };
 		927AF37D27880B830018CC34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37B27880B830018CC34 /* LaunchScreen.storyboard */; };
@@ -39,7 +38,6 @@
 		927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A6278813E00018CC34 /* UIViewController+.swift */; };
 		927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3AC2788162E0018CC34 /* PostViewController.swift */; };
 		927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3AF278816400018CC34 /* MyRecordViewController.swift */; };
-		927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3B22788165B0018CC34 /* ReportViewController.swift */; };
 		927AF3B4278817E40018CC34 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF39027880ECE0018CC34 /* Pretendard-Bold.otf */; };
 		927AF3B5278817E40018CC34 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF39127880ECE0018CC34 /* Pretendard-Regular.otf */; };
 		927AF3B6278817E40018CC34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF39327880ECE0018CC34 /* Pretendard-SemiBold.otf */; };
@@ -56,6 +54,34 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
+		929CFAA0278C1A4F00FCA541 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */; };
+		929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFA278DE04200FCA541 /* ReportOnePageViewController.swift */; };
+		929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFB278DE04200FCA541 /* ReportGraphViewController.swift */; };
+		929CFB02278DE04200FCA541 /* ReportLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFC278DE04200FCA541 /* ReportLabelViewController.swift */; };
+		929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFD278DE04200FCA541 /* ReportViewController.swift */; };
+		929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFE278DE04200FCA541 /* ReportRankingViewController.swift */; };
+		929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB06278DE06400FCA541 /* ReportDescriptionView.swift */; };
+		929CFB0D278DE06500FCA541 /* ReportRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB07278DE06400FCA541 /* ReportRankingView.swift */; };
+		929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB08278DE06500FCA541 /* ReportTopView.swift */; };
+		929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB09278DE06500FCA541 /* RespondingButton.swift */; };
+		929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB0A278DE06500FCA541 /* ReportGraphView.swift */; };
+		929CFB11278DE06500FCA541 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB0B278DE06500FCA541 /* MonthYearPickerView.swift */; };
+		929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB14278DE0E800FCA541 /* MainViewController.swift */; };
+		929CFB19278DE11E00FCA541 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB18278DE11E00FCA541 /* Media.swift */; };
+		929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */; };
+		92B70FBF2789F297009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC12789F2B1009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC32789F38F009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC52789F3A1009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCA278A1B82009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCC278AB993009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCE278ACBB3009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCF278B00DB009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FD0278B00E8009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FD4278C11CA009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		E2E27794278A077E0083AFF5 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		E2E27797278A0C560083AFF5 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +108,6 @@
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		927AF37427880B820018CC34 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		927AF37727880B820018CC34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		927AF37927880B830018CC34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		927AF37C27880B830018CC34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,11 +126,25 @@
 		927AF3A6278813E00018CC34 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		927AF3AC2788162E0018CC34 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		927AF3AF278816400018CC34 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
-		927AF3B22788165B0018CC34 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		927AF3DA27881DE90018CC34 /* UICollectionViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportSentenceViewController.swift; sourceTree = "<group>"; };
+		929CFAFA278DE04200FCA541 /* ReportOnePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportOnePageViewController.swift; sourceTree = "<group>"; };
+		929CFAFB278DE04200FCA541 /* ReportGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGraphViewController.swift; sourceTree = "<group>"; };
+		929CFAFC278DE04200FCA541 /* ReportLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportLabelViewController.swift; sourceTree = "<group>"; };
+		929CFAFD278DE04200FCA541 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		929CFAFE278DE04200FCA541 /* ReportRankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportRankingViewController.swift; sourceTree = "<group>"; };
+		929CFB06278DE06400FCA541 /* ReportDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDescriptionView.swift; sourceTree = "<group>"; };
+		929CFB07278DE06400FCA541 /* ReportRankingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportRankingView.swift; sourceTree = "<group>"; };
+		929CFB08278DE06500FCA541 /* ReportTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTopView.swift; sourceTree = "<group>"; };
+		929CFB09278DE06500FCA541 /* RespondingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RespondingButton.swift; sourceTree = "<group>"; };
+		929CFB0A278DE06500FCA541 /* ReportGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGraphView.swift; sourceTree = "<group>"; };
+		929CFB0B278DE06500FCA541 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
+		929CFB14278DE0E800FCA541 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		929CFB18278DE11E00FCA541 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,7 +399,9 @@
 		927AF38B27880DA50018CC34 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				927AF39627880F0B0018CC34 /* Controllers */,
+				929CFB13278DE0E000FCA541 /* Controllers */,
+				929CFB17278DE11100FCA541 /* Models */,
+				929CFB1A278DE12900FCA541 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -401,14 +442,6 @@
 				927AF39327880ECE0018CC34 /* Pretendard-SemiBold.otf */,
 			);
 			path = Pretendard;
-			sourceTree = "<group>";
-		};
-		927AF39627880F0B0018CC34 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				927AF37427880B820018CC34 /* MainViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		927AF39727880F4E0018CC34 /* Base */ = {
@@ -461,7 +494,8 @@
 		927AF3AA2788156E0018CC34 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				927AF3B12788164C0018CC34 /* Controllers */,
+				929CFAF8278DE02700FCA541 /* Controllers */,
+				929CFB05278DE05000FCA541 /* Views */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -482,14 +516,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		927AF3B12788164C0018CC34 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				927AF3B22788165B0018CC34 /* ReportViewController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		927AF3D927881D9E0018CC34 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +523,110 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		929CFAF8278DE02700FCA541 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				929CFAFB278DE04200FCA541 /* ReportGraphViewController.swift */,
+				929CFAFC278DE04200FCA541 /* ReportLabelViewController.swift */,
+				929CFAFA278DE04200FCA541 /* ReportOnePageViewController.swift */,
+				929CFAFE278DE04200FCA541 /* ReportRankingViewController.swift */,
+				929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */,
+				929CFAFD278DE04200FCA541 /* ReportViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		929CFB05278DE05000FCA541 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				929CFB12278DE0D100FCA541 /* Components */,
+				929CFB06278DE06400FCA541 /* ReportDescriptionView.swift */,
+				929CFB0A278DE06500FCA541 /* ReportGraphView.swift */,
+				929CFB07278DE06400FCA541 /* ReportRankingView.swift */,
+				929CFB08278DE06500FCA541 /* ReportTopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		929CFB12278DE0D100FCA541 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				929CFB0B278DE06500FCA541 /* MonthYearPickerView.swift */,
+				929CFB09278DE06500FCA541 /* RespondingButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		929CFB13278DE0E000FCA541 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				929CFB14278DE0E800FCA541 /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		929CFB17278DE11100FCA541 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				929CFB18278DE11E00FCA541 /* Media.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		929CFB1A278DE12900FCA541 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E25CCC3A278DE09500CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC59278DE1A300CB7018 /* Cells */,
+			);
+			name = Views;
+			path = ../../../../../../../Desktop/Views;
+			sourceTree = "<group>";
+		};
+		E25CCC3E278DE15400CB7018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC3F278DE15400CB7018 /* Media.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E25CCC41278DE15E00CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */,
+				E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */,
+				E25CCC44278DE15E00CB7018 /* Components */,
+				E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */,
+				E25CCC48278DE15E00CB7018 /* ReportTopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E25CCC44278DE15E00CB7018 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */,
+				E25CCC46278DE15E00CB7018 /* RespondingButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E25CCC59278DE1A300CB7018 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -648,35 +778,52 @@
 			files = (
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
-				927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
+				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
+				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
+				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
+				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
+				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				5B7BD11B278DC50C000BC0FA /* Record.swift in Sources */,
-				927AF37527880B820018CC34 /* MainViewController.swift in Sources */,
-				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				5B7BD108278CD324000BC0FA /* FilterModalViewController.swift in Sources */,
+				929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */,
+				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
+				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
+				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
+				929CFB11278DE06500FCA541 /* MonthYearPickerView.swift in Sources */,
+				929CFB02278DE04200FCA541 /* ReportLabelViewController.swift in Sources */,
+				929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */,
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
+				929CFB0D278DE06500FCA541 /* ReportRankingView.swift in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */,
+				E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				5B7BD10C278D870F000BC0FA /* MenuBarView.swift in Sources */,
+				E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
+				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
+				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
+				929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				5B7BD111278D8B6C000BC0FA /* Menu.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
+				E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
