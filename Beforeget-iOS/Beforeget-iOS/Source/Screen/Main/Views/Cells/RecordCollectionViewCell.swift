@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class RecordCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
@@ -32,7 +35,7 @@ final class RecordCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
         $0.addArrangedSubviews([countLabel, mediaLabel])
     }
     
-    // MARK: - InitUI
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,6 +46,8 @@ final class RecordCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - InitUI
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.black200.color

@@ -7,8 +7,8 @@
 
 import UIKit
 
-import Then
 import SnapKit
+import Then
 
 final class MainViewController: UIViewController {
     
@@ -43,6 +43,12 @@ final class MainViewController: UIViewController {
             case .youtube: return media.youtube
             }
         }
+    }
+    
+    enum CollectionViewConst {
+        static let cellInterval: CGFloat = 4
+        static let cellIntervalCount: CGFloat = 5
+        static let visibleCellsCount: CGFloat = 2.5
     }
     
     // MARK: - Properties
@@ -109,7 +115,7 @@ final class MainViewController: UIViewController {
     }
     
     private lazy var descriptionStackView = UIStackView().then {
-        let label = UILabel().then {
+        let messageLabel = UILabel().then {
             $0.text = "님, 잊기 전에 기록해보세요."
             $0.textColor = Asset.Colors.black200.color
             $0.font = BDSFont.body4
@@ -118,11 +124,11 @@ final class MainViewController: UIViewController {
         $0.axis = .horizontal
         $0.alignment = .fill
         $0.distribution = .fill
-        $0.addArrangedSubviews([nameLabel, label])
+        $0.addArrangedSubviews([nameLabel, messageLabel])
     }
     
     private lazy var recordStackView = UIStackView().then {
-        let label = UILabel().then {
+        let recordLabel = UILabel().then {
             $0.text = "기록"
             $0.textColor = Asset.Colors.black200.color
             $0.font = BDSFont.title5
@@ -132,12 +138,12 @@ final class MainViewController: UIViewController {
         $0.alignment = .fill
         $0.distribution = .fill
         $0.spacing = 7
-        $0.addArrangedSubviews([label, recordTotalLabel])
+        $0.addArrangedSubviews([recordLabel, recordTotalLabel])
     }
     
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
-        $0.minimumLineSpacing = 4
+        $0.minimumLineSpacing = CollectionViewConst.cellInterval
     }
     
     private lazy var recordCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
@@ -259,7 +265,8 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 146, height: recordCollectionView.frame.size.height)
+        return CGSize(width: (recordCollectionView.frame.width - (CollectionViewConst.cellInterval * CollectionViewConst.cellIntervalCount)) / CollectionViewConst.visibleCellsCount,
+                      height: recordCollectionView.frame.height)
     }
 }
 
