@@ -48,19 +48,32 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
-		E2E27794278A077E0083AFF5 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27793278A077D0083AFF5 /* RecordCollectionViewCell.swift */; };
-		E2E27797278A0C560083AFF5 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27796278A0C560083AFF5 /* Media.swift */; };
-		929CFAA0278C1A4F00FCA541 /* ReportGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFA9F278C1A4F00FCA541 /* ReportGraphView.swift */; };
-		92B70FBF2789F297009B7763 /* ReportGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FBE2789F297009B7763 /* ReportGraphViewController.swift */; };
-		92B70FC12789F2B1009B7763 /* ReportRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC02789F2B1009B7763 /* ReportRankingViewController.swift */; };
-		92B70FC32789F38F009B7763 /* ReportSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC22789F38F009B7763 /* ReportSentenceViewController.swift */; };
-		92B70FC52789F3A1009B7763 /* ReportOnePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC42789F3A1009B7763 /* ReportOnePageViewController.swift */; };
-		92B70FCA278A1B82009B7763 /* ReportDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC9278A1B82009B7763 /* ReportDescriptionView.swift */; };
-		92B70FCC278AB993009B7763 /* RespondingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FCB278AB993009B7763 /* RespondingButton.swift */; };
-		92B70FCE278ACBB3009B7763 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FCD278ACBB3009B7763 /* MonthYearPickerView.swift */; };
-		92B70FCF278B00DB009B7763 /* ReportLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FBC2789CAEF009B7763 /* ReportLabelViewController.swift */; };
-		92B70FD0278B00E8009B7763 /* ReportTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FC7278A11F7009B7763 /* ReportTopView.swift */; };
-		92B70FD4278C11CA009B7763 /* ReportRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B70FD3278C11CA009B7763 /* ReportRankingView.swift */; };
+		929CFAA0278C1A4F00FCA541 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FBF2789F297009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC12789F2B1009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC32789F38F009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FC52789F3A1009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCA278A1B82009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCC278AB993009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCE278ACBB3009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FCF278B00DB009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FD0278B00E8009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		92B70FD4278C11CA009B7763 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		E25CCC40278DE15400CB7018 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC3F278DE15400CB7018 /* Media.swift */; };
+		E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */; };
+		E25CCC4A278DE15E00CB7018 /* ReportGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */; };
+		E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */; };
+		E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC46278DE15E00CB7018 /* RespondingButton.swift */; };
+		E25CCC4D278DE15E00CB7018 /* ReportRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */; };
+		E25CCC4E278DE15E00CB7018 /* ReportTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC48278DE15E00CB7018 /* ReportTopView.swift */; };
+		E25CCC53278DE16800CB7018 /* ReportRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC4F278DE16700CB7018 /* ReportRankingViewController.swift */; };
+		E25CCC54278DE16800CB7018 /* ReportOnePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC50278DE16700CB7018 /* ReportOnePageViewController.swift */; };
+		E25CCC55278DE16800CB7018 /* ReportSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC51278DE16700CB7018 /* ReportSentenceViewController.swift */; };
+		E25CCC56278DE16800CB7018 /* ReportLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC52278DE16800CB7018 /* ReportLabelViewController.swift */; };
+		E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */; };
+		E25CCC5B278DE1F000CB7018 /* ReportGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CCC5A278DE1F000CB7018 /* ReportGraphViewController.swift */; };
+		E2E27794278A077E0083AFF5 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		E2E27797278A0C560083AFF5 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +116,19 @@
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		E25CCC3F278DE15400CB7018 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDescriptionView.swift; sourceTree = "<group>"; };
+		E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGraphView.swift; sourceTree = "<group>"; };
+		E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
+		E25CCC46278DE15E00CB7018 /* RespondingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RespondingButton.swift; sourceTree = "<group>"; };
+		E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportRankingView.swift; sourceTree = "<group>"; };
+		E25CCC48278DE15E00CB7018 /* ReportTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportTopView.swift; sourceTree = "<group>"; };
+		E25CCC4F278DE16700CB7018 /* ReportRankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportRankingViewController.swift; sourceTree = "<group>"; };
+		E25CCC50278DE16700CB7018 /* ReportOnePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportOnePageViewController.swift; sourceTree = "<group>"; };
+		E25CCC51278DE16700CB7018 /* ReportSentenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportSentenceViewController.swift; sourceTree = "<group>"; };
+		E25CCC52278DE16800CB7018 /* ReportLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportLabelViewController.swift; sourceTree = "<group>"; };
+		E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		E25CCC5A278DE1F000CB7018 /* ReportGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGraphViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,9 +297,9 @@
 		927AF38B27880DA50018CC34 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E2E27795278A0C2A0083AFF5 /* Models */,
+				E25CCC3E278DE15400CB7018 /* Models */,
+				E25CCC3A278DE09500CB7018 /* Views */,
 				927AF39627880F0B0018CC34 /* Controllers */,
-				E2986573278C980300618861 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -372,7 +398,7 @@
 		927AF3AA2788156E0018CC34 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				92B70FC6278A11A8009B7763 /* Views */,
+				E25CCC41278DE15E00CB7018 /* Views */,
 				927AF3B12788164C0018CC34 /* Controllers */,
 			);
 			path = Report;
@@ -397,12 +423,12 @@
 		927AF3B12788164C0018CC34 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E25CCC5A278DE1F000CB7018 /* ReportGraphViewController.swift */,
 				927AF3B22788165B0018CC34 /* ReportViewController.swift */,
-				92B70FBC2789CAEF009B7763 /* ReportLabelViewController.swift */,
-				92B70FBE2789F297009B7763 /* ReportGraphViewController.swift */,
-				92B70FC02789F2B1009B7763 /* ReportRankingViewController.swift */,
-				92B70FC22789F38F009B7763 /* ReportSentenceViewController.swift */,
-				92B70FC42789F3A1009B7763 /* ReportOnePageViewController.swift */,
+				E25CCC52278DE16800CB7018 /* ReportLabelViewController.swift */,
+				E25CCC50278DE16700CB7018 /* ReportOnePageViewController.swift */,
+				E25CCC4F278DE16700CB7018 /* ReportRankingViewController.swift */,
+				E25CCC51278DE16700CB7018 /* ReportSentenceViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -414,6 +440,52 @@
 				927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E25CCC3A278DE09500CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC59278DE1A300CB7018 /* Cells */,
+			);
+			name = Views;
+			path = ../../../../../../../Desktop/Views;
+			sourceTree = "<group>";
+		};
+		E25CCC3E278DE15400CB7018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC3F278DE15400CB7018 /* Media.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E25CCC41278DE15E00CB7018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */,
+				E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */,
+				E25CCC44278DE15E00CB7018 /* Components */,
+				E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */,
+				E25CCC48278DE15E00CB7018 /* ReportTopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E25CCC44278DE15E00CB7018 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */,
+				E25CCC46278DE15E00CB7018 /* RespondingButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E25CCC59278DE1A300CB7018 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -563,42 +635,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25CCC40278DE15400CB7018 /* Media.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
+				E25CCC4E278DE15E00CB7018 /* ReportTopView.swift in Sources */,
+				E25CCC56278DE16800CB7018 /* ReportLabelViewController.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
-				92B70FBF2789F297009B7763 /* ReportGraphViewController.swift in Sources */,
-				92B70FCA278A1B82009B7763 /* ReportDescriptionView.swift in Sources */,
+				92B70FBF2789F297009B7763 /* (null) in Sources */,
+				92B70FCA278A1B82009B7763 /* (null) in Sources */,
 				927AF37527880B820018CC34 /* MainViewController.swift in Sources */,
-				E2E27797278A0C560083AFF5 /* Media.swift in Sources */,
+				E25CCC4A278DE15E00CB7018 /* ReportGraphView.swift in Sources */,
+				E2E27797278A0C560083AFF5 /* (null) in Sources */,
+				E25CCC55278DE16800CB7018 /* ReportSentenceViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
-				929CFAA0278C1A4F00FCA541 /* ReportGraphView.swift in Sources */,
+				929CFAA0278C1A4F00FCA541 /* (null) in Sources */,
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
+				E25CCC53278DE16800CB7018 /* ReportRankingViewController.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
+				E25CCC54278DE16800CB7018 /* ReportOnePageViewController.swift in Sources */,
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
-				92B70FC52789F3A1009B7763 /* ReportOnePageViewController.swift in Sources */,
+				92B70FC52789F3A1009B7763 /* (null) in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
-				92B70FCF278B00DB009B7763 /* ReportLabelViewController.swift in Sources */,
+				92B70FCF278B00DB009B7763 /* (null) in Sources */,
+				E25CCC4D278DE15E00CB7018 /* ReportRankingView.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
-				92B70FD4278C11CA009B7763 /* ReportRankingView.swift in Sources */,
+				92B70FD4278C11CA009B7763 /* (null) in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */,
+				E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
-				92B70FC12789F2B1009B7763 /* ReportRankingViewController.swift in Sources */,
+				92B70FC12789F2B1009B7763 /* (null) in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
+				E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
-				E2E27794278A077E0083AFF5 /* RecordCollectionViewCell.swift in Sources */,
+				E25CCC5B278DE1F000CB7018 /* ReportGraphViewController.swift in Sources */,
+				E2E27794278A077E0083AFF5 /* (null) in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
-				92B70FD0278B00E8009B7763 /* ReportTopView.swift in Sources */,
-				92B70FC32789F38F009B7763 /* ReportSentenceViewController.swift in Sources */,
-				92B70FCE278ACBB3009B7763 /* MonthYearPickerView.swift in Sources */,
+				92B70FD0278B00E8009B7763 /* (null) in Sources */,
+				92B70FC32789F38F009B7763 /* (null) in Sources */,
+				92B70FCE278ACBB3009B7763 /* (null) in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
-				92B70FCC278AB993009B7763 /* RespondingButton.swift in Sources */,
+				92B70FCC278AB993009B7763 /* (null) in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
+				E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
