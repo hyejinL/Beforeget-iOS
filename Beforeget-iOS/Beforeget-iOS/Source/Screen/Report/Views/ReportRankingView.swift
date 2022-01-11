@@ -7,50 +7,39 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class ReportRankingView: UIView {
 
     // MARK: - Properties
     
-    private lazy var firstRankingView = UIView().then {
-        $0.backgroundColor = Asset.Colors.black200.color
-    }
-    private lazy var secondRankingView = UIView().then {
-        $0.backgroundColor = Asset.Colors.black200.color
-    }
-    private lazy var thirdRankingView = UIView().then {
-        $0.backgroundColor = Asset.Colors.black200.color
-    }
+    private var firstRankingView = UIView()
+    private var secondRankingView = UIView()
+    private var thirdRankingView = UIView()
     
-    private lazy var firstRankingCountLabel = UILabel().then {
+    private var firstRankingCountLabel = UILabel().then {
         $0.textColor = Asset.Colors.green100.color
         $0.font = BDSFont.enBody1
     }
-    private lazy var secondRankingCountLabel = UILabel().then {
+    private var secondRankingCountLabel = UILabel().then {
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody3
     }
-    private lazy var thirdRankingCountLabel = UILabel().then {
+    private var thirdRankingCountLabel = UILabel().then {
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody3
     }
     
-    private lazy var firstRankingTypeLabel = UILabel().then {
-        $0.textColor = .white
-        $0.font = BDSFont.enBody5
-    }
-    private lazy var secondRankingTypeLabel = UILabel().then {
-        $0.textColor = .white
-        $0.font = BDSFont.enBody5
-    }
-    private lazy var thirdRankingTypeLabel = UILabel().then {
-        $0.textColor = .white
-        $0.font = BDSFont.enBody5
-    }
+    private lazy var firstRankingTypeLabel = UILabel()
+    private lazy var secondRankingTypeLabel = UILabel()
+    private lazy var thirdRankingTypeLabel = UILabel()
     
     private lazy var starImageView = UIImageView().then {
-        $0.image = UIImage(named: "icn_star_green")
+        $0.image = Asset.Assets.icnStarGreen.image
         $0.contentMode = .scaleAspectFill
     }
+    
     private lazy var bestRecordLabel = UILabel().then {
         $0.text = "the best\nrecord"
         $0.textColor = Asset.Colors.green100.color
@@ -100,6 +89,15 @@ final class ReportRankingView: UIView {
     
     private func configUI() {
         backgroundColor = .white
+        
+        [firstRankingView, secondRankingView, thirdRankingView].forEach {
+            $0.backgroundColor = Asset.Colors.black200.color
+        }
+        
+        [firstRankingTypeLabel, secondRankingTypeLabel, thirdRankingTypeLabel].forEach {
+            $0.textColor = .white
+            $0.font = BDSFont.enBody5
+        }
     }
     
     private func setupLayout() {

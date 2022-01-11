@@ -7,14 +7,17 @@
 
 import UIKit
 
-class ReportViewController: UIPageViewController {
+import SnapKit
+import Then
+
+final class ReportViewController: UIPageViewController {
     
     // MARK: - Properties
     
     private lazy var naviBar = BDSNavigationBar(self, view: .report, isHidden: false)
     private var pages = [UIViewController]()
     private let initialPage = 0
-
+    
     private let paginationStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
@@ -23,23 +26,23 @@ class ReportViewController: UIPageViewController {
     }
     
     private let pageImageView1 = UIImageView().then {
-        $0.image = UIImage(named: "page_active")
+        $0.image = Asset.Assets.pageActive.image
     }
     
     private let pageImageView2 = UIImageView().then {
-        $0.image = UIImage(named: "page_inactive")
+        $0.image = Asset.Assets.pageInactive.image
     }
     
     private let pageImageView3 = UIImageView().then {
-        $0.image = UIImage(named: "page_inactive")
+        $0.image = Asset.Assets.pageInactive.image
     }
     
     private let pageImageView4 = UIImageView().then {
-        $0.image = UIImage(named: "page_inactive")
+        $0.image = Asset.Assets.pageInactive.image
     }
     
     private let pageImageView5 = UIImageView().then {
-        $0.image = UIImage(named: "page_inactive")
+        $0.image = Asset.Assets.pageInactive.image
     }
     
     // MARK: - Life Cycle
@@ -76,7 +79,11 @@ class ReportViewController: UIPageViewController {
             $0.height.equalTo(6)
         }
         
-        paginationStackView.addArrangedSubviews([pageImageView1, pageImageView2, pageImageView3, pageImageView4, pageImageView5])
+        paginationStackView.addArrangedSubviews([pageImageView1,
+                                                 pageImageView2,
+                                                 pageImageView3,
+                                                 pageImageView4,
+                                                 pageImageView5])
     }
     
     private func setupControllers() {
@@ -125,40 +132,41 @@ extension ReportViewController: UIPageViewControllerDataSource {
 
 extension ReportViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
-        guard let viewControllers = pageViewController.viewControllers else { return }
-        guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
+        guard
+            let viewController = pageViewController.viewControllers?.first,
+            let currentIndex = pages.firstIndex(of: viewController)
+        else { return }
         
         switch currentIndex {
         case 0:
-            pageImageView1.image = UIImage(named: "page_active")
+            pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         case 1:
-            pageImageView2.image = UIImage(named: "page_active")
+            pageImageView2.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         case 2:
-            pageImageView3.image = UIImage(named: "page_active")
+            pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         case 3:
-            pageImageView4.image = UIImage(named: "page_active")
+            pageImageView4.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView5].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
-            pageImageView5.image = UIImage(named: "page_active")
+            pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         default:
-            pageImageView1.image = UIImage(named: "page_active")
+            pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
-                $0.image = UIImage(named: "page_inactive")
+                $0.image = Asset.Assets.pageInactive.image
             }
         }
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    // MARK: - Properties
+    
     var years = [Int]()
     var months = [String]()
     
@@ -30,6 +32,8 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     
     var onDateSelected: ((_ year: Int, _ month: Int) -> Void)?
     
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonSetup()
@@ -40,8 +44,11 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         commonSetup()
     }
     
+    // MARK: - Custom Method
+    
     func commonSetup() {
         var years: [Int] = []
+        
         if years.count == 0 {
             var year = Calendar(identifier: .gregorian).component(.year, from: Date())
             for _ in 1...10 {
@@ -49,6 +56,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
                 year -= 1
             }
         }
+        
         self.years = years
         self.years.reverse()
         
@@ -58,6 +66,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
             months.append(DateFormatter().monthSymbols[month].capitalized)
             month += 1
         }
+        
         self.months = months
         
         delegate = self
@@ -70,6 +79,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     // MARK: - UIPicker Delegate / Data Source
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }

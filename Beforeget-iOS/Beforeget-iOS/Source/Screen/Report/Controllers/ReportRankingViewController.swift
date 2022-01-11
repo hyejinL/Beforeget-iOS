@@ -10,13 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-class ReportRankingViewController: UIViewController {
+final class ReportRankingViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var reportTopView = ReportTopView()
-    private lazy var reportRankingView = ReportRankingView()
-    private lazy var reportDescriptionView = ReportDescriptionView()
+    private var reportTopView = ReportTopView()
+    private var reportRankingView = ReportRankingView()
+    private var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
     // MARK: - Life Cycle
@@ -33,7 +33,7 @@ class ReportRankingViewController: UIViewController {
     private func configUI() {
         setupStatusBar(.white)
         
-        reportTopView.monthButton.inputAccessoryView = createToolbar()
+        reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
         reportTopView.reportTitle = "유형별 랭킹"
@@ -80,17 +80,18 @@ class ReportRankingViewController: UIViewController {
     
     private func bind() {
         reportTopView.delegate = self
-        reportTopView.monthButton.inputView = monthPicker
     }
     
-    private func createToolbar() -> UIToolbar {
+    private func setupToolbar() -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         toolbar.backgroundColor = .white
         toolbar.tintColor = Asset.Colors.black200.color
+        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchUpDoneButton))
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
@@ -99,7 +100,7 @@ class ReportRankingViewController: UIViewController {
     // MARK: - @objc
 
     @objc
-    func touchUpDoneButton() {
+    func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
     }
@@ -108,8 +109,7 @@ class ReportRankingViewController: UIViewController {
 // MARK: - ReportTopView Delegate
 
 extension ReportRankingViewController: ReportTopViewDelegate {
-    func touchUpMonthButton() {
-        reportTopView.monthButton.responder = true
-        reportTopView.monthButton.becomeFirstResponder()
+    func touchupMonthButton() {
+        
     }
 }

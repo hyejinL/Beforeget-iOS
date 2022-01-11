@@ -11,9 +11,8 @@ class RespondingButton: UIButton {
     
     // MARK: - Properties
     
-    var myView: UIView? = UIView()
-    var toolBarView: UIView? = UIView()
-    var responder: Bool = false
+    private var myView: UIView? = UIView()
+    private var toolBarView: UIView? = UIView()
     
     override var inputView: UIView? {
         get {
@@ -22,7 +21,6 @@ class RespondingButton: UIButton {
         
         set {
             myView = newValue
-            becomeFirstResponder()
         }
     }
     
@@ -36,12 +34,7 @@ class RespondingButton: UIButton {
     }
     
     override var canBecomeFirstResponder: Bool {
-        get {
-            responder
-        }
-        set {
-            responder = newValue
-        }
+        return true
     }
     
     // MARK: - Initializer

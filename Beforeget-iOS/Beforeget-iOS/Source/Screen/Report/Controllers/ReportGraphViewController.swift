@@ -8,15 +8,14 @@
 import UIKit
 
 import SnapKit
-import Then
 
-class ReportGraphViewController: UIViewController {
+final class ReportGraphViewController: UIViewController {
 
     // MARK: - Properties
     
-    private lazy var reportTopView = ReportTopView()
-    private lazy var reportGraphView = ReportGraphView()
-    private lazy var reportDescriptionView = ReportDescriptionView()
+    private var reportTopView = ReportTopView()
+    private var reportGraphView = ReportGraphView()
+    private var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
     // MARK: - Life Cycle
@@ -33,7 +32,7 @@ class ReportGraphViewController: UIViewController {
     private func configUI() {
         setupStatusBar(.white)
         
-        reportTopView.monthButton.inputAccessoryView = createToolbar()
+        reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
         reportTopView.reportTitle = "월별 그래프"
@@ -81,14 +80,16 @@ class ReportGraphViewController: UIViewController {
         reportTopView.delegate = self
     }
     
-    private func createToolbar() -> UIToolbar {
+    private func setupToolbar() -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        toolbar.backgroundColor = .white
+        toolbar.backgroundColor = Asset.Colors.white.color
         toolbar.tintColor = Asset.Colors.black200.color
+        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchUpDoneButton))
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
@@ -97,7 +98,7 @@ class ReportGraphViewController: UIViewController {
     // MARK: - @objc
 
     @objc
-    func touchUpDoneButton() {
+    func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
        view.endEditing(true)
     }
@@ -106,21 +107,20 @@ class ReportGraphViewController: UIViewController {
 // MARK: - ReportTopView Delegate
 
 extension ReportGraphViewController: ReportTopViewDelegate {
-    func touchUpMonthButton() {
-        reportTopView.monthButton.responder = true
-        reportTopView.monthButton.becomeFirstResponder()
+    func touchupMonthButton() {
+        
     }
 }
 
 // MARK: - ReportGraphView Delegate
 
 extension ReportGraphViewController: ReportGraphViewDelegate {
-    func touchUpThreeMonthButton() {
+    func touchupThreeMonthButton() {
         reportGraphView.threeMonthSelected = true
         reportGraphView.fiveMonthSelected = false
     }
     
-    func touchUpFiveMonthButton() {
+    func touchupFiveMonthButton() {
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
     }

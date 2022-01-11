@@ -10,8 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
-protocol ReportTopViewDelegate {
-    func touchUpMonthButton()
+// MARK: - Protocol
+
+protocol ReportTopViewDelegate: AnyObject {
+    func touchupMonthButton()
 }
 
 class ReportTopView: UIView {
@@ -19,26 +21,23 @@ class ReportTopView: UIView {
     // MARK: - Properties
     
     var monthButton = RespondingButton().then {
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 M월"
-        
-        $0.setTitle(dateFormatter.string(from: Date()), for: .normal)
+        $0.setTitle("2021년 12월", for: .normal)
         $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
-        $0.addTarget(self, action: #selector(touchUpMonthButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
         $0.titleLabel?.font = BDSFont.enBody7
     }
     
-    private lazy var starImageView = UIImageView().then {
-        $0.image = UIImage(named: "icn_star_black")
+    private var starImageView = UIImageView().then {
+        $0.image = Asset.Assets.icnStarBlack.image
         $0.contentMode = .scaleAspectFill
     }
     
-    private lazy var reportTitleLabel = UILabel().then {
+    private var reportTitleLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.title4
     }
     
-    private lazy var reportDescriptionLabel = UILabel().then {
+    private var reportDescriptionLabel = UILabel().then {
         $0.text = "이번 달 나의 소비 유형을 알아보세요"
         $0.textColor = Asset.Colors.gray100.color
         $0.font = BDSFont.body6
@@ -56,7 +55,7 @@ class ReportTopView: UIView {
         }
     }
     
-    var delegate: ReportTopViewDelegate?
+    weak var delegate: ReportTopViewDelegate?
     
     // MARK: - Initializer
     
@@ -78,8 +77,7 @@ class ReportTopView: UIView {
         
         monthButton.layer.borderWidth = 1
         monthButton.layer.borderColor = Asset.Colors.gray200.color.cgColor
-        monthButton.layer.cornerRadius = 31 / 2
-        monthButton.layer.masksToBounds = true
+        monthButton.makeRound(radius: 31 / 2)
     }
     
     private func setupLayout() {
@@ -111,7 +109,8 @@ class ReportTopView: UIView {
     // MARK: - @objc
     
     @objc
-    func touchUpMonthButton() {
-        delegate?.touchUpMonthButton()
+    func touchupMonthButton() {
+        monthButton.becomeFirstResponder()
+        delegate?.touchupMonthButton()
     }
 }

@@ -7,32 +7,32 @@
 
 import UIKit
 
-protocol ReportGraphViewDelegate {
-    func touchUpThreeMonthButton()
-    func touchUpFiveMonthButton()
+protocol ReportGraphViewDelegate: AnyObject {
+    func touchupThreeMonthButton()
+    func touchupFiveMonthButton()
 }
 
 class ReportGraphView: UIView {
     
     // MARK: - Properties
     
-    private lazy var monthLabel = UILabel().then {
+    private var monthLabel = UILabel().then {
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody6
     }
     
-    private lazy var threeMonthButton = UIButton().then {
+    private var threeMonthButton = UIButton().then {
         $0.setTitle("3M", for: .normal)
         $0.titleLabel?.font = BDSFont.enBody7
-        $0.addTarget(self, action: #selector(touchUpThreeMonthButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchupThreeMonthButton), for: .touchUpInside)
         $0.setTitleColor(Asset.Colors.white.color, for: .selected)
         $0.setTitleColor(Asset.Colors.gray100.color, for: .normal)
     }
     
-    private lazy var fiveMonthButton = UIButton().then {
+    private var fiveMonthButton = UIButton().then {
         $0.setTitle("5M", for: .normal)
         $0.titleLabel?.font = BDSFont.enBody7
-        $0.addTarget(self, action: #selector(touchUpFiveMonthButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(touchupFiveMonthButton), for: .touchUpInside)
         $0.setTitleColor(Asset.Colors.white.color, for: .selected)
         $0.setTitleColor(Asset.Colors.gray100.color, for: .normal)
     }
@@ -55,7 +55,7 @@ class ReportGraphView: UIView {
         }
     }
     
-    var delegate: ReportGraphViewDelegate?
+    weak var delegate: ReportGraphViewDelegate?
     
     // MARK: - Initializer
     
@@ -98,12 +98,12 @@ class ReportGraphView: UIView {
     // MARK: - @objc
     
     @objc
-    func touchUpThreeMonthButton() {
-        delegate?.touchUpThreeMonthButton()
+    func touchupThreeMonthButton() {
+        delegate?.touchupThreeMonthButton()
     }
     
     @objc
-    func touchUpFiveMonthButton() {
-        delegate?.touchUpFiveMonthButton()
+    func touchupFiveMonthButton() {
+        delegate?.touchupFiveMonthButton()
     }
 }
