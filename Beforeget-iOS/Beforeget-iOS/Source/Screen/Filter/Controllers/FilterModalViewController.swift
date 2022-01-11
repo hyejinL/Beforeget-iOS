@@ -12,13 +12,13 @@ import Then
 
 /// 필터 버튼 선택 시에 올라오는 모달 창 + 딤처리도 같이
 
-final class FilterModalViewController: UIViewController, SelectMenuDelegate {
+final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
     
     private var modalViewTopConstraint: NSLayoutConstraint!
     
-    private let height: CGFloat = 633 // 모달뷰 높이
+    private let height: CGFloat = 633
     
     private let dimmedView = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.5)
@@ -37,7 +37,7 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         $0.clipsToBounds = true
     }
     
-    private let menuBarView = MenuBarView()
+    private var menuBarView = MenuBarView()
     
     private let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
@@ -46,11 +46,13 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
     private lazy var filterCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: layout).then {
             $0.showsHorizontalScrollIndicator = false
+            $0.isPagingEnabled = true
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = .yellow
             FilterCollectionViewCell.register(target: $0)
         }
+    
+    private let applyButtonView = FilterApplyButtonView()
     
     // MARK: - Life Cycle
     
@@ -69,9 +71,15 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
     
     private func setupLayout() {
         view.addSubviews([dimmedView, modalView])
-        modalView.addSubviews([indicatorView, menuBarView, filterCollectionView])
+        modalView.addSubviews([indicatorView,
+                               menuBarView,
+                               filterCollectionView,
+                               applyButtonView])
         
-        let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
+        let topConstant =
+        view.safeAreaInsets.bottom +
+        view.safeAreaLayoutGuide.layoutFrame.height
+        
         modalViewTopConstraint = modalView.topAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.topAnchor,
             constant: topConstant)
@@ -96,25 +104,25 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         }
         
         menuBarView.snp.makeConstraints { make in
-            make.top.equalTo(indicatorView.snp.bottom).offset(1)
+            make.top.equalTo(indicatorView.snp.bottom).inset(1)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
-        
+
         filterCollectionView.snp.makeConstraints { make in
             make.top.equalTo(menuBarView.snp.bottom)
-            make.leading.bottom.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(applyButtonView.snp.top)
         }
         
-        menuBarView.selectMenuDelegate = self
+        applyButtonView.snp.makeConstraints { make in
+            make.top.equalTo(filterCollectionView.snp.bottom)
+            make.leading.bottom.trailing.equalToSuperview()
+            make.height.equalTo(103)
+        }
     }
-    
+
     // MARK: - Custom Method
-    
-    func selectMenu(index: Int) {
-        let indexPath = IndexPath(row: index, section: 0)
-        self.filterCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
     
     // 바텀 시트 표출 애니메이션
     private func showBottomSheet() {
@@ -134,7 +142,7 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
         let bottomPadding = view.safeAreaInsets.bottom
         modalViewTopConstraint.constant = safeAreaHeight + bottomPadding
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded()
         }) { _ in
@@ -147,16 +155,19 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
     // GestureRecognizer 세팅 작업
     private func setupGestureRecognizer() {
         // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
-        let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
+        let dimmedTap = UITapGestureRecognizer(
+            target: self, action: #selector(dimmedViewTapped(_:)))
         dimmedView.addGestureRecognizer(dimmedTap)
         dimmedView.isUserInteractionEnabled = true
         
         // 스와이프 했을 때, 바텀시트를 내리는 swipeGesture
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(panGesture))
+        let swipeGesture = UISwipeGestureRecognizer(
+            target: self, action: #selector(panGesture))
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
     }
-    
+
+    // MARK: - @objc
     
     // UITapGestureRecognizer 연결 함수 부분
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
@@ -179,18 +190,18 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
 // MARK: - UICollectionViewDelegate
 
 extension FilterModalViewController: UICollectionViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let menuWidth = (UIScreen.main.bounds.width - 152)/3
-        menuBarView.indicatorView.snp.updateConstraints { make in
-            make.leading.equalToSuperview().inset(round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)*menuWidth)
-        }
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
-        let indexPath = IndexPath(item: itemAt, section: 0)
-        menuBarView.menuCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let menuWidth = (UIScreen.main.bounds.width - 152)/3
+//        menuBarView.indicatorView.snp.updateConstraints { make in
+//            make.leading.equalToSuperview().inset(round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)*menuWidth)
+//        }
+//    }
+//
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
+//        let indexPath = IndexPath(item: itemAt, section: 0)
+//        menuBarView.menuCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -202,11 +213,9 @@ extension FilterModalViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.className, for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
-        
+        filterCell.backgroundColor = .blue
         return filterCell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -217,6 +226,10 @@ extension FilterModalViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     

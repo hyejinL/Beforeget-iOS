@@ -12,23 +12,6 @@ import Then
 
 class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Enum
-    
-    public enum Media: Int, CaseIterable {
-        case movie, book, tv, music, webtoon, youtube
-        
-        fileprivate var iconImage: UIImage {
-            switch self {
-            case .movie: return Asset.Assets.icnWebtoon.image
-            case .book: return Asset.Assets.icnWebtoon.image
-            case .tv: return Asset.Assets.icnWebtoon.image
-            case .music: return Asset.Assets.icnWebtoon.image
-            case .webtoon: return Asset.Assets.icnWebtoon.image
-            case .youtube: return Asset.Assets.icnWebtoon.image
-            }
-        }
-    }
-    
     // MARK: - Properties
     
     private let record = RecordMannager()
@@ -143,8 +126,8 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(
-            by: UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(
+            top: 0, left: 0, bottom: 6, right: 0))
     }
     
     // MARK: - Custom Method

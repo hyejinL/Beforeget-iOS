@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class MenuBarCollectionViewCell: UICollectionViewCell,
-                                    UICollectionViewRegisterable {
+                                 UICollectionViewRegisterable {
     
     // MARK: - Properties
     
