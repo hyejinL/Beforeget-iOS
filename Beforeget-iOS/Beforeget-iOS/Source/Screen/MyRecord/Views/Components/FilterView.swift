@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+/// 내 기록 모아보는 곳에서 필터 스택뷰가 있는 부분
+
 // MARK: - Delegate
 
 protocol DateFilterDelegate: MyRecordViewController {
@@ -24,7 +26,7 @@ protocol StarFilterDelegate: MyRecordViewController {
     func clickStarButton()
 }
 
-class FilterView: UIView {
+public class FilterView: UIView {
 
     // MARK: - Properties
     

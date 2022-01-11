@@ -10,12 +10,16 @@ import UIKit
 import SnapKit
 import Then
 
+/// 내 기록들 모아보는 곳
+
 final class MyRecordViewController: UIViewController,
                                     DateFilterDelegate,
                                     MediaFilterDelegate,
                                     StarFilterDelegate {
     
     // MARK: - Properties
+    
+    private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .record, isHidden: false)
@@ -37,7 +41,8 @@ final class MyRecordViewController: UIViewController,
     private lazy var recordTableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
-        RecordTableViewCell.register(target: $0)
+        $0.separatorStyle = .none
+        MyRecordTableViewCell.register(target: $0)
     }
     
     // MARK: - Life Cycle
@@ -96,6 +101,9 @@ final class MyRecordViewController: UIViewController,
     // MARK: - Custom Method
     
     public func clickDateButton() {
+        let filterModalViewController = FilterModalViewController()
+        filterModalViewController.modalPresentationStyle = .overFullScreen
+        self.present(filterModalViewController, animated: false, completion: nil)
         print("데이트버튼")
     }
     
@@ -111,18 +119,25 @@ final class MyRecordViewController: UIViewController,
 // MARK: - UITableViewDelegate
 
 extension MyRecordViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension MyRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return record.getCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let recordCell = tableView.dequeueReusableCell(withIdentifier: RecordTableViewCell.className, for: indexPath) as? RecordTableViewCell else { return UITableViewCell() }
+        guard let recordCell = tableView.dequeueReusableCell(
+            withIdentifier: MyRecordTableViewCell.className,
+            for: indexPath) as? MyRecordTableViewCell
+        else { return UITableViewCell() }
+        recordCell.selectionStyle = .none
+        recordCell.setData(index: indexPath.item)
         return recordCell
     }
 }
