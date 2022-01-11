@@ -24,9 +24,6 @@ class MainViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .white
-        
-        let label = UILabel()
-        label.font = BDSFont.title1
     }
     
     private func setupLayout() {
