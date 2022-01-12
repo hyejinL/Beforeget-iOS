@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icnAddItem.png",
+      "filename" : "btnKeyboard.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
       "scale" : "2x",
       "idiom" : "universal",
-      "filename" : "icnAddItem@2x.png"
+      "filename" : "btnKeyboard@2x.png"
     },
     {
-      "filename" : "icnAddItem@3x.png",
+      "filename" : "btnKeyboard@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
