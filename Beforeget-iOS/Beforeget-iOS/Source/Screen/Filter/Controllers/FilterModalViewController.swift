@@ -52,7 +52,9 @@ final class FilterModalViewController: UIViewController {
             FilterCollectionViewCell.register(target: $0)
         }
     
-    private let applyButtonView = FilterApplyButtonView()
+    private let applyButtonView = FilterApplyButtonView().then {
+        $0.backgroundColor = .white
+    }
     
     // MARK: - Life Cycle
     
@@ -73,8 +75,7 @@ final class FilterModalViewController: UIViewController {
         view.addSubviews([dimmedView, modalView])
         modalView.addSubviews([indicatorView,
                                menuBarView,
-                               filterCollectionView,
-                               applyButtonView])
+                               filterCollectionView])
         
         let topConstant =
         view.safeAreaInsets.bottom +
@@ -111,15 +112,14 @@ final class FilterModalViewController: UIViewController {
 
         filterCollectionView.snp.makeConstraints { make in
             make.top.equalTo(menuBarView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(applyButtonView.snp.top)
+            make.leading.bottom.trailing.equalToSuperview()
         }
         
-        applyButtonView.snp.makeConstraints { make in
-            make.top.equalTo(filterCollectionView.snp.bottom)
-            make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(103)
-        }
+//        applyButtonView.snp.makeConstraints { make in
+//            make.top.equalTo(filterCollectionView.snp.bottom)
+//            make.leading.bottom.trailing.equalToSuperview()
+//            make.height.equalTo(103)
+//        }
     }
 
     // MARK: - Custom Method
@@ -213,7 +213,6 @@ extension FilterModalViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.className, for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
-        filterCell.backgroundColor = .blue
         return filterCell
     }
 }

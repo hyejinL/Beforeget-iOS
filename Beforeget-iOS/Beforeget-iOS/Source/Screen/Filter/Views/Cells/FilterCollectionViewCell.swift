@@ -27,9 +27,9 @@ class FilterCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterab
     
     private lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
-//        $0.separatorStyle = .none
         $0.delegate = self
         $0.dataSource = self
+        $0.isScrollEnabled = false
         DateTableViewCell.register(target: $0)
         DatePickerTableViewCell.register(target: $0)
     }
@@ -42,6 +42,7 @@ class FilterCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterab
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configUI()
         setupLayout()
         setupCollectionView()
         addInitailValues()
@@ -54,6 +55,10 @@ class FilterCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterab
     }
     
     // MARK: - InitUI
+    
+    private func configUI() {
+        backgroundColor = .white
+    }
     
     private func setupLayout() {
         contentView.addSubviews([dateCollectionView, lineView, dateTableView])

@@ -70,7 +70,7 @@ final class MyRecordViewController: UIViewController,
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(44)
         }
         
         searchButton.snp.makeConstraints { make in

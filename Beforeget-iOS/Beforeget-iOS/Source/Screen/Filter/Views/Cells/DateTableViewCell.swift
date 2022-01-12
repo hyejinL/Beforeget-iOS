@@ -18,8 +18,7 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.textColor = Asset.Colors.black200.color
     }
     
-    public let dateLabel = UILabel().then {
-        $0.text = "날짜를 선택해주세요"
+    public var dateLabel = UILabel().then {
         $0.font = BDSFont.body8
         $0.textColor = Asset.Colors.black200.color
     }
@@ -57,6 +56,10 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
         startEndLabel.text = text
         dateLabel.text = date.convertToString()
     }
+    
+    func updateDateLabel(date: String) {
+        dateLabel.text = date
+    }
 }
 
 // MARK: - Date Formater
@@ -64,8 +67,7 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
 extension Date {
     func convertToString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier:"ko_KR")
-        dateFormatter.dateFormat = "YYYY년 M월 D일"
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일"
         let newDate: String = dateFormatter.string(from: self)
         return newDate
     }

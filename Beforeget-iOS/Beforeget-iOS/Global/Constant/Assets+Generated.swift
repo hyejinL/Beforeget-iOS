@@ -53,6 +53,8 @@ internal enum Asset {
     internal static let icnStarBlack = ImageAsset(name: "icn_star_black")
     internal static let icnStarGreen = ImageAsset(name: "icn_star_green")
     internal static let icnWebtoon = ImageAsset(name: "icn_webtoon")
+    internal static let imgSentenceBack = ImageAsset(name: "imgSentenceBack")
+    internal static let imgSentenceFront = ImageAsset(name: "imgSentenceFront")
     internal static let pageActive = ImageAsset(name: "page_active")
     internal static let pageInactive = ImageAsset(name: "page_inactive")
   }

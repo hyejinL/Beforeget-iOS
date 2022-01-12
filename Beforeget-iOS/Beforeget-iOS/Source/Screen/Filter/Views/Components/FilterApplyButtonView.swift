@@ -24,8 +24,7 @@ class FilterApplyButtonView: UIView {
     
     /// 이미지 수정 요망
     public var resetButton = UIButton().then {
-        $0.setImage(Asset.Assets.icnLittleStarBlack.image, for: .normal)
-        $0.backgroundColor = .lightGray
+        $0.setImage(Asset.Assets.btnRefresh.image, for: .normal)
     }
     
     public var applyButton = BDSButton().then {

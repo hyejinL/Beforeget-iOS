@@ -15,7 +15,7 @@ final class BDSNavigationBar: UIView {
     // MARK: - Metric Enum
     
     public enum Metric {
-        static let navigationHeight: CGFloat = 50
+        static let navigationHeight: CGFloat = 44
         static let titleTop: CGFloat = 19
         static let buttonTop: CGFloat = 6
         static let buttonLeading: CGFloat = 4
