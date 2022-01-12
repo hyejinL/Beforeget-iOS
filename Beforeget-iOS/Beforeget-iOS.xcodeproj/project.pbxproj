@@ -46,8 +46,6 @@
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
 		927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3E027881EDA0018CC34 /* UITextField+.swift */; };
-		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
-		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 		929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */; };
 		929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFA278DE04200FCA541 /* ReportOnePageViewController.swift */; };
 		929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFAFB278DE04200FCA541 /* ReportGraphViewController.swift */; };
@@ -63,6 +61,9 @@
 		929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB14278DE0E800FCA541 /* MainViewController.swift */; };
 		929CFB19278DE11E00FCA541 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB18278DE11E00FCA541 /* Media.swift */; };
 		929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */; };
+		E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDAA278F23A900AFA390 /* MediaType.swift */; };
+		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
+		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,8 +104,6 @@
 		927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewRegisterable.swift; sourceTree = "<group>"; };
 		927AF3DE27881EC30018CC34 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		927AF3E027881EDA0018CC34 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
-		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
-		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportSentenceViewController.swift; sourceTree = "<group>"; };
 		929CFAFA278DE04200FCA541 /* ReportOnePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportOnePageViewController.swift; sourceTree = "<group>"; };
 		929CFAFB278DE04200FCA541 /* ReportGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGraphViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +119,9 @@
 		929CFB14278DE0E800FCA541 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		929CFB18278DE11E00FCA541 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
+		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,7 +367,7 @@
 		927AF3A8278814ED0018CC34 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				E2E2779A278B67590083AFF5 /* Cells */,
+				E206FDA9278F230B00AFA390 /* Views */,
 				927AF3AB2788161B0018CC34 /* Controllers */,
 			);
 			path = Post;
@@ -460,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				929CFB18278DE11E00FCA541 /* Media.swift */,
+				E206FDAA278F23A900AFA390 /* MediaType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,50 +475,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E25CCC3A278DE09500CB7018 /* Views */ = {
+		E206FDA9278F230B00AFA390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E25CCC59278DE1A300CB7018 /* Cells */,
-			);
-			name = Views;
-			path = ../../../../../../../Desktop/Views;
-			sourceTree = "<group>";
-		};
-		E25CCC3E278DE15400CB7018 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC3F278DE15400CB7018 /* Media.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E25CCC41278DE15E00CB7018 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */,
-				E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */,
-				E25CCC44278DE15E00CB7018 /* Components */,
-				E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */,
-				E25CCC48278DE15E00CB7018 /* ReportTopView.swift */,
+				E2E2779A278B67590083AFF5 /* Cells */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		E25CCC44278DE15E00CB7018 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */,
-				E25CCC46278DE15E00CB7018 /* RespondingButton.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		E25CCC59278DE1A300CB7018 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		E2E2779A278B67590083AFF5 /* Cells */ = {
@@ -673,10 +638,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E25CCC40278DE15400CB7018 /* Media.swift in Sources */,
+				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
-				927AF3B32788165B0018CC34 /* ReportViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
@@ -704,11 +668,8 @@
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
-				E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */,
-				E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
-				E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
@@ -716,7 +677,6 @@
 				929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
-				E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

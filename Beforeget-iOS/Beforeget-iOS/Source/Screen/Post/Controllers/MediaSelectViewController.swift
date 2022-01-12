@@ -6,29 +6,18 @@
 //
 
 import UIKit
-import Then
+
 import SnapKit
+import Then
 
 final class MediaSelectViewController: UIViewController {
     
-    enum MediaType: Int, CustomStringConvertible {
-        case movie
-        case book
-        case tv
-        case music
-        case webtoon
-        case youtube
-        
-        var description: String {
-            switch self {
-            case .movie: return "Movie"
-            case .book: return "Book"
-            case .tv: return "TV"
-            case .music: return "Music"
-            case .webtoon: return "Webtoon"
-            case .youtube: return "Youtube"
-            }
-        }
+    enum CollectionViewConst {
+        static let interitemSpacing: CGFloat = 17
+        static let lineSpacing: CGFloat = 16
+        static let widthCellCount: CGFloat = 2
+        static let heightCellCount: CGFloat = 3
+        static let cellLineSpacingCount: CGFloat = 2
     }
     
     // MARK: - Properties
@@ -56,8 +45,8 @@ final class MediaSelectViewController: UIViewController {
     }
     
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
-        $0.minimumInteritemSpacing = 17
-        $0.minimumLineSpacing = 16
+        $0.minimumInteritemSpacing = CollectionViewConst.interitemSpacing
+        $0.minimumLineSpacing = CollectionViewConst.lineSpacing
     }
     
     private lazy var mediaCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
@@ -120,6 +109,7 @@ final class MediaSelectViewController: UIViewController {
     }
     
     // MARK: - Custom Method
+    
     private func activateNextButton() {
         nextButton.isEnabled = true
         nextButton.backgroundColor = Asset.Colors.black200.color
@@ -130,7 +120,8 @@ final class MediaSelectViewController: UIViewController {
 
 extension MediaSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (mediaCollectionView.frame.width - 17) / 2, height: (mediaCollectionView.frame.height - 16 * 2) / 3)
+        return CGSize(width: (mediaCollectionView.frame.width - CollectionViewConst.interitemSpacing) / CollectionViewConst.widthCellCount,
+                      height: (mediaCollectionView.frame.height - CollectionViewConst.lineSpacing * CollectionViewConst.cellLineSpacingCount) / CollectionViewConst.heightCellCount)
     }
 }
 
@@ -157,17 +148,6 @@ extension MediaSelectViewController: UICollectionViewDataSource {
 
 extension MediaSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MediaSelectCollectionViewCell
-        else { return }
-        
-        cell.isMediaSelected.toggle()
         activateNextButton()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MediaSelectCollectionViewCell
-        else { return }
-        
-        cell.isMediaSelected.toggle()
     }
 }

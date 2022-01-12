@@ -7,8 +7,8 @@
 
 import UIKit
 
-import Then
 import SnapKit
+import Then
 
 final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
@@ -25,11 +25,11 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
     }
     
     private let mediaLabel = UILabel().then {
-        $0.font = BDSFont.body4
+        $0.font = BDSFont.enBody4
         $0.textColor = Asset.Colors.black200.color
     }
     
-    var isMediaSelected: Bool = false {
+    override var isSelected: Bool {
         didSet {
             if isSelected {
                 mediaBackgroundView.layer.borderColor = Asset.Colors.black200.color.cgColor
