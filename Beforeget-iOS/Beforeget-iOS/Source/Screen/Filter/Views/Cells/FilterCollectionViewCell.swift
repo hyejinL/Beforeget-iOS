@@ -10,7 +10,9 @@ import UIKit
 import SnapKit
 import Then
 
-class FilterCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable, DatePickerDelegate {
+class FilterCollectionViewCell: UICollectionViewCell,
+                                UICollectionViewRegisterable,
+                                DatePickerDelegate {
     
     // MARK: - Properties
     
@@ -169,7 +171,7 @@ extension FilterCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.beginUpdates()
         tableView.deselectRow(at: indexPath, animated: false)
-
+        
         if let datePickerIndexPath = datePickerIndexPath,
            datePickerIndexPath.row - 1 == indexPath.row {
             tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
