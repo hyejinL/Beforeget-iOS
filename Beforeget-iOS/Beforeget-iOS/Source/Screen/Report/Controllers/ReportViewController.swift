@@ -52,6 +52,12 @@ final class ReportViewController: UIPageViewController {
         $0.image = Asset.Assets.pageInactive.image
     }
     
+    private let page1 = ReportLabelViewController()
+    private let page2 = ReportGraphViewController()
+    private let page3 = ReportRankingViewController()
+    private let page4 = ReportSentenceViewController()
+    private let page5 = ReportOnePageViewController()
+    
     // MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +75,7 @@ final class ReportViewController: UIPageViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
+        setupStatusBar(Asset.Colors.white.color)
     }
     
     private func setupLayout() {
@@ -78,7 +84,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
+            $0.height.equalTo(44)
         }
         
         downLoadButton.snp.makeConstraints {
@@ -104,17 +110,29 @@ final class ReportViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-        let page1 = ReportLabelViewController()
-        let page2 = ReportGraphViewController()
-        let page3 = ReportRankingViewController()
-        let page4 = ReportSentenceViewController()
-        let page5 = ReportOnePageViewController()
-        
         [page1, page2, page3, page4, page5].forEach {
             pages.append($0)
         }
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    private func setupBarData() {
+        page2.reportGraphView.barView1.animate(height: 30)
+        page2.reportGraphView.barView2.animate(height: 60)
+        page2.reportGraphView.barView3.animate(height: 40)
+        page2.reportGraphView.barView4.animate(height: 80)
+        page2.reportGraphView.barView5.animate(height: 10)
+        
+        page2.reportGraphView.barView1.barTitle = "8"
+        page2.reportGraphView.barView2.barTitle = "9"
+        page2.reportGraphView.barView3.barTitle = "10"
+        page2.reportGraphView.barView4.barTitle = "11"
+        page2.reportGraphView.barView5.barTitle = "12"
+        
+        
+        page2.reportGraphView.barView5.setupProgressColor(Asset.Colors.green100.color)
+        page2.reportGraphView.barView5.setupTitleColor(Asset.Colors.green100.color)
     }
     
     // MARK: - @objc
@@ -123,7 +141,7 @@ final class ReportViewController: UIPageViewController {
     }
 }
 
-// MARK: - UIPageViewControllerDelegate
+// MARK: - UIPageViewController DataSource
 
 extension ReportViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -149,6 +167,8 @@ extension ReportViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - UIPageViewController Delegate
+
 extension ReportViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
@@ -157,16 +177,12 @@ extension ReportViewController: UIPageViewControllerDelegate {
         else { return }
         
         switch currentIndex {
-        case 0:
-            pageImageView1.image = Asset.Assets.pageActive.image
-            [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
-                $0.image = Asset.Assets.pageInactive.image
-            }
         case 1:
             pageImageView2.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            setupBarData()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {

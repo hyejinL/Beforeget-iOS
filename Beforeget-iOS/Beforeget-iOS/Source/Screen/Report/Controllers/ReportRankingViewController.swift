@@ -31,8 +31,6 @@ final class ReportRankingViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
-        
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -59,7 +57,7 @@ final class ReportRankingViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
             $0.height.equalTo(146)
         }
         
@@ -99,8 +97,7 @@ final class ReportRankingViewController: UIViewController {
     
     // MARK: - @objc
 
-    @objc
-    func touchupDoneButton() {
+    @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
     }

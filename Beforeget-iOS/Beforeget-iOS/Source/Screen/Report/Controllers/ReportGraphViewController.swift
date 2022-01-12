@@ -10,11 +10,11 @@ import UIKit
 import SnapKit
 
 final class ReportGraphViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
-    private var reportGraphView = ReportGraphView()
+    var reportGraphView = ReportGraphView()
     private var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
@@ -30,8 +30,6 @@ final class ReportGraphViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
-        
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -47,9 +45,11 @@ final class ReportGraphViewController: UIViewController {
                                                 """
         
         reportGraphView.delegate = self
-        reportGraphView.month = "12월"
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
+        reportGraphView.month = "12월"
+        reportGraphView.maxCount = 30
+        reportGraphView.midCount = 15
     }
     
     private func setupLayout() {
@@ -57,7 +57,7 @@ final class ReportGraphViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
             $0.height.equalTo(146)
         }
         
@@ -96,11 +96,10 @@ final class ReportGraphViewController: UIViewController {
     }
     
     // MARK: - @objc
-
-    @objc
-    func touchupDoneButton() {
+    
+    @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-       view.endEditing(true)
+        view.endEditing(true)
     }
 }
 

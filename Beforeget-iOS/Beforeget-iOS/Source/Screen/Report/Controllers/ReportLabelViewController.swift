@@ -34,8 +34,6 @@ final class ReportLabelViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
-        
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -56,7 +54,7 @@ final class ReportLabelViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
             $0.height.equalTo(146)
         }
         
