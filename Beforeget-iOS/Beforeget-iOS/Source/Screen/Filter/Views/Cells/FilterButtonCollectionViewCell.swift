@@ -16,7 +16,7 @@ class FilterButtonCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     
     override var isSelected: Bool {
         didSet {
-            configuUI()
+            configUI()
         }
     }
     
@@ -45,7 +45,7 @@ class FilterButtonCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     
     // MARK: - InitUI
     
-    private func configuUI() {
+    private func configUI() {
         cellLabel.textColor = isSelected ?
         Asset.Colors.black200.color :
         Asset.Colors.gray300.color

@@ -27,7 +27,7 @@ protocol StarFilterDelegate: MyRecordViewController {
 }
 
 public class FilterView: UIView {
-
+    
     // MARK: - Properties
     
     public var dateString: String?
@@ -128,7 +128,7 @@ public class FilterView: UIView {
     }
     
     // MARK: - Custom Method
-
+    
     
     // MARK: - @objc
     
