@@ -116,19 +116,15 @@ public class FilterView: UIView {
             make.height.equalTo(35)
         }
         
+        /// 문제 : 에셋 양사이드 마진 값 설정해줘야 된다.
         [dateLabel, mediaLabel, starLabel].forEach {
             $0.snp.makeConstraints { make in
                 make.top.equalToSuperview().inset(4)
-                make.leading.equalToSuperview().inset(16)
                 make.bottom.equalToSuperview().inset(6)
-                make.trailing.equalToSuperview().inset(17)
                 make.centerX.equalToSuperview()
             }
         }
     }
-    
-    // MARK: - Custom Method
-    
     
     // MARK: - @objc
     

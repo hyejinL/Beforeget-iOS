@@ -13,14 +13,20 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: String)
+    func sendData(data: Int, media: Int, star: Int)
 }
 
 final class FilterModalViewController: UIViewController,
                                        SelectMenuDelegate,
-                                       DateFilterButtonDelegate {
+                                       DateFilterButtonDelegate,
+                                       MediaFilterButtonDelegate,
+                                       StarFilterButtonDelegate {
     
     // MARK: - Properties
+    
+    var selectedDateIndex: Int = 0
+    var selectedMediaIndex: Int = 0
+    var selectedStarIndex: Int = 0
     
     weak var sendDataDelegate: SendDataDelegate?
     
@@ -53,7 +59,7 @@ final class FilterModalViewController: UIViewController,
         $0.scrollDirection = .horizontal
     }
     
-    private lazy var filterCollectionView = UICollectionView(
+    public lazy var filterCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: layout).then {
             $0.showsHorizontalScrollIndicator = false
             $0.isPagingEnabled = true
@@ -74,7 +80,8 @@ final class FilterModalViewController: UIViewController,
     
     public var resetButton = UIButton(type: .system).then {
         $0.tintColor = Asset.Colors.black200.color
-        $0.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
+        $0.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupResetButton(_:)), for: .touchUpInside)
     }
     
     public var applyButton = BDSButton().then {
@@ -169,8 +176,23 @@ final class FilterModalViewController: UIViewController,
     }
     
     func selectDateFilter(index: Int) {
-        let index = IndexPath(row: index, section: 0)
+        selectedDateIndex = index
+        print(selectedDateIndex, "이것은 날짜다!!", "d")
         resetButton.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
+        applyButton.isDisabled = false
+    }
+    
+    func selectMediaFilter(index: Int) {
+        selectedMediaIndex = index
+        print(selectedMediaIndex, "이것은 미디어다!!")
+        resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
+        applyButton.isDisabled = false
+    }
+    
+    func selectStarFilter(index: Int) {
+        selectedStarIndex = index
+        print(selectedStarIndex, "이것은 별점이다!!!")
+        resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
         applyButton.isDisabled = false
     }
     
@@ -217,9 +239,15 @@ final class FilterModalViewController: UIViewController,
     
     // MARK: - @objc
     
+    @objc func touchupResetButton(_ sender: UIButton) {
+        filterCollectionView.
+    }
+    
     @objc func touchupApplyButton(_ sender: UIButton) {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
-        sendDataDelegate?.sendData(data: "2개월")
+        sendDataDelegate?.sendData(data: selectedDateIndex,
+                                   media: selectedMediaIndex,
+                                   star: selectedStarIndex)
         hideBottomSheetAndGoBack()
     }
     
@@ -271,17 +299,19 @@ extension FilterModalViewController: UICollectionViewDataSource {
             guard let filterCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: FilterCollectionViewCell.className,
                 for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
-            filterCell.dateFilterDelegate = self
+            filterCell.dateFilterButtonDelegate = self
             return filterCell
         case 1:
             guard let mediaCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
+            mediaCell.mediaFilterButtonDelegate = self
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: StarCollectionViewCell.className,
                 for: indexPath) as? StarCollectionViewCell else { return UICollectionViewCell() }
+            starCell.starFilterButtonDelegate = self
             return starCell
         }
     }

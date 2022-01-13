@@ -16,6 +16,8 @@ protocol DateFilterButtonDelegate: FilterModalViewController {
     func selectDateFilter(index: Int)
 }
 
+/// 필터모달 오픈 시에 데이트 피커 테이블 뷰가 있는 아이.
+
 class FilterCollectionViewCell: UICollectionViewCell,
                                 UICollectionViewRegisterable,
                                 DatePickerDelegate {
@@ -24,7 +26,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     private var filter = FilterManager()
     
-    weak var dateFilterDelegate: DateFilterButtonDelegate?
+    weak var dateFilterButtonDelegate: DateFilterButtonDelegate?
     
     var inputText: [String] = ["시작", "끝"]
     var inputDates: [Date] = []
@@ -144,7 +146,7 @@ extension FilterCollectionViewCell {
 
 extension FilterCollectionViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dateFilterDelegate?.selectDateFilter(index: indexPath.item)
+        dateFilterButtonDelegate?.selectDateFilter(index: indexPath.item)
     }
 }
 

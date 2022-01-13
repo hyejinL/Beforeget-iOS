@@ -10,15 +10,31 @@ import UIKit
 import SnapKit
 import Then
 
-/// 내 기록들 모아보는 곳
-
 final class MyRecordViewController: UIViewController,
                                     DateFilterDelegate,
                                     MediaFilterDelegate,
-                                    StarFilterDelegate, SendDataDelegate {
+                                    StarFilterDelegate,
+                                    SendDataDelegate {
+    
+    // MARK: - Enum
+    
+    public enum MediaType: Int, CaseIterable {
+        case Movie, Book, Music, Youtube, Webtoon, TV
+        
+        var mediaNumber: Int {
+            switch self {
+            case .Movie: return 1
+            case .Book: return 2
+            case .Music: return 3
+            case .Youtube: return 4
+            case .Webtoon: return 5
+            case .TV: return 6
+            }
+        }
+    }
 
     // MARK: - Properties
-        
+            
     private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
@@ -111,6 +127,8 @@ final class MyRecordViewController: UIViewController,
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
+        filterModalViewController.sendDataDelegate = self
+//        filterModalViewController.filterCollectionView.cellForItem(at: 1)
         self.present(filterModalViewController, animated: false, completion: nil)
         print("미디어버튼")
     }
@@ -119,13 +137,28 @@ final class MyRecordViewController: UIViewController,
         /// 3번째 별점 페이지로 바로 오픈해야 됨
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
+        filterModalViewController.sendDataDelegate = self
         self.present(filterModalViewController, animated: false, completion: nil)
         print("스타버튼")
     }
 
-    func sendData(data: String) {
-        filterView.dateLabel.text = data
+    func sendData(data: Int, media: Int, star: Int) {
+        /// 문제 : 미디어 부분에서 여러개 선택했을 때 설정처리 + 기간일 경우 int가 0부터 넘어옴..;;;
+        /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
+        /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
+        /// MediaType.allCases.ind
+        
+        filterView.mediaButton.isSelected = (media == 0) ?
+        false : true
+        
+        filterView.starButton.isSelected = (star == 0) ?
+        false : true
+        
+        filterView.dateLabel.text = "기간"
         filterView.dateButton.isSelected = true
+        filterView.mediaLabel.text = "미디어\(media)"
+        filterView.mediaButton.isSelected = true
+        filterView.starLabel.text = "별점"
     }
 }
 

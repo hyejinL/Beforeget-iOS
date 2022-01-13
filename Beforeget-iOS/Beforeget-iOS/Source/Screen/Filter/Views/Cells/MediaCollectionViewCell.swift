@@ -10,9 +10,17 @@ import UIKit
 import SnapKit
 import Then
 
+// MARK: - Delegate
+
+protocol MediaFilterButtonDelegate: FilterModalViewController {
+    func selectMediaFilter(index: Int)
+}
+
 class MediaCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
+    
+    weak var mediaFilterButtonDelegate: MediaFilterButtonDelegate?
    
     private lazy var firstButtonStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -39,31 +47,37 @@ class MediaCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     }
     
     private let movieButton = UIButton().then {
+        $0.tag = 1
         $0.setImage(Asset.Assets.boxMovie.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveMovie.image, for: .normal)
     }
     
     private let bookButton = UIButton().then {
+        $0.tag = 2
         $0.setImage(Asset.Assets.boxBook.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveBook.image, for: .normal)
     }
     
     private let tvButton = UIButton().then {
+        $0.tag = 3
         $0.setImage(Asset.Assets.boxTV.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveTv.image, for: .normal)
     }
     
     private let musicButton = UIButton().then {
+        $0.tag = 4
         $0.setImage(Asset.Assets.boxMusic.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveMusic.image, for: .normal)
     }
     
     private let webtoonButton = UIButton().then {
+        $0.tag = 5
         $0.setImage(Asset.Assets.boxWebtoon.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveWebtoon.image, for: .normal)
     }
     
     private let youtubeButton = UIButton().then {
+        $0.tag = 6
         $0.setImage(Asset.Assets.boxYoutube.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveYoutube.image, for: .normal)
     }
@@ -120,5 +134,6 @@ class MediaCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
 
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        mediaFilterButtonDelegate?.selectMediaFilter(index: sender.tag)
     }
 }
