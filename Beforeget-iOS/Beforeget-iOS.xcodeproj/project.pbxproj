@@ -17,6 +17,7 @@
 		5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
 		924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* BDSButton.swift */; };
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
+		925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
@@ -92,6 +93,7 @@
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		924A3E2D2788390E006482B1 /* BDSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSButton.swift; sourceTree = "<group>"; };
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
+		925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceCollectionViewCell.swift; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 				5B6D7F81278A2BCF00202230 /* CloseButton.swift */,
 			);
 			path = UIComponet;
+			sourceTree = "<group>";
+		};
+		925E77F7278F7473009A96FB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		927AF36427880B820018CC34 = {
@@ -444,6 +454,7 @@
 		929CFB05278DE05000FCA541 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				925E77F7278F7473009A96FB /* Cells */,
 				929CFB12278DE0D100FCA541 /* Components */,
 				929CFB06278DE06400FCA541 /* ReportDescriptionView.swift */,
 				929CFB0A278DE06500FCA541 /* ReportGraphView.swift */,
@@ -664,6 +675,7 @@
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
+				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
 				929CFB11278DE06500FCA541 /* MonthYearPickerView.swift in Sources */,
 				929CFB02278DE04200FCA541 /* ReportLabelViewController.swift in Sources */,
 				929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */,

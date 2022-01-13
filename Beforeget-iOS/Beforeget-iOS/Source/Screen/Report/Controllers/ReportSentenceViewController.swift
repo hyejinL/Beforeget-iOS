@@ -7,13 +7,25 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class ReportSentenceViewController: UIViewController {
 
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
-    private var reportSentneceView = ReportSentenceView()
+    private var reportSentenceView = ReportSentenceView()
     private lazy var monthPicker = MonthYearPickerView()
+    
+    private var isFront: Bool = false
+    
+    private var movieData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
+    private var bookData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
+    private var tvData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
+    private var musicData: [String] = []
+    private var webtoonData: [String] = []
+    private var youtubeData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
     
     // MARK: - Life Cycle
     
@@ -21,12 +33,13 @@ final class ReportSentenceViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        bind()
     }
     
     // MARK: - InitUI
     
     private func configUI() {
-//        reportTopView.monthButton.inputAccessoryView = setupToolbar()
+        reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
         reportTopView.reportTitle = "유형별 한 줄 리뷰 순위"
@@ -34,7 +47,7 @@ final class ReportSentenceViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([reportTopView, reportSentneceView])
+        view.addSubviews([reportTopView, reportSentenceView])
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -42,10 +55,10 @@ final class ReportSentenceViewController: UIViewController {
             $0.height.equalTo(146)
         }
         
-        reportSentneceView.snp.makeConstraints {
+        reportSentenceView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.top.equalTo(reportTopView.snp.bottom)
-            $0.height.equalTo(290)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(54)
         }
     }
     
@@ -53,6 +66,14 @@ final class ReportSentenceViewController: UIViewController {
     
     private func bind() {
         reportTopView.delegate = self
+        reportSentenceView.delegate = self
+        
+        reportSentenceView.movieData = movieData
+        reportSentenceView.bookData = bookData
+        reportSentenceView.tvData = tvData
+        reportSentenceView.musicData = musicData
+        reportSentenceView.webtoonData = webtoonData
+        reportSentenceView.youtubeData = youtubeData
     }
     
     private func setupToolbar() -> UIToolbar {
@@ -83,5 +104,63 @@ final class ReportSentenceViewController: UIViewController {
 extension ReportSentenceViewController: ReportTopViewDelegate {
     func touchupMonthButton() {
         
+    }
+}
+
+// MARK: - ReportSentenceView Delegate
+
+extension ReportSentenceViewController: ReportSentenceViewDelegate {
+    func touchupMovie() {
+        if reportSentenceView.movieIsFront {
+            reportSentenceView.movieImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.movieImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.movieImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    func touchupBook() {
+        if reportSentenceView.bookIsFront {
+            reportSentenceView.bookImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.bookImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.bookImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    func touchupTV() {
+        if reportSentenceView.tvIsFront {
+            reportSentenceView.tvImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.tvImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.tvImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    func touchupMusic() {
+        if reportSentenceView.musicIsFront {
+            reportSentenceView.musicImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.musicImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.musicImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    func touchupWebtoon() {
+        if reportSentenceView.webtoonIsFront {
+            reportSentenceView.webtoonImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.webtoonImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.webtoonImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+    }
+    
+    func touchupYoutube() {
+        if reportSentenceView.youtubeIsFront {
+            reportSentenceView.youtubeImageView.image = Asset.Assets.imgSentenceBack.image
+        } else {
+            reportSentenceView.youtubeImageView.image = Asset.Assets.imgSentenceFront.image
+        }
+        UIView.transition(with: reportSentenceView.youtubeImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
 }
