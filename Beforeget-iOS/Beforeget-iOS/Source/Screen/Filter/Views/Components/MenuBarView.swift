@@ -16,8 +16,6 @@ protocol SelectMenuDelegate: FilterModalViewController {
     func selectMenu(index: Int)
 }
 
-/// 필터 모달뷰에서 있는 기간, 미디어, 별점 메뉴 부분
-
 class MenuBarView: UIView {
     
     // MARK: - Properties

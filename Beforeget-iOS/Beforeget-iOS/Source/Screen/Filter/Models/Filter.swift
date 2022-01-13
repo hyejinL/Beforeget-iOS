@@ -19,9 +19,17 @@ struct Filter: Hashable {
     }
 }
 
-extension Filter {
-    static let dateMenu = [Filter(filterMenu: "2주"),
-                           Filter(filterMenu: "1개월"),
-                           Filter(filterMenu: "3개월"),
-                           Filter(filterMenu: "직접입력")]
+struct FilterManager {
+    let filter = [Filter(filterMenu: "2주"),
+                    Filter(filterMenu: "1개월"),
+                    Filter(filterMenu: "3개월"),
+                    Filter(filterMenu: "직접입력")]
+    
+    func getFilterText(index: Int) -> String {
+        return filter[index].filterMenu
+    }
+    
+    func getFilterCount() -> Int {
+        return filter.count
+    }
 }

@@ -15,10 +15,10 @@ import Then
 final class MyRecordViewController: UIViewController,
                                     DateFilterDelegate,
                                     MediaFilterDelegate,
-                                    StarFilterDelegate {
-    
+                                    StarFilterDelegate, SendDataDelegate {
+
     // MARK: - Properties
-    
+        
     private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
@@ -32,7 +32,7 @@ final class MyRecordViewController: UIViewController,
         $0.setImage(Asset.Assets.btnPlus.image, for: .normal)
     }
     
-    private lazy var filterView = FilterView().then {
+    public lazy var filterView = FilterView().then {
         $0.dateDelegate = self
         $0.mediaDelegate = self
         $0.starDelegate = self
@@ -103,16 +103,29 @@ final class MyRecordViewController: UIViewController,
     public func clickDateButton() {
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
+        filterModalViewController.sendDataDelegate = self
         self.present(filterModalViewController, animated: false, completion: nil)
-        print("데이트버튼")
     }
     
     public func clickMediaButton() {
+        /// 2번째 미디어 페이지로 바로 오픈해야 됨
+        let filterModalViewController = FilterModalViewController()
+        filterModalViewController.modalPresentationStyle = .overFullScreen
+        self.present(filterModalViewController, animated: false, completion: nil)
         print("미디어버튼")
     }
     
     public func clickStarButton() {
+        /// 3번째 별점 페이지로 바로 오픈해야 됨
+        let filterModalViewController = FilterModalViewController()
+        filterModalViewController.modalPresentationStyle = .overFullScreen
+        self.present(filterModalViewController, animated: false, completion: nil)
         print("스타버튼")
+    }
+
+    func sendData(data: String) {
+        filterView.dateLabel.text = data
+        filterView.dateButton.isSelected = true
     }
 }
 

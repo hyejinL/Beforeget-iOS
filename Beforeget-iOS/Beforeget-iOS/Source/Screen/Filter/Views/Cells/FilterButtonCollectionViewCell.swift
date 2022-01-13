@@ -7,20 +7,24 @@
 
 import UIKit
 
-class FilterButtonCollectionViewCell: UICollectionViewCell {
+import SnapKit
+import Then
+
+class FilterButtonCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
     
-    public var menu: Filter? {
+    override var isSelected: Bool {
         didSet {
-            guard let menu = menu else { return }
-            cellLabel.text = menu.filterMenu
+            configuUI()
         }
     }
     
-    private var menuButton = UIButton().then {
-        $0.setImage(Asset.Assets.boxFilterActive.image, for: .selected)
-        $0.setImage(Asset.Assets.boxFilterInactive.image, for: .normal)
+    private var menuView = UIView().then {
+        $0.makeRound()
+        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        $0.layer.borderWidth = 1
+        $0.backgroundColor = .white
     }
 
     public var cellLabel = UILabel().then {
@@ -46,16 +50,16 @@ class FilterButtonCollectionViewCell: UICollectionViewCell {
         Asset.Colors.black200.color :
         Asset.Colors.gray300.color
         
-        menuButton.layer.borderColor = isSelected ?
+        menuView.layer.borderColor = isSelected ?
         Asset.Colors.black200.color.cgColor :
         Asset.Colors.gray300.color.cgColor
     }
     
     private func setupLayout() {
-        contentView.addSubview(menuButton)
-        menuButton.addSubview(cellLabel)
+        contentView.addSubview(menuView)
+        menuView.addSubview(cellLabel)
         
-        menuButton.snp.makeConstraints { make in
+        menuView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(37)
         }

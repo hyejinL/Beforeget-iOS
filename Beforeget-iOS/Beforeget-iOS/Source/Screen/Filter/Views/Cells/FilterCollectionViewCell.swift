@@ -10,22 +10,33 @@ import UIKit
 import SnapKit
 import Then
 
+// MARK: - Delegate
+
+protocol DateFilterButtonDelegate: FilterModalViewController {
+    func selectDateFilter(index: Int)
+}
+
 class FilterCollectionViewCell: UICollectionViewCell,
                                 UICollectionViewRegisterable,
                                 DatePickerDelegate {
     
     // MARK: - Properties
     
+    private var filter = FilterManager()
+    
+    weak var dateFilterDelegate: DateFilterButtonDelegate?
+    
     var inputText: [String] = ["시작", "끝"]
     var inputDates: [Date] = []
     var datePickerIndexPath: IndexPath?
-    
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Filter>! = nil
-    
+        
     private lazy var dateCollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: setupCollectionViewLayout()
-    )
+        frame: .zero, collectionViewLayout: setupCollectionViewLayout()).then {
+        $0.isScrollEnabled = false
+        $0.delegate = self
+        $0.dataSource = self
+        FilterButtonCollectionViewCell.register(target: $0)
+    }
     
     private lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
@@ -46,10 +57,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
         super.init(frame: frame)
         configUI()
         setupLayout()
-        setupCollectionView()
         addInitailValues()
-        configDataSource()
-        applySnapshot()
     }
     
     required init?(coder: NSCoder) {
@@ -84,11 +92,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    private func setupCollectionView() {
-        dateCollectionView.isScrollEnabled = false
-    }
-    
-    func addInitailValues() {
+    private func addInitailValues() {
         inputDates = Array(repeating: Date(), count: inputText.count)
     }
     
@@ -136,30 +140,25 @@ extension FilterCollectionViewCell {
     }
 }
 
-// MARK: - Configure Data
+// MARK: - UICollectionViewDelegate
 
-extension FilterCollectionViewCell {
-    private func configDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<FilterButtonCollectionViewCell, Filter> {
-            (cell, indexPath, menu) in
-            cell.menu = menu
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<Section, Filter>(collectionView: dateCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: Filter) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(
-                using: cellRegistration,
-                for: indexPath,
-                item: itemIdentifier
-            )
-        }
+extension FilterCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dateFilterDelegate?.selectDateFilter(index: indexPath.item)
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension FilterCollectionViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return filter.getFilterCount()
     }
     
-    private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Filter>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(Filter.dateMenu, toSection: .main)
-        dataSource.apply(snapshot, animatingDifferences: false)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let dateFilterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterButtonCollectionViewCell.className, for: indexPath) as? FilterButtonCollectionViewCell else { return UICollectionViewCell() }
+        dateFilterCell.cellLabel.text = filter.getFilterText(index: indexPath.item)
+        return dateFilterCell
     }
 }
 

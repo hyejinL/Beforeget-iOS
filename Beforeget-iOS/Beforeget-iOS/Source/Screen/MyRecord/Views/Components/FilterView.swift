@@ -30,6 +30,8 @@ public class FilterView: UIView {
 
     // MARK: - Properties
     
+    public var dateString: String?
+    
     weak var dateDelegate: DateFilterDelegate?
     weak var mediaDelegate: MediaFilterDelegate?
     weak var starDelegate: StarFilterDelegate?
@@ -45,30 +47,30 @@ public class FilterView: UIView {
         )
     }
     
-    private var dateButton = UIButton().then {
+    public var dateButton = UIButton().then {
         $0.addTarget(self, action: #selector(touchupDateButton),
                      for: .touchUpInside)
     }
     
-    private var mediaButton = UIButton().then {
+    public var mediaButton = UIButton().then {
         $0.addTarget(self, action: #selector(touchupMediaButton),
                      for: .touchUpInside)
     }
     
-    private var starButton = UIButton().then {
+    public var starButton = UIButton().then {
         $0.addTarget(self, action: #selector(touchupStarButton),
                      for: .touchUpInside)
     }
     
-    private var dateLabel = UILabel().then {
+    public var dateLabel = UILabel().then {
         $0.text = "기간"
     }
     
-    private var mediaLabel = UILabel().then {
+    public var mediaLabel = UILabel().then {
         $0.text = "미디어"
     }
     
-    private var starLabel = UILabel().then {
+    public var starLabel = UILabel().then {
         $0.text = "별점"
     }
     
@@ -92,6 +94,7 @@ public class FilterView: UIView {
         [dateButton, mediaButton, starButton].forEach {
             $0.setImage(Asset.Assets.btnFilterInactive.image, for: .normal)
             $0.setImage(Asset.Assets.btnFilterActive.image, for: .highlighted)
+            $0.setImage(Asset.Assets.btnFilterActive.image, for: .selected)
         }
         
         [dateLabel, mediaLabel, starLabel].forEach {
@@ -123,6 +126,9 @@ public class FilterView: UIView {
             }
         }
     }
+    
+    // MARK: - Custom Method
+
     
     // MARK: - @objc
     

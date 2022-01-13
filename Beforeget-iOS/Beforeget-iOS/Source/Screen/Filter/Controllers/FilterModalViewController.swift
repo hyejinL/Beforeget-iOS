@@ -10,9 +10,19 @@ import UIKit
 import SnapKit
 import Then
 
-final class FilterModalViewController: UIViewController, SelectMenuDelegate {
+// MARK: - Delegate
+
+protocol SendDataDelegate: MyRecordViewController {
+    func sendData(data: String)
+}
+
+final class FilterModalViewController: UIViewController,
+                                       SelectMenuDelegate,
+                                       DateFilterButtonDelegate {
     
     // MARK: - Properties
+    
+    weak var sendDataDelegate: SendDataDelegate?
     
     private var modalViewTopConstraint: NSLayoutConstraint!
     
@@ -53,7 +63,7 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
             MediaCollectionViewCell.register(target: $0)
             StarCollectionViewCell.register(target: $0)
         }
-
+    
     private lazy var buttonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 14
@@ -62,13 +72,15 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
             applyButton])
     }
     
-    public var resetButton = UIButton().then {
+    public var resetButton = UIButton(type: .system).then {
+        $0.tintColor = Asset.Colors.black200.color
         $0.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
     }
     
     public var applyButton = BDSButton().then {
         $0.text = "적용"
         $0.isDisabled = true
+        $0.addTarget(self, action: #selector(touchupApplyButton(_:)), for: .touchUpInside)
     }
     
     // MARK: - Life Cycle
@@ -125,7 +137,7 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
-
+        
         filterCollectionView.snp.makeConstraints { make in
             make.top.equalTo(menuBarView.snp.bottom)
             make.leading.trailing.equalToSuperview()
@@ -148,13 +160,18 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
             make.width.equalTo(76)
         }
     }
-
+    
     // MARK: - Custom Method
     
-    /// 메뉴를 눌렀을 때 필터 컬렉션뷰를 해당 페이지로 이동해주기 (스크롤시켜주기) 위한 메소드
     func selectMenu(index: Int) {
         let index = IndexPath(row: index, section: 0)
         filterCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+    }
+    
+    func selectDateFilter(index: Int) {
+        let index = IndexPath(row: index, section: 0)
+        resetButton.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
+        applyButton.isDisabled = false
     }
     
     // 바텀 시트 표출 애니메이션
@@ -170,7 +187,6 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         }, completion: nil)
     }
     
-    // 바텀 시트 사라지는 애니메이션
     private func hideBottomSheetAndGoBack() {
         let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
         let bottomPadding = view.safeAreaInsets.bottom
@@ -185,7 +201,6 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         }
     }
     
-    // GestureRecognizer 세팅 작업
     private func setupGestureRecognizer() {
         // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
         let dimmedTap = UITapGestureRecognizer(
@@ -199,15 +214,19 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
     }
-
+    
     // MARK: - @objc
     
-    // UITapGestureRecognizer 연결 함수 부분
+    @objc func touchupApplyButton(_ sender: UIButton) {
+        // 필터 선택 시에 데이터값 전달하는 로직 작성
+        sendDataDelegate?.sendData(data: "2개월")
+        hideBottomSheetAndGoBack()
+    }
+    
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
         hideBottomSheetAndGoBack()
     }
     
-    // UISwipeGestureRecognizer 연결 함수 부분
     @objc func panGesture(_ recognizer: UISwipeGestureRecognizer) {
         if recognizer.state == .ended {
             switch recognizer.direction {
@@ -230,19 +249,8 @@ extension FilterModalViewController: UICollectionViewDelegate {
         menuBarView.indicatorView.snp.updateConstraints { make in
             make.leading.equalToSuperview().inset(menuIndex*menuWidth+75+menuIndex*39)
         }
-        
-        switch menuIndex {
-        case 0.0:
-            return resetButton.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
-        case 1.0:
-            return resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
-        case 2.0:
-            return resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
-        default:
-            return
-        }
     }
-
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
         let indexPath = IndexPath(item: itemAt, section: 0)
@@ -263,6 +271,7 @@ extension FilterModalViewController: UICollectionViewDataSource {
             guard let filterCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: FilterCollectionViewCell.className,
                 for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
+            filterCell.dateFilterDelegate = self
             return filterCell
         case 1:
             guard let mediaCell = collectionView.dequeueReusableCell(
