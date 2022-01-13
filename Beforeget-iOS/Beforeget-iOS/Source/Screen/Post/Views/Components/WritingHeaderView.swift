@@ -59,8 +59,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     }
     
     private let lineView = UIView().then {
-        // 색 고칠것!!!!!!!!! gray400
-        $0.backgroundColor = Asset.Colors.gray300.color
+        $0.backgroundColor = Asset.Colors.gray400.color
     }
     
     
