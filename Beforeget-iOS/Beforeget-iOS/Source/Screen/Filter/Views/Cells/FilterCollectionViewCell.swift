@@ -114,8 +114,12 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(resetDateFilter), name: NSNotification.Name("ResetDateFilter"), object: nil)
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(resetDateFilter),
+            name: NSNotification.Name("ResetDateFilter"),
+            object: nil)
     }
     
     // MARK: - @objc

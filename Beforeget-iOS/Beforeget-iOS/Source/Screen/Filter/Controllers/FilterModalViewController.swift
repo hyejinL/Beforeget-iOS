@@ -182,22 +182,19 @@ final class FilterModalViewController: UIViewController,
     
     func selectDateFilter(index: Int) {
         selectedDateIndex = index
-        print(selectedDateIndex, "이것은 날짜다!!", "d")
-        resetButton.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
+        print(selectedDateIndex, "이것은 날짜다!!")
         applyButton.isDisabled = false
     }
     
     func selectMediaFilter(index: Int) {
         selectedMediaIndex = index
         print(selectedMediaIndex, "이것은 미디어다!!")
-        resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
         applyButton.isDisabled = false
     }
     
     func selectStarFilter(index: Int) {
         selectedStarIndex = index
         print(selectedStarIndex, "이것은 별점이다!!!")
-        resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
         applyButton.isDisabled = false
     }
     
@@ -242,13 +239,12 @@ final class FilterModalViewController: UIViewController,
         view.addGestureRecognizer(swipeGesture)
     }
     
-    func setupNotification() {
+    /// 문제 : 이 노티를 사용할 경우에 적용하기 버튼은 Disable 되지 않음
+    private func setupNotification() {
         NotificationCenter.default.post(name: NSNotification.Name("ResetDateFilter"), object: nil)
-        NotificationCenter.default.post(name: NSNotification.Name("ResetMediaFilter"), object: nil)
-        NotificationCenter.default.post(name: NSNotification.Name("ResetStarFilter"), object: nil)
     }
     
-    func removeNotification() {
+    private func removeNotification() {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -288,9 +284,18 @@ extension FilterModalViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
+        print(menuIndex)
         
         menuBarView.indicatorView.snp.updateConstraints { make in
             make.leading.equalToSuperview().inset(menuIndex*menuWidth+75+menuIndex*39)
+        }
+        
+        switch menuIndex {
+        case 0.0..<1.0: return resetButton.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
+        case 1.0..<2.0: return resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
+        case 2.0...: return resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
+        default:
+            return
         }
     }
     

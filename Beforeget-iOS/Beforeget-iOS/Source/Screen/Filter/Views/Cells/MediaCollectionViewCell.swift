@@ -89,7 +89,6 @@ class MediaCollectionViewCell: UICollectionViewCell,
         super.init(frame: frame)
         configUI()
         setupLayout()
-        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -132,26 +131,10 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
-    // MARK: - Custom Method
-    
-    func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(resetMediaFilter),
-                                               name: NSNotification.Name("ResetMediaFilter"), object: nil)
-    }
-    
     // MARK: - @objc
     
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         mediaFilterButtonDelegate?.selectMediaFilter(index: sender.tag)
-    }
-    
-    @objc func resetMediaFilter() {
-        movieButton.setImage(Asset.Assets.boxInactiveMovie.image, for: .normal)
-        bookButton.setImage(Asset.Assets.boxInactiveBook.image, for: .normal)
-        webtoonButton.setImage(Asset.Assets.boxInactiveWebtoon.image, for: .normal)
-        tvButton.setImage(Asset.Assets.boxInactiveTv.image, for: .normal)
-        musicButton.setImage(Asset.Assets.boxInactiveMusic.image, for: .normal)
-        youtubeButton.setImage(Asset.Assets.boxInactiveYoutube.image, for: .normal)
     }
 }
