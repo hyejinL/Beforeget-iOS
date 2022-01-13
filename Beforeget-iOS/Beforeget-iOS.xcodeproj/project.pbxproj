@@ -29,6 +29,7 @@
 		5B83EF33278E388C00D07AC7 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83EF32278E388C00D07AC7 /* DatePickerTableViewCell.swift */; };
 		5B86AEB9278F7B22001C4486 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B86AEB8278F7B22001C4486 /* MediaCollectionViewCell.swift */; };
 		5B86AEBB278F7BC9001C4486 /* StarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B86AEBA278F7BC9001C4486 /* StarCollectionViewCell.swift */; };
+		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* BDSButton.swift */; };
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
@@ -101,6 +102,7 @@
 		5B83EF32278E388C00D07AC7 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		5B86AEB8278F7B22001C4486 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B86AEBA278F7BC9001C4486 /* StarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarCollectionViewCell.swift; sourceTree = "<group>"; };
+		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		924A3E2D2788390E006482B1 /* BDSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSButton.swift; sourceTree = "<group>"; };
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				927AF3A6278813E00018CC34 /* UIViewController+.swift */,
 				927AF3DE27881EC30018CC34 /* UIStackView+.swift */,
 				927AF3E027881EDA0018CC34 /* UITextField+.swift */,
+				5BD114922790B3670063EB3B /* UICollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				5B7BD10C278D870F000BC0FA /* MenuBarView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
+				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
 				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
 				5B86AEB9278F7B22001C4486 /* MediaCollectionViewCell.swift in Sources */,

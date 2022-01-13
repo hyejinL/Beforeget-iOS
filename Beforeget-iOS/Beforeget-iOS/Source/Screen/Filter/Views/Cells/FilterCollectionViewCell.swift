@@ -31,14 +31,14 @@ class FilterCollectionViewCell: UICollectionViewCell,
     var inputText: [String] = ["시작", "끝"]
     var inputDates: [Date] = []
     var datePickerIndexPath: IndexPath?
-        
-    private lazy var dateCollectionView = UICollectionView(
+    
+    public lazy var dateCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: setupCollectionViewLayout()).then {
-        $0.isScrollEnabled = false
-        $0.delegate = self
-        $0.dataSource = self
-        FilterButtonCollectionViewCell.register(target: $0)
-    }
+            $0.isScrollEnabled = false
+            $0.delegate = self
+            $0.dataSource = self
+            FilterButtonCollectionViewCell.register(target: $0)
+        }
     
     private lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
@@ -60,6 +60,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
         configUI()
         setupLayout()
         addInitailValues()
+        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -109,6 +110,18 @@ class FilterCollectionViewCell: UICollectionViewCell,
     func didChangeDate(date: Date, indexPath: IndexPath) {
         inputDates[indexPath.row] = date
         dateTableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
+    // MARK: - Custom Method
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(resetDateFilter), name: NSNotification.Name("ResetDateFilter"), object: nil)
+    }
+    
+    // MARK: - @objc
+    
+    @objc func resetDateFilter() {
+        dateCollectionView.deselectAllItems(animated: false)
     }
 }
 

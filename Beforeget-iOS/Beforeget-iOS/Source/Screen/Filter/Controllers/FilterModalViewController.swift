@@ -29,7 +29,7 @@ final class FilterModalViewController: UIViewController,
     var selectedStarIndex: Int = 0
     
     weak var sendDataDelegate: SendDataDelegate?
-    
+        
     private var modalViewTopConstraint: NSLayoutConstraint!
     
     private let height: CGFloat = 633
@@ -101,6 +101,11 @@ final class FilterModalViewController: UIViewController,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showBottomSheet()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        removeNotification()
     }
     
     // MARK: - InitUI
@@ -237,10 +242,20 @@ final class FilterModalViewController: UIViewController,
         view.addGestureRecognizer(swipeGesture)
     }
     
+    func setupNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name("ResetDateFilter"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ResetMediaFilter"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ResetStarFilter"), object: nil)
+    }
+    
+    func removeNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - @objc
     
     @objc func touchupResetButton(_ sender: UIButton) {
-        filterCollectionView.
+        setupNotification()
     }
     
     @objc func touchupApplyButton(_ sender: UIButton) {
