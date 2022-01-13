@@ -15,6 +15,7 @@
 		5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F7F278A2A8F00202230 /* BackButton.swift */; };
 		5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F81278A2BCF00202230 /* CloseButton.swift */; };
 		5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
+		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* BDSButton.swift */; };
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
@@ -86,6 +87,7 @@
 		5B6D7F7F278A2A8F00202230 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5B6D7F81278A2BCF00202230 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSNavigationBar.swift; sourceTree = "<group>"; };
+		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		924A3E2D2788390E006482B1 /* BDSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSButton.swift; sourceTree = "<group>"; };
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
@@ -156,6 +158,30 @@
 				5B304B7627882AF30054314A /* Assets+Generated.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		5BD114942790C1910063EB3B /* DetailRecord */ = {
+			isa = PBXGroup;
+			children = (
+				5BD114962790C1AB0063EB3B /* Views */,
+				5BD114952790C1A50063EB3B /* Controllers */,
+			);
+			path = DetailRecord;
+			sourceTree = "<group>";
+		};
+		5BD114952790C1A50063EB3B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5BD114962790C1AB0063EB3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8BE74230A796E431079FC61E /* Pods */ = {
@@ -286,6 +312,7 @@
 		927AF38A27880D9D0018CC34 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				5BD114942790C1910063EB3B /* DetailRecord */,
 				927AF3AA2788156E0018CC34 /* Report */,
 				927AF3A92788155E0018CC34 /* MyRecord */,
 				927AF3A8278814ED0018CC34 /* Post */,
@@ -479,52 +506,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E25CCC3A278DE09500CB7018 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC59278DE1A300CB7018 /* Cells */,
-			);
-			name = Views;
-			path = ../../../../../../../Desktop/Views;
-			sourceTree = "<group>";
-		};
-		E25CCC3E278DE15400CB7018 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC3F278DE15400CB7018 /* Media.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E25CCC41278DE15E00CB7018 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC42278DE15E00CB7018 /* ReportDescriptionView.swift */,
-				E25CCC43278DE15E00CB7018 /* ReportGraphView.swift */,
-				E25CCC44278DE15E00CB7018 /* Components */,
-				E25CCC47278DE15E00CB7018 /* ReportRankingView.swift */,
-				E25CCC48278DE15E00CB7018 /* ReportTopView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		E25CCC44278DE15E00CB7018 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC45278DE15E00CB7018 /* MonthYearPickerView.swift */,
-				E25CCC46278DE15E00CB7018 /* RespondingButton.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		E25CCC59278DE1A300CB7018 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				E25CCC57278DE1A000CB7018 /* RecordCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,13 +653,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E25CCC40278DE15400CB7018 /* Media.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
 				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
+				5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
@@ -707,12 +688,9 @@
 				92B70FD4278C11CA009B7763 /* (null) in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
-				E25CCC4C278DE15E00CB7018 /* RespondingButton.swift in Sources */,
-				E25CCC4B278DE15E00CB7018 /* MonthYearPickerView.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				92B70FC12789F2B1009B7763 /* (null) in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
-				E25CCC49278DE15E00CB7018 /* ReportDescriptionView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				E2E27794278A077E0083AFF5 /* (null) in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
@@ -725,7 +703,6 @@
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				92B70FCC278AB993009B7763 /* (null) in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
-				E25CCC58278DE1A000CB7018 /* RecordCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
