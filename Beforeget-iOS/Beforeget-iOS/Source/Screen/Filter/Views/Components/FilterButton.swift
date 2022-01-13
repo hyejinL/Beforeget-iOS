@@ -10,34 +10,32 @@ import UIKit
 class FilterButton: UIButton {
     
     // MARK: - Properties
-
+    
     public var text: String? = nil {
         didSet {
             setTitle(text, for: .normal)
         }
     }
     
-    public override var isSelected: Bool {
-        didSet {
-            isSelected = !isSelected
-            setupBorderColor()
+    override var isSelected: Bool {
+        get {
+            return super.isSelected
+        }
+        set {
+            layer.borderColor = Asset.Colors.black200.color.cgColor
+            super.isSelected = newValue
         }
     }
     
-    public override var isHidden: Bool {
-        didSet {
-            starImageView.isHidden = true
-        }
-    }
-    
+    /// 나중에 지울 것
     private lazy var starImageView = UIImageView().then {
         $0.image = Asset.Assets.icnLittleStarBlack.image
     }
     
     // MARK: - Initializer
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    public init(star: Bool) {
+        super.init(frame: .zero)
         setupTitleColor()
         setupBorderColor()
         makeRound()
@@ -51,8 +49,11 @@ class FilterButton: UIButton {
     
     private func setupTitleColor() {
         titleLabel?.font = BDSFont.body8
-        setTitleColor(Asset.Colors.gray300.color, for: .normal)
-        setTitleColor(Asset.Colors.black200.color, for: .selected)
+        if isSelected {
+            setTitleColor(Asset.Colors.black200.color, for: .selected)
+        } else {
+            setTitleColor(Asset.Colors.gray300.color, for: .normal)
+        }
     }
     
     private func setupBorderColor() {

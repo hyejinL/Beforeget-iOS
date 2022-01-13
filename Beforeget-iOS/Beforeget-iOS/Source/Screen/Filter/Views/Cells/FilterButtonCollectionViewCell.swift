@@ -18,39 +18,14 @@ class FilterButtonCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    public var isCellSelected: Bool = false {
-        didSet {
-            isSelected = !isSelected
-            configuUI()
-        }
-    }
-    
-    public var isStarHidden: Bool = false {
-        didSet {
-            starImageView.isHidden = isStarHidden ?
-            true : false
-        }
-    }
-    
-    private var menuButton = UIButton(type: .system).then {
-        $0.makeRound()
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
-    }
-    
-    private lazy var cellStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 4
-        $0.addArrangedSubviews([starImageView, cellLabel])
+    private var menuButton = UIButton().then {
+        $0.setImage(Asset.Assets.boxFilterActive.image, for: .selected)
+        $0.setImage(Asset.Assets.boxFilterInactive.image, for: .normal)
     }
 
     public var cellLabel = UILabel().then {
         $0.font = BDSFont.body8
         $0.textColor = Asset.Colors.gray300.color
-    }
-    
-    private lazy var starImageView = UIImageView().then {
-        $0.image = Asset.Assets.icnLittleStarBlack.image
     }
         
     // MARK: - Initializer
@@ -78,25 +53,15 @@ class FilterButtonCollectionViewCell: UICollectionViewCell {
     
     private func setupLayout() {
         contentView.addSubview(menuButton)
-        menuButton.addSubview(cellStackView)
+        menuButton.addSubview(cellLabel)
         
         menuButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(37)
         }
         
-        cellStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(6)
-            make.centerX.equalToSuperview()
-        }
-        
-        starImageView.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview()
-            make.width.height.equalTo(24)
-        }
-        
         cellLabel.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalToSuperview()
+            make.center.equalToSuperview()
         }
     }
 }

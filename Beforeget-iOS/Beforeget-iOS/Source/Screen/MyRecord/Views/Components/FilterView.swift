@@ -37,6 +37,7 @@ public class FilterView: UIView {
     private lazy var filterStackView = UIStackView().then {
         $0.spacing = 10
         $0.axis = .horizontal
+        $0.distribution = .fillEqually
         $0.addArrangedSubviews([
             dateButton,
             mediaButton,
@@ -96,6 +97,7 @@ public class FilterView: UIView {
         [dateLabel, mediaLabel, starLabel].forEach {
             $0.textColor = Asset.Colors.black200.color
             $0.font = BDSFont.body1
+            $0.textAlignment = .center
         }
     }
     
@@ -113,7 +115,11 @@ public class FilterView: UIView {
         
         [dateLabel, mediaLabel, starLabel].forEach {
             $0.snp.makeConstraints { make in
-                make.center.equalToSuperview()
+                make.top.equalToSuperview().inset(4)
+                make.leading.equalToSuperview().inset(16)
+                make.bottom.equalToSuperview().inset(6)
+                make.trailing.equalToSuperview().inset(17)
+                make.centerX.equalToSuperview()
             }
         }
     }

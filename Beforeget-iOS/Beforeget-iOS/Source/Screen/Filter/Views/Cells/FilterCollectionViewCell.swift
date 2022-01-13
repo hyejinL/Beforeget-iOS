@@ -143,8 +143,6 @@ extension FilterCollectionViewCell {
         let cellRegistration = UICollectionView.CellRegistration<FilterButtonCollectionViewCell, Filter> {
             (cell, indexPath, menu) in
             cell.menu = menu
-            cell.isStarHidden = true
-            cell.isCellSelected = true
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, Filter>(collectionView: dateCollectionView) {

@@ -50,6 +50,8 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
             $0.delegate = self
             $0.dataSource = self
             FilterCollectionViewCell.register(target: $0)
+            MediaCollectionViewCell.register(target: $0)
+            StarCollectionViewCell.register(target: $0)
         }
 
     private lazy var buttonStackView = UIStackView().then {
@@ -61,7 +63,7 @@ final class FilterModalViewController: UIViewController, SelectMenuDelegate {
     }
     
     public var resetButton = UIButton().then {
-        $0.setImage(Asset.Assets.btnRefresh.image, for: .normal)
+        $0.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
     }
     
     public var applyButton = BDSButton().then {
@@ -228,6 +230,17 @@ extension FilterModalViewController: UICollectionViewDelegate {
         menuBarView.indicatorView.snp.updateConstraints { make in
             make.leading.equalToSuperview().inset(menuIndex*menuWidth+75+menuIndex*39)
         }
+        
+        switch menuIndex {
+        case 0.0:
+            return resetButton.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
+        case 1.0:
+            return resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
+        case 2.0:
+            return resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
+        default:
+            return
+        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -245,8 +258,23 @@ extension FilterModalViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.className, for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
-        return filterCell
+        switch indexPath.item {
+        case 0:
+            guard let filterCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: FilterCollectionViewCell.className,
+                for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
+            return filterCell
+        case 1:
+            guard let mediaCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MediaCollectionViewCell.className,
+                for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
+            return mediaCell
+        default:
+            guard let starCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: StarCollectionViewCell.className,
+                for: indexPath) as? StarCollectionViewCell else { return UICollectionViewCell() }
+            return starCell
+        }
     }
 }
 
