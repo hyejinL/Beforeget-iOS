@@ -130,9 +130,11 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.barView4.barTitle = "11"
         page2.reportGraphView.barView5.barTitle = "12"
         
-        
-        page2.reportGraphView.barView5.setupProgressColor(Asset.Colors.green100.color)
-        page2.reportGraphView.barView5.setupTitleColor(Asset.Colors.green100.color)
+        page5.reportOnePageView.barView1.setupBarHeight(height: 30)
+        page5.reportOnePageView.barView2.setupBarHeight(height: 40)
+        page5.reportOnePageView.barView3.setupBarHeight(height: 20)
+        page5.reportOnePageView.barView4.setupBarHeight(height: 60)
+        page5.reportOnePageView.barView5.setupBarHeight(height: 30)
     }
     
     // MARK: - @objc
