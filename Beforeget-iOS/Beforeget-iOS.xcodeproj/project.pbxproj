@@ -62,6 +62,7 @@
 		929CFB19278DE11E00FCA541 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB18278DE11E00FCA541 /* Media.swift */; };
 		929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */; };
 		E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDAA278F23A900AFA390 /* MediaType.swift */; };
+		E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDB2278F478400AFA390 /* WritingHeaderView.swift */; };
 		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
 		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		929CFB18278DE11E00FCA541 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
 		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
 		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -478,9 +480,18 @@
 		E206FDA9278F230B00AFA390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E206FDAD278F35A500AFA390 /* Components */,
 				E2E2779A278B67590083AFF5 /* Cells */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E206FDAD278F35A500AFA390 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E206FDB2278F478400AFA390 /* WritingHeaderView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E2E2779A278B67590083AFF5 /* Cells */ = {
@@ -648,6 +659,7 @@
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
+				E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
