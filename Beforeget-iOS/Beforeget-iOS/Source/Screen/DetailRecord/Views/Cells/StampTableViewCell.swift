@@ -17,13 +17,15 @@ class StampTableViewCell: UITableViewCell, UITableViewRegisterable{
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
-        $0.title = "장르제목"
+        $0.title = "타임스탬프"
     }
     
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +39,12 @@ class StampTableViewCell: UITableViewCell, UITableViewRegisterable{
     }
     
     private func setupLayout() {
+        contentView.addSubviews([titleLabel])
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+        }
     }
     
     // MARK: - Custom Method

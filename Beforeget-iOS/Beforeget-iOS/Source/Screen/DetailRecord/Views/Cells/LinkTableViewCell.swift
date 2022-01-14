@@ -7,25 +7,34 @@
 
 import UIKit
 
+import SafariServices
 import SnapKit
 import Then
 
-class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
+// MARK: - Delegate
 
+protocol LinkButtonDelegate: DetailRecordViewController {
+    func clickLinkButton(url: NSURL)
+}
+
+class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
     // MARK: - Properties
     
+    weak var linkButtonDelegate: LinkButtonDelegate?
+    
     private var cellMargin: CGFloat = 47
+    
+    public var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
     
     public var titleLabel = CellTitleLabel().then {
         $0.title = "링크"
     }
     
-    public var linkLabel = UILabel().then {
-        $0.text = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
-        $0.font = BDSFont.body8
-        $0.textColor = Asset.Colors.black200.color
-        $0.textAlignment = .left
-        $0.numberOfLines = 0
+    public lazy var linkButton = UIButton(type: .system).then {
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.setTitle(linkString, for: .normal)
+        $0.addTarget(self, action: #selector(touchupLinkButton(_:)), for: .touchUpInside)
     }
     
     // MARK: - Life Cycle
@@ -48,7 +57,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private func setupLayout() {
         contentView.addSubviews([titleLabel,
-                                 linkLabel])
+                                 linkButton])
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -56,7 +65,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.width.equalTo(50)
         }
         
-        linkLabel.snp.makeConstraints { make in
+        linkButton.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(21)
@@ -65,8 +74,16 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - Custom Method
-
-    public func setData() {
-       /// 문제 : 나중에 데이터 전달
+        
+    public func setData(_ link: String) {
+        /// 문제 : 나중에 데이터 전달
+        linkString = link
+    }
+    
+    // MARK: - @objc
+    
+    @objc func touchupLinkButton(_ sender: UIButton) {
+        guard let url = NSURL(string: linkString) else { return }
+        linkButtonDelegate?.clickLinkButton(url: url)
     }
 }

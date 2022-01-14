@@ -47,11 +47,13 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .orange
+        contentView.backgroundColor = .white
+        
         [leftLineView, rightLineView, bottomLineView].forEach {
             $0.backgroundColor = Asset.Colors.black200.color
         }
         
+        /// 문제
         cellImageView.image?.resize(newWidth: 295)
     }
     

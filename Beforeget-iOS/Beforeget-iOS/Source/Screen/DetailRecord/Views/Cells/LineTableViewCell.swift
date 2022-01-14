@@ -51,6 +51,7 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private func configUI() {
         contentView.backgroundColor = .white
+        
         descriptionLabel.addLetterSpacing()
         descriptionLabel.addLineSpacing(spacing: 25)
     }

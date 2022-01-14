@@ -43,7 +43,8 @@ class TextTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = .white
+        
         descriptionLabel.addLetterSpacing()
         descriptionLabel.addLineSpacing(spacing: 25)
     }

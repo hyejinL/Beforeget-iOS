@@ -29,7 +29,6 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private var quoteLabel = UILabel().then {
-        $0.backgroundColor = .red
         $0.text = "사실 이것은 다 빈치가 살짝 장난을 친 것입니다."
         $0.font = BDSFont.body4
         $0.textColor = Asset.Colors.black200.color
@@ -54,7 +53,8 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .white
+        
         quoteLabel.addLetterSpacing()
         quoteLabel.addLineSpacing(spacing: 25)
     }

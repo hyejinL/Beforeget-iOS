@@ -181,7 +181,9 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - Custom Method
     
-    
+    public func setData() {
+        
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -224,7 +226,7 @@ extension DetailRecordHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-//
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let reviewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ReviewTagCollectionViewCell.className,

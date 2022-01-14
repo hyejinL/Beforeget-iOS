@@ -7,19 +7,29 @@
 
 import UIKit
 
+import SafariServices
 import SnapKit
 import Then
 
-final class DetailRecordViewController: UIViewController {
+final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
+    
+    // MARK: - Dummy Data
+    
+    private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
+    
+    private var sectionArray: [DetailRecordSection] = [
+        .comment, .image, .comma,
+        .genre, .text, .song,
+        .line, .link, .stamp
+    ]
     
     // MARK: - Properties
     
-    private var sectionArray: [DetailRecordSection] = [.comment, .image, .comma, .genre, .text, .song, .line, .link, .stamp]
-    
-    private lazy var navigationBar = BDSNavigationBar(self, view: .none, isHidden: false).then {
-        $0.backButton.setImageTintColor(.white)
-        $0.backgroundColor = Asset.Colors.black200.color
-    }
+    private lazy var navigationBar = BDSNavigationBar(
+        self, view: .none, isHidden: false).then {
+            $0.backButton.setImageTintColor(.white)
+            $0.backgroundColor = Asset.Colors.black200.color
+        }
     
     private lazy var buttonStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -97,8 +107,10 @@ final class DetailRecordViewController: UIViewController {
     
     // MARK: - Custom Method
     
-    
-    
+    func clickLinkButton(url: NSURL) {
+        let safariView: SFSafariViewController = SFSafariViewController(url: url as URL)
+        self.present(safariView, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -112,19 +124,26 @@ extension DetailRecordViewController: UITableViewDelegate {
         let headerView = DetailRecordHeaderView()
         return headerView
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1+sectionArray.count
+        return sectionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
         else { return UITableViewCell() }
-        
         
         switch detailSection {
         case .comment:
@@ -133,55 +152,64 @@ extension DetailRecordViewController: UITableViewDataSource {
                 for: indexPath) as? CommentTableViewCell
             else { return UITableViewCell() }
             return commentCell
+            
         case .image:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let imageCell = tableView.dequeueReusableCell(
                 withIdentifier: ImageTableViewCell.className,
                 for: indexPath) as? ImageTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return imageCell
+            
         case .comma:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let commaCell = tableView.dequeueReusableCell(
                 withIdentifier: CommaTableViewCell.className,
                 for: indexPath) as? CommaTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return commaCell
+            
         case .genre:
             guard let genreCell = tableView.dequeueReusableCell(
                 withIdentifier: GenreTableViewCell.className,
                 for: indexPath) as? GenreTableViewCell
             else { return UITableViewCell() }
-            genreCell.backgroundColor = .lightGray
             return genreCell
+            
         case .text:
             guard let textCell = tableView.dequeueReusableCell(
                 withIdentifier: TextTableViewCell.className,
                 for: indexPath) as? TextTableViewCell
             else { return UITableViewCell() }
             return textCell
+            
         case .song:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let songCell = tableView.dequeueReusableCell(
                 withIdentifier: SongTableViewCell.className,
                 for: indexPath) as? SongTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return songCell
+            
         case .line:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let lineCell = tableView.dequeueReusableCell(
                 withIdentifier: LineTableViewCell.className,
                 for: indexPath) as? LineTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return lineCell
+            
         case .link:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let linkCell = tableView.dequeueReusableCell(
                 withIdentifier: LinkTableViewCell.className,
                 for: indexPath) as? LinkTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            linkCell.linkButtonDelegate = self
+            linkCell.setData(linkString)
+            return linkCell
+            
         case .stamp:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let stampCell = tableView.dequeueReusableCell(
                 withIdentifier: StampTableViewCell.className,
                 for: indexPath) as? StampTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return stampCell
         }
     }
 }

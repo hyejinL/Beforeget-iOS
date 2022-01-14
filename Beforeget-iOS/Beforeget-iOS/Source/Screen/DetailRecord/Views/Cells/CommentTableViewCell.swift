@@ -49,6 +49,7 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private func configUI() {
         contentView.backgroundColor = .white
+        
         commentLabel.addLetterSpacing()
         commentLabel.addLineSpacing(spacing: 25)
     }
