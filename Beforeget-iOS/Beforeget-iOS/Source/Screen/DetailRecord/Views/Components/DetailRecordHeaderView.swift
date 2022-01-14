@@ -232,7 +232,7 @@ extension DetailRecordHeaderView: UICollectionViewDelegateFlowLayout {
         
         reviewCell.reviewLabel.text = reviewArray[indexPath.item]
         reviewCell.reviewLabel.sizeToFit()
-        let cellWidth = reviewCell.reviewLabel.frame.width + 16
+        let cellWidth = reviewCell.reviewLabel.frame.width + 32
         
         return CGSize(width: cellWidth, height: 30)
     }
