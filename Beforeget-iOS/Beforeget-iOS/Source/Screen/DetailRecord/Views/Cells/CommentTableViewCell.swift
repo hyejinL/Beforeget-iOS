@@ -73,7 +73,7 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
         lineView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(47)
+            make.bottom.equalToSuperview().inset(cellMargin)
             make.width.equalTo(2)
         }
     }
