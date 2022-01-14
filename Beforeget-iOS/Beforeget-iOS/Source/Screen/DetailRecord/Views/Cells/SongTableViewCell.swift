@@ -37,9 +37,17 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private func setupLayout() {
+        contentView.addSubviews([titleLabel])
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+        }
     }
     
     // MARK: - Custom Method
 
+    public func setData() {
+       /// 문제 : 나중에 데이터 전달
+    }
 }

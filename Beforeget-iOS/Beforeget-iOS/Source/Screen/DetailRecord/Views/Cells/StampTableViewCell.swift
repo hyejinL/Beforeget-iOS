@@ -42,4 +42,7 @@ class StampTableViewCell: UITableViewCell, UITableViewRegisterable{
     
     // MARK: - Custom Method
 
+    public func setData() {
+       /// 문제 : 나중에 데이터 전달
+    }
 }

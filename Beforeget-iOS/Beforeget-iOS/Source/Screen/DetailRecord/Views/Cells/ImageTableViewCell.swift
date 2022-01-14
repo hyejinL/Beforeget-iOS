@@ -29,7 +29,7 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     private let bottomLineView = UIView()
     
     public var cellImageView = UIImageView().then {
-        $0.backgroundColor = .lightGray
+        $0.image = Asset.Assets.btnDownload.image
     }
         
     // MARK: - Life Cycle
@@ -51,6 +51,8 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
         [leftLineView, rightLineView, bottomLineView].forEach {
             $0.backgroundColor = Asset.Colors.black200.color
         }
+        
+        cellImageView.image?.resize(newWidth: 295)
     }
     
     private func setupLayout() {
@@ -94,7 +96,6 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
         cellImageView.snp.makeConstraints { make in
             make.top.equalTo(starImageView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(300)
         }
         
         bottomLineView.snp.makeConstraints { make in

@@ -15,9 +15,10 @@
 		5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F7F278A2A8F00202230 /* BackButton.swift */; };
 		5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F81278A2BCF00202230 /* CloseButton.swift */; };
 		5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
+		5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82542C27917F3A004BDA5D /* UIImage+.swift */; };
+		5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */; };
+		5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
-		5BD1149B2790C4100063EB3B /* TopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149A2790C4100063EB3B /* TopTableViewCell.swift */; };
-		5BD1149D2790C42F0063EB3B /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149C2790C42E0063EB3B /* ReviewTableViewCell.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
 		5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */; };
 		5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */; };
@@ -31,6 +32,7 @@
 		5BD114B4279132140063EB3B /* DetailRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114B3279132140063EB3B /* DetailRecord.swift */; };
 		5BD114B8279133710063EB3B /* CellTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114B7279133710063EB3B /* CellTitleLabel.swift */; };
 		5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114B927913AE20063EB3B /* UIButton+.swift */; };
+		5BD114BC279175680063EB3B /* DetailRecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */; };
 		924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2D2788390E006482B1 /* BDSButton.swift */; };
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
@@ -102,9 +104,10 @@
 		5B6D7F7F278A2A8F00202230 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5B6D7F81278A2BCF00202230 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSNavigationBar.swift; sourceTree = "<group>"; };
+		5B82542C27917F3A004BDA5D /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTagCollectionViewCell.swift; sourceTree = "<group>"; };
+		5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
-		5BD1149A2790C4100063EB3B /* TopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTableViewCell.swift; sourceTree = "<group>"; };
-		5BD1149C2790C42E0063EB3B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommaTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 		5BD114B3279132140063EB3B /* DetailRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecord.swift; sourceTree = "<group>"; };
 		5BD114B7279133710063EB3B /* CellTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTitleLabel.swift; sourceTree = "<group>"; };
 		5BD114B927913AE20063EB3B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordHeaderView.swift; sourceTree = "<group>"; };
 		771A48A6C9DD9C15921B096E /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		924A3E2D2788390E006482B1 /* BDSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSButton.swift; sourceTree = "<group>"; };
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				5BD114B7279133710063EB3B /* CellTitleLabel.swift */,
+				5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */,
+				5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -237,8 +243,6 @@
 		5BD114B6279133570063EB3B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5BD1149A2790C4100063EB3B /* TopTableViewCell.swift */,
-				5BD1149C2790C42E0063EB3B /* ReviewTableViewCell.swift */,
 				5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */,
 				5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */,
 				5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */,
@@ -248,6 +252,7 @@
 				5BD114AA2790C4730063EB3B /* LineTableViewCell.swift */,
 				5BD114AC2790C4960063EB3B /* LinkTableViewCell.swift */,
 				5BD114AE2790C4A80063EB3B /* StampTableViewCell.swift */,
+				5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 				927AF3DE27881EC30018CC34 /* UIStackView+.swift */,
 				927AF3E027881EDA0018CC34 /* UITextField+.swift */,
 				5BD114B927913AE20063EB3B /* UIButton+.swift */,
+				5B82542C27917F3A004BDA5D /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -727,13 +733,13 @@
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
 				5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */,
+				5BD114BC279175680063EB3B /* DetailRecordHeaderView.swift in Sources */,
 				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */,
 				5BD114AB2790C4730063EB3B /* LineTableViewCell.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
-				5BD1149D2790C42F0063EB3B /* ReviewTableViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				5BD114B8279133710063EB3B /* CellTitleLabel.swift in Sources */,
 				92B70FBF2789F297009B7763 /* (null) in Sources */,
@@ -744,12 +750,14 @@
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
+				5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */,
 				929CFAA0278C1A4F00FCA541 /* (null) in Sources */,
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
 				5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
+				5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */,
 				929CFB11278DE06500FCA541 /* MonthYearPickerView.swift in Sources */,
 				929CFB02278DE04200FCA541 /* ReportLabelViewController.swift in Sources */,
 				929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */,
@@ -762,9 +770,9 @@
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				92B70FCF278B00DB009B7763 /* (null) in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
-				5BD1149B2790C4100063EB3B /* TopTableViewCell.swift in Sources */,
 				92B70FD4278C11CA009B7763 /* (null) in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
+				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,

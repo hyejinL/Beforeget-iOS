@@ -39,12 +39,11 @@ final class DetailRecordViewController: UIViewController {
         $0.setImageTintColor(.white)
     }
     
-    private lazy var recordTableView = UITableView().then {
+    private lazy var recordTableView = UITableView(frame: .zero, style: .grouped).then {
+        $0.backgroundColor = Asset.Colors.black200.color
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
-        TopTableViewCell.register(target: $0)
-        ReviewTableViewCell.register(target: $0)
         CommentTableViewCell.register(target: $0)
         ImageTableViewCell.register(target: $0)
         CommaTableViewCell.register(target: $0)
@@ -76,7 +75,7 @@ final class DetailRecordViewController: UIViewController {
         view.addSubviews([navigationBar,
                           buttonStackView,
                           recordTableView])
-
+        
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
@@ -88,7 +87,7 @@ final class DetailRecordViewController: UIViewController {
             make.trailing.equalToSuperview().inset(8)
             make.height.equalTo(44)
         }
-
+        
         recordTableView.snp.makeConstraints { make in
             make.top.equalTo(navigationBar.snp.bottom)
             make.leading.trailing.equalToSuperview()
@@ -97,29 +96,37 @@ final class DetailRecordViewController: UIViewController {
     }
     
     // MARK: - Custom Method
-
-
-
+    
+    
+    
 }
 
 // MARK: - UITableViewDelegate
 
 extension DetailRecordViewController: UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = DetailRecordHeaderView()
+        return headerView
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionArray.count
+        return 1+sectionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = DetailRecordSection(rawValue: indexPath.row)
+        guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
         else { return UITableViewCell() }
         
-        switch section {
+        
+        switch detailSection {
         case .comment:
             guard let commentCell = tableView.dequeueReusableCell(
                 withIdentifier: CommentTableViewCell.className,
