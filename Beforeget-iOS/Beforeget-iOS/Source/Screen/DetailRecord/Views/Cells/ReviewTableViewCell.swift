@@ -14,6 +14,11 @@ class ReviewTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
+    private var cellMargin: CGFloat = 47
+    
+    public let titleLabel = CellTitleLabel().then {
+        $0.title = "한 줄 리뷰"
+    }
     
     // MARK: - Life Cycle
     

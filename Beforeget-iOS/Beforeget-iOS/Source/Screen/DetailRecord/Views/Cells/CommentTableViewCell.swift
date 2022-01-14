@@ -14,7 +14,7 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
-    var cellMargin: CGFloat = 47
+    private var cellMargin: CGFloat = 47
     
     public let titleLabel = CellTitleLabel().then {
         $0.title = "코멘트"

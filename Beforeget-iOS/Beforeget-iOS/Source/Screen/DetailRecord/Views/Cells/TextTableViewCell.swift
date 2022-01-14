@@ -14,6 +14,13 @@ class TextTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
+    private var cellMargin: CGFloat = 47
+    
+    public var titleLabel = CellTitleLabel().then {
+        $0.title = "장르제목"
+    }
+    
+    public var
     
     // MARK: - Life Cycle
     

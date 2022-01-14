@@ -14,11 +14,20 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
+    private var cellMargin: CGFloat = 47
+    
+    public var titleLabel = CellTitleLabel().then {
+        $0.title = "장르제목"
+    }
+    
+    
     
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {

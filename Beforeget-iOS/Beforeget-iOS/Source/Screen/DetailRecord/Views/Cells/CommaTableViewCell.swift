@@ -14,7 +14,7 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Properties
     
-    var cellMargin: CGFloat = 47
+    private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
         $0.title = "콤마제목"
