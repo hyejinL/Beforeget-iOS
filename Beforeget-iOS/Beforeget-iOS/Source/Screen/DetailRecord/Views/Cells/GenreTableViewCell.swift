@@ -11,11 +11,11 @@ import SnapKit
 import Then
 
 class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
-
+    
     // MARK: - Properties
     
     private var genreArray: [String] = ["액션느와르", "로맨스코미디", "스릴러", "SF공상과학", "하이퍼리얼리즘", "모험"]
-
+    
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
@@ -35,9 +35,9 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
             $0.dataSource = self
             GenreCollectionViewCell.register(target: $0)
         }
-        
-    // MARK: - Life Cycle
     
+    // MARK: - Initializer
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
@@ -56,7 +56,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private func setupLayout() {
         addSubviews([titleLabel,
-                                 genreCollectionView])
+                     genreCollectionView])
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -81,7 +81,7 @@ extension GenreTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.className, for: indexPath) as? GenreCollectionViewCell else { return UICollectionViewCell() }
-        genreCell.setData(genreArray[indexPath.item]) 
+        genreCell.setData(genreArray[indexPath.item])
         return genreCell
     }
 }
@@ -100,15 +100,15 @@ extension GenreTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         guard let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.className, for: indexPath) as? GenreCollectionViewCell else { return .zero }
-
+        
         genreCell.genreLabel.text = genreArray[indexPath.item]
         genreCell.genreLabel.sizeToFit()
         let cellWidth = genreCell.genreLabel.frame.width + 32
-
+        
         return CGSize(width: cellWidth, height: 37)
     }
 }

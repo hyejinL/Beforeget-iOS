@@ -36,12 +36,12 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         $0.axis = .horizontal
         $0.spacing = 1
         $0.distribution = .fillEqually
-        $0.addArrangedSubviews([downloadButton,
+        $0.addArrangedSubviews([shareButton,
                                 menuButton])
     }
     
-    private lazy var downloadButton = UIButton(type: .system).then {
-        $0.setImage(Asset.Assets.btnDownload.image, for: .normal)
+    private lazy var shareButton = UIButton(type: .system).then {
+        $0.setImage(Asset.Assets.btnShare.image, for: .normal)
         $0.setImageTintColor(.white)
     }
     

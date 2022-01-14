@@ -33,8 +33,8 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.backgroundColor = Asset.Colors.gray300.color
     }
     
-    // MARK: - Life Cycle
-    
+    // MARK: - Initializer
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()

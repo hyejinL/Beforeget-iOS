@@ -18,8 +18,8 @@ class CellTitleLabel: UILabel {
         }
     }
         
-    // MARK: - Life Cycle
-    
+    // MARK: - Initializer
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()

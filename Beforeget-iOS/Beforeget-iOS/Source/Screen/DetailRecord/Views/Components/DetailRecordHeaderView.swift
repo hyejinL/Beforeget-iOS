@@ -86,8 +86,8 @@ class DetailRecordHeaderView: UIView {
             ReviewTagCollectionViewCell.register(target: $0)
         }
     
-    // MARK: - Life Cycle
-    
+    // MARK: - Initializer
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()

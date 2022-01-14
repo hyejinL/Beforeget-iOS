@@ -33,8 +33,8 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
         SongListTableViewCell.register(target: $0)
     }
     
-    // MARK: - Life Cycle
-    
+    // MARK: - Initializer
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
@@ -74,14 +74,6 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     public func setData() {
        /// 문제 : 나중에 데이터 전달
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension SongTableViewCell: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension + 15
-//    }
 }
 
 // MARK: - UITableViewDelegate
