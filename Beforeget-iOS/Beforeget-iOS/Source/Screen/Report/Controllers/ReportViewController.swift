@@ -58,6 +58,11 @@ final class ReportViewController: UIPageViewController {
     private let page4 = ReportSentenceViewController()
     private let page5 = ReportOnePageViewController()
     
+    // MARK: - TODO REMOVE
+    
+    private var dumyData: [Int] = [0, 3, 0, 2, 12]
+    private var heights = [Double]()
+    
     // MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +75,7 @@ final class ReportViewController: UIPageViewController {
         configUI()
         setupLayout()
         setupControllers()
+        calculateHeight()
     }
     
     // MARK: - InitUI
@@ -117,27 +123,37 @@ final class ReportViewController: UIPageViewController {
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
+    private func calculateHeight() {
+        let maxCount = dumyData.max()
+        page2.reportGraphView.maxCount = maxCount!
+        
+        let midCount = dumyData.sorted(by: >)[2]
+        page2.reportGraphView.midCount = midCount
+    
+        for data in dumyData {
+            let height = 150 * data / maxCount!
+            heights.append(Double(height))
+        }
+    }
+    
     private func setupBarData() {
-        page2.reportGraphView.barView1.animate(height: 30)
-        page2.reportGraphView.barView2.animate(height: 60)
-        page2.reportGraphView.barView3.animate(height: 40)
-        page2.reportGraphView.barView4.animate(height: 80)
-        page2.reportGraphView.barView5.animate(height: 10)
-        
-        page2.reportGraphView.barView1.barTitle = "8"
-        page2.reportGraphView.barView2.barTitle = "9"
-        page2.reportGraphView.barView3.barTitle = "10"
-        page2.reportGraphView.barView4.barTitle = "11"
-        page2.reportGraphView.barView5.barTitle = "12"
-        
-        page5.reportOnePageView.barView1.setupBarHeight(height: 30)
-        page5.reportOnePageView.barView2.setupBarHeight(height: 40)
-        page5.reportOnePageView.barView3.setupBarHeight(height: 20)
-        page5.reportOnePageView.barView4.setupBarHeight(height: 60)
-        page5.reportOnePageView.barView5.setupBarHeight(height: 30)
+        page5.reportOnePageView.barView1.setupBarHeight(height: CGFloat(heights[0]))
+        page5.reportOnePageView.barView2.setupBarHeight(height: CGFloat(heights[1]))
+        page5.reportOnePageView.barView3.setupBarHeight(height: CGFloat(heights[2]))
+        page5.reportOnePageView.barView4.setupBarHeight(height: CGFloat(heights[3]))
+        page5.reportOnePageView.barView5.setupBarHeight(height: CGFloat(heights[4]))
+    }
+    
+    private func setupBarAnimation() {
+        page2.reportGraphView.barView1.animate(height: CGFloat(heights[0]))
+        page2.reportGraphView.barView2.animate(height: CGFloat(heights[1]))
+        page2.reportGraphView.barView3.animate(height: CGFloat(heights[2]))
+        page2.reportGraphView.barView4.animate(height: CGFloat(heights[3]))
+        page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
     }
     
     // MARK: - @objc
+    
     @objc func touchupDownLoadButton() {
         
     }
@@ -184,7 +200,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            setupBarData()
+            setupBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
@@ -200,6 +216,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            setupBarData()
         default:
             pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {

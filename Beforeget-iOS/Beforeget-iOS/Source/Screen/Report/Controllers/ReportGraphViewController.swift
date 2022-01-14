@@ -47,9 +47,7 @@ final class ReportGraphViewController: UIViewController {
         reportGraphView.delegate = self
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
-        reportGraphView.month = "12월"
-        reportGraphView.maxCount = 30
-        reportGraphView.midCount = 15
+        reportGraphView.month = "12"
     }
     
     private func setupLayout() {
@@ -78,6 +76,12 @@ final class ReportGraphViewController: UIViewController {
     
     private func bind() {
         reportTopView.delegate = self
+        
+        reportGraphView.barView1.barTitle = addOrSubtractMonth(month: -5)
+        reportGraphView.barView2.barTitle = addOrSubtractMonth(month: -4)
+        reportGraphView.barView3.barTitle = addOrSubtractMonth(month: -3)
+        reportGraphView.barView4.barTitle = addOrSubtractMonth(month: -2)
+        reportGraphView.barView5.barTitle = addOrSubtractMonth(month: -1)
     }
     
     private func setupToolbar() -> UIToolbar {
@@ -93,6 +97,13 @@ final class ReportGraphViewController: UIViewController {
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        let date = Calendar.current.date(byAdding: .month, value: month, to: Date())!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월"
+        return dateFormatter.string(from: date)
     }
     
     // MARK: - @objc

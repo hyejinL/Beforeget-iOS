@@ -67,7 +67,10 @@ class ReportGraphView: UIView {
     var barView2 = BarView()
     var barView3 = BarView()
     var barView4 = BarView()
-    var barView5 = BarView()
+    var barView5 = BarView().then {
+        $0.setupTitleColor(Asset.Colors.green100.color)
+        $0.setupProgressColor(Asset.Colors.green100.color)
+    }
     
     private var barStackView = UIStackView().then {
         $0.axis = .horizontal

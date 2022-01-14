@@ -288,11 +288,18 @@ class ReportOnePageView: UIView {
         sentenceCollectionView.dataSource = self
         sentenceCollectionView.reloadData()
         
-        barView1.barTitle = "8"
-        barView2.barTitle = "9"
-        barView3.barTitle = "10"
-        barView4.barTitle = "11"
-        barView5.barTitle = "12"
+        barView1.barTitle = addOrSubtractMonth(month: -5)
+        barView2.barTitle = addOrSubtractMonth(month: -4)
+        barView3.barTitle = addOrSubtractMonth(month: -3)
+        barView4.barTitle = addOrSubtractMonth(month: -2)
+        barView5.barTitle = addOrSubtractMonth(month: -1)
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        let date = Calendar.current.date(byAdding: .month, value: month, to: Date())!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월"
+        return dateFormatter.string(from: date)
     }
 }
 

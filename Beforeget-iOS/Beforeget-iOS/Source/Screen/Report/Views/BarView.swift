@@ -27,15 +27,13 @@ class BarView: UIView {
     }
     
     private var barTitleLabel = UILabel().then {
-        $0.text = "월"
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody7
-        $0.addTextWithLineHeight(lineHeight: 14)
     }
     
     var barTitle: String = "" {
         didSet {
-            barTitleLabel.text = "\(barTitle)월"
+            barTitleLabel.text = barTitle
         }
     }
     
@@ -64,7 +62,13 @@ class BarView: UIView {
     // MARK: - InitUI
     
     func initBar() {
-        addSubviews([barBackgroundView, barProgressView, barTitleLabel])
+        addSubviews([barTitleLabel, barBackgroundView, barProgressView, barTitleLabel])
+        
+        barTitleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(14)
+        }
         
         barBackgroundView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -78,11 +82,6 @@ class BarView: UIView {
             $0.width.equalTo(4)
             $0.height.equalTo(0)
             $0.bottom.equalTo(barBackgroundView.snp.bottom)
-        }
-        
-        barTitleLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
         }
     }
     
@@ -105,6 +104,13 @@ class BarView: UIView {
             }
             self.layoutIfNeeded()
         }
+    }
+    
+    func setupBarHeight(height: CGFloat) {
+        barProgressView.snp.updateConstraints {
+            $0.height.equalTo(height)
+        }
+        self.layoutIfNeeded()
     }
     
     func setupBackColor(_ color: UIColor) {
