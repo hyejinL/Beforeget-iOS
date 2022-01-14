@@ -14,6 +14,8 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
+    var cellMargin: CGFloat = 47
+    
     public let titleLabel = CellTitleLabel().then {
         $0.title = "코멘트"
     }
@@ -64,14 +66,14 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
         commentLabel.snp.makeConstraints { make in
             make.top.equalTo(lineView.snp.top)
             make.leading.equalToSuperview().inset(40)
-            make.bottom.equalToSuperview().inset(6)
+            make.bottom.equalToSuperview().inset(6+cellMargin)
             make.trailing.equalToSuperview().inset(20)
         }
         
         lineView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(47)
             make.width.equalTo(2)
         }
     }

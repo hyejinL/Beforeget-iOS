@@ -14,6 +14,8 @@ final class DetailRecordViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var sectionArray: [DetailRecordSection] = [.comment, .image, .comma, .genre]
+    
     private lazy var navigationBar = BDSNavigationBar(self, view: .none, isHidden: false).then {
         $0.backButton.setImageTintColor(.white)
         $0.backgroundColor = Asset.Colors.black200.color
@@ -40,6 +42,7 @@ final class DetailRecordViewController: UIViewController {
     private lazy var recordTableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
+        $0.separatorStyle = .none
         TopTableViewCell.register(target: $0)
         ReviewTableViewCell.register(target: $0)
         CommentTableViewCell.register(target: $0)
@@ -96,6 +99,7 @@ final class DetailRecordViewController: UIViewController {
     // MARK: - Custom Method
 
 
+
 }
 
 // MARK: - UITableViewDelegate
@@ -108,12 +112,70 @@ extension DetailRecordViewController: UITableViewDelegate {
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 11
+        return sectionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let commentCell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.className, for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
+        guard let section = DetailRecordSection(rawValue: indexPath.row)
+        else { return UITableViewCell() }
         
-        return commentCell
+        switch section {
+        case .comment:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: CommentTableViewCell.className,
+                for: indexPath) as? CommentTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .image:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: ImageTableViewCell.className,
+                for: indexPath) as? ImageTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .comma:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: CommaTableViewCell.className,
+                for: indexPath) as? CommaTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .genre:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: GenreTableViewCell.className,
+                for: indexPath) as? GenreTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .text:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: TextTableViewCell.className,
+                for: indexPath) as? TextTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .song:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: SongTableViewCell.className,
+                for: indexPath) as? SongTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .line:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: LineTableViewCell.className,
+                for: indexPath) as? LineTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .link:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: LinkTableViewCell.className,
+                for: indexPath) as? LinkTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        case .stamp:
+            guard let commentCell = tableView.dequeueReusableCell(
+                withIdentifier: StampTableViewCell.className,
+                for: indexPath) as? StampTableViewCell
+            else { return UITableViewCell() }
+            return commentCell
+        }
+        
+       
     }
 }
