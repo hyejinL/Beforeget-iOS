@@ -14,7 +14,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
-    private var genreArray: [String] = ["액션", "범죄", "스릴러", "SF공상과학", "코미디", "모험"]
+    private var genreArray: [String] = ["액션느와르", "로맨스코미디", "스릴러", "SF공상과학", "하이퍼리얼리즘", "모험"]
 
     private var cellMargin: CGFloat = 47
     
@@ -55,7 +55,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private func setupLayout() {
-        contentView.addSubviews([titleLabel,
+        addSubviews([titleLabel,
                                  genreCollectionView])
         
         titleLabel.snp.makeConstraints { make in
@@ -68,7 +68,6 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(cellMargin)
             make.height.equalTo(84)
-            make.height.equalTo(genreArray.count*37)
         }
     }
 }

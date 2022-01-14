@@ -186,12 +186,6 @@ class DetailRecordHeaderView: UIView {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-
-extension DetailRecordHeaderView: UICollectionViewDelegate {
-    
-}
-
 // MARK: - UICollectionViewDataSource
 
 extension DetailRecordHeaderView: UICollectionViewDataSource {

@@ -17,6 +17,7 @@ class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     public let genreLabel = UILabel().then {
         $0.font = BDSFont.body4
         $0.textColor = Asset.Colors.black200.color
+        $0.numberOfLines = 0
     }
     
     // MARK: - Initializer
