@@ -82,6 +82,7 @@ final class ReportViewController: UIPageViewController {
     
     private func configUI() {
         setupStatusBar(Asset.Colors.white.color)
+        view.backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
@@ -129,7 +130,7 @@ final class ReportViewController: UIPageViewController {
         
         let midCount = dumyData.sorted(by: >)[2]
         page2.reportGraphView.midCount = midCount
-    
+        
         for data in dumyData {
             let height = 150 * data / maxCount!
             heights.append(Double(height))
@@ -152,10 +153,45 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
     }
     
+    private func saveImageOnPhone(image: UIImage, image_name: String) -> URL? {
+        let imagePath: String = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(image_name).png"
+        let imageUrl: URL = URL(fileURLWithPath: imagePath)
+        
+        do {
+            try image.pngData()?.write(to: imageUrl)
+            return imageUrl
+        } catch {
+            return nil
+        }
+    }
+    
+    private func showError() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "오류.", message: "다시 시도해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+    
     // MARK: - @objc
     
-    @objc func touchupDownLoadButton() {
+    @objc func touchupDownLoadButton()  {
+        let screenShot = self.view.toImage()
         
+        let imageToShare = screenShot
+        
+        let activityItems : NSMutableArray = []
+        activityItems.add(imageToShare)
+        
+        guard let url = saveImageOnPhone(image: imageToShare, image_name: "Beforeget") else {
+            showError()
+            return
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
+        
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
 

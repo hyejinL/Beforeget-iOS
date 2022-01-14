@@ -34,4 +34,15 @@ extension UIView {
     var className: String {
         NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!
     }
+    
+    func toImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
 }
