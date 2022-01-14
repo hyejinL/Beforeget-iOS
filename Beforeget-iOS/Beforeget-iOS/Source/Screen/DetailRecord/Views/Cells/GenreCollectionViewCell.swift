@@ -13,7 +13,7 @@ import Then
 class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
-        
+    
     public let genreLabel = UILabel().then {
         $0.font = BDSFont.body4
         $0.textColor = Asset.Colors.black200.color
@@ -33,16 +33,18 @@ class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - InitUI
     
-    private func configUI() {
+    public func configUI() {
         contentView.backgroundColor = Asset.Colors.gray400.color
+        contentView.layer.cornerRadius = 4
+        contentView.layer.masksToBounds = true
     }
     
-    private func setupLayout() {
+    public func setupLayout() {
         contentView.addSubview(genreLabel)
         
         genreLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
+            make.centerY.equalToSuperview().inset(6)
         }
     }
     

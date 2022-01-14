@@ -7,16 +7,23 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 class StampCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
     
-    
+    public let stampLabel = UILabel().then {
+        $0.font = BDSFont.body4
+        $0.textColor = Asset.Colors.green100.color
+    }
     
     // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configUI()
         setupLayout()
     }
     
@@ -26,14 +33,24 @@ class StampCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - InitUI
     
-    private func configUI() {
-        contentView.backgroundColor = .white
+    public func configUI() {
+        contentView.backgroundColor = Asset.Colors.black200.color
+        contentView.layer.cornerRadius = 4
+        contentView.layer.masksToBounds = true
     }
     
-    private func setupLayout() {
+    public func setupLayout() {
+        contentView.addSubview(stampLabel)
         
+        stampLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview().inset(6)
+        }
     }
     
     // MARK: - Custom Method
-
+    
+    public func setData(_ data: String) {
+        stampLabel.text = data
+    }
 }

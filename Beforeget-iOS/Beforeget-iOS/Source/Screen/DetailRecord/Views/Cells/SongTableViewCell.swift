@@ -14,7 +14,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Dummy Data
     
-    private var songArray: [String] = ["소코도모 - 인생은 회전목마", "잔나비 - 꿈과 책과 힘과 벽과 개발과 코딩"]
+    public var songArray: [String] = ["소코도모 - 인생은 회전목마", "잔나비 - 꿈과 책과 힘과 벽과 개발과 코딩", "AllIWannaDo"]
 
     // MARK: - Properties
     
@@ -24,12 +24,12 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.title = "노래제목"
     }
     
-    private lazy var songTableView = UITableView(frame: frame, style: .plain).then {
+    public lazy var songListTableView = UITableView(frame: frame, style: .plain).then {
         $0.separatorStyle = .none
         $0.isScrollEnabled = false
         $0.delegate = self
         $0.dataSource = self
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .red
         SongListTableViewCell.register(target: $0)
     }
     
@@ -39,6 +39,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
         setupLayout()
+        contentView.layoutIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -48,22 +49,23 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = .white
     }
     
     private func setupLayout() {
         contentView.addSubviews([titleLabel,
-                                 songTableView])
+                                 songListTableView])
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
         }
         
-        songTableView.snp.makeConstraints { make in
+        songListTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().offset(cellMargin)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(songArray.count*56)
         }
     }
     
@@ -77,7 +79,9 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
 // MARK: - UITableViewDelegate
 
 extension SongTableViewCell: UITableViewDelegate {
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension + 15
+//    }
 }
 
 // MARK: - UITableViewDelegate
@@ -89,7 +93,7 @@ extension SongTableViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let songListCell = tableView.dequeueReusableCell(withIdentifier: SongListTableViewCell.className, for: indexPath) as? SongListTableViewCell else { return UITableViewCell() }
-//        songListCell.setData(songArray[indexPath.item])
+        songListCell.setData(songArray[indexPath.item])
         return songListCell
     }
 }

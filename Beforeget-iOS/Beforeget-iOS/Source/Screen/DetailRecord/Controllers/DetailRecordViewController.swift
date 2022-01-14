@@ -31,6 +31,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
             $0.backgroundColor = Asset.Colors.black200.color
         }
     
+    /// 문제 : shareButton으로 바꿔줘야 함
     private lazy var buttonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 1
@@ -121,7 +122,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
             // 수정하기 -> 글쓰기 화면으로 넘어가야 함
         }
         let delete = UIAlertAction(title: "삭제", style: .default) { _ in
-           // 삭제하기 -> 내 기록에서 삭제가 되어야 함
+            // 삭제하기 -> 내 기록에서 삭제가 되어야 함
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         optionMenu.addAction(edit)
@@ -149,6 +150,10 @@ extension DetailRecordViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension + 47
     }
 }
 
@@ -204,6 +209,8 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: SongTableViewCell.className,
                 for: indexPath) as? SongTableViewCell
             else { return UITableViewCell() }
+            songCell.layoutIfNeeded()
+            songCell.songListTableView.contentSize.height = CGFloat(songCell.songArray.count*56)
             return songCell
             
         case .line:

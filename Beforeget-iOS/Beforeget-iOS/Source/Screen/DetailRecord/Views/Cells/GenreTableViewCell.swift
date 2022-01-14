@@ -24,6 +24,10 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private let customFlowLayout = LeftAlignmentCollectionViewFlowLayout()
     
+    private let layout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+    }
+    
     private lazy var genreCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: customFlowLayout).then {
             $0.isScrollEnabled = false
@@ -63,20 +67,10 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(cellMargin)
+            make.height.equalTo(84)
+            make.height.equalTo(genreArray.count*37)
         }
     }
-    
-    // MARK: - Custom Method
-
-    public func setData() {
-       /// 문제 : 나중에 데이터 전달
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension GenreTableViewCell: UICollectionViewDelegate {
-    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -105,18 +99,17 @@ extension GenreTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 10
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        guard let genreCell = collectionView.dequeueReusableCell(
-//            withReuseIdentifier: GenreCollectionViewCell.className,
-//            for: indexPath) as? GenreCollectionViewCell else { return .zero }
-//        
-////        genreCell.genreLabel.text = genreArray[indexPath.item]
-//        genreCell.genreLabel.sizeToFit()
-//        let cellWidth = genreCell.genreLabel.frame.width + 32
-//        
-//        return CGSize(width: cellWidth, height: 37)
-//    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        guard let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.className, for: indexPath) as? GenreCollectionViewCell else { return .zero }
+
+        genreCell.genreLabel.text = genreArray[indexPath.item]
+        genreCell.genreLabel.sizeToFit()
+        let cellWidth = genreCell.genreLabel.frame.width + 32
+
+        return CGSize(width: cellWidth, height: 37)
+    }
 }
