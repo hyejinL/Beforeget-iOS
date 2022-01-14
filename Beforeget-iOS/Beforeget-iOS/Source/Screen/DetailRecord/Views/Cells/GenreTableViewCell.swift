@@ -19,9 +19,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     public var titleLabel = CellTitleLabel().then {
         $0.title = "장르제목"
     }
-    
-    
-    
+        
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,10 +39,17 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private func setupLayout() {
+        contentView.addSubviews([titleLabel])
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+        }
     }
     
     // MARK: - Custom Method
 
-
+    public func setData() {
+       /// 문제 : 나중에 데이터 전달
+    }
 }

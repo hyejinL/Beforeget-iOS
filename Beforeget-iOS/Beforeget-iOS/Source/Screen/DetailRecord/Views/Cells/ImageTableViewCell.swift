@@ -47,8 +47,7 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .white
-        
+        contentView.backgroundColor = .orange
         [leftLineView, rightLineView, bottomLineView].forEach {
             $0.backgroundColor = Asset.Colors.black200.color
         }

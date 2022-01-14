@@ -14,7 +14,7 @@ final class DetailRecordViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var sectionArray: [DetailRecordSection] = [.comment, .image, .comma, .genre]
+    private var sectionArray: [DetailRecordSection] = [.comment, .image, .comma, .genre, .text, .song, .line, .link, .stamp]
     
     private lazy var navigationBar = BDSNavigationBar(self, view: .none, isHidden: false).then {
         $0.backButton.setImageTintColor(.white)
@@ -139,17 +139,18 @@ extension DetailRecordViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             return commentCell
         case .genre:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let genreCell = tableView.dequeueReusableCell(
                 withIdentifier: GenreTableViewCell.className,
                 for: indexPath) as? GenreTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            genreCell.backgroundColor = .lightGray
+            return genreCell
         case .text:
-            guard let commentCell = tableView.dequeueReusableCell(
+            guard let textCell = tableView.dequeueReusableCell(
                 withIdentifier: TextTableViewCell.className,
                 for: indexPath) as? TextTableViewCell
             else { return UITableViewCell() }
-            return commentCell
+            return textCell
         case .song:
             guard let commentCell = tableView.dequeueReusableCell(
                 withIdentifier: SongTableViewCell.className,
@@ -175,7 +176,5 @@ extension DetailRecordViewController: UITableViewDataSource {
             else { return UITableViewCell() }
             return commentCell
         }
-        
-       
     }
 }
