@@ -16,6 +16,8 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     private var cellMargin: CGFloat = 47
     
+    private var imageHeight: CGFloat = 0
+    
     public var titleLabel = CellTitleLabel().then {
         $0.title = "이미지제목"
     }
@@ -30,6 +32,8 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     public var cellImageView = UIImageView().then {
         $0.image = Asset.Assets.btnDownload.image
+        $0.contentMode = .scaleAspectFit
+        $0.layer.masksToBounds = true
     }
         
     // MARK: - Life Cycle
@@ -53,8 +57,9 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
             $0.backgroundColor = Asset.Colors.black200.color
         }
         
-        /// 문제
-        cellImageView.image?.resize(newWidth: 295)
+        /// 문제 :  이미지
+        guard let image = cellImageView.image?.resize(newWidth: 295) else { return }
+        imageHeight = image.size.height
     }
     
     private func setupLayout() {
@@ -94,10 +99,10 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.trailing.equalToSuperview().inset(20)
         }
 
-        /// 문제 : 이미지 가로길이가 295로 들어가고 높이는 항상 비율 계산해서 넣어줄 것
         cellImageView.snp.makeConstraints { make in
             make.top.equalTo(starImageView.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(imageHeight)
         }
         
         bottomLineView.snp.makeConstraints { make in

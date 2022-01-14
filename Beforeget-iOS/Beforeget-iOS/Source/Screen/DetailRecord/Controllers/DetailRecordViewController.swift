@@ -47,6 +47,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     private lazy var menuButton = UIButton(type: .system).then {
         $0.setImage(Asset.Assets.btnDetail.image, for: .normal)
         $0.setImageTintColor(.white)
+        $0.addTarget(self, action: #selector(touchupMenuButton(_:)), for: .touchUpInside)
     }
     
     private lazy var recordTableView = UITableView(frame: .zero, style: .grouped).then {
@@ -110,6 +111,23 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     func clickLinkButton(url: NSURL) {
         let safariView: SFSafariViewController = SFSafariViewController(url: url as URL)
         self.present(safariView, animated: true, completion: nil)
+    }
+    
+    // MARK: - @objc
+    
+    @objc func touchupMenuButton(_ sender: UIButton) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "수정", style: .default) { _ in
+            // 수정하기 -> 글쓰기 화면으로 넘어가야 함
+        }
+        let delete = UIAlertAction(title: "삭제", style: .default) { _ in
+           // 삭제하기 -> 내 기록에서 삭제가 되어야 함
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        optionMenu.addAction(edit)
+        optionMenu.addAction(delete)
+        optionMenu.addAction(cancel)
+        self.present(optionMenu, animated: true, completion: nil)
     }
 }
 

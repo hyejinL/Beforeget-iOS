@@ -19,8 +19,8 @@
 		5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */; };
 		5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */; };
 		5B82543327918CD5004BDA5D /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82543227918CD5004BDA5D /* GenreCollectionViewCell.swift */; };
-		5B82543527918D08004BDA5D /* SongCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82543427918D08004BDA5D /* SongCollectionViewCell.swift */; };
 		5B82543727918D23004BDA5D /* StampCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82543627918D23004BDA5D /* StampCollectionViewCell.swift */; };
+		5B8254392791A623004BDA5D /* SongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8254382791A623004BDA5D /* SongListTableViewCell.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
 		5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */; };
@@ -111,8 +111,8 @@
 		5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		5B82543227918CD5004BDA5D /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
-		5B82543427918D08004BDA5D /* SongCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B82543627918D23004BDA5D /* StampCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampCollectionViewCell.swift; sourceTree = "<group>"; };
+		5B8254382791A623004BDA5D /* SongListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -258,9 +258,9 @@
 				5BD114A82790C4680063EB3B /* SongTableViewCell.swift */,
 				5BD114AA2790C4730063EB3B /* LineTableViewCell.swift */,
 				5BD114AC2790C4960063EB3B /* LinkTableViewCell.swift */,
+				5B8254382791A623004BDA5D /* SongListTableViewCell.swift */,
 				5BD114AE2790C4A80063EB3B /* StampTableViewCell.swift */,
 				5B82543227918CD5004BDA5D /* GenreCollectionViewCell.swift */,
-				5B82543427918D08004BDA5D /* SongCollectionViewCell.swift */,
 				5B82543627918D23004BDA5D /* StampCollectionViewCell.swift */,
 			);
 			path = Cells;
@@ -743,7 +743,6 @@
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
 				5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */,
 				5BD114BC279175680063EB3B /* DetailRecordHeaderView.swift in Sources */,
-				5B82543527918D08004BDA5D /* SongCollectionViewCell.swift in Sources */,
 				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */,
@@ -806,6 +805,7 @@
 				92B70FCE278ACBB3009B7763 /* (null) in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				92B70FCC278AB993009B7763 /* (null) in Sources */,
+				5B8254392791A623004BDA5D /* SongListTableViewCell.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
