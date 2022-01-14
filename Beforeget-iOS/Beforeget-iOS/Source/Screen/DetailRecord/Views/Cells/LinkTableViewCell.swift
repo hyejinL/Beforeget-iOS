@@ -17,13 +17,23 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
-        $0.title = "장르제목"
+        $0.title = "링크"
+    }
+    
+    public var linkLabel = UILabel().then {
+        $0.text = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
+        $0.font = BDSFont.body8
+        $0.textColor = Asset.Colors.black200.color
+        $0.textAlignment = .left
+        $0.numberOfLines = 0
     }
     
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +47,21 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private func setupLayout() {
+        contentView.addSubviews([titleLabel,
+                                 linkLabel])
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(50)
+        }
+        
+        linkLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(21)
+            make.bottom.equalToSuperview().inset(cellMargin)
+        }
     }
     
     // MARK: - Custom Method

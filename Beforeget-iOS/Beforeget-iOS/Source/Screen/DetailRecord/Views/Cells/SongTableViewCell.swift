@@ -17,7 +17,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
-        $0.title = "장르제목"
+        $0.title = "노래제목"
     }
     
     // MARK: - Life Cycle
