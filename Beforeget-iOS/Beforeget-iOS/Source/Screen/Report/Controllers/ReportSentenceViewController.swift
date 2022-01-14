@@ -18,8 +18,6 @@ final class ReportSentenceViewController: UIViewController {
     private var reportSentenceView = ReportSentenceView()
     private lazy var monthPicker = MonthYearPickerView()
     
-    private var isFront: Bool = false
-    
     private var movieData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
     private var bookData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
     private var tvData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
@@ -111,55 +109,55 @@ extension ReportSentenceViewController: ReportTopViewDelegate {
 
 extension ReportSentenceViewController: ReportSentenceViewDelegate {
     func touchupMovie() {
-        if reportSentenceView.movieIsFront {
-            reportSentenceView.movieImageView.image = Asset.Assets.imgSentenceBack.image
+        if movieData.isEmpty {
+            reportSentenceView.movieImageView.image = reportSentenceView.movieIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.movieImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.movieImageView.image = reportSentenceView.movieIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.movieImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func touchupBook() {
-        if reportSentenceView.bookIsFront {
-            reportSentenceView.bookImageView.image = Asset.Assets.imgSentenceBack.image
+        if bookData.isEmpty {
+            reportSentenceView.bookImageView.image = reportSentenceView.bookIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.bookImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.bookImageView.image = reportSentenceView.bookIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.bookImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func touchupTV() {
-        if reportSentenceView.tvIsFront {
-            reportSentenceView.tvImageView.image = Asset.Assets.imgSentenceBack.image
+        if tvData.isEmpty {
+            reportSentenceView.tvImageView.image = reportSentenceView.tvIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.tvImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.tvImageView.image = reportSentenceView.tvIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.tvImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func touchupMusic() {
-        if reportSentenceView.musicIsFront {
-            reportSentenceView.musicImageView.image = Asset.Assets.imgSentenceBack.image
+        if musicData.isEmpty {
+            reportSentenceView.musicImageView.image = reportSentenceView.musicIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.musicImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.musicImageView.image = reportSentenceView.musicIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.musicImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func touchupWebtoon() {
-        if reportSentenceView.webtoonIsFront {
-            reportSentenceView.webtoonImageView.image = Asset.Assets.imgSentenceBack.image
+        if webtoonData.isEmpty {
+            reportSentenceView.webtoonImageView.image = reportSentenceView.webtoonIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.webtoonImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.webtoonImageView.image = reportSentenceView.webtoonIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.webtoonImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
     
     func touchupYoutube() {
-        if reportSentenceView.youtubeIsFront {
-            reportSentenceView.youtubeImageView.image = Asset.Assets.imgSentenceBack.image
+        if youtubeData.isEmpty {
+            reportSentenceView.youtubeImageView.image = reportSentenceView.youtubeIsFront ? Asset.Assets.boxSentenceEmpty.image : Asset.Assets.imgSentenceFront.image
         } else {
-            reportSentenceView.youtubeImageView.image = Asset.Assets.imgSentenceFront.image
+            reportSentenceView.youtubeImageView.image = reportSentenceView.youtubeIsFront ? Asset.Assets.imgSentenceBack.image : Asset.Assets.imgSentenceFront.image
         }
         UIView.transition(with: reportSentenceView.youtubeImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }

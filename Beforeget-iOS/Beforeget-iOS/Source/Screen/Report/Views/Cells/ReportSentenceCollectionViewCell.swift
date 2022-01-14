@@ -36,7 +36,7 @@ class ReportSentenceCollectionViewCell: UICollectionViewCell, UICollectionViewRe
         
         layer.borderWidth = 1
         layer.borderColor = Asset.Colors.green100.color.cgColor
-        layer.cornerRadius = 3
+        makeRound(radius: 3)
     }
     
     private func setupLayout() {

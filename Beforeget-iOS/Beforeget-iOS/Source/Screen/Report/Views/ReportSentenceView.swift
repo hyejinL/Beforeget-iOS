@@ -80,42 +80,42 @@ class ReportSentenceView: UIView {
     
     private var movieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
     
     private var bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
     
     private var tvCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
     
     private var musicCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
     
     private var webtoonCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
     
     private var youtubeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.isHidden = true
     }
@@ -337,7 +337,6 @@ extension ReportSentenceView: UICollectionViewDelegateFlowLayout {
         default:
             return .zero
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
