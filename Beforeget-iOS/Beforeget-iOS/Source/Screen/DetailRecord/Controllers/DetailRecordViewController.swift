@@ -14,17 +14,30 @@ final class DetailRecordViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var navigationBar = BDSNavigationBar(self, view: .none, isHidden: false)
+    private lazy var navigationBar = BDSNavigationBar(self, view: .none, isHidden: false).then {
+        $0.backButton.setImageTintColor(.white)
+        $0.backgroundColor = Asset.Colors.black200.color
+    }
+    
+    private lazy var buttonStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 1
+        $0.distribution = .fillEqually
+        $0.addArrangedSubviews([downloadButton,
+                                menuButton])
+    }
     
     private lazy var downloadButton = UIButton(type: .system).then {
         $0.setImage(Asset.Assets.btnDownload.image, for: .normal)
+        $0.setImageTintColor(.white)
     }
     
     private lazy var menuButton = UIButton(type: .system).then {
         $0.setImage(Asset.Assets.btnDetail.image, for: .normal)
+        $0.setImageTintColor(.white)
     }
     
-    private lazy var recordTableView = UITableView(frame: .zero, style: .plain).then {
+    private lazy var recordTableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
         TopTableViewCell.register(target: $0)
@@ -52,10 +65,32 @@ final class DetailRecordViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .white
+        navigationController?.isNavigationBarHidden = true
+        setupStatusBar(Asset.Colors.black200.color)
     }
     
     private func setupLayout() {
+        view.addSubviews([navigationBar,
+                          buttonStackView,
+                          recordTableView])
+
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(44)
+        }
         
+        buttonStackView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.top)
+            make.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(44)
+        }
+
+        recordTableView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     // MARK: - Custom Method
@@ -73,12 +108,12 @@ extension DetailRecordViewController: UITableViewDelegate {
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 11
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let commentCell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.className, for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
+        
+        return commentCell
     }
-    
-    
 }
