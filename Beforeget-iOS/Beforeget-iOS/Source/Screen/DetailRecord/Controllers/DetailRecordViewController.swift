@@ -31,7 +31,10 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
             $0.backgroundColor = Asset.Colors.black200.color
         }
     
-    /// 문제 : shareButton으로 바꿔줘야 함
+    private let backView = UIView().then {
+        $0.backgroundColor = Asset.Colors.black200.color
+    }
+    
     private lazy var buttonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 1
@@ -52,7 +55,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     }
     
     private lazy var recordTableView = UITableView(frame: .zero, style: .grouped).then {
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = Asset.Colors.white.color
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
@@ -85,6 +88,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     private func setupLayout() {
         view.addSubviews([navigationBar,
+                          backView,
                           buttonStackView,
                           recordTableView])
         
@@ -92,6 +96,13 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(44)
+        }
+        
+        backView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(recordTableView.snp.top)
+            make.height.equalTo(0)
         }
         
         buttonStackView.snp.makeConstraints { make in
@@ -112,6 +123,14 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     func clickLinkButton(url: NSURL) {
         let safariView: SFSafariViewController = SFSafariViewController(url: url as URL)
         self.present(safariView, animated: true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            recordTableView.backgroundColor = Asset.Colors.black200.color
+        } else {
+            recordTableView.backgroundColor = Asset.Colors.white.color
+        }
     }
     
     // MARK: - @objc

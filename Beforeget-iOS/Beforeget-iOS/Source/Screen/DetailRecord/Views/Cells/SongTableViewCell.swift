@@ -78,7 +78,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
 
 // MARK: - UITableViewDelegate
 
-extension SongTableViewCell: UITableViewDataSource {
+extension SongTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songArray.count
     }
