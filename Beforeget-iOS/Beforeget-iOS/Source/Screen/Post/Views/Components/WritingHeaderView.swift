@@ -24,7 +24,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
             outgoing.foregroundColor = Asset.Colors.black200.color
             return outgoing
         }
-        config.contentInsets = NSDirectionalEdgeInsets(top: 9, leading: 18, bottom: 9, trailing: 18)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 9, leading: 20, bottom: 9, trailing: 20)
         
         $0.configuration = config
         $0.layer.cornerRadius = 16
@@ -33,23 +33,28 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     }
     
     private let star1 = UIButton().then {
-        $0.setImage(Asset.Assets.btnStarInactive.image, for: .normal)
+        $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupStar1), for: .touchUpInside)
     }
     
     private let star2 = UIButton().then {
-        $0.setImage(Asset.Assets.btnStarInactive.image, for: .normal)
+        $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupStar2), for: .touchUpInside)
     }
     
     private let star3 = UIButton().then {
-        $0.setImage(Asset.Assets.btnStarInactive.image, for: .normal)
+        $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupStar3), for: .touchUpInside)
     }
     
     private let star4 = UIButton().then {
-        $0.setImage(Asset.Assets.btnStarInactive.image, for: .normal)
+        $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupStar4), for: .touchUpInside)
     }
     
     private let star5 = UIButton().then {
-        $0.setImage(Asset.Assets.btnStarInactive.image, for: .normal)
+        $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupStar5), for: .touchUpInside)
     }
     
     private let starDescriptionLabel = UILabel().then {
@@ -128,11 +133,50 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         
         lineView.snp.makeConstraints {
             $0.top.equalTo(starDescriptionLabel.snp.bottom).offset(33)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
     }
     
-    // MARK: - Custom Method
+    // MARK: - @objc
     
+    @objc func touchupStar1() {
+        star1.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        [star2, star3, star4, star5].forEach {
+            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+        }
+    }
+    
+    @objc func touchupStar2() {
+        [star1, star2].forEach {
+            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        }
+        [star3, star4, star5].forEach {
+            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+        }
+    }
+    
+    @objc func touchupStar3() {
+        [star1, star2, star3].forEach {
+            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        }
+        [star4, star5].forEach {
+            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+        }
+    }
+    
+    @objc func touchupStar4() {
+        [star1, star2, star3, star4].forEach {
+            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        }
+        [star5].forEach {
+            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+        }
+    }
+    
+    @objc func touchupStar5() {
+        [star1, star2, star3, star4, star5].forEach {
+            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        }
+    }
 }
