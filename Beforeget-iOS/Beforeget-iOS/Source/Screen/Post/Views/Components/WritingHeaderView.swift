@@ -26,7 +26,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         config.contentInsets = NSDirectionalEdgeInsets(top: 9, leading: 20, bottom: 9, trailing: 20)
         
         $0.configuration = config
-        $0.layer.cornerRadius = 16
+        $0.makeRound(radius: 16)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = Asset.Colors.black200.color.cgColor
     }

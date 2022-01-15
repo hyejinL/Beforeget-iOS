@@ -77,6 +77,7 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
     }
     
     // MARK: - Custom Method
+    
     func config(_ mediaName: String) {
         mediaLabel.text = mediaName
     }
