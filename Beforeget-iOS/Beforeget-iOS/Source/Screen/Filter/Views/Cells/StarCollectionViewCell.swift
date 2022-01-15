@@ -16,8 +16,14 @@ protocol StarFilterButtonDelegate: FilterModalViewController {
     func selectStarFilter(index: Int)
 }
 
-class StarCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
+class StarCollectionViewCell: UICollectionViewCell,
+                                UICollectionViewRegisterable,
+                              ResetFilterDelegate {
     
+    func clickResetButton() {
+        print("스타 초기화 갈겨~")
+    }
+
     // MARK: - Properties
     
     weak var starFilterButtonDelegate: StarFilterButtonDelegate?
@@ -74,6 +80,7 @@ class StarCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable
         super.init(frame: frame)
         configUI()
         setupLayout()
+        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -111,13 +118,28 @@ class StarCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable
         
         fiveStarButton.snp.makeConstraints { make in
             make.top.equalTo(secondButtonStackView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().inset(21)
+            make.leading.equalTo(secondButtonStackView.snp.leading)
             make.height.equalTo(37)
         }
     }
     
     // MARK: - Custom Method
-
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(resetDateFilter),
+            name: NSNotification.Name("ResetDateFilter"),
+            object: nil)
+    }
+    
+    // MARK: - @objc
+    
+    @objc func resetDateFilter() {
+        print("스타 삭제")
+        setupNotification()
+    }
+    
     @objc func touchupStarButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         starFilterButtonDelegate?.selectStarFilter(index: sender.tag)

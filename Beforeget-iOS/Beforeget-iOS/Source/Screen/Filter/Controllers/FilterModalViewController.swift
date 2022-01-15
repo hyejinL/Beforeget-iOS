@@ -27,7 +27,7 @@ final class FilterModalViewController: UIViewController,
     var selectedDateIndex: Int = 0
     var selectedMediaIndex: Int = 0
     var selectedStarIndex: Int = 0
-    
+        
     weak var sendDataDelegate: SendDataDelegate?
         
     private var modalViewTopConstraint: NSLayoutConstraint!
@@ -241,7 +241,8 @@ final class FilterModalViewController: UIViewController,
     
     /// 문제 : 이 노티를 사용할 경우에 적용하기 버튼은 Disable 되지 않음
     private func setupNotification() {
-        NotificationCenter.default.post(name: NSNotification.Name("ResetDateFilter"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name("ResetDateFilter"), object: nil)
+        (filterCollectionView.visibleCells.first as? ResetFilterDelegate)?.clickResetButton()
     }
     
     private func removeNotification() {

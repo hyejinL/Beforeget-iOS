@@ -12,6 +12,10 @@ import Then
 
 // MARK: - Delegate
 
+protocol ResetFilterDelegate: AnyObject {
+    func clickResetButton()
+}
+
 protocol DateFilterButtonDelegate: FilterModalViewController {
     func selectDateFilter(index: Int)
 }
@@ -20,11 +24,18 @@ protocol DateFilterButtonDelegate: FilterModalViewController {
 
 class FilterCollectionViewCell: UICollectionViewCell,
                                 UICollectionViewRegisterable,
-                                DatePickerDelegate {
+                                DatePickerDelegate, ResetFilterDelegate {
+    
+    func clickResetButton() {
+        print("날짜 초기화 갈겨~")
+        
+    }
     
     // MARK: - Properties
     
     private var filter = FilterManager()
+    
+    weak var resetFilterDelegate: ResetFilterDelegate?
     
     weak var dateFilterButtonDelegate: DateFilterButtonDelegate?
     
@@ -125,6 +136,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     // MARK: - @objc
     
     @objc func resetDateFilter() {
+        print("노티 기간 삭제")
         dateCollectionView.deselectAllItems(animated: false)
     }
 }
@@ -185,23 +197,26 @@ extension FilterCollectionViewCell: UICollectionViewDataSource {
 
 extension FilterCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.beginUpdates()
+
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        guard datePickerIndexPath != indexPath else { return }
         
         if let datePickerIndexPath = datePickerIndexPath,
            datePickerIndexPath.row - 1 == indexPath.row {
-            tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
             self.datePickerIndexPath = nil
+            tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
             
         } else {
             if let datePickerIndexPath = datePickerIndexPath {
+                self.datePickerIndexPath = nil
                 tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
             }
-            datePickerIndexPath = indexPathToInsertDatePicker(indexPath: indexPath)
-            tableView.insertRows(at: [datePickerIndexPath!], with: .fade)
+            if indexPath.row < tableView.numberOfRows(inSection: 0) {
+                datePickerIndexPath = indexPathToInsertDatePicker(indexPath: indexPath)
+                tableView.insertRows(at: [datePickerIndexPath!], with: .fade)
+            }
         }
-        
-        tableView.endUpdates()
     }
 }
 
@@ -222,6 +237,7 @@ extension FilterCollectionViewCell: UITableViewDataSource {
             datePickerCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
             datePickerCell.datePickerDelegate = self
+            datePickerCell.setSelected(false, animated: false)
             return datePickerCell
         } else { // 동일하지 않은 경우 데이트셀을 반환해서 날짜와 제목을 반환
             guard let dateCell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.className, for: indexPath) as? DateTableViewCell else { return UITableViewCell() }

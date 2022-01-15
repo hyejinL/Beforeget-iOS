@@ -17,7 +17,12 @@ protocol MediaFilterButtonDelegate: FilterModalViewController {
 }
 
 class MediaCollectionViewCell: UICollectionViewCell,
-                               UICollectionViewRegisterable {
+                               UICollectionViewRegisterable,
+                               ResetFilterDelegate {
+    
+    func clickResetButton() {
+        print("미디어 초기화 갈겨~")
+    }
     
     // MARK: - Properties
     
@@ -89,6 +94,7 @@ class MediaCollectionViewCell: UICollectionViewCell,
         super.init(frame: frame)
         configUI()
         setupLayout()
+        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -129,6 +135,24 @@ class MediaCollectionViewCell: UICollectionViewCell,
             make.leading.trailing.equalToSuperview().inset(21)
             make.height.equalTo(37)
         }
+    }
+    
+    // MARK: - Custom Method
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(resetDateFilter),
+            name: NSNotification.Name("ResetDateFilter"),
+            object: nil)
+    }
+    
+    // MARK: - @objc
+    
+    @objc func resetDateFilter() {
+        print("미디어 삭제")
+        movieButton.setImage(Asset.Assets.boxInactiveWebtoon.image, for: .normal)
+        setupNotification()
     }
     
     // MARK: - @objc
