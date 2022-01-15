@@ -12,7 +12,6 @@ import Then
 
 final class WritingHeaderView: UITableViewHeaderFooterView {
     
-    static let identifier = "WritingHeaderView"
     // MARK: - Properties
     
     private let dateButton = UIButton().then {
@@ -32,27 +31,27 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         $0.layer.borderColor = Asset.Colors.black200.color.cgColor
     }
     
-    private let star1 = UIButton().then {
+    private let star1Button = UIButton().then {
         $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupStar1), for: .touchUpInside)
     }
     
-    private let star2 = UIButton().then {
+    private let star2Button = UIButton().then {
         $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupStar2), for: .touchUpInside)
     }
     
-    private let star3 = UIButton().then {
+    private let star3Button = UIButton().then {
         $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupStar3), for: .touchUpInside)
     }
     
-    private let star4 = UIButton().then {
+    private let star4Button = UIButton().then {
         $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupStar4), for: .touchUpInside)
     }
     
-    private let star5 = UIButton().then {
+    private let star5Button = UIButton().then {
         $0.setImage(Asset.Assets.btnBigstarInactive.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupStar5), for: .touchUpInside)
     }
@@ -67,8 +66,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         $0.backgroundColor = Asset.Colors.gray400.color
     }
     
-    
-    // MARK: - Life Cycle
+    // MARK: - Initializer
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -88,11 +86,11 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     
     private func setupLayout() {
         contentView.addSubviews([dateButton,
-                     star1,
-                     star2,
-                     star3,
-                     star4,
-                     star5,
+                     star1Button,
+                     star2Button,
+                     star3Button,
+                     star4Button,
+                     star5Button,
                      starDescriptionLabel,
                      lineView])
         
@@ -101,33 +99,33 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
             $0.centerX.equalToSuperview()
         }
         
-        star1.snp.makeConstraints {
+        star1Button.snp.makeConstraints {
             $0.top.equalTo(dateButton.snp.bottom).offset(41)
-            $0.trailing.equalTo(star2.snp.leading)
+            $0.trailing.equalTo(star2Button.snp.leading)
         }
         
-        star2.snp.makeConstraints {
+        star2Button.snp.makeConstraints {
             $0.top.equalTo(dateButton.snp.bottom).offset(31)
-            $0.trailing.equalTo(star3.snp.leading)
+            $0.trailing.equalTo(star3Button.snp.leading)
         }
         
-        star3.snp.makeConstraints {
-            $0.top.equalTo(star1.snp.top)
+        star3Button.snp.makeConstraints {
+            $0.top.equalTo(star1Button.snp.top)
             $0.centerX.equalToSuperview()
         }
         
-        star4.snp.makeConstraints {
-            $0.top.equalTo(star2.snp.top)
-            $0.leading.equalTo(star3.snp.trailing)
+        star4Button.snp.makeConstraints {
+            $0.top.equalTo(star2Button.snp.top)
+            $0.leading.equalTo(star3Button.snp.trailing)
         }
         
-        star5.snp.makeConstraints {
-            $0.top.equalTo(star1.snp.top)
-            $0.leading.equalTo(star4.snp.trailing)
+        star5Button.snp.makeConstraints {
+            $0.top.equalTo(star1Button.snp.top)
+            $0.leading.equalTo(star4Button.snp.trailing)
         }
         
         starDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(star3.snp.bottom).offset(5)
+            $0.top.equalTo(star3Button.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
         }
         
@@ -141,41 +139,41 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     // MARK: - @objc
     
     @objc func touchupStar1() {
-        star1.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        [star2, star3, star4, star5].forEach {
+        star1Button.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+        [star2Button, star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
     }
     
     @objc func touchupStar2() {
-        [star1, star2].forEach {
+        [star1Button, star2Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
-        [star3, star4, star5].forEach {
+        [star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
     }
     
     @objc func touchupStar3() {
-        [star1, star2, star3].forEach {
+        [star1Button, star2Button, star3Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
-        [star4, star5].forEach {
+        [star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
     }
     
     @objc func touchupStar4() {
-        [star1, star2, star3, star4].forEach {
+        [star1Button, star2Button, star3Button, star4Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
-        [star5].forEach {
+        [star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
     }
     
     @objc func touchupStar5() {
-        [star1, star2, star3, star4, star5].forEach {
+        [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
     }
