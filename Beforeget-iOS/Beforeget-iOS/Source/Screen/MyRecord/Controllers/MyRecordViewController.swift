@@ -21,20 +21,25 @@ final class MyRecordViewController: UIViewController,
     public enum MediaType: Int, CaseIterable {
         case Movie, Book, Music, Youtube, Webtoon, TV
         
-        var mediaNumber: Int {
+        var mediaString: String {
             switch self {
-            case .Movie: return 1
-            case .Book: return 2
-            case .Music: return 3
-            case .Youtube: return 4
-            case .Webtoon: return 5
-            case .TV: return 6
+            case .Movie: return "Movie"
+            case .Book: return "Book"
+            case .Music: return "Music"
+            case .Youtube: return "Youtube"
+            case .Webtoon: return "Webtoon"
+            case .TV: return "TV"
             }
         }
     }
-
+    
     // MARK: - Properties
-            
+    
+    /// 서버한테 보내야 될 값들
+    private var dateQuery: String = ""
+    private var mediaQuery: String = ""
+    private var starQuery: String = ""
+    
     private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
@@ -120,7 +125,7 @@ final class MyRecordViewController: UIViewController,
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
         filterModalViewController.sendDataDelegate = self
-        self.present(filterModalViewController, animated: false, completion: nil)
+        present(filterModalViewController, animated: false, completion: nil)
     }
     
     public func clickMediaButton() {
@@ -128,8 +133,8 @@ final class MyRecordViewController: UIViewController,
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
         filterModalViewController.sendDataDelegate = self
-//        filterModalViewController.filterCollectionView.cellForItem(at: 1)
-        self.present(filterModalViewController, animated: false, completion: nil)
+        //        filterModalViewController.filterCollectionView.cellForItem(at: 1)
+        present(filterModalViewController, animated: false, completion: nil)
         print("미디어버튼")
     }
     
@@ -138,27 +143,35 @@ final class MyRecordViewController: UIViewController,
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
         filterModalViewController.sendDataDelegate = self
-        self.present(filterModalViewController, animated: false, completion: nil)
+        present(filterModalViewController, animated: false, completion: nil)
         print("스타버튼")
     }
-
-    func sendData(data: Int, media: Int, star: Int) {
+    
+    func sendData(data: Int, media: [Int], star: [Int]) {
+        // MARK: - FIXME
         /// 문제 : 미디어 부분에서 여러개 선택했을 때 설정처리 + 기간일 경우 int가 0부터 넘어옴..;;;
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
-        /// MediaType.allCases.ind
         
-        filterView.mediaButton.isSelected = (media == 0) ?
+        filterView.dateButton.isSelected = (data == 0) ?
         false : true
         
-        filterView.starButton.isSelected = (star == 0) ?
+        filterView.mediaButton.isSelected = (media == [0]) ?
         false : true
         
-        filterView.dateLabel.text = "기간"
+        filterView.starButton.isSelected = (star == [0]) ?
+        false : true
+        
         filterView.dateButton.isSelected = true
-        filterView.mediaLabel.text = "미디어\(media)"
+        filterView.mediaButton.setTitle("         \(media[0]) 외 ()   ", for: .normal)
         filterView.mediaButton.isSelected = true
-        filterView.starLabel.text = "별점"
+        
+        switch data {
+        case 0: dateQuery = "14"
+        case 1: dateQuery = "1"
+        case 2: dateQuery = "3"
+        default: dateQuery = "날짜"
+        }
     }
 }
 
@@ -183,7 +196,7 @@ extension MyRecordViewController: UITableViewDataSource {
             for: indexPath) as? MyRecordTableViewCell
         else { return UITableViewCell() }
         recordCell.selectionStyle = .none
-        recordCell.setData(index: indexPath.item)
+        recordCell.config(index: indexPath.item)
         return recordCell
     }
 }

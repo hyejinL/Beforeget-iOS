@@ -17,16 +17,16 @@ protocol StarFilterButtonDelegate: FilterModalViewController {
 }
 
 class StarCollectionViewCell: UICollectionViewCell,
-                                UICollectionViewRegisterable,
+                              UICollectionViewRegisterable,
                               ResetFilterDelegate {
     
-    func clickResetButton() {
-        print("스타 초기화 갈겨~")
-    }
-
     // MARK: - Properties
     
     weak var starFilterButtonDelegate: StarFilterButtonDelegate?
+    
+    private lazy var starButtonList: [UIButton] = [oneStarButton, twoStarButton,
+                                                   threeStarButton, fourStarButton,
+                                                   fiveStarButton]
     
     private lazy var firstButtonStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -35,7 +35,7 @@ class StarCollectionViewCell: UICollectionViewCell,
         $0.addArrangedSubviews([
             oneStarButton, twoStarButton])
     }
-        
+    
     private lazy var secondButtonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 11
@@ -50,25 +50,25 @@ class StarCollectionViewCell: UICollectionViewCell,
         $0.setImage(Asset.Assets.boxInactiveStar1.image, for: .normal)
     }
     
-    private lazy var  twoStarButton = UIButton().then {
+    private lazy var twoStarButton = UIButton().then {
         $0.tag = 2
         $0.setImage(Asset.Assets.boxActiveStar2.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveStar2.image, for: .normal)
     }
     
-    private lazy var  threeStarButton = UIButton().then {
+    private lazy var threeStarButton = UIButton().then {
         $0.tag = 3
         $0.setImage(Asset.Assets.boxActiveStar3.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveStar3.image, for: .normal)
     }
     
-    private lazy var  fourStarButton = UIButton().then {
+    private lazy var fourStarButton = UIButton().then {
         $0.tag = 4
         $0.setImage(Asset.Assets.boxActiveStar4.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveStar4.image, for: .normal)
     }
     
-    private lazy var  fiveStarButton = UIButton().then {
+    private lazy var fiveStarButton = UIButton().then {
         $0.tag = 5
         $0.setImage(Asset.Assets.boxActiveStar5.image, for: .selected)
         $0.setImage(Asset.Assets.boxInactiveStar5.image, for: .normal)
@@ -80,7 +80,6 @@ class StarCollectionViewCell: UICollectionViewCell,
         super.init(frame: frame)
         configUI()
         setupLayout()
-        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -90,11 +89,10 @@ class StarCollectionViewCell: UICollectionViewCell,
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .white
-        
-        [oneStarButton, twoStarButton,
-         threeStarButton, fourStarButton,
-         fiveStarButton].forEach {
+        contentView.backgroundColor = Asset.Colors.white.color
+            
+        starButtonList.forEach {
+            $0.contentMode = .scaleAspectFit
             $0.addTarget(self, action: #selector(touchupStarButton(_:)), for: .touchUpInside)
         }
     }
@@ -125,20 +123,14 @@ class StarCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    private func setupNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(resetDateFilter),
-            name: NSNotification.Name("ResetDateFilter"),
-            object: nil)
+    func clickResetButton() {
+        print("스타 초기화 갈겨~")
+        starButtonList.forEach {
+            $0.isSelected = false
+        }
     }
     
     // MARK: - @objc
-    
-    @objc func resetDateFilter() {
-        print("스타 삭제")
-        setupNotification()
-    }
     
     @objc func touchupStarButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected

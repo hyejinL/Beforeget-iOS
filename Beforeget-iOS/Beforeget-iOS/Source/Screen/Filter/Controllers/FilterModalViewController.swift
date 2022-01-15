@@ -13,23 +13,20 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: Int, star: Int)
+    func sendData(data: Int, media: [Int], star: [Int])
 }
 
-final class FilterModalViewController: UIViewController,
-                                       SelectMenuDelegate,
-                                       DateFilterButtonDelegate,
-                                       MediaFilterButtonDelegate,
-                                       StarFilterButtonDelegate {
+final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
     
+    /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
     var selectedDateIndex: Int = 0
-    var selectedMediaIndex: Int = 0
-    var selectedStarIndex: Int = 0
-        
+    var selectedMediaIndex: [Int] = [0]
+    var selectedStarIndex: [Int] = [0]
+    
     weak var sendDataDelegate: SendDataDelegate?
-        
+    
     private var modalViewTopConstraint: NSLayoutConstraint!
     
     private let height: CGFloat = 633
@@ -47,8 +44,7 @@ final class FilterModalViewController: UIViewController,
     
     private let indicatorView = UIView().then {
         $0.backgroundColor = Asset.Colors.gray300.color
-        $0.layer.cornerRadius = 2
-        $0.clipsToBounds = true
+        $0.makeRound(radius: 2)
     }
     
     private lazy var menuBarView = MenuBarView().then {
@@ -101,11 +97,6 @@ final class FilterModalViewController: UIViewController,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showBottomSheet()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        removeNotification()
     }
     
     // MARK: - InitUI
@@ -175,29 +166,6 @@ final class FilterModalViewController: UIViewController,
     
     // MARK: - Custom Method
     
-    func selectMenu(index: Int) {
-        let index = IndexPath(row: index, section: 0)
-        filterCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-    }
-    
-    func selectDateFilter(index: Int) {
-        selectedDateIndex = index
-        print(selectedDateIndex, "이것은 날짜다!!")
-        applyButton.isDisabled = false
-    }
-    
-    func selectMediaFilter(index: Int) {
-        selectedMediaIndex = index
-        print(selectedMediaIndex, "이것은 미디어다!!")
-        applyButton.isDisabled = false
-    }
-    
-    func selectStarFilter(index: Int) {
-        selectedStarIndex = index
-        print(selectedStarIndex, "이것은 별점이다!!!")
-        applyButton.isDisabled = false
-    }
-    
     // 바텀 시트 표출 애니메이션
     private func showBottomSheet() {
         let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
@@ -238,28 +206,20 @@ final class FilterModalViewController: UIViewController,
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
     }
-    
-    /// 문제 : 이 노티를 사용할 경우에 적용하기 버튼은 Disable 되지 않음
-    private func setupNotification() {
-//        NotificationCenter.default.post(name: NSNotification.Name("ResetDateFilter"), object: nil)
-        (filterCollectionView.visibleCells.first as? ResetFilterDelegate)?.clickResetButton()
-    }
-    
-    private func removeNotification() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
     // MARK: - @objc
     
     @objc func touchupResetButton(_ sender: UIButton) {
-        setupNotification()
+        /// 문제 : 이 노티를 사용할 경우에 적용하기 버튼은 Disable 되지 않음
+        (filterCollectionView.visibleCells.first as? ResetFilterDelegate)?.clickResetButton()
     }
     
     @objc func touchupApplyButton(_ sender: UIButton) {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
-        sendDataDelegate?.sendData(data: selectedDateIndex,
-                                   media: selectedMediaIndex,
-                                   star: selectedStarIndex)
+        sendDataDelegate?.sendData(
+            data: selectedDateIndex,
+            media: selectedMediaIndex,
+            star: selectedStarIndex)
         hideBottomSheetAndGoBack()
     }
     
@@ -268,13 +228,8 @@ final class FilterModalViewController: UIViewController,
     }
     
     @objc func panGesture(_ recognizer: UISwipeGestureRecognizer) {
-        if recognizer.state == .ended {
-            switch recognizer.direction {
-            case .down:
-                hideBottomSheetAndGoBack()
-            default:
-                break
-            }
+        if recognizer.state == .ended, recognizer.direction == .down {
+            hideBottomSheetAndGoBack()
         }
     }
 }
@@ -285,7 +240,6 @@ extension FilterModalViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
-        print(menuIndex)
         
         menuBarView.indicatorView.snp.updateConstraints { make in
             make.leading.equalToSuperview().inset(menuIndex*menuWidth+75+menuIndex*39)
@@ -295,8 +249,7 @@ extension FilterModalViewController: UICollectionViewDelegate {
         case 0.0..<1.0: return resetButton.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
         case 1.0..<2.0: return resetButton.setImage(Asset.Assets.btnRefreshMedia.image, for: .normal)
         case 2.0...: return resetButton.setImage(Asset.Assets.btnRefreshStar.image, for: .normal)
-        default:
-            return
+        default: return
         }
     }
     
@@ -355,5 +308,35 @@ extension FilterModalViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: self.filterCollectionView.frame.height)
+    }
+}
+
+// MARK: - Custom Delegate
+
+extension FilterModalViewController:
+    SelectMenuDelegate, DateFilterButtonDelegate,
+    MediaFilterButtonDelegate, StarFilterButtonDelegate {
+    
+    func selectMenu(index: Int) {
+        let index = IndexPath(row: index, section: 0)
+        filterCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+    }
+    
+    func selectDateFilter(index: Int) {
+        selectedDateIndex = index
+        print(selectedDateIndex, "이것은 날짜다!!")
+        applyButton.isDisabled = false
+    }
+    
+    func selectMediaFilter(index: Int) {
+        selectedMediaIndex.append(index)
+        print(selectedMediaIndex, "이것은 미디어다!!")
+        applyButton.isDisabled = false
+    }
+    
+    func selectStarFilter(index: Int) {
+        selectedStarIndex.append(index)
+        print(selectedStarIndex, "이것은 별점이다!!!")
+        applyButton.isDisabled = false
     }
 }

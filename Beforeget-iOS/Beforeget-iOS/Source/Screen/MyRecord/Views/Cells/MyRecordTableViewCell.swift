@@ -132,7 +132,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
 
-    public func setData(index: Int) {
+    public func config(index: Int) {
         onelineLabel.text = record.getData(index: index).oneline[0]
         titleLabel.text = record.getData(index: index).title
         starLabel.text = String(record.getStar(index: index))

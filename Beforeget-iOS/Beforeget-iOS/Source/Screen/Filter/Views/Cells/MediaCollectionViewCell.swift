@@ -20,11 +20,10 @@ class MediaCollectionViewCell: UICollectionViewCell,
                                UICollectionViewRegisterable,
                                ResetFilterDelegate {
     
-    func clickResetButton() {
-        print("미디어 초기화 갈겨~")
-    }
-    
     // MARK: - Properties
+    
+    private var buttonTitle: [String] = []
+    private var mediaButtonList: [UIButton] = []
     
     weak var mediaFilterButtonDelegate: MediaFilterButtonDelegate?
     
@@ -32,60 +31,21 @@ class MediaCollectionViewCell: UICollectionViewCell,
         $0.axis = .horizontal
         $0.spacing = 11
         $0.distribution = .fillEqually
-        $0.addArrangedSubviews([
-            movieButton, bookButton])
+        $0.addArrangedSubviews([mediaButtonList[0], mediaButtonList[1]])
     }
     
     private lazy var secondButtonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 11
         $0.distribution = .fillEqually
-        $0.addArrangedSubviews([
-            tvButton, musicButton])
+        $0.addArrangedSubviews([mediaButtonList[2], mediaButtonList[3]])
     }
     
     private lazy var thirdButtonStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 11
         $0.distribution = .fillEqually
-        $0.addArrangedSubviews([
-            webtoonButton, youtubeButton])
-    }
-    
-    private let movieButton = UIButton().then {
-        $0.tag = 1
-        $0.setImage(Asset.Assets.boxMovie.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveMovie.image, for: .normal)
-    }
-    
-    private let bookButton = UIButton().then {
-        $0.tag = 2
-        $0.setImage(Asset.Assets.boxBook.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveBook.image, for: .normal)
-    }
-    
-    private let tvButton = UIButton().then {
-        $0.tag = 3
-        $0.setImage(Asset.Assets.boxTV.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveTv.image, for: .normal)
-    }
-    
-    private let musicButton = UIButton().then {
-        $0.tag = 4
-        $0.setImage(Asset.Assets.boxMusic.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveMusic.image, for: .normal)
-    }
-    
-    private let webtoonButton = UIButton().then {
-        $0.tag = 5
-        $0.setImage(Asset.Assets.boxWebtoon.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveWebtoon.image, for: .normal)
-    }
-    
-    private let youtubeButton = UIButton().then {
-        $0.tag = 6
-        $0.setImage(Asset.Assets.boxYoutube.image, for: .selected)
-        $0.setImage(Asset.Assets.boxInactiveYoutube.image, for: .normal)
+        $0.addArrangedSubviews([mediaButtonList[4], mediaButtonList[5]])
     }
     
     // MARK: - Initializer
@@ -93,8 +53,9 @@ class MediaCollectionViewCell: UICollectionViewCell,
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
+        setupButtonList()
         setupLayout()
-        setupNotification()
+        setupAction()
     }
     
     required init?(coder: NSCoder) {
@@ -104,12 +65,11 @@ class MediaCollectionViewCell: UICollectionViewCell,
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .white
-        
-        [movieButton, bookButton,
-         tvButton, musicButton,
-         webtoonButton, youtubeButton].forEach {
-            $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
+        contentView.backgroundColor = Asset.Colors.white.color
+        mediaButtonList.forEach {
+            $0.layer.borderColor = isSelected ?
+            Asset.Colors.black200.color.cgColor :
+            Asset.Colors.gray300.color.cgColor
         }
     }
     
@@ -139,20 +99,34 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    private func setupNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(resetDateFilter),
-            name: NSNotification.Name("ResetDateFilter"),
-            object: nil)
+    public func clickResetButton() {
+        mediaButtonList.forEach {
+            $0.isSelected = false
+        }
     }
     
-    // MARK: - @objc
+    private func setupButtonList() {
+        buttonTitle.append(contentsOf: [
+            "Movie", "Book", "TV",
+            "Music", "Webtoon", "Youtube"])
+        
+        buttonTitle.forEach {
+            let mediaButton = UIButton()
+            mediaButton.setTitle($0, for: .normal)
+            mediaButton.titleLabel?.font = BDSFont.body8
+            mediaButton.setTitleColor(Asset.Colors.gray300.color, for: .normal)
+            mediaButton.setTitleColor(Asset.Colors.black200.color, for: .selected)
+            mediaButton.layer.borderColor = Asset.Colors.gray300.color.cgColor
+            mediaButton.layer.borderWidth = 1
+            mediaButton.makeRound(radius: 4)
+            mediaButtonList.append(mediaButton)
+        }
+    }
     
-    @objc func resetDateFilter() {
-        print("미디어 삭제")
-        movieButton.setImage(Asset.Assets.boxInactiveWebtoon.image, for: .normal)
-        setupNotification()
+    private func setupAction() {
+        mediaButtonList.forEach {
+            $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
+        }
     }
     
     // MARK: - @objc

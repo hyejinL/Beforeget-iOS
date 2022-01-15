@@ -26,9 +26,8 @@ class FilterCollectionViewCell: UICollectionViewCell,
                                 UICollectionViewRegisterable,
                                 DatePickerDelegate, ResetFilterDelegate {
     
-    func clickResetButton() {
-        print("날짜 초기화 갈겨~")
-        
+    func clickResetFilter() {
+        print("날짜 필터 삭제")
     }
     
     // MARK: - Properties
@@ -71,7 +70,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
         configUI()
         setupLayout()
         addInitailValues()
-        setupNotification()
+        disableDatePicker()
     }
     
     required init?(coder: NSCoder) {
@@ -125,18 +124,12 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    private func setupNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(resetDateFilter),
-            name: NSNotification.Name("ResetDateFilter"),
-            object: nil)
+    func disableDatePicker() {
+        
     }
     
-    // MARK: - @objc
-    
-    @objc func resetDateFilter() {
-        print("노티 기간 삭제")
+    func clickResetButton() {
+        print("날짜 초기화 갈겨~")
         dateCollectionView.deselectAllItems(animated: false)
     }
 }

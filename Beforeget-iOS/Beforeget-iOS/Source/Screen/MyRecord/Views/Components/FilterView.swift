@@ -30,6 +30,8 @@ public class FilterView: UIView {
     
     // MARK: - Properties
     
+    public var mediaTitle: String = "미디어"
+    
     public var dateString: String?
     
     weak var dateDelegate: DateFilterDelegate?
@@ -39,7 +41,7 @@ public class FilterView: UIView {
     private lazy var filterStackView = UIStackView().then {
         $0.spacing = 10
         $0.axis = .horizontal
-        $0.distribution = .fillEqually
+        $0.distribution = .fill
         $0.addArrangedSubviews([
             dateButton,
             mediaButton,
@@ -48,30 +50,21 @@ public class FilterView: UIView {
     }
     
     public var dateButton = UIButton().then {
+        $0.setTitle("기간", for: .normal)
         $0.addTarget(self, action: #selector(touchupDateButton),
                      for: .touchUpInside)
     }
     
     public var mediaButton = UIButton().then {
+        $0.setTitle("미디어", for: .normal)
         $0.addTarget(self, action: #selector(touchupMediaButton),
                      for: .touchUpInside)
     }
     
     public var starButton = UIButton().then {
+        $0.setTitle("별점", for: .normal)
         $0.addTarget(self, action: #selector(touchupStarButton),
                      for: .touchUpInside)
-    }
-    
-    public var dateLabel = UILabel().then {
-        $0.text = "기간"
-    }
-    
-    public var mediaLabel = UILabel().then {
-        $0.text = "미디어"
-    }
-    
-    public var starLabel = UILabel().then {
-        $0.text = "별점"
     }
     
     // MARK: - Initializers
@@ -89,40 +82,25 @@ public class FilterView: UIView {
     // MARK: - InitUI
     
     private func configUI() {
-        backgroundColor = .white
+        backgroundColor = Asset.Colors.white.color
         
         [dateButton, mediaButton, starButton].forEach {
-            $0.setImage(Asset.Assets.btnFilterInactive.image, for: .normal)
-            $0.setImage(Asset.Assets.btnFilterActive.image, for: .highlighted)
-            $0.setImage(Asset.Assets.btnFilterActive.image, for: .selected)
-        }
-        
-        [dateLabel, mediaLabel, starLabel].forEach {
-            $0.textColor = Asset.Colors.black200.color
-            $0.font = BDSFont.body1
-            $0.textAlignment = .center
+            $0.titleLabel?.font = BDSFont.body1
+            $0.contentMode = .scaleAspectFit
+            $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+            $0.setBackgroundImage(Asset.Assets.btnFilterInactive.image, for: .normal)
+            $0.setBackgroundImage(Asset.Assets.btnFilterActive.image, for: .highlighted)
+            $0.setBackgroundImage(Asset.Assets.btnFilterActive.image, for: .selected)
         }
     }
     
     private func setupLayout() {
         addSubviews([filterStackView])
-        dateButton.addSubview(dateLabel)
-        mediaButton.addSubview(mediaLabel)
-        starButton.addSubview(starLabel)
         
         filterStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
             make.centerX.equalToSuperview()
             make.height.equalTo(35)
-        }
-        
-        /// 문제 : 에셋 양사이드 마진 값 설정해줘야 된다.
-        [dateLabel, mediaLabel, starLabel].forEach {
-            $0.snp.makeConstraints { make in
-                make.top.equalToSuperview().inset(4)
-                make.bottom.equalToSuperview().inset(6)
-                make.centerX.equalToSuperview()
-            }
         }
     }
     
