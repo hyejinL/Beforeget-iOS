@@ -34,6 +34,7 @@ final class MediaSelectViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.gray300.color
         $0.layer.cornerRadius = 4
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(touchupNextButton), for: .touchUpInside)
     }
     
     private let messageLabel = UILabel().then {
@@ -113,6 +114,12 @@ final class MediaSelectViewController: UIViewController {
     private func activateNextButton() {
         nextButton.isEnabled = true
         nextButton.backgroundColor = Asset.Colors.black200.color
+    }
+    
+    //MARK: - @objc
+    
+    @objc func touchupNextButton() {
+        navigationController?.pushViewController(PostViewController(), animated: true)
     }
 }
 
