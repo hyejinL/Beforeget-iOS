@@ -348,6 +348,8 @@ extension ReportSentenceView: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionView DataSource
+
 extension ReportSentenceView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {

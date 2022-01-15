@@ -90,7 +90,6 @@ final class ReportGraphViewController: UIViewController {
         toolbar.backgroundColor = Asset.Colors.white.color
         toolbar.tintColor = Asset.Colors.black200.color
         toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
@@ -100,7 +99,7 @@ final class ReportGraphViewController: UIViewController {
     }
     
     private func addOrSubtractMonth(month:Int) -> String {
-        let date = Calendar.current.date(byAdding: .month, value: month, to: Date())!
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M월"
         return dateFormatter.string(from: date)

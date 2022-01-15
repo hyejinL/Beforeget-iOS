@@ -83,7 +83,6 @@ final class ReportLabelViewController: UIViewController {
         toolbar.backgroundColor = .white
         toolbar.tintColor = Asset.Colors.black200.color
         toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))

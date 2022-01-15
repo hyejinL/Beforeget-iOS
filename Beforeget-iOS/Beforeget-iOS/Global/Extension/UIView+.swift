@@ -40,9 +40,9 @@ extension UIView {
         
         drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
         UIGraphicsEndImageContext()
         
-        return image!
+        return image
     }
 }

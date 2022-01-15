@@ -170,8 +170,6 @@ class ReportOnePageView: UIView {
         }
         
         graphView.addSubviews([midLineView, minLineView, barStackView])
-
-        // MARK: - FIXME 막대 그래프 추가
         
         barStackView.addArrangedSubviews([barView1, barView2, barView3, barView4, barView5])
 
@@ -219,6 +217,7 @@ class ReportOnePageView: UIView {
         }
         
         sentenceView.addSubview(sentenceCollectionView)
+        
         sentenceCollectionView.snp.makeConstraints { 
             $0.leading.trailing.equalToSuperview().inset(14)
             $0.top.bottom.equalToSuperview().inset(32)
@@ -303,6 +302,8 @@ class ReportOnePageView: UIView {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+
 extension ReportOnePageView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: calculateCellWidth(text: sentence[indexPath.item]), height: (collectionView.frame.height - 14*2)/3)
@@ -315,6 +316,8 @@ extension ReportOnePageView: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 }
+
+// MARK: - UICollectionView DataSource
 
 extension ReportOnePageView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

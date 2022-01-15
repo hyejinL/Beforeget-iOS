@@ -129,7 +129,15 @@ class ReportGraphView: UIView {
     }
     
     private func setupLayout() {
-        addSubviews([monthLabel, threeMonthButton, fiveMonthButton, maxCountLabel, midCountLabel, minCountLabel, midLineView, minLineView, barStackView])
+        addSubviews([monthLabel,
+                     threeMonthButton,
+                     fiveMonthButton,
+                     maxCountLabel,
+                     midCountLabel,
+                     minCountLabel,
+                     midLineView,
+                     minLineView,
+                     barStackView])
         
         barStackView.addArrangedSubviews([barView1, barView2, barView3, barView4, barView5])
         
@@ -191,7 +199,7 @@ class ReportGraphView: UIView {
         }
     }
     
-    private func chagneMonth(month: Int) {
+    private func changeMonth(month: Int) {
         if month == 3 {
             [barView1, barView2, barView3, barView4, barView5].forEach {
                 barStackView.removeArrangedSubview($0)
@@ -214,12 +222,12 @@ class ReportGraphView: UIView {
     // MARK: - @objc
     
     @objc func touchupThreeMonthButton() {
-        chagneMonth(month: 3)
+        changeMonth(month: 3)
         delegate?.touchupThreeMonthButton()
     }
     
     @objc func touchupFiveMonthButton() {
-        chagneMonth(month: 5)
+        changeMonth(month: 5)
         delegate?.touchupFiveMonthButton()
     }
 }
