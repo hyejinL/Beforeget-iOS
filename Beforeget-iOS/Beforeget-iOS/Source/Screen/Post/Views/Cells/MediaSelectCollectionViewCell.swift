@@ -31,11 +31,8 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
     
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                mediaBackgroundView.layer.borderColor = Asset.Colors.black200.color.cgColor
-            } else {
-                mediaBackgroundView.layer.borderColor = Asset.Colors.gray300.color.cgColor
-            }
+            let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray300.color.cgColor
+            mediaBackgroundView.layer.borderColor = borderColor
         }
     }
     
