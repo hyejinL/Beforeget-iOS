@@ -12,7 +12,7 @@ import Then
 
 // MARK: - Delegate
 
-protocol DatePickerDelegate: FilterCollectionViewCell {
+protocol DatePickerDelegate: AnyObject {
     func didChangeDate(date: Date, indexPath: IndexPath)
 }
 
@@ -21,6 +21,8 @@ class DatePickerTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Properties
     
     weak var datePickerDelegate: DatePickerDelegate?
+    public var dateSendingClosure: ((Int, Date) -> ())?
+    public var selectedDate: Date?
     
     public var indexPath: IndexPath!
     
@@ -40,6 +42,7 @@ class DatePickerTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.datePickerMode = .date
         $0.setValue(UIColor.white, forKeyPath: "textColor")
         $0.locale = Locale(identifier: "ko_KR")
+        $0.timeZone = TimeZone(abbreviation: "KST")
         $0.preferredDatePickerStyle = .wheels
         $0.addTarget(self, action: #selector(dateDidChange(_:)), for: .valueChanged)
     }
@@ -110,5 +113,7 @@ class DatePickerTableViewCell: UITableViewCell, UITableViewRegisterable {
     @objc func dateDidChange(_ sender: UIDatePicker) {
         let indexPathForDisplayDate = IndexPath(row: indexPath.row - 1, section: indexPath.section)
         datePickerDelegate?.didChangeDate(date: sender.date, indexPath: indexPathForDisplayDate)
+        print("indexPath.section = \(indexPath.section), row = \(indexPath.row)")
+        dateSendingClosure?(indexPath.row - 1, sender.date)
     }
 }

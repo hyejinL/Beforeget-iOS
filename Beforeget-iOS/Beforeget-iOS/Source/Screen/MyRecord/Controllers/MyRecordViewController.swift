@@ -146,14 +146,12 @@ extension MyRecordViewController:
     public func clickDateButton() {
         // MARK: - FIXME
         presentFilterModal()
-        print("기간버튼")
     }
     
     public func clickMediaButton() {
         // MARK: - FIXME
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
         presentFilterModal()
-        print("미디어버튼")
     }
     
     public func clickStarButton() {
@@ -165,12 +163,11 @@ extension MyRecordViewController:
     
     public func sendData(data: Int, media: [String], star: [String]) {
         // MARK: - FIXME
-        /// 문제 : 미디어 부분에서 여러개 선택했을 때 설정처리 + 기간일 경우 int가 0부터 넘어옴..;;;
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
         print(data, media, star, "넘어온 값")
         
-        filterView.dateButton.isSelected = (data == 0) ?
+        filterView.dateButton.isSelected = (data == -1) ?
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true

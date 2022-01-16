@@ -20,10 +20,10 @@ final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
     
-    /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
     var selectedDateIndex: Int = -1
     var selectedMediaIndex: [String] = ["미디어"]
     var selectedStarIndex: [String] = ["별점"]
+    var recordDateTuple: [String] = ["",""]
     
     weak var sendDataDelegate: SendDataDelegate?
     
@@ -219,6 +219,8 @@ final class FilterModalViewController: UIViewController {
             media: selectedMediaIndex,
             star: selectedStarIndex)
         hideBottomSheetAndGoBack()
+//        let presentingVC = presentingViewController as? MyRecordViewController
+//        presentingVC.filterView.dateButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
     }
     
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
@@ -273,13 +275,17 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 withReuseIdentifier: FilterCollectionViewCell.className,
                 for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
             filterCell.dateFilterButtonDelegate = self
+            // MARK: - 추후 공부할 부분 : Closure
+            filterCell.dateSendingClosure = { index, date in
+                self.recordDateTuple[index] = date.convertToString("YYYY-MM-dd")
+                print(self.recordDateTuple)
+            }
             return filterCell
         case 1:
             guard let mediaCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
-        
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
@@ -315,7 +321,7 @@ extension FilterModalViewController: UICollectionViewDelegateFlowLayout {
 
 extension FilterModalViewController:
     SelectMenuDelegate, DateFilterButtonDelegate,
-    MediaFilterButtonDelegate, StarFilterButtonDelegate {
+    MediaFilterButtonDelegate, StarFilterButtonDelegate, DatePickerDelegate {
     
     func selectMenu(index: Int) {
         let index = IndexPath(row: index, section: 0)
@@ -338,5 +344,9 @@ extension FilterModalViewController:
         selectedStarIndex = index
         print(selectedStarIndex, "이것은 별점이다!!!")
         applyButton.isDisabled = false
+    }
+    
+    func didChangeDate(date: Date, indexPath: IndexPath) {
+        print(date, indexPath, "날짜 전달이다")
     }
 }

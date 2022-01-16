@@ -35,6 +35,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     weak var dateFilterButtonDelegate: DateFilterButtonDelegate?
     
+    var dateSendingClosure: ((Int, Date) -> ())?
     var inputText: [String] = ["시작", "끝"]
     var inputDates: [Date] = []
     var datePickerIndexPath: IndexPath?
@@ -77,7 +78,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     // MARK: - InitUI
     
     private func configUI() {
-        backgroundColor = .white
+        backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
@@ -239,6 +240,10 @@ extension FilterCollectionViewCell: UITableViewDataSource {
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
             datePickerCell.datePickerDelegate = self
             datePickerCell.setSelected(false, animated: false)
+            datePickerCell.dateSendingClosure = { index, date in
+                self.dateSendingClosure?(index, date)
+                print("datePickerCell.dateSendingClosure")
+            }
             return datePickerCell
         } else { // 동일하지 않은 경우 데이트셀을 반환해서 날짜와 제목을 반환
             guard let dateCell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.className, for: indexPath) as? DateTableViewCell else { return UITableViewCell() }
