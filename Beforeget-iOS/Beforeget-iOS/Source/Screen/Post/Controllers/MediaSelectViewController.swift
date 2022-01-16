@@ -70,7 +70,7 @@ final class MediaSelectViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
@@ -119,7 +119,9 @@ final class MediaSelectViewController: UIViewController {
     //MARK: - @objc
     
     @objc func touchupNextButton() {
-        navigationController?.pushViewController(PostViewController(), animated: true)
+        print("다음버튼", presentingViewController)
+        let postViewController = PostViewController()
+        navigationController?.pushViewController(postViewController, animated: true)
     }
 }
 

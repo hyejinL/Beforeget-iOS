@@ -244,14 +244,24 @@ final class MainViewController: UIViewController {
     }
     
     @objc func touchupPostButton(_ sender: UIButton) {
-        let postViewController = PostViewController()
-        postViewController.modalPresentationStyle = .overFullScreen
-        present(postViewController, animated: true, completion: nil)
+        let mediaSelectViewController = MediaSelectViewController()
+        mediaSelectViewController.modalPresentationStyle = .overFullScreen
+        present(mediaSelectViewController, animated: true, completion: nil)
     }
     
     @objc func touchupViewAllRecordButton(_ sender: UIButton) {
         let myRecordViewController = MyRecordViewController()
         navigationController?.pushViewController(myRecordViewController, animated: true)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailRecordViewController = DetailRecordViewController()
+        // MARK: - TODO 필터링된 미디어 유형 1~6을 보내주면 됨.
+        navigationController?.pushViewController(detailRecordViewController, animated: true)
     }
 }
 

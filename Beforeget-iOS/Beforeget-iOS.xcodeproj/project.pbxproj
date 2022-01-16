@@ -35,6 +35,9 @@
 		5B86AEB9278F7B22001C4486 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B86AEB8278F7B22001C4486 /* MediaCollectionViewCell.swift */; };
 		5B86AEBB278F7BC9001C4486 /* StarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B86AEBA278F7BC9001C4486 /* StarCollectionViewCell.swift */; };
 		5B8F1365279415FD00385D5E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1364279415FD00385D5E /* SettingViewController.swift */; };
+		5B8F136B2794C77900385D5E /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136A2794C77900385D5E /* SettingTableViewCell.swift */; };
+		5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */; };
+		5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136F2794D37D00385D5E /* SettingFooterView.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
@@ -136,6 +139,9 @@
 		5B86AEB8278F7B22001C4486 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B86AEBA278F7BC9001C4486 /* StarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarCollectionViewCell.swift; sourceTree = "<group>"; };
 		5B8F1364279415FD00385D5E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		5B8F136A2794C77900385D5E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
+		5B8F136F2794D37D00385D5E /* SettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFooterView.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 		5B8F13622794131700385D5E /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				5B8F13682794C75200385D5E /* Views */,
 				5B8F1363279415E100385D5E /* Controllers */,
 			);
 			path = Setting;
@@ -334,6 +341,32 @@
 				5B8F1364279415FD00385D5E /* SettingViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5B8F13682794C75200385D5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F136C2794CA3400385D5E /* Components */,
+				5B8F13692794C75D00385D5E /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B8F13692794C75D00385D5E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F136A2794C77900385D5E /* SettingTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		5B8F136C2794CA3400385D5E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */,
+				5B8F136F2794D37D00385D5E /* SettingFooterView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		5BD114942790C1910063EB3B /* DetailRecord */ = {
@@ -909,6 +942,7 @@
 			files = (
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
+				5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
@@ -937,6 +971,7 @@
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */,
+				5B8F136B2794C77900385D5E /* SettingTableViewCell.swift in Sources */,
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
@@ -980,6 +1015,7 @@
 				5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */,
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
+				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
 				929CFB27278EBE6200FCA541 /* BarView.swift in Sources */,
 				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
 				9277486B27902CBC00FAAE77 /* ReportOnePageView.swift in Sources */,
