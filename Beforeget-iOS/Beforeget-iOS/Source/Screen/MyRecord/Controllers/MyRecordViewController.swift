@@ -22,6 +22,10 @@ final class MyRecordViewController: UIViewController {
     private var mediaQuery: String = ""
     private var starQuery: String = ""
     
+    var selectedDateIndex: Int = -1
+    var selectedMediaArray: [String] = []
+    var selectedStarArray: [Int] = []
+    
     private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
@@ -140,17 +144,22 @@ extension MyRecordViewController:
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
         filterModalViewController.sendDataDelegate = self
+        filterModalViewController.selectedDateIndex = selectedDateIndex
+        filterModalViewController.selectedMediaArray = selectedMediaArray
+        filterModalViewController.selectedStarArray = selectedStarArray
         present(filterModalViewController, animated: false, completion: nil)
     }
     
     public func clickDateButton() {
         // MARK: - FIXME
+        print("기간 버튼 열리면서 데이터 전달")
         presentFilterModal()
     }
     
     public func clickMediaButton() {
         // MARK: - FIXME
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
+        print("미디어 버튼 열리면서 데이터 전달")
         presentFilterModal()
     }
     
@@ -161,7 +170,7 @@ extension MyRecordViewController:
         print("스타버튼")
     }
     
-    public func sendData(data: Int, media: [String], star: [String]) {
+    public func sendData(data: Int, media: [String], star: [Int]) {
         // MARK: - FIXME
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
@@ -171,7 +180,7 @@ extension MyRecordViewController:
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true
-        filterView.starButton.isSelected = (star == ["별점"]) ?
+        filterView.starButton.isSelected = (star == [-1]) ?
         false : true
         
         mediaData = filterView.mediaButton.isSelected ?
@@ -179,11 +188,8 @@ extension MyRecordViewController:
         
         filterView.mediaButton.setTitle(mediaData, for: .normal)
         
-//        switch data {
-//        case 0: dateQuery = "14"
-//        case 1: dateQuery = "1"
-//        case 2: dateQuery = "3"
-//        default: dateQuery = "날짜"
-//        }
+        selectedDateIndex = data
+        selectedMediaArray = media
+        selectedStarArray = star
     }
 }

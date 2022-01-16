@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol MediaFilterButtonDelegate: FilterModalViewController {
-    func selectMediaFilter(index: [String])
+    func selectMediaFilter(indexList: [String])
 }
 
 class MediaCollectionViewCell: UICollectionViewCell,
@@ -23,8 +23,9 @@ class MediaCollectionViewCell: UICollectionViewCell,
     // MARK: - Properties
         
     /// FilterView에 전달할 선택된 미디어 유형 필터 배열입니다.
-    private var selectedMedia: [String] = []
+    public var selectedMediaArray: [String] = []
     
+    public var buttonTag: [Int] = [1, 2, 3, 4, 5, 6]
     public var buttonTitle: [String] = []
     public var mediaButtonList: [UIButton] = []
     
@@ -133,6 +134,10 @@ class MediaCollectionViewCell: UICollectionViewCell,
             mediaButton.configuration = config
             mediaButtonList.append(mediaButton)
         }
+        
+        for mediaIndex in 0..<buttonTitle.count {
+            mediaButtonList[mediaIndex].tag = mediaIndex
+        }
     }
     
     private func setupAction() {
@@ -150,12 +155,17 @@ class MediaCollectionViewCell: UICollectionViewCell,
     // MARK: - @objc
     
     @objc func touchupMediaButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-
-        if sender.isSelected {
-            selectedMedia.append(sender.titleLabel?.text ?? "")
+        sender.isSelected.toggle()
+        print("sender.isSelected = \(sender.isSelected)")
+        let senderIndex = sender.titleLabel?.text ?? ""
+        if let index = selectedMediaArray.firstIndex(of: senderIndex){
+            print("index가 있음")
+            selectedMediaArray.remove(at: index)
+            print("selectedMediaArray = \(selectedMediaArray)")
+        }else{
+            selectedMediaArray.append(senderIndex)
+            print("selectedMediaArray = \(selectedMediaArray)")
         }
-        
-        mediaFilterButtonDelegate?.selectMediaFilter(index: removeDuplication(in: selectedMedia))
+        mediaFilterButtonDelegate?.selectMediaFilter(indexList: selectedMediaArray)
     }
 }

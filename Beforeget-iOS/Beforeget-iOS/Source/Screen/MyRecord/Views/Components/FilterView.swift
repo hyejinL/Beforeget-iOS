@@ -29,9 +29,7 @@ protocol StarFilterDelegate: MyRecordViewController {
 public class FilterView: UIView {
     
     // MARK: - Properties
-    
-    public var mediaTitle: String = "미디어"
-    
+        
     public var dateString: String?
     
     weak var dateDelegate: DateFilterDelegate?

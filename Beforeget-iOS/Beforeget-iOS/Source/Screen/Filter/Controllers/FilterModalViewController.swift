@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [String], star: [String])
+    func sendData(data: Int, media: [String], star: [Int])
 }
 
 final class FilterModalViewController: UIViewController {
@@ -21,8 +21,10 @@ final class FilterModalViewController: UIViewController {
     // MARK: - Properties
     
     var selectedDateIndex: Int = -1
-    var selectedMediaIndex: [String] = ["미디어"]
-    var selectedStarIndex: [String] = ["별점"]
+    var selectedMediaArray: [String] = [""]
+    var selectedStarArray: [Int] = [-1]
+    
+    // MARK: - FIXME 리팩토링시 네이밍 변경
     var recordDateTuple: [String] = ["",""]
     
     weak var sendDataDelegate: SendDataDelegate?
@@ -216,8 +218,8 @@ final class FilterModalViewController: UIViewController {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
         sendDataDelegate?.sendData(
             data: selectedDateIndex,
-            media: selectedMediaIndex,
-            star: selectedStarIndex)
+            media: selectedMediaArray,
+            star: selectedStarArray)
         hideBottomSheetAndGoBack()
 //        let presentingVC = presentingViewController as? MyRecordViewController
 //        presentingVC.filterView.dateButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
@@ -286,12 +288,25 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
+            mediaCell.selectedMediaArray = selectedMediaArray
+            selectedMediaArray.forEach {
+                print("mediaindex \($0)")
+                // MARK: - FIXME 여기서 해결해줘야 함
+//                mediaCell.mediaButtonList.forEach { _ in
+//
+//                }
+            }
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: StarCollectionViewCell.className,
                 for: indexPath) as? StarCollectionViewCell else { return UICollectionViewCell() }
             starCell.starFilterButtonDelegate = self
+            starCell.selectedStarArray = selectedStarArray
+            selectedStarArray.forEach {
+                print("starindex \($0)")
+                starCell.starButtonList[$0 - 1].isSelected = true
+            }
             return starCell
         }
     }
@@ -321,7 +336,7 @@ extension FilterModalViewController: UICollectionViewDelegateFlowLayout {
 
 extension FilterModalViewController:
     SelectMenuDelegate, DateFilterButtonDelegate,
-    MediaFilterButtonDelegate, StarFilterButtonDelegate, DatePickerDelegate {
+    MediaFilterButtonDelegate, StarFilterButtonDelegate {
     
     func selectMenu(index: Int) {
         let index = IndexPath(row: index, section: 0)
@@ -334,19 +349,15 @@ extension FilterModalViewController:
         applyButton.isDisabled = false
     }
     
-    func selectMediaFilter(index: [String]) {
-        selectedMediaIndex = index
-        print(selectedMediaIndex, "이것은 미디어다!!")
+    func selectMediaFilter(indexList: [String]) {
+        selectedMediaArray = indexList
+        print(selectedMediaArray, "이것은 미디어다!!")
         applyButton.isDisabled = false
     }
     
-    func selectStarFilter(index: [String]) {
-        selectedStarIndex = index
-        print(selectedStarIndex, "이것은 별점이다!!!")
+    func selectStarFilter(indexList: [Int]) {
+        selectedStarArray = indexList
+        print(selectedStarArray, "이것은 별점이다!!!")
         applyButton.isDisabled = false
-    }
-    
-    func didChangeDate(date: Date, indexPath: IndexPath) {
-        print(date, indexPath, "날짜 전달이다")
     }
 }
