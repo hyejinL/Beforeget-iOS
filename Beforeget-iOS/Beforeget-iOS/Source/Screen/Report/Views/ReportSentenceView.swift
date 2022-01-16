@@ -213,14 +213,12 @@ class ReportSentenceView: UIView {
         [movieImageView, bookImageView, tvImageView, musicImageView, webtoonImageView, youtubeImageView].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(165)
-                $0.height.equalTo(UIScreen.main.hasNotch ? 158 : 131)
             }
         }
         
         [mediaHorizontalStackView1, mediaHorizontalStackView2, mediaHorizontalStackView3].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalToSuperview()
-                $0.height.equalTo(UIScreen.main.hasNotch ? 158 : 131)
             }
         }
         
@@ -239,7 +237,7 @@ class ReportSentenceView: UIView {
         
         [movieCollectionView, bookCollectionView, tvCollectionView, musicCollectionView, webtoonCollectionView, youtubeCollectionView].forEach {
             $0.snp.makeConstraints {
-                $0.width.equalTo(UIScreen.main.hasNotch ? 110 : 98)
+                $0.width.equalTo(UIScreen.main.hasNotch ? 120 : 115)
                 $0.height.equalTo(UIScreen.main.hasNotch ? 103 : 93)
                 $0.centerX.centerY.equalToSuperview()
             }

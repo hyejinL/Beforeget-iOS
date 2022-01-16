@@ -204,7 +204,6 @@ class ReportOnePageView: UIView {
         [barView1, barView2, barView3, barView4, barView5].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(28)
-                $0.height.equalTo(UIScreen.main.hasNotch ? 177 : 157)
             }
         }
 
@@ -257,15 +256,16 @@ class ReportOnePageView: UIView {
         }
 
         sentenceView.snp.makeConstraints {
-            $0.width.equalTo(138)
+            $0.width.equalTo(UIScreen.main.hasNotch ? 138 : 130)
             $0.top.bottom.equalToSuperview()
         }
         
         sentenceView.addSubview(sentenceCollectionView)
         
         sentenceCollectionView.snp.makeConstraints { 
-            $0.leading.trailing.equalToSuperview().inset(UIScreen.main.hasNotch ? 14 : 12)
-            $0.top.bottom.equalToSuperview().inset(UIScreen.main.hasNotch ? 32 : 19)
+            $0.width.equalTo(110)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 107 : 91)
+            $0.centerX.centerY.equalToSuperview()
         }
 
         secondRankingView.snp.makeConstraints {
@@ -287,7 +287,7 @@ class ReportOnePageView: UIView {
         thirdRankingView.addSubviews([thirdRankingMediaLabel, thirdRankingCountLabel])
         
         firstRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(32)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 32 : 29)
             $0.centerX.equalToSuperview()
         }
         
@@ -297,7 +297,7 @@ class ReportOnePageView: UIView {
         }
         
         secondRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 38 : 34)
             $0.centerX.equalToSuperview()
         }
         
@@ -307,7 +307,7 @@ class ReportOnePageView: UIView {
         }
         
         thirdRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 38 : 34)
             $0.centerX.equalToSuperview()
         }
         

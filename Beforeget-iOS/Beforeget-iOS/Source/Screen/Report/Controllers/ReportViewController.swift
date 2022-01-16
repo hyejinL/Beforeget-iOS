@@ -90,7 +90,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(44)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
