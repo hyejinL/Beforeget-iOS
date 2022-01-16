@@ -18,24 +18,43 @@ class PostViewController: UIViewController {
     
     private let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
-        $0.setTitleColor(Asset.Colors.gray200.color, for: .normal)
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
     }
     
-    private lazy var writingTableView = UITableView().then {
+    private lazy var writingTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.backgroundColor = Asset.Colors.white.color
         $0.sectionHeaderTopPadding = 0
-        
+        $0.separatorStyle = .none
+        $0.rowHeight = UITableView.automaticDimension
+        $0.showsVerticalScrollIndicator = false
         $0.delegate = self
         $0.dataSource = self
     }
     
-    private lazy var toolBar = UIToolbar().then {
-        $0.barTintColor = Asset.Colors.white.color
-        $0.setItems([UIBarButtonItem(customView: addItemButton), toolBarSpacing, UIBarButtonItem(customView: deleteItemButton)], animated: true)
+    private let backgroundView = UIView().then {
+        $0.backgroundColor = .black.withAlphaComponent(0.5)
     }
     
-    private let toolBarSpacing = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
-        $0.width = 15
+    private lazy var datePicker = UIDatePicker().then {
+        $0.preferredDatePickerStyle = .inline
+        $0.backgroundColor = Asset.Colors.white.color
+        $0.makeRound(radius: 8)
+        $0.addTarget(self, action: #selector(handelDatePicker(_:)), for: .valueChanged)
+    }
+    
+    private let bottomBarView = UIView().then {
+        $0.backgroundColor = Asset.Colors.white.color
+    }
+    
+    private let bottomBarLineview = UIView().then {
+        $0.backgroundColor = Asset.Colors.gray300.color
+    }
+    
+    private lazy var bottomBarStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.addArrangedSubviews([bottomBarLineview, bottomBarView])
     }
     
     private let addItemButton = UIButton().then {
@@ -58,12 +77,22 @@ class PostViewController: UIViewController {
         $0.configuration = config
     }
     
+    private lazy var hideKeyboardButton = UIButton().then {
+        var config = UIButton.Configuration.plain()
+        config.image = Asset.Assets.btnKeyboard.image
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        $0.configuration = config
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
+    }
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        setupKeyboardNotifications()
     }
     
     // MARK: - InitUI
@@ -77,7 +106,10 @@ class PostViewController: UIViewController {
         view.addSubviews([navigationBar,
                           doneButton,
                           writingTableView,
-                          toolBar])
+                          bottomBarStackView,
+                          addItemButton,
+                          deleteItemButton,
+                          hideKeyboardButton])
         
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -90,17 +122,42 @@ class PostViewController: UIViewController {
         
         writingTableView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
-            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.bottom.equalTo(bottomBarStackView.snp.top)
         }
         
-        toolBar.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+        bottomBarLineview.snp.makeConstraints {
+            $0.height.equalTo(1)
         }
         
+        bottomBarView.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+        
+        bottomBarStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        }
+        
+        view.keyboardLayoutGuide.snp.makeConstraints {
+            $0.top.equalTo(bottomBarView.snp.bottom)
+        }
+        
+        addItemButton.snp.makeConstraints {
+            $0.centerY.equalTo(bottomBarView.snp.centerY)
+            $0.leading.equalTo(bottomBarView.snp.leading).inset(18)
+        }
+        
+        deleteItemButton.snp.makeConstraints {
+            $0.centerY.equalTo(bottomBarView.snp.centerY)
+            $0.leading.equalTo(addItemButton.snp.trailing).offset(15)
+        }
+        
+        hideKeyboardButton.snp.makeConstraints {
+            $0.trailing.equalTo(bottomBarView.snp.trailing).inset(10)
+            $0.centerY.equalTo(bottomBarView.snp.centerY)
+        }
     }
-    
-    // MARK: - Custom Method
-
 }
 
 extension PostViewController: UITableViewDataSource {
@@ -109,13 +166,29 @@ extension PostViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        var cell: UITableViewCell?
+        cell?.selectionStyle = .none
+        
+        switch indexPath.row {
+        case 0:
+            cell = TitleTableViewCell()
+        case 1:
+            cell = OneLineReviewTableViewCell()
+        case 2:
+            cell = CommentTableViewCell()
+        default:
+            cell = UITableViewCell()
+        }
+        
+        return cell ?? UITableViewCell()
     }
 }
 
 extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return WritingHeaderView()
+        let headerView = WritingHeaderView()
+        headerView.delegate = self
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -123,4 +196,54 @@ extension PostViewController: UITableViewDelegate {
     }
 }
 
+extension PostViewController {
+    private func setupKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        hideKeyboardButton.isHidden = false
+    }
 
+    @objc func keyboardWillHide(_ sender: Notification) {
+        hideKeyboardButton.isHidden = true
+    }
+    
+    @objc func hideKeyboard() {
+        super.view.endEditing(true)
+    }
+    
+    @objc func handelDatePicker(_ sender: UIDatePicker) {
+        [backgroundView, datePicker].forEach {
+            $0.isHidden = true
+        }
+        NotificationCenter.default.post(name: Notification.Name.didReceiveDate, object: sender.date)
+    }
+}
+
+extension PostViewController: WritingHeaderViewDelegate {
+    func touchupDateButton() {
+        view.addSubviews([backgroundView, datePicker])
+        
+        [backgroundView, datePicker].forEach {
+            $0.isHidden = false
+        }
+        
+        backgroundView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        datePicker.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(21)
+            $0.centerY.equalToSuperview()
+        }
+    }
+}

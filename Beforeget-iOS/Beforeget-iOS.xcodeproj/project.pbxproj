@@ -63,8 +63,12 @@
 		929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */; };
 		E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDAA278F23A900AFA390 /* MediaType.swift */; };
 		E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDB2278F478400AFA390 /* WritingHeaderView.swift */; };
+		E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */; };
+		E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */; };
+		E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */; };
 		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
 		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
+		E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072427940B8900E815E6 /* NotificationName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,8 +126,12 @@
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
+		E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineReviewTableViewCell.swift; sourceTree = "<group>"; };
+		E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
 		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2F4072427940B8900E815E6 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,7 @@
 			children = (
 				5B304B782788304B0054314A /* Fonts.swift */,
 				5B304B7627882AF30054314A /* Assets+Generated.swift */,
+				E2F4072427940B8900E815E6 /* NotificationName.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -498,6 +507,9 @@
 			isa = PBXGroup;
 			children = (
 				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
+				E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */,
+				E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */,
+				E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -650,6 +662,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
+				E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
@@ -661,6 +674,7 @@
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
 				E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
+				E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */,
 				929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
@@ -680,8 +694,10 @@
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
+				E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
