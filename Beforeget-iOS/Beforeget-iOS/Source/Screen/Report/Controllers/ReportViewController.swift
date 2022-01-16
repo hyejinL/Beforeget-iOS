@@ -52,6 +52,17 @@ final class ReportViewController: UIPageViewController {
         $0.image = Asset.Assets.pageInactive.image
     }
     
+    private let page1 = ReportLabelViewController()
+    private let page2 = ReportGraphViewController()
+    private let page3 = ReportRankingViewController()
+    private let page4 = ReportSentenceViewController()
+    private let page5 = ReportOnePageViewController()
+    
+    // MARK: - TODO REMOVE
+    
+    private var dumyData: [Int] = [0, 3, 0, 2, 12]
+    private var heights = [Double]()
+    
     // MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,12 +75,14 @@ final class ReportViewController: UIPageViewController {
         configUI()
         setupLayout()
         setupControllers()
+        calculateHeight()
     }
     
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
+        setupStatusBar(Asset.Colors.white.color)
+        view.backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
@@ -78,7 +91,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
+            $0.height.equalTo(44)
         }
         
         downLoadButton.snp.makeConstraints {
@@ -104,12 +117,6 @@ final class ReportViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-        let page1 = ReportLabelViewController()
-        let page2 = ReportGraphViewController()
-        let page3 = ReportRankingViewController()
-        let page4 = ReportSentenceViewController()
-        let page5 = ReportOnePageViewController()
-        
         [page1, page2, page3, page4, page5].forEach {
             pages.append($0)
         }
@@ -117,13 +124,78 @@ final class ReportViewController: UIPageViewController {
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
-    // MARK: - @objc
-    @objc func touchupDownLoadButton() {
+    private func calculateHeight() {
+        let maxCount = dumyData.max()
+        page2.reportGraphView.maxCount = maxCount!
         
+        let midCount = dumyData.sorted(by: >)[2]
+        page2.reportGraphView.midCount = midCount
+        
+        for data in dumyData {
+            let height = 150 * data / maxCount!
+            heights.append(Double(height))
+        }
+    }
+    
+    private func setupBarData() {
+        page5.reportOnePageView.barView1.setupBarHeight(height: CGFloat(heights[0]))
+        page5.reportOnePageView.barView2.setupBarHeight(height: CGFloat(heights[1]))
+        page5.reportOnePageView.barView3.setupBarHeight(height: CGFloat(heights[2]))
+        page5.reportOnePageView.barView4.setupBarHeight(height: CGFloat(heights[3]))
+        page5.reportOnePageView.barView5.setupBarHeight(height: CGFloat(heights[4]))
+    }
+    
+    private func setupBarAnimation() {
+        page2.reportGraphView.barView1.animate(height: CGFloat(heights[0]))
+        page2.reportGraphView.barView2.animate(height: CGFloat(heights[1]))
+        page2.reportGraphView.barView3.animate(height: CGFloat(heights[2]))
+        page2.reportGraphView.barView4.animate(height: CGFloat(heights[3]))
+        page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
+    }
+    
+    private func saveImageOnPhone(image: UIImage, image_name: String) -> URL? {
+        let imagePath: String = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(image_name).png"
+        let imageUrl: URL = URL(fileURLWithPath: imagePath)
+        
+        do {
+            try image.pngData()?.write(to: imageUrl)
+            return imageUrl
+        } catch {
+            return nil
+        }
+    }
+    
+    private func showError() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "오류.", message: "다시 시도해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    // MARK: - @objc
+    
+    @objc func touchupDownLoadButton()  {
+        let screenShot = self.view.toImage()
+        
+        let imageToShare = screenShot
+        
+        let activityItems : NSMutableArray = []
+        activityItems.add(imageToShare)
+        
+        guard let url = saveImageOnPhone(image: imageToShare, image_name: "Beforeget") else {
+            showError()
+            return
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
+        
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
 
-// MARK: - UIPageViewControllerDelegate
+// MARK: - UIPageViewController DataSource
 
 extension ReportViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -149,6 +221,8 @@ extension ReportViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - UIPageViewController Delegate
+
 extension ReportViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
@@ -157,16 +231,12 @@ extension ReportViewController: UIPageViewControllerDelegate {
         else { return }
         
         switch currentIndex {
-        case 0:
-            pageImageView1.image = Asset.Assets.pageActive.image
-            [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
-                $0.image = Asset.Assets.pageInactive.image
-            }
         case 1:
             pageImageView2.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            setupBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
@@ -182,6 +252,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            setupBarData()
         default:
             pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
