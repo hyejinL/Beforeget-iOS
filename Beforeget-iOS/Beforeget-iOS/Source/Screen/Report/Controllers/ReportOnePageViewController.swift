@@ -57,8 +57,8 @@ final class ReportOnePageViewController: UIViewController {
         
         reportOnePageView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            $0.top.equalTo(monthButton.snp.bottom).offset(26)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(54)
+            $0.top.equalTo(monthButton.snp.bottom).offset(UIScreen.main.hasNotch ? 27 : 22)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 54 : 65)
         }
     }
     

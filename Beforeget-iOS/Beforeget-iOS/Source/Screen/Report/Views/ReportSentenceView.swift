@@ -213,14 +213,14 @@ class ReportSentenceView: UIView {
         [movieImageView, bookImageView, tvImageView, musicImageView, webtoonImageView, youtubeImageView].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(165)
-                $0.height.equalTo(158)
+                $0.height.equalTo(UIScreen.main.hasNotch ? 158 : 131)
             }
         }
         
         [mediaHorizontalStackView1, mediaHorizontalStackView2, mediaHorizontalStackView3].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalToSuperview()
-                $0.height.equalTo(158)
+                $0.height.equalTo(UIScreen.main.hasNotch ? 158 : 131)
             }
         }
         
@@ -239,8 +239,8 @@ class ReportSentenceView: UIView {
         
         [movieCollectionView, bookCollectionView, tvCollectionView, musicCollectionView, webtoonCollectionView, youtubeCollectionView].forEach {
             $0.snp.makeConstraints {
-                $0.width.equalTo(120)
-                $0.height.equalTo(103)
+                $0.width.equalTo(UIScreen.main.hasNotch ? 110 : 98)
+                $0.height.equalTo(UIScreen.main.hasNotch ? 103 : 93)
                 $0.centerX.centerY.equalToSuperview()
             }
         }
@@ -340,7 +340,7 @@ extension ReportSentenceView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 14
+        return UIScreen.main.hasNotch ? 14 : 9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
