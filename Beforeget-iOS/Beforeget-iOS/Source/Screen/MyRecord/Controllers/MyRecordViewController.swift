@@ -59,7 +59,7 @@ final class MyRecordViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Asset.Colors.white.color
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -135,9 +135,7 @@ extension MyRecordViewController:
     MediaFilterDelegate,
     StarFilterDelegate,
     SendDataDelegate  {
-    
-    // MARK: - Custom Method
-    
+        
     private func presentFilterModal() {
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
@@ -146,18 +144,20 @@ extension MyRecordViewController:
     }
     
     public func clickDateButton() {
+        // MARK: - FIXME
         presentFilterModal()
         print("기간버튼")
     }
     
     public func clickMediaButton() {
+        // MARK: - FIXME
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
         presentFilterModal()
-        //        filterModalViewController.filterCollectionView.cellForItem(at: 1)
         print("미디어버튼")
     }
     
     public func clickStarButton() {
+        // MARK: - FIXME
         /// 3번째 별점 페이지로 바로 오픈해야 됨
         presentFilterModal()
         print("스타버튼")

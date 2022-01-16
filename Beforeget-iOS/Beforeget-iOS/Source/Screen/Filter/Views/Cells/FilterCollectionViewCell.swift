@@ -24,11 +24,8 @@ protocol DateFilterButtonDelegate: FilterModalViewController {
 
 class FilterCollectionViewCell: UICollectionViewCell,
                                 UICollectionViewRegisterable,
-                                DatePickerDelegate, ResetFilterDelegate {
-    
-    func clickResetFilter() {
-        print("날짜 필터 삭제")
-    }
+                                DatePickerDelegate,
+                                ResetFilterDelegate {
     
     // MARK: - Properties
     
@@ -50,7 +47,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
             FilterButtonCollectionViewCell.register(target: $0)
         }
     
-    private lazy var dateTableView = UITableView(frame: .zero).then {
+    public lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
         $0.delegate = self
         $0.dataSource = self
@@ -70,7 +67,6 @@ class FilterCollectionViewCell: UICollectionViewCell,
         configUI()
         setupLayout()
         addInitailValues()
-        disableDatePicker()
     }
     
     required init?(coder: NSCoder) {
@@ -124,12 +120,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Custom Method
     
-    func disableDatePicker() {
-        
-    }
-    
     func clickResetButton() {
-        print("날짜 초기화 갈겨~")
         dateCollectionView.deselectAllItems(animated: false)
     }
 }
@@ -168,6 +159,16 @@ extension FilterCollectionViewCell {
 
 extension FilterCollectionViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item, "이게몬데")
+        
+        if indexPath.item != 3 {
+            dateTableView.allowsSelection = false
+        } else {
+            dateTableView.isUserInteractionEnabled = true
+            dateTableView.allowsSelection = true
+
+            dateTableView.deselectRow(at: indexPath, animated: true)
+        }
         dateFilterButtonDelegate?.selectDateFilter(index: indexPath.item)
     }
 }
@@ -190,7 +191,7 @@ extension FilterCollectionViewCell: UICollectionViewDataSource {
 
 extension FilterCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         tableView.deselectRow(at: indexPath, animated: false)
         
         guard datePickerIndexPath != indexPath else { return }

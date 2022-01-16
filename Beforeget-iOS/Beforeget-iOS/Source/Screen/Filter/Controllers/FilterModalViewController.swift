@@ -209,7 +209,6 @@ final class FilterModalViewController: UIViewController {
     // MARK: - @objc
     
     @objc func touchupResetButton(_ sender: UIButton) {
-        /// 문제 : 이 노티를 사용할 경우에 적용하기 버튼은 Disable 되지 않음
         (filterCollectionView.visibleCells.first as? ResetFilterDelegate)?.clickResetButton()
     }
     
@@ -236,8 +235,8 @@ final class FilterModalViewController: UIViewController {
 // MARK: - UICollectionViewDelegate
 
 extension FilterModalViewController: UICollectionViewDelegate {
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // MARK: - FIXME 13 미니 대응 문제로 실제 상수값 변경 요망
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
         
