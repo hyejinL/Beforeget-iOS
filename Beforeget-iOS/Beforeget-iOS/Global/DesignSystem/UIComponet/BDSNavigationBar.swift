@@ -16,8 +16,7 @@ final class BDSNavigationBar: UIView {
     
     public enum Metric {
         static let navigationHeight: CGFloat = 44
-        static let titleTop: CGFloat = 19
-        static let buttonTop: CGFloat = 6
+        static let titleTop: CGFloat = 13
         static let buttonLeading: CGFloat = 4
         static let buttonTrailing: CGFloat = 7
         static let buttonSize: CGFloat = 44
@@ -100,9 +99,8 @@ final class BDSNavigationBar: UIView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(Metric.titleTop)
             make.centerX.equalToSuperview()
-            
         }
         
         closeButton.snp.makeConstraints { make in
