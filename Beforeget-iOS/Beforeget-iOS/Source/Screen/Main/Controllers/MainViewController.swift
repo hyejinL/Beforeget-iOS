@@ -15,7 +15,7 @@ final class MainViewController: UIViewController {
     enum CollectionViewConst {
         static let cellInterval: CGFloat = 4
         static let cellIntervalCount: CGFloat = 5
-        static let visibleCellsCount: CGFloat = 2.5
+        static let visibleCellsCount: CGFloat = UIScreen.main.hasNotch ? 2.5 : 2.6
     }
     
     // MARK: - Properties
@@ -149,7 +149,10 @@ final class MainViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Asset.Colors.white.color
+        
+        messageLabel.addLineSpacing(spacing: 34)
+        messageLabel.textAlignment = .center
     }
     
     private func setupLayout() {
@@ -168,7 +171,7 @@ final class MainViewController: UIViewController {
         
         topBarView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 50 : 49)
         }
         
         logoImageView.snp.makeConstraints {
@@ -184,12 +187,12 @@ final class MainViewController: UIViewController {
         writingBackgroundView.snp.makeConstraints {
             $0.top.equalTo(topBarView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(397)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 390 : 357)
         }
         
         mediaImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(writingBackgroundView)
-            $0.height.equalTo(145)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 145 : 118)
         }
         
         messageLabel.snp.makeConstraints {
@@ -208,7 +211,7 @@ final class MainViewController: UIViewController {
         }
         
         recordStackView.snp.makeConstraints {
-            $0.top.equalTo(writingBackgroundView.snp.bottom).offset(28)
+            $0.top.equalTo(writingBackgroundView.snp.bottom).offset(UIScreen.main.hasNotch ? 28 : 19)
             $0.leading.equalToSuperview().inset(20)
         }
         
@@ -218,7 +221,7 @@ final class MainViewController: UIViewController {
         }
         
         recordCollectionView.snp.makeConstraints {
-            $0.top.equalTo(recordStackView.snp.bottom).offset(16)
+            $0.top.equalTo(recordStackView.snp.bottom).offset(UIScreen.main.hasNotch ? 16 : 11)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
