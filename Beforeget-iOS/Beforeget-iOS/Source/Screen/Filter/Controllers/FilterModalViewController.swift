@@ -21,7 +21,7 @@ final class FilterModalViewController: UIViewController {
     // MARK: - Properties
     
     /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
-    var selectedDateIndex: Int = 0
+    var selectedDateIndex: Int = -1
     var selectedMediaIndex: [String] = ["미디어"]
     var selectedStarIndex: [String] = ["별점"]
     

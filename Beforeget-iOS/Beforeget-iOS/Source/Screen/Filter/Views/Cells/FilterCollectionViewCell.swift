@@ -49,6 +49,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     public lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
+        $0.isHidden = true
         $0.delegate = self
         $0.dataSource = self
         $0.isScrollEnabled = false
@@ -158,16 +159,18 @@ extension FilterCollectionViewCell {
 // MARK: - UICollectionViewDelegate
 
 extension FilterCollectionViewCell: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item, "이게몬데")
-        
-        if indexPath.item != 3 {
-            dateTableView.allowsSelection = false
-        } else {
-            dateTableView.isUserInteractionEnabled = true
-            dateTableView.allowsSelection = true
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
+        if indexPath.item == 3 {
             dateTableView.deselectRow(at: indexPath, animated: true)
+            UIView.animate(withDuration: 0.5) {
+                self.dateTableView.alpha = 1
+                self.dateTableView.isHidden = false
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.dateTableView.alpha = 0
+                self.dateTableView.isHidden = true
+            }
         }
         dateFilterButtonDelegate?.selectDateFilter(index: indexPath.item)
     }

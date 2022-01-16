@@ -182,11 +182,11 @@ extension MyRecordViewController:
         
         filterView.mediaButton.setTitle(mediaData, for: .normal)
         
-        switch data {
-        case 0: dateQuery = "14"
-        case 1: dateQuery = "1"
-        case 2: dateQuery = "3"
-        default: dateQuery = "날짜"
-        }
+//        switch data {
+//        case 0: dateQuery = "14"
+//        case 1: dateQuery = "1"
+//        case 2: dateQuery = "3"
+//        default: dateQuery = "날짜"
+//        }
     }
 }
