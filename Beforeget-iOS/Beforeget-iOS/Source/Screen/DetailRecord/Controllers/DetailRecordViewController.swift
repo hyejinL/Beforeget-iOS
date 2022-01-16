@@ -78,11 +78,15 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
-        view.backgroundColor = .white
-        navigationController?.isNavigationBarHidden = true
+        view.backgroundColor = Asset.Colors.white.color
         setupStatusBar(Asset.Colors.black200.color)
     }
     
@@ -245,7 +249,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 for: indexPath) as? LinkTableViewCell
             else { return UITableViewCell() }
             linkCell.linkButtonDelegate = self
-            linkCell.setData(linkString)
+            linkCell.config(linkString)
             return linkCell
             
         case .stamp:

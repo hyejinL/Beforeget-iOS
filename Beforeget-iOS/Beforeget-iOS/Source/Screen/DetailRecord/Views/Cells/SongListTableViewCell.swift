@@ -74,7 +74,7 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func setData(_ data: String) {
+    public func config(_ data: String) {
         songLabel.text = data
     }
 }

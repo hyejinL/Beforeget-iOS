@@ -81,7 +81,7 @@ class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func setData() {
+    public func config() {
        /// 문제 : 나중에 데이터 전달
     }
 }

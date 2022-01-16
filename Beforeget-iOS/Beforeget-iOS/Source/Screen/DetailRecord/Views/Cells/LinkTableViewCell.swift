@@ -75,7 +75,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
         
-    public func setData(_ link: String) {
+    public func config(_ link: String) {
         /// 문제 : 나중에 데이터 전달
         linkString = link
     }

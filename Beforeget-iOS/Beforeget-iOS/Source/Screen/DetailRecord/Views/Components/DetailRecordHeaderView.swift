@@ -181,7 +181,7 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - Custom Method
     
-    public func setData() {
+    public func config() {
         
     }
 }
@@ -198,7 +198,7 @@ extension DetailRecordHeaderView: UICollectionViewDataSource {
             withReuseIdentifier: ReviewTagCollectionViewCell.className,
             for: indexPath) as? ReviewTagCollectionViewCell
         else { return UICollectionViewCell() }
-        reviewCell.setData(
+        reviewCell.config(
             reviewArray[indexPath.item],
             color: colorArray[indexPath.item],
             fontColor: fontColorArray[indexPath.item])

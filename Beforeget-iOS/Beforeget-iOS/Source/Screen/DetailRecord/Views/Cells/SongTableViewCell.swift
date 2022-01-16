@@ -71,7 +71,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
 
-    public func setData() {
+    public func config() {
        /// 문제 : 나중에 데이터 전달
     }
 }
@@ -85,7 +85,7 @@ extension SongTableViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let songListCell = tableView.dequeueReusableCell(withIdentifier: SongListTableViewCell.className, for: indexPath) as? SongListTableViewCell else { return UITableViewCell() }
-        songListCell.setData(songArray[indexPath.item])
+        songListCell.config(songArray[indexPath.item])
         return songListCell
     }
 }

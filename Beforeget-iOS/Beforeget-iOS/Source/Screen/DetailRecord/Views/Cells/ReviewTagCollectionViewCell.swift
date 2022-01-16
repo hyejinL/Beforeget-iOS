@@ -43,7 +43,7 @@ class ReviewTagCollectionViewCell: UICollectionViewCell, UICollectionViewRegiste
     
     // MARK: - Custom Method
     
-    func setData(_ data: String, color: UIColor, fontColor: UIColor) {
+    func config(_ data: String, color: UIColor, fontColor: UIColor) {
         reviewLabel.text = data
         contentView.backgroundColor = color
         reviewLabel.textColor = fontColor
