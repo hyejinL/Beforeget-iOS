@@ -78,6 +78,7 @@ internal enum Asset {
     internal static let btnAll = ImageAsset(name: "btn_all")
     internal static let icnAddItem = ImageAsset(name: "icnAddItem")
     internal static let icnEdit = ImageAsset(name: "icnEdit")
+    internal static let icnLittleStarInactive = ImageAsset(name: "icnLittleStarInactive")
     internal static let icnLogoMain = ImageAsset(name: "icnLogoMain")
     internal static let icnTextStar = ImageAsset(name: "icnTextStar")
     internal static let icnLittleStarBlack = ImageAsset(name: "icn_littleStar_black")

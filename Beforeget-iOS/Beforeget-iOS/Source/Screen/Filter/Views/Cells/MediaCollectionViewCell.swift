@@ -21,9 +21,7 @@ class MediaCollectionViewCell: UICollectionViewCell,
                                ResetFilterDelegate {
     
     // MARK: - Properties
-    
-    var isMediaSelected: Bool = true
-    
+        
     /// FilterView에 전달할 선택된 미디어 유형 필터 배열입니다.
     private var selectedMedia: [String] = []
     
@@ -112,13 +110,27 @@ class MediaCollectionViewCell: UICollectionViewCell,
         
         buttonTitle.forEach {
             let mediaButton = UIButton()
-            mediaButton.setTitle($0, for: .normal)
-            mediaButton.titleLabel?.font = BDSFont.body8
-            mediaButton.setTitleColor(Asset.Colors.gray300.color, for: .normal)
-            mediaButton.setTitleColor(Asset.Colors.black200.color, for: .selected)
-            mediaButton.layer.borderColor = Asset.Colors.gray300.color.cgColor
-            mediaButton.layer.borderWidth = 1
-            mediaButton.makeRound(radius: 4)
+            var config = UIButton.Configuration.borderedTinted()
+            config.title = $0
+            config.attributedTitle?.font = BDSFont.body8
+            config.baseBackgroundColor = .clear
+            config.background.strokeWidth = 1
+            config.background.cornerRadius = 4
+
+            mediaButton.configurationUpdateHandler = { button in
+                var config = button.configuration
+      
+                config?.background.strokeColor = button.isSelected ?
+                Asset.Colors.black200.color :
+                Asset.Colors.gray300.color
+                
+                config?.attributedTitle?.foregroundColor = button.isSelected ?
+                Asset.Colors.black200.color :
+                Asset.Colors.gray300.color
+                
+                button.configuration = config
+            }
+            mediaButton.configuration = config
             mediaButtonList.append(mediaButton)
         }
     }
@@ -129,7 +141,7 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
-    func removeDuplication(in array: [String]) -> [String]{
+    private func removeDuplication(in array: [String]) -> [String]{
         let set = Set(array)
         let duplicationRemovedArray = Array(set)
         return duplicationRemovedArray
@@ -140,10 +152,6 @@ class MediaCollectionViewCell: UICollectionViewCell,
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
 
-        sender.layer.borderColor = isMediaSelected ?
-        Asset.Colors.black200.color.cgColor :
-        Asset.Colors.gray300.color.cgColor
-        
         if sender.isSelected {
             selectedMedia.append(sender.titleLabel?.text ?? "")
         }

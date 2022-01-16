@@ -15,6 +15,7 @@ final class MyRecordViewController: UIViewController {
     // MARK: - Properties
     
     private var mediaData: String = ""
+    private var starData: String = ""
     
     /// 서버한테 보내야 될 값들
     private var dateQuery: String = ""
@@ -162,7 +163,7 @@ extension MyRecordViewController:
         print("스타버튼")
     }
     
-    public func sendData(data: Int, media: [String], star: [Int]) {
+    public func sendData(data: Int, media: [String], star: [String]) {
         // MARK: - FIXME
         /// 문제 : 미디어 부분에서 여러개 선택했을 때 설정처리 + 기간일 경우 int가 0부터 넘어옴..;;;
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
@@ -171,11 +172,9 @@ extension MyRecordViewController:
         
         filterView.dateButton.isSelected = (data == 0) ?
         false : true
-        
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true
-        
-        filterView.starButton.isSelected = (star == [0]) ?
+        filterView.starButton.isSelected = (star == ["별점"]) ?
         false : true
         
         mediaData = filterView.mediaButton.isSelected ?

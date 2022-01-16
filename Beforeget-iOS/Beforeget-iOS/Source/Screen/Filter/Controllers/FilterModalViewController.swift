@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [String], star: [Int])
+    func sendData(data: Int, media: [String], star: [String])
 }
 
 final class FilterModalViewController: UIViewController {
@@ -23,7 +23,7 @@ final class FilterModalViewController: UIViewController {
     /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
     var selectedDateIndex: Int = 0
     var selectedMediaIndex: [String] = ["미디어"]
-    var selectedStarIndex: [Int] = [0]
+    var selectedStarIndex: [String] = ["별점"]
     
     weak var sendDataDelegate: SendDataDelegate?
     
@@ -335,8 +335,8 @@ extension FilterModalViewController:
         applyButton.isDisabled = false
     }
     
-    func selectStarFilter(index: Int) {
-        selectedStarIndex.append(index)
+    func selectStarFilter(index: [String]) {
+        selectedStarIndex = index
         print(selectedStarIndex, "이것은 별점이다!!!")
         applyButton.isDisabled = false
     }
