@@ -10,11 +10,11 @@ import UIKit
 import SnapKit
 
 final class ReportGraphViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
-    private var reportGraphView = ReportGraphView()
+    var reportGraphView = ReportGraphView()
     private var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
@@ -30,8 +30,6 @@ final class ReportGraphViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
-        
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -47,9 +45,9 @@ final class ReportGraphViewController: UIViewController {
                                                 """
         
         reportGraphView.delegate = self
-        reportGraphView.month = "12월"
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
+        reportGraphView.month = "12"
     }
     
     private func setupLayout() {
@@ -57,7 +55,7 @@ final class ReportGraphViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
             $0.height.equalTo(146)
         }
         
@@ -78,6 +76,12 @@ final class ReportGraphViewController: UIViewController {
     
     private func bind() {
         reportTopView.delegate = self
+        
+        reportGraphView.barView1.barTitle = addOrSubtractMonth(month: -5)
+        reportGraphView.barView2.barTitle = addOrSubtractMonth(month: -4)
+        reportGraphView.barView3.barTitle = addOrSubtractMonth(month: -3)
+        reportGraphView.barView4.barTitle = addOrSubtractMonth(month: -2)
+        reportGraphView.barView5.barTitle = addOrSubtractMonth(month: -1)
     }
     
     private func setupToolbar() -> UIToolbar {
@@ -86,7 +90,6 @@ final class ReportGraphViewController: UIViewController {
         toolbar.backgroundColor = Asset.Colors.white.color
         toolbar.tintColor = Asset.Colors.black200.color
         toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
@@ -95,12 +98,18 @@ final class ReportGraphViewController: UIViewController {
         return toolbar
     }
     
+    private func addOrSubtractMonth(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월"
+        return dateFormatter.string(from: date)
+    }
+    
     // MARK: - @objc
-
-    @objc
-    func touchupDoneButton() {
+    
+    @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-       view.endEditing(true)
+        view.endEditing(true)
     }
 }
 

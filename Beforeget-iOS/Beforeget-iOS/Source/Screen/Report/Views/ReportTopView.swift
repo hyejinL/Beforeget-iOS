@@ -38,7 +38,6 @@ class ReportTopView: UIView {
     }
     
     private var reportDescriptionLabel = UILabel().then {
-        $0.text = "이번 달 나의 소비 유형을 알아보세요"
         $0.textColor = Asset.Colors.gray100.color
         $0.font = BDSFont.body6
     }

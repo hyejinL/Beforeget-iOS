@@ -50,6 +50,7 @@ internal enum Asset {
     internal static let boxTV = ImageAsset(name: "boxTV")
     internal static let boxWebtoon = ImageAsset(name: "boxWebtoon")
     internal static let boxYoutube = ImageAsset(name: "boxYoutube")
+    internal static let boxSentenceEmpty = ImageAsset(name: "box_sentence_empty")
     internal static let btnAddreview = ImageAsset(name: "btnAddreview")
     internal static let btnBack = ImageAsset(name: "btnBack")
     internal static let btnBigstarActive = ImageAsset(name: "btnBigstarActive")
