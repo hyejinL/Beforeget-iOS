@@ -76,6 +76,10 @@
 		929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB14278DE0E800FCA541 /* MainViewController.swift */; };
 		929CFB19278DE11E00FCA541 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB18278DE11E00FCA541 /* Media.swift */; };
 		929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */; };
+		E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDAA278F23A900AFA390 /* MediaType.swift */; };
+		E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDB2278F478400AFA390 /* WritingHeaderView.swift */; };
+		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
+		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +150,10 @@
 		929CFB14278DE0E800FCA541 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		929CFB18278DE11E00FCA541 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
+		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
+		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
+		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,6 +492,7 @@
 		927AF3A8278814ED0018CC34 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				E206FDA9278F230B00AFA390 /* Views */,
 				927AF3AB2788161B0018CC34 /* Controllers */,
 			);
 			path = Post;
@@ -512,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				927AF3AC2788162E0018CC34 /* PostViewController.swift */,
+				E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -579,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				929CFB18278DE11E00FCA541 /* Media.swift */,
+				E206FDAA278F23A900AFA390 /* MediaType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -589,6 +600,31 @@
 				929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E206FDA9278F230B00AFA390 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E206FDAD278F35A500AFA390 /* Components */,
+				E2E2779A278B67590083AFF5 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E206FDAD278F35A500AFA390 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E206FDB2278F478400AFA390 /* WritingHeaderView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E2E2779A278B67590083AFF5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F0FEFA1EFB61C49406456B9A /* Frameworks */ = {
@@ -738,8 +774,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
+				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
@@ -747,6 +785,7 @@
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
+				E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */,
 				5B83EF33278E388C00D07AC7 /* DatePickerTableViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
 				5B86AEBB278F7BC9001C4486 /* StarCollectionViewCell.swift in Sources */,
@@ -767,6 +806,7 @@
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
+				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
 				5B83EF31278E381200D07AC7 /* DateTableViewCell.swift in Sources */,
 				5B83EF2F278E1E2A00D07AC7 /* FilterButtonCollectionViewCell.swift in Sources */,
