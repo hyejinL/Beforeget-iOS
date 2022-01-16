@@ -122,6 +122,10 @@ class FilterCollectionViewCell: UICollectionViewCell,
     // MARK: - Custom Method
     
     func clickResetButton() {
+        UIView.animate(withDuration: 0.5) {
+            self.dateTableView.alpha = 1
+            self.dateTableView.isHidden = true
+        }
         dateCollectionView.deselectAllItems(animated: false)
     }
 }
