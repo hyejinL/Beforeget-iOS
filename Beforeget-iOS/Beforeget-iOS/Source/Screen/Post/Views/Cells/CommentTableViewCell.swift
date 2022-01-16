@@ -9,7 +9,12 @@ import UIKit
 
 import SnapKit
 import Then
-import SwiftUI
+
+//MARK: - protocol
+
+protocol CommentTableViewCellDelegate: AnyObject {
+    func updateTextViewHeight(_ cell: CommentTableViewCell,_ textView: UITextView)
+}
 
 class CommentTableViewCell: UITableViewCell {
     
@@ -27,16 +32,21 @@ class CommentTableViewCell: UITableViewCell {
         $0.textColor = Asset.Colors.gray200.color
     }
     
-    private let commentView = UIView().then {
-        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
-        $0.layer.borderWidth = 1
-        $0.makeRound(radius: 5)
-    }
+    //    private let commentView = UIView().then {
+    //        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
+    //        $0.layer.borderWidth = 1
+    //        $0.makeRound(radius: 5)
+    //    }
     
     private lazy var commentTextView = UITextView().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body6
         $0.isScrollEnabled = false
+        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        $0.layer.borderWidth = 1
+        $0.makeRound(radius: 5)
+        $0.textContainerInset = UIEdgeInsets(top: 14, left: 13, bottom: 14, right: 13)
+        $0.sizeToFit()
         $0.delegate = self
     }
     
@@ -46,9 +56,7 @@ class CommentTableViewCell: UITableViewCell {
         $0.textColor = Asset.Colors.gray200.color
     }
     
-    private let maxHeight: CGFloat = 118
-    private lazy var minHeight: CGFloat = 40
-    
+    weak var delegate: CommentTableViewCellDelegate?
     
     // MARK: - Life Cycle
     
@@ -70,7 +78,6 @@ class CommentTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         contentView.addSubviews([commentLabel,
-                                 commentView,
                                  commentTextView,
                                  placeHolderLabel,
                                  letterCountLabel])
@@ -80,24 +87,19 @@ class CommentTableViewCell: UITableViewCell {
             $0.leading.equalToSuperview()
         }
         
-        commentView.snp.makeConstraints {
+        commentTextView.snp.makeConstraints {
             $0.top.equalTo(commentLabel.snp.bottom).offset(18)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(118)
-        }
-        
-        commentTextView.snp.makeConstraints {
-            $0.top.bottom.equalTo(commentView).inset(5)
-            $0.leading.trailing.equalTo(commentView).inset(16)
+            $0.height.equalTo(46)
         }
         
         placeHolderLabel.snp.makeConstraints {
-            $0.top.equalTo(commentView.snp.top).offset(11)
-            $0.leading.equalTo(commentTextView.snp.leading)
+            $0.top.equalTo(commentTextView.snp.top).offset(14)
+            $0.leading.equalTo(commentTextView.snp.leading).inset(13)
         }
         
         letterCountLabel.snp.makeConstraints {
-            $0.top.equalTo(commentView.snp.bottom).offset(7)
+            $0.top.equalTo(commentTextView.snp.bottom).offset(7)
             $0.bottom.equalToSuperview().inset(14)
             $0.trailing.equalToSuperview()
         }
@@ -117,12 +119,12 @@ extension CommentTableViewCell: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
-        commentView.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        commentTextView.layer.borderColor = Asset.Colors.gray300.color.cgColor
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         placeHolderLabel.isHidden = true
-        commentView.layer.borderColor = Asset.Colors.black200.color.cgColor
+        commentTextView.layer.borderColor = Asset.Colors.black200.color.cgColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -130,6 +132,18 @@ extension CommentTableViewCell: UITextViewDelegate {
         
         if commentTextView.text.count > 100 {
             commentTextView.deleteBackward()
+        }
+        
+        if let delegate = delegate {
+            delegate.updateTextViewHeight(self, textView)
+        }
+        
+        let size = CGSize(width: contentView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
         }
     }
 }

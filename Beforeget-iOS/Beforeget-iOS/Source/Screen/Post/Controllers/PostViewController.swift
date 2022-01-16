@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class PostViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false)
@@ -25,8 +25,10 @@ class PostViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.white.color
         $0.sectionHeaderTopPadding = 0
         $0.separatorStyle = .none
-        $0.rowHeight = UITableView.automaticDimension
         $0.showsVerticalScrollIndicator = false
+        $0.estimatedRowHeight = 200
+        //        $0.invalidateIntrinsicContentSize()
+        $0.rowHeight = UITableView.automaticDimension
         $0.delegate = self
         $0.dataSource = self
     }
@@ -167,7 +169,6 @@ extension PostViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
-        cell?.selectionStyle = .none
         
         switch indexPath.row {
         case 0:
@@ -175,10 +176,14 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             cell = OneLineReviewTableViewCell()
         case 2:
-            cell = CommentTableViewCell()
+            let commentCell = CommentTableViewCell()
+            commentCell.delegate = self
+            return commentCell
         default:
             cell = UITableViewCell()
         }
+        
+        cell?.selectionStyle = .none
         
         return cell ?? UITableViewCell()
     }
@@ -193,6 +198,14 @@ extension PostViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 192
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
 }
 
@@ -212,7 +225,7 @@ extension PostViewController {
     @objc func keyboardWillShow(_ sender: Notification) {
         hideKeyboardButton.isHidden = false
     }
-
+    
     @objc func keyboardWillHide(_ sender: Notification) {
         hideKeyboardButton.isHidden = true
     }
@@ -244,6 +257,20 @@ extension PostViewController: WritingHeaderViewDelegate {
         datePicker.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(21)
             $0.centerY.equalToSuperview()
+        }
+    }
+}
+
+extension PostViewController: CommentTableViewCellDelegate {
+    func updateTextViewHeight(_ cell: CommentTableViewCell, _ textView: UITextView) {
+        let size = textView.bounds.size
+        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: size.width,
+                                                    height: CGFloat.greatestFiniteMagnitude))
+        if size.height != estimatedSize.height {
+            UIView.setAnimationsEnabled(false)
+            writingTableView.beginUpdates()
+            writingTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
         }
     }
 }

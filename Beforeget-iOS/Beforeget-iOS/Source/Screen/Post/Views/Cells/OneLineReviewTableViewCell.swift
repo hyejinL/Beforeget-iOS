@@ -76,7 +76,7 @@ class OneLineReviewTableViewCell: UITableViewCell {
         
         addButton.snp.makeConstraints {
             $0.top.equalTo(onelineReviewLabel.snp.bottom).offset(17)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(31)
             $0.centerX.equalToSuperview()
         }
            
