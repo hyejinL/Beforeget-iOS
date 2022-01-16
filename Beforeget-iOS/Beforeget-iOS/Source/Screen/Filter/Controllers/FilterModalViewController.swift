@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [Int], star: [Int])
+    func sendData(data: Int, media: [String], star: [Int])
 }
 
 final class FilterModalViewController: UIViewController {
@@ -22,7 +22,7 @@ final class FilterModalViewController: UIViewController {
     
     /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
     var selectedDateIndex: Int = 0
-    var selectedMediaIndex: [Int] = [0]
+    var selectedMediaIndex: [String] = ["미디어"]
     var selectedStarIndex: [Int] = [0]
     
     weak var sendDataDelegate: SendDataDelegate?
@@ -185,8 +185,7 @@ final class FilterModalViewController: UIViewController {
         modalViewTopConstraint.constant = safeAreaHeight + bottomPadding
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedView.alpha = 0.0
-            self.view.layoutIfNeeded()
-        }) { _ in
+            self.view.layoutIfNeeded() }) { _ in
             if self.presentingViewController != nil {
                 self.dismiss(animated: false, completion: nil)
             }
@@ -237,6 +236,7 @@ final class FilterModalViewController: UIViewController {
 // MARK: - UICollectionViewDelegate
 
 extension FilterModalViewController: UICollectionViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
@@ -280,6 +280,7 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
+        
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
@@ -328,8 +329,8 @@ extension FilterModalViewController:
         applyButton.isDisabled = false
     }
     
-    func selectMediaFilter(index: Int) {
-        selectedMediaIndex.append(index)
+    func selectMediaFilter(index: [String]) {
+        selectedMediaIndex = index
         print(selectedMediaIndex, "이것은 미디어다!!")
         applyButton.isDisabled = false
     }

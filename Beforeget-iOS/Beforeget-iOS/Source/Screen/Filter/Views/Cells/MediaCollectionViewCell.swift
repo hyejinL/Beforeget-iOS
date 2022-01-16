@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol MediaFilterButtonDelegate: FilterModalViewController {
-    func selectMediaFilter(index: Int)
+    func selectMediaFilter(index: [String])
 }
 
 class MediaCollectionViewCell: UICollectionViewCell,
@@ -22,8 +22,13 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     // MARK: - Properties
     
-    private var buttonTitle: [String] = []
-    private var mediaButtonList: [UIButton] = []
+    var isMediaSelected: Bool = true
+    
+    /// FilterView에 전달할 선택된 미디어 유형 필터 배열입니다.
+    private var selectedMedia: [String] = []
+    
+    public var buttonTitle: [String] = []
+    public var mediaButtonList: [UIButton] = []
     
     weak var mediaFilterButtonDelegate: MediaFilterButtonDelegate?
     
@@ -66,11 +71,6 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color
-        mediaButtonList.forEach {
-            $0.layer.borderColor = isSelected ?
-            Asset.Colors.black200.color.cgColor :
-            Asset.Colors.gray300.color.cgColor
-        }
     }
     
     private func setupLayout() {
@@ -129,10 +129,25 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
+    func removeDuplication(in array: [String]) -> [String]{
+        let set = Set(array)
+        let duplicationRemovedArray = Array(set)
+        return duplicationRemovedArray
+    }
+    
     // MARK: - @objc
     
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        mediaFilterButtonDelegate?.selectMediaFilter(index: sender.tag)
+
+        sender.layer.borderColor = isMediaSelected ?
+        Asset.Colors.black200.color.cgColor :
+        Asset.Colors.gray300.color.cgColor
+        
+        if sender.isSelected {
+            selectedMedia.append(sender.titleLabel?.text ?? "")
+        }
+        
+        mediaFilterButtonDelegate?.selectMediaFilter(index: removeDuplication(in: selectedMedia))
     }
 }
