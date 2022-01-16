@@ -1,37 +1,23 @@
 {
   "images" : [
     {
-      "filename" : "boxActiveStar1.png",
       "idiom" : "universal",
-      "resizing" : {
-        "cap-insets" : {
-          "bottom" : 7,
-          "left" : 10,
-          "right" : 10,
-          "top" : 8
-        },
-        "center" : {
-          "height" : 1,
-          "mode" : "tile",
-          "width" : 1
-        },
-        "mode" : "9-part"
-      },
+      "filename" : "boxActiveStar1.png",
       "scale" : "1x"
     },
     {
-      "filename" : "boxActiveStar1@2x.png",
       "idiom" : "universal",
+      "filename" : "boxActiveStar1@2x.png",
       "scale" : "2x"
     },
     {
       "filename" : "boxActiveStar1@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "author" : "xcode",
-    "version" : 1
+    "version" : 1,
+    "author" : "xcode"
   }
 }
