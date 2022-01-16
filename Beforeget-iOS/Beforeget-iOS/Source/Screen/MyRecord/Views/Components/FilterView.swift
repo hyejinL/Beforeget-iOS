@@ -86,11 +86,12 @@ public class FilterView: UIView {
         
         [dateButton, mediaButton, starButton].forEach {
             $0.titleLabel?.font = BDSFont.body1
-            $0.contentMode = .scaleAspectFit
+            $0.contentMode = .scaleToFill
             $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
             $0.setBackgroundImage(Asset.Assets.btnFilterInactive.image, for: .normal)
             $0.setBackgroundImage(Asset.Assets.btnFilterActive.image, for: .highlighted)
             $0.setBackgroundImage(Asset.Assets.btnFilterActive.image, for: .selected)
+            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 9, bottom: 0, right: 9)
         }
     }
     
