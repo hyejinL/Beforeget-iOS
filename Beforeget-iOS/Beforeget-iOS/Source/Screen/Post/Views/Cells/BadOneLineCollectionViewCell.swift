@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostModalBadCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
+class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
     
@@ -15,16 +15,18 @@ class PostModalBadCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
         $0.scrollDirection = .horizontal
     }
     
-    private lazy var reviewTextCollectionView = UICollectionView(frame: .zero, collectionViewLayout: reviewTextLayout).then {
+    private lazy var oneLineTextCollectionView = UICollectionView(frame: .zero, collectionViewLayout: reviewTextLayout).then {
         $0.backgroundColor = Asset.Colors.white.color
         $0.isScrollEnabled = false
         
-        PostModalReviewCollectionViewCell.register(target: $0)
+        OneLineTextCollectionViewCell.register(target: $0)
         $0.delegate = self
         $0.dataSource = self
+        $0.allowsMultipleSelection = true
     }
     
-    var badReviews = [String]()
+    private var badReviews = [String]()
+    private var selectedBadReviews = [String]()
     
     // MARK: - InitUI
     
@@ -32,6 +34,7 @@ class PostModalBadCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
         super.init(frame: frame)
         configUI()
         setupLayout()
+        getNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -43,9 +46,9 @@ class PostModalBadCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     }
     
     private func setupLayout() {
-        addSubview(reviewTextCollectionView)
+        addSubview(oneLineTextCollectionView)
         
-        reviewTextCollectionView.snp.makeConstraints {
+        oneLineTextCollectionView.snp.makeConstraints {
             $0.leading.trailing.top.bottom.equalToSuperview()
         }
     }
@@ -60,14 +63,24 @@ class PostModalBadCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
         return label.frame.width + 42
     }
     
+    private func getNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(touchupResetButton), name: NSNotification.Name("touchupOneLineResetButton"), object: nil)
+    }
+    
     public func config(badReviews: [String]) {
         self.badReviews = badReviews
+    }
+    
+    // MARK: - @objc
+    
+    @objc func touchupResetButton() {
+        oneLineTextCollectionView.deselectAllItems()
     }
 }
 
 // MARK: - UICollectionViewDelegate FlowLayout
 
-extension PostModalBadCollectionViewCell: UICollectionViewDelegateFlowLayout {
+extension BadOneLineCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: calculateCellWidth(text: badReviews[indexPath.item]), height: 39)
     }
@@ -87,13 +100,13 @@ extension PostModalBadCollectionViewCell: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UICollectionViewDataSource
 
-extension PostModalBadCollectionViewCell: UICollectionViewDataSource {
+extension BadOneLineCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return badReviews.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostModalReviewCollectionViewCell.className, for: indexPath) as? PostModalReviewCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell else { return UICollectionViewCell() }
         cell.config(oneline: badReviews[indexPath.item])
         return cell
     }

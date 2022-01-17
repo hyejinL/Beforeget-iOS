@@ -10,13 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-class PostModalReviewCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
+class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
     
     private lazy var onelineLabel = UILabel().then {
         $0.font = BDSFont.body8
-        $0.textColor = Asset.Colors.gray100.color
+        $0.textColor = Asset.Colors.gray200.color
     }
     
     // MARK: - InitUI
@@ -33,13 +33,15 @@ class PostModalReviewCollectionViewCell: UICollectionViewCell, UICollectionViewR
     
     override var isSelected: Bool {
         didSet {
-            let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray300.color.cgColor
+            let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray200.color.cgColor
             contentView.layer.borderWidth = 1
             contentView.layer.borderColor = borderColor
             contentView.makeRound(radius: 20)
             
-            let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray300.color
+            let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
             onelineLabel.textColor = textColor
+            
+            NotificationCenter.default.post(name: NSNotification.Name("selectedReviews"), object: nil)
         }
     }
     
@@ -48,7 +50,7 @@ class PostModalReviewCollectionViewCell: UICollectionViewCell, UICollectionViewR
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        contentView.layer.borderColor = Asset.Colors.gray200.color.cgColor
         contentView.makeRound(radius: 20)
     }
     

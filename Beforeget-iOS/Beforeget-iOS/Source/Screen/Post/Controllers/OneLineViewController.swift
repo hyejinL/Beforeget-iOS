@@ -10,12 +10,19 @@ import UIKit
 import SnapKit
 import Then
 
-final class PostModalViewController: UIViewController {
+final class OneLineViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var modalBackView = UIView().then {
+    private let dimmedView = UIView().then {
+        $0.backgroundColor = .black.withAlphaComponent(0.5)
+    }
+    
+    private var modalView = UIView().then {
         $0.backgroundColor = Asset.Colors.white.color
+        $0.makeRound(radius: 15)
+        $0.layer.maskedCorners =
+        [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     private var indicatorView = UIView().then {
@@ -49,7 +56,7 @@ final class PostModalViewController: UIViewController {
         $0.scrollDirection = .horizontal
     }
     
-    private lazy var reviewCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
+    private lazy var oneLineCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
         $0.backgroundColor = Asset.Colors.white.color
         $0.isScrollEnabled = true
         $0.showsHorizontalScrollIndicator = false
@@ -57,8 +64,8 @@ final class PostModalViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         
-        PostModalGoodCollectionViewCell.register(target: $0)
-        PostModalBadCollectionViewCell.register(target: $0)
+        GoodOneLineCollectionViewCell.register(target: $0)
+        BadOneLineCollectionViewCell.register(target: $0)
     }
     
     private var countLabel = UILabel().then {
@@ -69,12 +76,18 @@ final class PostModalViewController: UIViewController {
     
     private var resetButton = UIButton().then {
         $0.setImage(Asset.Assets.btnRefreshAll.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupResetButton), for: .touchUpInside)
     }
     
     private var applyButton = BDSButton().then {
         $0.text = "적용"
         $0.isDisabled = true
+        $0.backgroundColor = Asset.Colors.gray300.color
+        $0.addTarget(self, action: #selector(touchupApplyButton), for: .touchUpInside)
     }
+    
+    private var modalViewTopConstraint: NSLayoutConstraint!
+    private let height: CGFloat = 435
     
     private var currentIndex = 0
     private var count = 0
@@ -89,7 +102,18 @@ final class PostModalViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        setTextLabelGesture()
+        setupGestureRecognizer()
+        getNotification()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showBottomSheet()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - InitUI
@@ -99,21 +123,35 @@ final class PostModalViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(modalBackView)
-        modalBackView.addSubviews([indicatorView,
+        view.addSubviews([dimmedView, modalView])
+        modalView.addSubviews([indicatorView,
                                    goodLabel,
                                    badLabel,
                                    lineView,
                                    statusMovedView,
-                                   reviewCollectionView,
+                                   oneLineCollectionView,
                                    countLabel,
                                    applyButton,
                                    resetButton])
         
-        modalBackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(379)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
+        let topConstant =
+        view.safeAreaInsets.bottom +
+        view.safeAreaLayoutGuide.layoutFrame.height
+        
+        modalViewTopConstraint = modalView.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor,
+            constant: topConstant)
+        
+        NSLayoutConstraint.activate([
+            modalViewTopConstraint
+        ])
+        
+        dimmedView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        modalView.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalToSuperview()
         }
         
         indicatorView.snp.makeConstraints {
@@ -145,14 +183,14 @@ final class PostModalViewController: UIViewController {
             $0.centerX.equalTo(goodLabel.snp.centerX)
         }
         
-        reviewCollectionView.snp.makeConstraints {
+        oneLineCollectionView.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(220)
         }
         
         countLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewCollectionView.snp.bottom).offset(13)
+            $0.top.equalTo(oneLineCollectionView.snp.bottom).offset(13)
             $0.trailing.equalToSuperview().inset(21)
         }
         
@@ -173,7 +211,7 @@ final class PostModalViewController: UIViewController {
     
     // MARK: - Custom Method
     
-    private func setTextLabelGesture() {
+    private func setupGestureRecognizer() {
         let tapGoodLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToGood))
         goodLabel.addGestureRecognizer(tapGoodLabelGesture)
         goodLabel.isUserInteractionEnabled = true
@@ -181,15 +219,53 @@ final class PostModalViewController: UIViewController {
         let tapBadLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToBad))
         badLabel.addGestureRecognizer(tapBadLabelGesture)
         badLabel.isUserInteractionEnabled = true
+        
+        let dimmedTap = UITapGestureRecognizer(
+            target: self, action: #selector(dimmedViewTapped(_:)))
+        dimmedView.addGestureRecognizer(dimmedTap)
+        dimmedView.isUserInteractionEnabled = true
+        
+        let swipeGesture = UISwipeGestureRecognizer(
+            target: self, action: #selector(panGesture))
+        swipeGesture.direction = .down
+        view.addGestureRecognizer(swipeGesture)
+    }
+    
+    private func showBottomSheet() {
+        let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
+        let bottomPadding: CGFloat = view.safeAreaInsets.bottom
+        
+        modalViewTopConstraint.constant = (safeAreaHeight + bottomPadding) - height
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+            self.dimmedView.alpha = 0.5
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func hideBottomSheetAndGoBack() {
+        let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
+        let bottomPadding = view.safeAreaInsets.bottom
+        modalViewTopConstraint.constant = safeAreaHeight + bottomPadding
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
+            self.dimmedView.alpha = 0.0
+            self.view.layoutIfNeeded() }) { _ in
+            if self.presentingViewController != nil {
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
+    
+    private func getNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getSelectedReviews), name: NSNotification.Name("selectedReviews"), object: nil)
     }
         
     // MARK: - @objc
     
-    @objc
-    private func dragToGood() {
+    @objc func dragToGood() {
         if currentIndex == 1 {
             let indexPath = IndexPath(item: 0, section: 0)
-            reviewCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+            oneLineCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
             UIView.animate(withDuration: 0.3) {
                 self.statusMovedView.transform = .identity
             }
@@ -199,10 +275,9 @@ final class PostModalViewController: UIViewController {
         }
     }
     
-    @objc
-    private func dragToBad() {
+    @objc func dragToBad() {
         let indexPath = IndexPath(item: 1, section: 0)
-        reviewCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        oneLineCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
         if currentIndex == 0 {
             UIView.animate(withDuration: 0.3) {
                 self.statusMovedView.transform = CGAffineTransform(translationX: (self.view.frame.width - 40) / 2 , y: 0)
@@ -212,11 +287,34 @@ final class PostModalViewController: UIViewController {
             self.badLabel.textColor =  Asset.Colors.black200.color
         }
     }
+    
+    @objc func touchupResetButton() {
+        NotificationCenter.default.post(name: NSNotification.Name("touchupOneLineResetButton"), object: nil)
+    }
+    
+    @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+        hideBottomSheetAndGoBack()
+    }
+    
+    @objc func panGesture(_ recognizer: UISwipeGestureRecognizer) {
+        if recognizer.state == .ended, recognizer.direction == .down {
+            hideBottomSheetAndGoBack()
+        }
+    }
+    
+    @objc func getSelectedReviews() {
+        applyButton.isDisabled = false
+        applyButton.backgroundColor = Asset.Colors.black200.color
+    }
+    
+    @objc func touchupApplyButton() {
+        
+    }
 }
 
 // MARK: - UICollectionView Delegate
 
-extension PostModalViewController: UICollectionViewDelegate {
+extension OneLineViewController: UICollectionViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let targetIndex = targetContentOffset.pointee.x / scrollView.frame.size.width
         if targetIndex == 1 && currentIndex == 0 {
@@ -237,7 +335,7 @@ extension PostModalViewController: UICollectionViewDelegate {
     }
 }
 
-extension PostModalViewController: UICollectionViewDelegateFlowLayout {
+extension OneLineViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = collectionView.frame.height
         let width = collectionView.frame.width
@@ -258,20 +356,20 @@ extension PostModalViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - UICollectionView DataSource
-extension PostModalViewController: UICollectionViewDataSource {
+extension OneLineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostModalGoodCollectionViewCell.className, for: indexPath) as? PostModalGoodCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoodOneLineCollectionViewCell.className, for: indexPath) as? GoodOneLineCollectionViewCell else {
                 return UICollectionViewCell()
             }
             cell.config(goodReviews: goodReviews)
             return cell
         } else if indexPath.row == 1 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostModalBadCollectionViewCell.className, for: indexPath) as? PostModalBadCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BadOneLineCollectionViewCell.className, for: indexPath) as? BadOneLineCollectionViewCell else {
                 return UICollectionViewCell()
             }
             cell.config(badReviews: badReviews)
