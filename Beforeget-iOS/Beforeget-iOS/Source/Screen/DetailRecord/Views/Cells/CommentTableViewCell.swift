@@ -1,5 +1,5 @@
 //
-//  CommentTableViewCell.swift
+//  CommentDetailTableViewCell.swift
 //  Beforeget-iOS
 //
 //  Created by Thisisme Hi on 2022/01/14.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class CommentTableViewCell: UITableViewCell, UITableViewRegisterable {
+class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
 
     // MARK: - Properties
     
