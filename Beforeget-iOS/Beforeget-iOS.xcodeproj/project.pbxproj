@@ -50,7 +50,7 @@
 		5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F13872795847300385D5E /* CompleteViewController.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
-		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
+		5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */; };
 		5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */; };
 		5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */; };
 		5BD114A52790C4570063EB3B /* GenreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */; };
@@ -163,7 +163,7 @@
 		5B8F13872795847300385D5E /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
-		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommaTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTableViewCell.swift; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */,
-				5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */,
+				5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */,
 				5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */,
 				5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */,
 				5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */,
@@ -1049,7 +1049,7 @@
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
-				5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */,
+				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
 				5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */,
