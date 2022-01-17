@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F75B78F7AFE1CACC07B5AF /* Pods_Beforeget_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */; };
 		5B304B71278824C80054314A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B70278824C80054314A /* swiftgen.yml */; };
 		5B304B752788257F0054314A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B742788257E0054314A /* Colors.xcassets */; };
 		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
@@ -124,7 +125,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beforeget_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B304B70278824C80054314A /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		5B304B742788257E0054314A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
@@ -181,6 +182,7 @@
 		5BD114B7279133710063EB3B /* CellTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTitleLabel.swift; sourceTree = "<group>"; };
 		5BD114B927913AE20063EB3B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordHeaderView.swift; sourceTree = "<group>"; };
+		6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineViewController.swift; sourceTree = "<group>"; };
 		921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		929CFB26278EBE6200FCA541 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		929CFB29278EEA4600FCA541 /* ReportSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceView.swift; sourceTree = "<group>"; };
+		AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
 		E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -248,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F75B78F7AFE1CACC07B5AF /* Pods_Beforeget_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +490,8 @@
 		8BE74230A796E431079FC61E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */,
+				AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */,
+				6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 				927AF36F27880B820018CC34 /* Beforeget-iOS */,
 				927AF36E27880B820018CC34 /* Products */,
 				8BE74230A796E431079FC61E /* Pods */,
+				CEBE864B6EB4B05BF4709142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -831,6 +837,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CEBE864B6EB4B05BF4709142 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E206FDA9278F230B00AFA390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,19 +886,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 927AF38127880B830018CC34 /* Build configuration list for PBXNativeTarget "Beforeget-iOS" */;
 			buildPhases = (
-				7597565D40553964C622AC2C /* [CP] Check Pods Manifest.lock */,
+				39B4BB462CF3F1F15D540DD4 /* [CP] Check Pods Manifest.lock */,
 				5B304B73278825470054314A /* ShellScript */,
 				927AF36927880B820018CC34 /* Sources */,
 				927AF36A27880B820018CC34 /* Frameworks */,
 				927AF36B27880B820018CC34 /* Resources */,
+				FCEA452953764A8CA3F6F4A1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Beforeget-iOS";
-			packageProductDependencies = (
-			);
 			productName = "Beforeget-iOS";
 			productReference = 927AF36D27880B820018CC34 /* Beforeget-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -913,8 +926,6 @@
 				Base,
 			);
 			mainGroup = 927AF36427880B820018CC34;
-			packageReferences = (
-			);
 			productRefGroup = 927AF36E27880B820018CC34 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -946,24 +957,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5B304B73278825470054314A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
-		};
-		7597565D40553964C622AC2C /* [CP] Check Pods Manifest.lock */ = {
+		39B4BB462CF3F1F15D540DD4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -983,6 +977,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B304B73278825470054314A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
+		};
+		FCEA452953764A8CA3F6F4A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1238,7 +1266,7 @@
 		};
 		927AF38227880B830018CC34 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */;
+			baseConfigurationReference = AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1269,6 +1297,7 @@
 		};
 		927AF38327880B830018CC34 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
