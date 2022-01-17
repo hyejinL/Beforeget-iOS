@@ -10,13 +10,19 @@ import UIKit
 import SnapKit
 import Then
 
+// MARK: - Protocol
+
+protocol WritingHeaderViewDelegate: AnyObject {
+    func touchupDateButton()
+}
+
 final class WritingHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
-    private let dateButton = UIButton().then {
+    private lazy var dateButton = RespondingButton().then {
         var config = UIButton.Configuration.plain()
-        config.title = "2022. 01. 08. SAT"
+        config.title = formatDate(Date())
         config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
             outgoing.font = BDSFont.enBody7
@@ -29,6 +35,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         $0.makeRound(radius: 16)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = Asset.Colors.black200.color.cgColor
+        $0.addTarget(self, action: #selector(touchupDate), for: .touchUpInside)
     }
     
     private let star1Button = UIButton().then {
@@ -66,12 +73,14 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         $0.backgroundColor = Asset.Colors.gray400.color
     }
     
+    weak var delegate: WritingHeaderViewDelegate?
+    
     // MARK: - Initializer
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        configUI()
         setupLayout()
+        setupDatePickerNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -80,19 +89,15 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - InitUI
     
-    private func configUI() {
-        backgroundColor = .white
-    }
-    
     private func setupLayout() {
         contentView.addSubviews([dateButton,
-                     star1Button,
-                     star2Button,
-                     star3Button,
-                     star4Button,
-                     star5Button,
-                     starDescriptionLabel,
-                     lineView])
+                                 star1Button,
+                                 star2Button,
+                                 star3Button,
+                                 star4Button,
+                                 star5Button,
+                                 starDescriptionLabel,
+                                 lineView])
         
         dateButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
@@ -136,6 +141,35 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         }
     }
     
+    //MARK: - Custom Method
+    
+    private func setupDatePickerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(configDateButton(_:)), name: Notification.Name.didReceiveDate, object: nil)
+    }
+    
+    //MARK: - Custom Method
+    
+    private func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy. MM. dd."
+        let dateString = dateFormatter.string(from: date)
+        let calendar = Calendar.current
+        var weekday: String
+        
+        switch calendar.component(.weekday, from: date) {
+        case 1: weekday = "SUN"
+        case 2: weekday = "MON"
+        case 3: weekday = "TUE"
+        case 4: weekday = "WED"
+        case 5: weekday = "THU"
+        case 6: weekday = "FRI"
+        case 7: weekday = "SAT"
+        default: weekday = "MON"
+        }
+        
+        return "\(dateString) \(weekday)"
+    }
+    
     // MARK: - @objc
     
     @objc func touchupStar1() {
@@ -176,5 +210,14 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
+    }
+    
+    @objc func touchupDate() {
+        delegate?.touchupDateButton()
+    }
+    
+    @objc func configDateButton(_ sender: Notification) {
+        guard let date = sender.object as? Date else { return }
+        dateButton.setTitle(formatDate(date), for: .normal)
     }
 }
