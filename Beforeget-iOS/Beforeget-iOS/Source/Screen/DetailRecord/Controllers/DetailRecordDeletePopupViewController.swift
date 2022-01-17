@@ -7,7 +7,9 @@
 
 import UIKit
 
-class DetailRecordDeletePopupViewController: UIViewController {
+import SnapKit
+
+final class DetailRecordDeletePopupViewController: UIViewController {
     
     // MARK: - Properties
     

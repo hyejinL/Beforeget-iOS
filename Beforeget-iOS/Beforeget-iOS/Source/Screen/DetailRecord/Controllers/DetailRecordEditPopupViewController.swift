@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class DetailRecordEditPopupViewController: UIViewController {
+final class DetailRecordEditPopupViewController: UIViewController {
     
     // MARK: - Properties
     

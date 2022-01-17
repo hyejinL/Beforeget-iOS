@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PostSavePopupViewController: UIViewController {
+import SnapKit
+
+final class PostSavePopupViewController: UIViewController {
     
     // MARK: - Properties
     

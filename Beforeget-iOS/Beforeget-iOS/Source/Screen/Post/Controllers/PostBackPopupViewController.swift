@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PostBackPopupViewController: UIViewController {
+import SnapKit
+
+final class PostBackPopupViewController: UIViewController {
     
     // MARK: - Properties
     

@@ -47,6 +47,7 @@
 		5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */; };
 		5B8F138227957A4A00385D5E /* PostSavePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */; };
 		5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */; };
+		5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F13872795847300385D5E /* CompleteViewController.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
@@ -160,6 +161,7 @@
 		5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordDeletePopupViewController.swift; sourceTree = "<group>"; };
 		5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSavePopupViewController.swift; sourceTree = "<group>"; };
 		5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBackPopupViewController.swift; sourceTree = "<group>"; };
+		5B8F13872795847300385D5E /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -387,6 +389,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		5B8F13852795840300385D5E /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F13862795846100385D5E /* Controllers */,
+			);
+			path = Complete;
+			sourceTree = "<group>";
+		};
+		5B8F13862795846100385D5E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F13872795847300385D5E /* CompleteViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		5BD114942790C1910063EB3B /* DetailRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,6 +609,7 @@
 		927AF38A27880D9D0018CC34 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				5B8F13852795840300385D5E /* Complete */,
 				5B8F13622794131700385D5E /* Setting */,
 				5BD114942790C1910063EB3B /* DetailRecord */,
 				927AF3AA2788156E0018CC34 /* Report */,
@@ -1014,6 +1033,7 @@
 				929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */,
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
+				5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
 				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,

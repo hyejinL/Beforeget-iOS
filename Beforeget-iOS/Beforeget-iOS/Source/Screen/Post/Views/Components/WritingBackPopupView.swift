@@ -7,7 +7,9 @@
 
 import UIKit
 
-class WritingBackPopupView: UIView {
+import SnapKit
+
+final class WritingBackPopupView: UIView {
     
     // MARK: - Properties
     
