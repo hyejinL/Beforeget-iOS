@@ -83,7 +83,7 @@ class ReportTopView: UIView {
         addSubviews([monthButton, starImageView, reportTitleLabel, reportDescriptionLabel])
         
         monthButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(23)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 23 : 13)
             $0.leading.trailing.equalToSuperview().inset(133)
             $0.height.equalTo(31)
         }
