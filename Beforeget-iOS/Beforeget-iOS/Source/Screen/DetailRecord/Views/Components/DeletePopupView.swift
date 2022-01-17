@@ -1,5 +1,5 @@
 //
-//  EditPopupView.swift
+//  DeletePopupView.swift
 //  Beforeget-iOS
 //
 //  Created by Thisisme Hi on 2022/01/17.
@@ -10,15 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
-class EditPopupView: UIView {
+class DeletePopupView: UIView {
     
     // MARK: - Properties
     
     weak var viewController: UIViewController?
     
     private var popupView = BDSPopupView(
-        image: Asset.Assets.imgEdit.image,
-        title: PopupText.edit,
+        image: Asset.Assets.imgDelete.image,
+        title: PopupText.delete,
         info: .none).then {
             $0.leftText = "취소"
             $0.rightText = "확인"
@@ -40,7 +40,7 @@ class EditPopupView: UIView {
     }
     
     // MARK: - InitUI
-
+    
     private func configUI() {
         backgroundColor = Asset.Colors.white.color
         layer.cornerRadius = 10
@@ -57,14 +57,11 @@ class EditPopupView: UIView {
     // MARK: - @objc
     
     @objc func touchupLeftButton(_ sender: UIButton) {
-        guard let pvc = viewController?.presentingViewController else { return }
-        viewController?.dismiss(animated: true) {
-            pvc.dismiss(animated: true, completion: nil)
-        }
+        viewController?.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - FIXME 추후에 삭제로 서버통신 넘기기
     @objc func touchupRightButton(_ sender: UIButton) {
-        // MARK: - FIXME : 추후에 확인 누르면 글쓰기 수정으로 넘어가기
         viewController?.dismiss(animated: true, completion: nil)
     }
 }

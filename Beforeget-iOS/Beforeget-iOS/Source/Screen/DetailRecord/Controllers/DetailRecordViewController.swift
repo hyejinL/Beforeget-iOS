@@ -142,15 +142,18 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     @objc func touchupMenuButton(_ sender: UIButton) {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let edit = UIAlertAction(title: "수정", style: .default) { _ in
-            // MARK: - FIXME : 추후에 확인 누르면 글쓰기 수정으로 넘어가기
+            // MARK: - FIMXE : 수정서버통신
             let viewController = DetailRecordEditPopupViewController()
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
             self.present(viewController, animated: true, completion: nil)
         }
         let delete = UIAlertAction(title: "삭제", style: .default) { _ in
-            // MARK: - FIXME
-            // 삭제하기 -> 내 기록에서 삭제가 되어야 함
+            // MARK: - FIXME : 삭제서버통신
+            let viewController = DetailRecordDeletePopupViewController()
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.modalTransitionStyle = .crossDissolve
+            self.present(viewController, animated: true, completion: nil)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         optionMenu.addAction(edit)

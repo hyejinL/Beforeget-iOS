@@ -1,5 +1,5 @@
 //
-//  EditPopupView.swift
+//  WritingBackPopupView.swift
 //  Beforeget-iOS
 //
 //  Created by Thisisme Hi on 2022/01/17.
@@ -7,19 +7,16 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-class EditPopupView: UIView {
+class WritingBackPopupView: UIView {
     
     // MARK: - Properties
     
     weak var viewController: UIViewController?
     
     private var popupView = BDSPopupView(
-        image: Asset.Assets.imgEdit.image,
-        title: PopupText.edit,
-        info: .none).then {
+        image: Asset.Assets.imgBack.image,
+        title: PopupText.back,
+        info: PopupText.subBack).then {
             $0.leftText = "취소"
             $0.rightText = "확인"
             $0.leftButton.addTarget(self, action: #selector(touchupLeftButton(_:)), for: .touchUpInside)
@@ -39,8 +36,7 @@ class EditPopupView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - InitUI
-
+    // MARK: - Custom Method
     private func configUI() {
         backgroundColor = Asset.Colors.white.color
         layer.cornerRadius = 10
@@ -64,7 +60,6 @@ class EditPopupView: UIView {
     }
     
     @objc func touchupRightButton(_ sender: UIButton) {
-        // MARK: - FIXME : 추후에 확인 누르면 글쓰기 수정으로 넘어가기
         viewController?.dismiss(animated: true, completion: nil)
     }
 }

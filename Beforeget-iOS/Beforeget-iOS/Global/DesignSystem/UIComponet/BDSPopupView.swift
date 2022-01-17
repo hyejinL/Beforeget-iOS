@@ -15,8 +15,8 @@ import Then
 // MARK: - Constant
 
 public enum PopupText {
-    static let warn = "작성 중인 기록이 있어요!"
-    static let subWarn = "화면을 벗어나면 작성 중인 기록은 \n저장되지 않습니다."
+    static let back = "작성 중인 기록이 있어요!"
+    static let subBack = "화면을 벗어나면 작성 중인 기록은 \n저장되지 않습니다."
     static let save = "기록을 저장할까요?"
     static let edit = "기록을 수정할까요?"
     static let delete = "정말로 삭제하시겠어요?"
