@@ -69,6 +69,8 @@
 		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
 		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 		E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072427940B8900E815E6 /* NotificationName.swift */; };
+		E2F4072727947BD300E815E6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072627947BD300E815E6 /* AddItemViewController.swift */; };
+		E2F407292794840A00E815E6 /* AddItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +134,8 @@
 		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
 		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2F4072427940B8900E815E6 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		E2F4072627947BD300E815E6 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +410,7 @@
 			children = (
 				927AF3AC2788162E0018CC34 /* PostViewController.swift */,
 				E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */,
+				E2F4072627947BD300E815E6 /* AddItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 				E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */,
 				E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */,
 				E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */,
+				E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -666,6 +672,7 @@
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
+				E2F4072727947BD300E815E6 /* AddItemViewController.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
 				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
@@ -701,6 +708,7 @@
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
+				E2F407292794840A00E815E6 /* AddItemCollectionViewCell.swift in Sources */,
 				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
 				929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,

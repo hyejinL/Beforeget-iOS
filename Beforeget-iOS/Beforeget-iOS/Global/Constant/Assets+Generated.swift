@@ -64,6 +64,8 @@ internal enum Asset {
     internal static let btnFilterActive = ImageAsset(name: "btn_filter_active")
     internal static let btnFilterInactive = ImageAsset(name: "btn_filter_inactive")
     internal static let icnAddItem = ImageAsset(name: "icnAddItem")
+    internal static let icnCheckActive = ImageAsset(name: "icnCheckActive")
+    internal static let icnCheckInactive = ImageAsset(name: "icnCheckInactive")
     internal static let icnEdit = ImageAsset(name: "icnEdit")
     internal static let icnLogoMain = ImageAsset(name: "icnLogoMain")
     internal static let icnTextStar = ImageAsset(name: "icnTextStar")
@@ -74,6 +76,7 @@ internal enum Asset {
     internal static let icnWebtoon = ImageAsset(name: "icn_webtoon")
     internal static let imgSentenceBack = ImageAsset(name: "imgSentenceBack")
     internal static let imgSentenceFront = ImageAsset(name: "imgSentenceFront")
+    internal static let imgExample = ImageAsset(name: "img_example")
     internal static let pageActive = ImageAsset(name: "page_active")
     internal static let pageInactive = ImageAsset(name: "page_inactive")
   }
