@@ -93,13 +93,10 @@ internal enum Asset {
     internal static let btnWriting = ImageAsset(name: "btnWriting")
     internal static let btnAll = ImageAsset(name: "btn_all")
     internal static let icnAddItem = ImageAsset(name: "icnAddItem")
-
-    internal static let icnCheckActive = ImageAsset(name: "icnCheckActive")
-    internal static let icnCheckInactive = ImageAsset(name: "icnCheckInactive")
-
     internal static let icnApple = ImageAsset(name: "icnApple")
     internal static let icnCheck = ImageAsset(name: "icnCheck")
-
+    internal static let icnCheckActive = ImageAsset(name: "icnCheckActive")
+    internal static let icnCheckInactive = ImageAsset(name: "icnCheckInactive")
     internal static let icnEdit = ImageAsset(name: "icnEdit")
     internal static let icnKakao = ImageAsset(name: "icnKakao")
     internal static let icnLittleStarInactive = ImageAsset(name: "icnLittleStarInactive")
