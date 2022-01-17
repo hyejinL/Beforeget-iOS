@@ -19,6 +19,18 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         $0.textColor = Asset.Colors.gray200.color
     }
     
+    override var isSelected: Bool {
+        didSet {
+            let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray200.color.cgColor
+            contentView.layer.borderWidth = 1
+            contentView.layer.borderColor = borderColor
+            contentView.makeRound(radius: 20)
+            
+            let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
+            onelineLabel.textColor = textColor
+        }
+    }
+    
     // MARK: - InitUI
     
     override init(frame: CGRect) {
@@ -31,17 +43,6 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var isSelected: Bool {
-        didSet {
-            let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray200.color.cgColor
-            contentView.layer.borderWidth = 1
-            contentView.layer.borderColor = borderColor
-            contentView.makeRound(radius: 20)
-            
-            let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
-            onelineLabel.textColor = textColor
-        }
-    }
     
     // MARK: - InitUI
     

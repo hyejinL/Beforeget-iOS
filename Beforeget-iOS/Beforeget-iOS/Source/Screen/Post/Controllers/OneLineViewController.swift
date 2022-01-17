@@ -325,6 +325,8 @@ extension OneLineViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionView DelegateFlowLayout
+
 extension OneLineViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = collectionView.frame.height
@@ -346,6 +348,7 @@ extension OneLineViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - UICollectionView DataSource
+
 extension OneLineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2

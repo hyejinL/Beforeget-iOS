@@ -29,7 +29,7 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     private var goodReviews = [String]()
     private var selectedGoodReviews = [String]()
     
-    // MARK: - InitUI
+    // MARK: - Initializser
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,6 +41,8 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - InitUI
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color

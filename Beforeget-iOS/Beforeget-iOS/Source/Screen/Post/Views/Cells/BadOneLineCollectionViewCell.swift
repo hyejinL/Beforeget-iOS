@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
@@ -28,7 +31,7 @@ class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegist
     private var badReviews = [String]()
     private var selectedBadReviews = [String]()
     
-    // MARK: - InitUI
+    // MARK: - Initializser
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +43,8 @@ class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegist
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - InitUI
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color
