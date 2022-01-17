@@ -184,7 +184,8 @@ extension MyRecordViewController:
         false : true
         filterView.starButton.isSelected = (star == [-1]) ?
         false : true
-        
+       
+//        guard let data = mediaData[0] else { return }
         mediaData = filterView.mediaButton.isSelected ?
         "---" : "미디어"
         

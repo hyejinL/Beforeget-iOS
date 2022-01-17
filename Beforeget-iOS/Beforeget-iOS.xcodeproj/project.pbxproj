@@ -87,12 +87,6 @@
 		927AF3B7278817E40018CC34 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF39227880ECE0018CC34 /* Pretendard-Medium.otf */; };
 		927AF3B8278817E80018CC34 /* PPNeueMachina-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF38E27880ECE0018CC34 /* PPNeueMachina-Regular.otf */; };
 		927AF3B9278817E80018CC34 /* PPNeueMachina-Ultrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 927AF38F27880ECE0018CC34 /* PPNeueMachina-Ultrabold.otf */; };
-		927AF3C927881B7B0018CC34 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3C827881B7B0018CC34 /* Moya */; };
-		927AF3CC27881BB50018CC34 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3CB27881BB50018CC34 /* Kingfisher */; };
-		927AF3CF27881BE40018CC34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3CE27881BE40018CC34 /* SnapKit */; };
-		927AF3D227881BF30018CC34 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3D127881BF30018CC34 /* Then */; };
-		927AF3D527881C110018CC34 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3D427881C110018CC34 /* Lottie */; };
-		927AF3D827881C860018CC34 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 927AF3D727881C860018CC34 /* IQKeyboardManagerSwift */; };
 		927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DA27881DE90018CC34 /* UICollectionViewRegisterable.swift */; };
 		927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DC27881E000018CC34 /* UITableViewRegisterable.swift */; };
 		927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3DE27881EC30018CC34 /* UIStackView+.swift */; };
@@ -240,12 +234,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				927AF3D527881C110018CC34 /* Lottie in Frameworks */,
-				927AF3CF27881BE40018CC34 /* SnapKit in Frameworks */,
-				927AF3CC27881BB50018CC34 /* Kingfisher in Frameworks */,
-				927AF3C927881B7B0018CC34 /* Moya in Frameworks */,
-				927AF3D227881BF30018CC34 /* Then in Frameworks */,
-				927AF3D827881C860018CC34 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,12 +873,6 @@
 			);
 			name = "Beforeget-iOS";
 			packageProductDependencies = (
-				927AF3C827881B7B0018CC34 /* Moya */,
-				927AF3CB27881BB50018CC34 /* Kingfisher */,
-				927AF3CE27881BE40018CC34 /* SnapKit */,
-				927AF3D127881BF30018CC34 /* Then */,
-				927AF3D427881C110018CC34 /* Lottie */,
-				927AF3D727881C860018CC34 /* IQKeyboardManagerSwift */,
 			);
 			productName = "Beforeget-iOS";
 			productReference = 927AF36D27880B820018CC34 /* Beforeget-iOS.app */;
@@ -921,12 +903,6 @@
 			);
 			mainGroup = 927AF36427880B820018CC34;
 			packageReferences = (
-				927AF3C727881B7B0018CC34 /* XCRemoteSwiftPackageReference "Moya" */,
-				927AF3CA27881BB50018CC34 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				927AF3CD27881BE30018CC34 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				927AF3D027881BF30018CC34 /* XCRemoteSwiftPackageReference "Then" */,
-				927AF3D327881C110018CC34 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				927AF3D627881C860018CC34 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 927AF36E27880B820018CC34 /* Products */;
 			projectDirPath = "";
@@ -1327,90 +1303,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		927AF3C727881B7B0018CC34 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		927AF3CA27881BB50018CC34 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		927AF3CD27881BE30018CC34 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
-		927AF3D027881BF30018CC34 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		927AF3D327881C110018CC34 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		927AF3D627881C860018CC34 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		927AF3C827881B7B0018CC34 /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3C727881B7B0018CC34 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-		927AF3CB27881BB50018CC34 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3CA27881BB50018CC34 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		927AF3CE27881BE40018CC34 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3CD27881BE30018CC34 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		927AF3D127881BF30018CC34 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3D027881BF30018CC34 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
-		};
-		927AF3D427881C110018CC34 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3D327881C110018CC34 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
-		};
-		927AF3D727881C860018CC34 /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 927AF3D627881C860018CC34 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 927AF36527880B820018CC34 /* Project object */;
 }
