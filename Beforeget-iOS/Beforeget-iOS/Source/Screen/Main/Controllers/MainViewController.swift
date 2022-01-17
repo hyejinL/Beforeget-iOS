@@ -259,9 +259,9 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailRecordViewController = DetailRecordViewController()
+        let recordViewController = MyRecordViewController()
         // MARK: - TODO 필터링된 미디어 유형 1~6을 보내주면 됨.
-        navigationController?.pushViewController(detailRecordViewController, animated: true)
+        navigationController?.pushViewController(recordViewController, animated: true)
     }
 }
 

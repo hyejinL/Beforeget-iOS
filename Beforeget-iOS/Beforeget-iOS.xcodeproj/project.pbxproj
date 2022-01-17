@@ -38,6 +38,9 @@
 		5B8F136B2794C77900385D5E /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136A2794C77900385D5E /* SettingTableViewCell.swift */; };
 		5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */; };
 		5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F136F2794D37D00385D5E /* SettingFooterView.swift */; };
+		5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F13712794E57500385D5E /* BDSPopupView.swift */; };
+		5B8F13762795577D00385D5E /* EditPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F13752795577D00385D5E /* EditPopupView.swift */; };
+		5B8F1378279559E800385D5E /* DetailRecordEditPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F1377279559E800385D5E /* DetailRecordEditPopupViewController.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
@@ -142,6 +145,9 @@
 		5B8F136A2794C77900385D5E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		5B8F136F2794D37D00385D5E /* SettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFooterView.swift; sourceTree = "<group>"; };
+		5B8F13712794E57500385D5E /* BDSPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSPopupView.swift; sourceTree = "<group>"; };
+		5B8F13752795577D00385D5E /* EditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupView.swift; sourceTree = "<group>"; };
+		5B8F1377279559E800385D5E /* DetailRecordEditPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordEditPopupViewController.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -383,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */,
+				5B8F1377279559E800385D5E /* DetailRecordEditPopupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -410,6 +417,7 @@
 				5BD114B7279133710063EB3B /* CellTitleLabel.swift */,
 				5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */,
 				5B8254302791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift */,
+				5B8F13752795577D00385D5E /* EditPopupView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -466,6 +474,7 @@
 				5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */,
 				5B6D7F7F278A2A8F00202230 /* BackButton.swift */,
 				5B6D7F81278A2BCF00202230 /* CloseButton.swift */,
+				5B8F13712794E57500385D5E /* BDSPopupView.swift */,
 			);
 			path = UIComponet;
 			sourceTree = "<group>";
@@ -954,6 +963,7 @@
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */,
 				5BD114AB2790C4730063EB3B /* LineTableViewCell.swift in Sources */,
+				5B8F13762795577D00385D5E /* EditPopupView.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
 				929CFB1C278DE13600FCA541 /* RecordCollectionViewCell.swift in Sources */,
 				5B8F1365279415FD00385D5E /* SettingViewController.swift in Sources */,
@@ -1016,8 +1026,10 @@
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
 				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
 				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
+				5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */,
 				929CFB27278EBE6200FCA541 /* BarView.swift in Sources */,
 				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
+				5B8F1378279559E800385D5E /* DetailRecordEditPopupViewController.swift in Sources */,
 				9277486B27902CBC00FAAE77 /* ReportOnePageView.swift in Sources */,
 				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
 				5B86AEB9278F7B22001C4486 /* MediaCollectionViewCell.swift in Sources */,

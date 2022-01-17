@@ -77,13 +77,13 @@ final class MyRecordViewController: UIViewController {
         }
         
         searchButton.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.top).inset(6)
+            make.top.equalTo(navigationBar.snp.top)
             make.trailing.equalTo(plusButton.snp.leading).offset(-1)
             make.width.height.equalTo(44)
         }
         
         plusButton.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.top).inset(6)
+            make.top.equalTo(navigationBar.snp.top)
             make.trailing.equalTo(navigationBar.snp.trailing).inset(8)
             make.width.height.equalTo(44)
         }
@@ -107,7 +107,8 @@ final class MyRecordViewController: UIViewController {
 extension MyRecordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-
+        let detailRecordViewController = DetailRecordViewController()
+        navigationController?.pushViewController(detailRecordViewController, animated: true)
     }
 }
 
