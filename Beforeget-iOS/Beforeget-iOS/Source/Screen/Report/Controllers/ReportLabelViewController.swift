@@ -59,15 +59,15 @@ final class ReportLabelViewController: UIViewController {
         }
         
         typeImageView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 20 : 15)
             $0.top.equalTo(reportTopView.snp.bottom)
-            $0.height.equalTo(290)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 290 : 242)
         }
         
         reportDescriptionView.snp.makeConstraints {
             $0.top.equalTo(typeImageView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(157)
+            $0.height.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 87 : 62)
         }
     }
     
