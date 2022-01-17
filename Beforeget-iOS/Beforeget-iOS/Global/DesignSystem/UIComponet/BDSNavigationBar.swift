@@ -15,7 +15,7 @@ final class BDSNavigationBar: UIView {
     // MARK: - Metric Enum
     
     public enum Metric {
-        static let navigationHeight: CGFloat = 44
+        static let navigationHeight: CGFloat = UIScreen.main.hasNotch ? 44 : 50
         static let titleTop: CGFloat = 13
         static let buttonLeading: CGFloat = 4
         static let buttonTrailing: CGFloat = 7
@@ -72,6 +72,13 @@ final class BDSNavigationBar: UIView {
         setupBackButton(isHidden: isHidden)
     }
     
+    convenience init(_ viewController: UIViewController,
+                     view: PageView,
+                     isHidden: Bool, mediaType: MediaType) {
+        self.init(viewController, view: view, isHidden: isHidden)
+        setupWriteTitle(mediaType: mediaType)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -115,5 +122,9 @@ final class BDSNavigationBar: UIView {
     private func setupBackButton(isHidden: Bool) {
         backButton.isHidden = isHidden
         closeButton.isHidden = !backButton.isHidden
+    }
+    
+    private func setupWriteTitle(mediaType: MediaType) {
+        titleLabel.text = "\(mediaType)"
     }
 }

@@ -36,10 +36,26 @@ class ReportOnePageView: UIView {
     }
     
     private var sentenceView = UIView()
-    private var sentenceCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    private lazy var sentenceCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         ReportSentenceCollectionViewCell.register(target: $0)
         $0.backgroundColor = Asset.Colors.black200.color
         $0.isScrollEnabled = false
+    }
+    
+    private var maxCountLabel = UILabel().then {
+        $0.textColor = Asset.Colors.white.color
+        $0.font = BDSFont.enBody8
+    }
+    
+    private var midCountLabel = UILabel().then {
+        $0.textColor = Asset.Colors.white.color
+        $0.font = BDSFont.enBody8
+    }
+    
+    private var minCountLabel = UILabel().then {
+        $0.text = "0"
+        $0.textColor = Asset.Colors.white.color
+        $0.font = BDSFont.enBody8
     }
     
     private var midLineView = UIView().then {
@@ -84,6 +100,18 @@ class ReportOnePageView: UIView {
     private var thirdRankingCountLabel = UILabel().then {
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody3
+    }
+    
+    var maxCount: Int = 0 {
+        didSet {
+            maxCountLabel.text = "\(maxCount)"
+        }
+    }
+    
+    var midCount: Int = 0 {
+        didSet {
+            midCountLabel.text = "\(midCount)"
+        }
     }
     
     var firstRankingMedia: String = "" {
@@ -166,42 +194,58 @@ class ReportOnePageView: UIView {
         
         graphView.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.height.equalTo(244)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 244 : 209)
         }
         
-        graphView.addSubviews([midLineView, minLineView, barStackView])
+        graphView.addSubviews([maxCountLabel, midCountLabel, minCountLabel, midLineView, minCountLabel, minLineView, barStackView])
         
         barStackView.addArrangedSubviews([barView1, barView2, barView3, barView4, barView5])
 
         [barView1, barView2, barView3, barView4, barView5].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(28)
-                $0.height.equalTo(177)
             }
         }
 
         barStackView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(53)
             $0.trailing.equalToSuperview().inset(54)
-            $0.top.equalToSuperview().inset(41)
-            $0.bottom.equalToSuperview().inset(26)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 41 : 28)
+            $0.bottom.equalToSuperview().inset(UIScreen.main.hasNotch ? 26 : 19)
+        }
+        
+        maxCountLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(UIScreen.main.hasNotch ? 25 : 35)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 37 : 28)
+        }
+        
+        midCountLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(UIScreen.main.hasNotch ? 25 : 35)
+            $0.top.equalTo(maxCountLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 64 : 55)
         }
         
         midLineView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(117)
-            $0.leading.trailing.equalToSuperview().inset(44)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 116 : 98)
+            $0.leading.equalTo(midCountLabel.snp.trailing).offset(7)
+            $0.trailing.equalToSuperview().inset(UIScreen.main.hasNotch ? 45 : 35)
             $0.height.equalTo(0.5)
         }
         
+        minCountLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(UIScreen.main.hasNotch ? 25 : 35)
+            $0.top.equalTo(midCountLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 64 : 55)
+        }
+        
         minLineView.snp.makeConstraints {
-            $0.top.equalTo(midLineView.snp.bottom).offset(74)
-            $0.leading.trailing.equalToSuperview().inset(44)
+            $0.top.equalTo(midLineView.snp.bottom).offset(UIScreen.main.hasNotch ? 75 : 65)
+            $0.leading.equalTo(midCountLabel.snp.trailing).offset(11)
+            $0.trailing.equalToSuperview().inset(UIScreen.main.hasNotch ? 45 : 35)
             $0.height.equalTo(0.5)
         }
         
         reportOnePageHorizontalStackView2.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.height.equalTo(130)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 130 : 123)
         }
         
         reportOnePageHorizontalStackView1.addArrangedSubviews([mediaImageView, sentenceView])
@@ -212,15 +256,16 @@ class ReportOnePageView: UIView {
         }
 
         sentenceView.snp.makeConstraints {
-            $0.width.equalTo(138)
+            $0.width.equalTo(UIScreen.main.hasNotch ? 138 : 130)
             $0.top.bottom.equalToSuperview()
         }
         
         sentenceView.addSubview(sentenceCollectionView)
         
         sentenceCollectionView.snp.makeConstraints { 
-            $0.leading.trailing.equalToSuperview().inset(14)
-            $0.top.bottom.equalToSuperview().inset(32)
+            $0.width.equalTo(110)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 107 : 91)
+            $0.centerX.centerY.equalToSuperview()
         }
 
         secondRankingView.snp.makeConstraints {
@@ -242,7 +287,7 @@ class ReportOnePageView: UIView {
         thirdRankingView.addSubviews([thirdRankingMediaLabel, thirdRankingCountLabel])
         
         firstRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(32)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 32 : 29)
             $0.centerX.equalToSuperview()
         }
         
@@ -252,7 +297,7 @@ class ReportOnePageView: UIView {
         }
         
         secondRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 38 : 34)
             $0.centerX.equalToSuperview()
         }
         
@@ -262,7 +307,7 @@ class ReportOnePageView: UIView {
         }
         
         thirdRankingCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 38 : 34)
             $0.centerX.equalToSuperview()
         }
         
@@ -306,10 +351,10 @@ class ReportOnePageView: UIView {
 
 extension ReportOnePageView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: calculateCellWidth(text: sentence[indexPath.item]), height: (collectionView.frame.height - 14*2)/3)
+        return CGSize(width: calculateCellWidth(text: sentence[indexPath.item]), height: 25)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 14
+        return UIScreen.main.hasNotch ? 14 : 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

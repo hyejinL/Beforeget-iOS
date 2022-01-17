@@ -27,9 +27,8 @@ final class ReportViewController: UIPageViewController {
     
     private let paginationStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.alignment = .center
-        $0.spacing = 15
-        $0.distribution = .fillEqually
+        $0.spacing = 13
+        $0.distribution = .equalSpacing
     }
     
     private let pageImageView1 = UIImageView().then {
@@ -91,7 +90,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(44)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
@@ -100,17 +99,17 @@ final class ReportViewController: UIPageViewController {
             $0.width.height.equalTo(44)
         }
         
-        paginationStackView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(145)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(17)
-            $0.height.equalTo(6)
-        }
-        
         paginationStackView.addArrangedSubviews([pageImageView1,
                                                  pageImageView2,
                                                  pageImageView3,
                                                  pageImageView4,
                                                  pageImageView5])
+        
+        paginationStackView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(145)
+            $0.height.equalTo(6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 18 : 26)
+        }
     }
     
     private func setupControllers() {
@@ -125,14 +124,17 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func calculateHeight() {
-        let maxCount = dumyData.max()
-        page2.reportGraphView.maxCount = maxCount!
+        guard let maxCount = dumyData.max() else { return }
+        page2.reportGraphView.maxCount = maxCount
+        page5.reportOnePageView.maxCount = maxCount
         
         let midCount = dumyData.sorted(by: >)[2]
         page2.reportGraphView.midCount = midCount
+        page5.reportOnePageView.midCount = midCount
         
         for data in dumyData {
-            let height = 150 * data / maxCount!
+            let totalHeight = UIScreen.main.hasNotch ? 150 : 130
+            let height = totalHeight * data / maxCount
             heights.append(Double(height))
         }
     }
