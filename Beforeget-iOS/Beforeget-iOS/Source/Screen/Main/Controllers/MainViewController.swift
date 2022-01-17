@@ -244,7 +244,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func touchupPostButton(_ sender: UIButton) {
-        let mediaSelectViewController = MediaSelectViewController()
+        let mediaSelectViewController = UINavigationController(rootViewController: MediaSelectViewController())
         mediaSelectViewController.modalPresentationStyle = .overFullScreen
         present(mediaSelectViewController, animated: true, completion: nil)
     }

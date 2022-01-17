@@ -45,6 +45,8 @@
 		5B8F137C2795776100385D5E /* WritingBackPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F137B2795776100385D5E /* WritingBackPopupView.swift */; };
 		5B8F137E279577F500385D5E /* DeletePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F137D279577F500385D5E /* DeletePopupView.swift */; };
 		5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */; };
+		5B8F138227957A4A00385D5E /* PostSavePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */; };
+		5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
 		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
@@ -156,6 +158,8 @@
 		5B8F137B2795776100385D5E /* WritingBackPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingBackPopupView.swift; sourceTree = "<group>"; };
 		5B8F137D279577F500385D5E /* DeletePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePopupView.swift; sourceTree = "<group>"; };
 		5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordDeletePopupViewController.swift; sourceTree = "<group>"; };
+		5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSavePopupViewController.swift; sourceTree = "<group>"; };
+		5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBackPopupViewController.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
 		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -711,6 +715,8 @@
 			children = (
 				927AF3AC2788162E0018CC34 /* PostViewController.swift */,
 				E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */,
+				5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */,
+				5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1009,10 +1015,12 @@
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
+				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
 				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
 				929CFB2A278EEA4600FCA541 /* ReportSentenceView.swift in Sources */,
+				5B8F138227957A4A00385D5E /* PostSavePopupViewController.swift in Sources */,
 				5B83EF31278E381200D07AC7 /* DateTableViewCell.swift in Sources */,
 				5B83EF2F278E1E2A00D07AC7 /* FilterButtonCollectionViewCell.swift in Sources */,
 				929CFB0D278DE06500FCA541 /* ReportRankingView.swift in Sources */,

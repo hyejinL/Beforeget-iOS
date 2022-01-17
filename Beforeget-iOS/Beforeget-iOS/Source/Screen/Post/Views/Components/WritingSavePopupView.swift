@@ -56,13 +56,12 @@ class WritingSavePopupView: UIView {
     // MARK: - @objc
     
     @objc func touchupLeftButton(_ sender: UIButton) {
-        guard let pvc = viewController?.presentingViewController else { return }
-        viewController?.dismiss(animated: true) {
-            pvc.dismiss(animated: true, completion: nil)
-        }
+        viewController?.dismiss(animated: true, completion: nil)
     }
     
     @objc func touchupRightButton(_ sender: UIButton) {
+        // MARK: - FIXME 완료 화면으로 넘어가기
         viewController?.dismiss(animated: true, completion: nil)
+//        let completeViewController =
     }
 }
