@@ -37,20 +37,24 @@ final class MainViewController: UIViewController {
         $0.backgroundColor = Asset.Colors.gray300.color
     }
     
-    private let statisticsButton = UIButton().then {
+    private let reportButton = UIButton().then {
         $0.setImage(Asset.Assets.btnStats.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupReportButton(_:)), for: .touchUpInside)
     }
     
     private let settingButton = UIButton().then {
         $0.setImage(Asset.Assets.btnSetting.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupSettingButton(_:)), for: .touchUpInside)
     }
     
-    private let writingButton = UIButton().then {
+    private let postButton = UIButton().then {
         $0.setImage(Asset.Assets.btnWriting.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupPostButton(_:)), for: .touchUpInside)
     }
     
     private let viewAllRecordsButton = UIButton().then {
         $0.setImage(Asset.Assets.btnAll.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupViewAllRecordButton(_:)), for: .touchUpInside)
     }
     
     private let messageLabel = UILabel().then {
@@ -78,7 +82,7 @@ final class MainViewController: UIViewController {
         $0.alignment = .fill
         $0.distribution = .fill
         $0.spacing = 3
-        $0.addArrangedSubviews([statisticsButton, settingButton])
+        $0.addArrangedSubviews([reportButton, settingButton])
     }
     
     private lazy var descriptionStackView = UIStackView().then {
@@ -128,7 +132,7 @@ final class MainViewController: UIViewController {
     ]
     
     private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(dummyData[0]) }
-                                                     .reduce(0) { $0 + $1 }
+        .reduce(0) { $0 + $1 }
     
     // MARK: - Life Cycle
     
@@ -164,7 +168,7 @@ final class MainViewController: UIViewController {
                           mediaImageView,
                           messageLabel,
                           descriptionStackView,
-                          writingButton,
+                          postButton,
                           recordStackView,
                           viewAllRecordsButton,
                           recordCollectionView])
@@ -205,7 +209,7 @@ final class MainViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-        writingButton.snp.makeConstraints {
+        postButton.snp.makeConstraints {
             $0.top.equalTo(descriptionStackView.snp.bottom).offset(44)
             $0.centerX.equalToSuperview()
         }
@@ -225,6 +229,42 @@ final class MainViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    // MARK: - @objc
+    
+    @objc func touchupReportButton(_ sender: UIButton) {
+        let reportViewController = ReportViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal,
+            options: nil)
+        navigationController?.pushViewController(reportViewController, animated: true)
+    }
+    
+    @objc func touchupSettingButton(_ sender: UIButton) {
+        let settingViewController = SettingViewController()
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    @objc func touchupPostButton(_ sender: UIButton) {
+        let mediaSelectViewController = UINavigationController(rootViewController: MediaSelectViewController())
+        mediaSelectViewController.modalPresentationStyle = .overFullScreen
+        present(mediaSelectViewController, animated: true, completion: nil)
+    }
+    
+    @objc func touchupViewAllRecordButton(_ sender: UIButton) {
+        let myRecordViewController = MyRecordViewController()
+        navigationController?.pushViewController(myRecordViewController, animated: true)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recordViewController = MyRecordViewController()
+        // MARK: - TODO 필터링된 미디어 유형 1~6을 보내주면 됨.
+        navigationController?.pushViewController(recordViewController, animated: true)
     }
 }
 
@@ -249,9 +289,7 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
-        
         cell.config(media.recordCount(dummyData[0]), "\(media)")
-        
         return cell
     }
 }

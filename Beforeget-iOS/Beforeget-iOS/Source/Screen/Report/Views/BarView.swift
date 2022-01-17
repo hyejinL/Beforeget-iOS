@@ -73,7 +73,7 @@ class BarView: UIView {
         barBackgroundView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(4)
-            $0.height.equalTo(150)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 150 : 130)
             $0.top.equalToSuperview()
         }
         

@@ -62,7 +62,7 @@ final class ReportGraphViewController: UIViewController {
         reportGraphView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.top.equalTo(reportTopView.snp.bottom)
-            $0.height.equalTo(290)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 290 : 242)
         }
         
         reportDescriptionView.snp.makeConstraints {

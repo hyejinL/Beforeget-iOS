@@ -143,7 +143,7 @@ class ReportGraphView: UIView {
         
         monthLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(25)
-            $0.top.equalToSuperview().inset(31)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 31 : 21)
         }
         
         threeMonthButton.snp.makeConstraints {
@@ -157,12 +157,12 @@ class ReportGraphView: UIView {
         }
         
         maxCountLabel.snp.makeConstraints {
-            $0.top.equalTo(monthLabel.snp.bottom).offset(36)
+            $0.top.equalTo(monthLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 36 : 26)
             $0.leading.equalToSuperview().inset(25)
         }
         
         midCountLabel.snp.makeConstraints {
-            $0.top.equalTo(maxCountLabel.snp.bottom).offset(64)
+            $0.top.equalTo(maxCountLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 64 : 55)
             $0.leading.equalTo(maxCountLabel.snp.leading)
         }
         
@@ -174,7 +174,7 @@ class ReportGraphView: UIView {
         }
         
         minCountLabel.snp.makeConstraints {
-            $0.top.equalTo(midCountLabel.snp.bottom).offset(65)
+            $0.top.equalTo(midCountLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 65 : 55)
             $0.leading.equalTo(maxCountLabel.snp.leading)
         }
         
@@ -188,14 +188,14 @@ class ReportGraphView: UIView {
         [barView1, barView2, barView3, barView4, barView5].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(28)
-                $0.height.equalTo(177)
+                $0.height.equalTo(UIScreen.main.hasNotch ? 177 : 157)
             }
         }
         
         barStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(86)
-            $0.bottom.equalToSuperview().inset(27)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 86 : 67)
+            $0.bottom.equalToSuperview().inset(UIScreen.main.hasNotch ? 27 : 18)
         }
     }
     
