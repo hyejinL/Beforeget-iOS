@@ -59,7 +59,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
-        CommentTableViewCell.register(target: $0)
+        CommentDetailTableViewCell.register(target: $0)
         ImageTableViewCell.register(target: $0)
         CommaTableViewCell.register(target: $0)
         GenreTableViewCell.register(target: $0)
@@ -202,8 +202,8 @@ extension DetailRecordViewController: UITableViewDataSource {
         switch detailSection {
         case .comment:
             guard let commentCell = tableView.dequeueReusableCell(
-                withIdentifier: CommentTableViewCell.className,
-                for: indexPath) as? CommentTableViewCell
+                withIdentifier: CommentDetailTableViewCell.className,
+                for: indexPath) as? CommentDetailTableViewCell
             else { return UITableViewCell() }
             return commentCell
             
