@@ -103,7 +103,6 @@ final class OneLineViewController: UIViewController {
         configUI()
         setupLayout()
         setupGestureRecognizer()
-        getNotification()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -255,10 +254,6 @@ final class OneLineViewController: UIViewController {
             }
         }
     }
-    
-    private func getNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getSelectedReviews), name: NSNotification.Name("selectedReviews"), object: nil)
-    }
         
     // MARK: - @objc
     
@@ -302,13 +297,8 @@ final class OneLineViewController: UIViewController {
         }
     }
     
-    @objc func getSelectedReviews() {
-        applyButton.isDisabled = false
-        applyButton.backgroundColor = Asset.Colors.black200.color
-    }
-    
     @objc func touchupApplyButton() {
-        
+        // 적용하기 버튼 
     }
 }
 

@@ -40,8 +40,6 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
             
             let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
             onelineLabel.textColor = textColor
-            
-            NotificationCenter.default.post(name: NSNotification.Name("selectedReviews"), object: nil)
         }
     }
     
