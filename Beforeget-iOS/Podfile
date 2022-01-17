@@ -6,6 +6,12 @@ target 'Beforeget-iOS' do
   use_frameworks!
 
   # Pods for Beforeget-iOS
-pod 'SwiftGen', '~> 6.0'
+  pod 'SwiftGen', '~> 6.0'
+  pod 'SnapKit', '~> 5.0.0'
+  pod 'Then'
+  pod 'lottie-ios'
+  pod 'Moya', '~> 14.0'
+  pod 'Kingfisher', '~> 6.0'
+  pod 'IQKeyboardManagerSwift', '6.3.0'
 
 end

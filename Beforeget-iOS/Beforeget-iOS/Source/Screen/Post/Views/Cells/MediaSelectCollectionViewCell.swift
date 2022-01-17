@@ -58,11 +58,11 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
                                  mediaLabel])
         
         mediaBackgroundView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
         mediaImageView.snp.makeConstraints {
-            $0.top.equalTo(mediaBackgroundView.snp.top).inset(42)
+            $0.top.equalTo(mediaBackgroundView.snp.top).inset(UIScreen.main.hasNotch ? 44 : 33)
             $0.centerX.equalTo(mediaBackgroundView)
             $0.width.height.equalTo(20)
         }
