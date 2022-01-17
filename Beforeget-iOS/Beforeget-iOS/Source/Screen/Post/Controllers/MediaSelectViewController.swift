@@ -119,7 +119,6 @@ final class MediaSelectViewController: UIViewController {
     //MARK: - @objc
     
     @objc func touchupNextButton() {
-        print("다음버튼", presentingViewController)
         let postViewController = PostViewController()
         navigationController?.pushViewController(postViewController, animated: true)
     }
