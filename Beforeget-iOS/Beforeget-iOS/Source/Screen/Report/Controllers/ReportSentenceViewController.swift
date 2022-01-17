@@ -50,13 +50,13 @@ final class ReportSentenceViewController: UIViewController {
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
-            $0.height.equalTo(146)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 146 : 142)
         }
         
         reportSentenceView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.top.equalTo(reportTopView.snp.bottom)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(54)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 54 : 62)
         }
     }
     
