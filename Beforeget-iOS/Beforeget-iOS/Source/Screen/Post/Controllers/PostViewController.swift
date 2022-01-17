@@ -27,7 +27,6 @@ class PostViewController: UIViewController {
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
         $0.estimatedRowHeight = 200
-        //        $0.invalidateIntrinsicContentSize()
         $0.rowHeight = UITableView.automaticDimension
         $0.delegate = self
         $0.dataSource = self

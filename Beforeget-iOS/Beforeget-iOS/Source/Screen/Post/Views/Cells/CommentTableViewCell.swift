@@ -32,12 +32,6 @@ class CommentTableViewCell: UITableViewCell {
         $0.textColor = Asset.Colors.gray200.color
     }
     
-    //    private let commentView = UIView().then {
-    //        $0.layer.borderColor = Asset.Colors.gray300.color.cgColor
-    //        $0.layer.borderWidth = 1
-    //        $0.makeRound(radius: 5)
-    //    }
-    
     private lazy var commentTextView = UITextView().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body6
@@ -103,12 +97,6 @@ class CommentTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().inset(14)
             $0.trailing.equalToSuperview()
         }
-    }
-    
-    // MARK: - Custom Method
-    
-    func setToolBar(_ toolBar: UIToolbar) {
-        commentTextView.inputAccessoryView = toolBar
     }
 }
 
