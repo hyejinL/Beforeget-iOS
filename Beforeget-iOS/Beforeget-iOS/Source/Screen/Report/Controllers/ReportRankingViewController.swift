@@ -31,8 +31,6 @@ final class ReportRankingViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        setupStatusBar(.white)
-        
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
@@ -59,14 +57,14 @@ final class ReportRankingViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
-            $0.height.equalTo(146)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 146 : 142)
         }
         
         reportRankingView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.top.equalTo(reportTopView.snp.bottom)
-            $0.height.equalTo(290)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 290 : 242)
         }
         
         reportDescriptionView.snp.makeConstraints {
@@ -85,10 +83,9 @@ final class ReportRankingViewController: UIViewController {
     private func setupToolbar() -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        toolbar.backgroundColor = .white
+        toolbar.backgroundColor = Asset.Colors.white.color
         toolbar.tintColor = Asset.Colors.black200.color
         toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
@@ -99,8 +96,7 @@ final class ReportRankingViewController: UIViewController {
     
     // MARK: - @objc
 
-    @objc
-    func touchupDoneButton() {
+    @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
     }

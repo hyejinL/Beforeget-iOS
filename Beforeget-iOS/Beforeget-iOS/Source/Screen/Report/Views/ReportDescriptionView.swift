@@ -64,8 +64,8 @@ class ReportDescriptionView: UIView {
         addSubviews([descriptionTitleLabel, descriptionContentLabel])
         
         descriptionTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(26)
+            $0.leading.equalToSuperview().inset(21)
+            $0.top.equalToSuperview().inset(25)
         }
         
         descriptionContentLabel.snp.makeConstraints {

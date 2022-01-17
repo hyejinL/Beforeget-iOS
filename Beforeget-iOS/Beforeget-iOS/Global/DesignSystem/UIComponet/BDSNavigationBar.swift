@@ -15,9 +15,8 @@ final class BDSNavigationBar: UIView {
     // MARK: - Metric Enum
     
     public enum Metric {
-        static let navigationHeight: CGFloat = 50
-        static let titleTop: CGFloat = 19
-        static let buttonTop: CGFloat = 6
+        static let navigationHeight: CGFloat = UIScreen.main.hasNotch ? 44 : 50
+        static let titleTop: CGFloat = 13
         static let buttonLeading: CGFloat = 4
         static let buttonTrailing: CGFloat = 7
         static let buttonSize: CGFloat = 44
@@ -44,7 +43,7 @@ final class BDSNavigationBar: UIView {
     // MARK: - Properties
     
     private var viewController = UIViewController()
-    private var backButton = BackButton()
+    public var backButton = BackButton()
     private var closeButton = CloseButton()
     
     private var titleLabel = UILabel().then {
@@ -73,6 +72,13 @@ final class BDSNavigationBar: UIView {
         setupBackButton(isHidden: isHidden)
     }
     
+    convenience init(_ viewController: UIViewController,
+                     view: PageView,
+                     isHidden: Bool, mediaType: MediaType) {
+        self.init(viewController, view: view, isHidden: isHidden)
+        setupWriteTitle(mediaType: mediaType)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,7 +100,7 @@ final class BDSNavigationBar: UIView {
         }
         
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Metric.buttonTop)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(Metric.buttonLeading)
             make.width.height.equalTo(Metric.buttonSize)
         }
@@ -102,11 +108,10 @@ final class BDSNavigationBar: UIView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(Metric.titleTop)
             make.centerX.equalToSuperview()
-            
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Metric.buttonTop)
+            make.top.equalToSuperview()
             make.trailing.equalToSuperview().inset(Metric.buttonTrailing)
             make.width.height.equalTo(Metric.buttonSize)
         }
@@ -117,5 +122,9 @@ final class BDSNavigationBar: UIView {
     private func setupBackButton(isHidden: Bool) {
         backButton.isHidden = isHidden
         closeButton.isHidden = !backButton.isHidden
+    }
+    
+    private func setupWriteTitle(mediaType: MediaType) {
+        titleLabel.text = "\(mediaType)"
     }
 }

@@ -108,7 +108,7 @@ final class ReportRankingView: UIView {
         
         secondRankingView.snp.makeConstraints {
             $0.leading.bottom.equalToSuperview()
-            $0.height.equalTo(256)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 34 : 28)
             $0.width.equalTo(100)
         }
         
@@ -140,7 +140,7 @@ final class ReportRankingView: UIView {
         
         starImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(firstRankingTypeLabel.snp.bottom).offset(86)
+            $0.top.equalTo(firstRankingTypeLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 86 : 48)
             $0.width.height.equalTo(18)
         }
         
@@ -151,7 +151,7 @@ final class ReportRankingView: UIView {
         
         thirdRankingView.snp.makeConstraints {
             $0.leading.equalTo(firstRankingView.snp.trailing).offset(2)
-            $0.height.equalTo(230)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 60 : 50)
             $0.trailing.bottom.equalToSuperview()
         }
         

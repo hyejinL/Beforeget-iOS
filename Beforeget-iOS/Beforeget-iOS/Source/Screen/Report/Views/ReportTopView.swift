@@ -38,7 +38,6 @@ class ReportTopView: UIView {
     }
     
     private var reportDescriptionLabel = UILabel().then {
-        $0.text = "이번 달 나의 소비 유형을 알아보세요"
         $0.textColor = Asset.Colors.gray100.color
         $0.font = BDSFont.body6
     }
@@ -84,7 +83,7 @@ class ReportTopView: UIView {
         addSubviews([monthButton, starImageView, reportTitleLabel, reportDescriptionLabel])
         
         monthButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(23)
+            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 23 : 13)
             $0.leading.trailing.equalToSuperview().inset(133)
             $0.height.equalTo(31)
         }
