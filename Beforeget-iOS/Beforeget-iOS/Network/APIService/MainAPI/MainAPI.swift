@@ -23,13 +23,13 @@ final class MainAPI {
     // MARK: - GET 
     
     func getMain(completion: @escaping ((Main?, Error?) -> ())) {
-        mainProvider.request(.main) { response in
+        mainProvider.request(.main) { [weak self] response in
             switch response {
             case .success(let result):
                 do {
-                    self.mainResponse = try result.map(MainResponse.self)
-                    guard let data = self.mainResponse?.data else { return }
-                    self.mainData = self.mainResponse?.data
+                    self?.mainResponse = try result.map(MainResponse.self)
+                    guard let data = self?.mainResponse?.data else { return }
+                    self?.mainData = self?.mainResponse?.data
                     
                     completion(data, nil)
                 } catch(let err) {
