@@ -133,9 +133,9 @@ final class MainViewController: UIViewController {
         $0.dataSource = self
     }
     
-    private var mainData: Main?
+    private var mainMediaData: Main?
     
-    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(mainData) }
+    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(mainMediaData) }
         .reduce(0) { $0 + $1 }
     
     // MARK: - Life Cycle
@@ -145,11 +145,11 @@ final class MainViewController: UIViewController {
         configUI()
         setupLayout()
 
-        mainAPI.getMain { data, err in
+        mainAPI.getMain { [weak self] data, err in
             guard let data = data else { return }
-            self.mainData = data
-            self.recordTotalLabel.text = "\(data.movie + data.book + data.music + data.tv + data.youtube + data.webtoon)"
-            self.recordCollectionView.reloadData()
+            self?.mainMediaData = data
+            self?.recordTotalLabel.text = "\(data.movie + data.book + data.music + data.tv + data.youtube + data.webtoon)"
+            self?.recordCollectionView.reloadData()
         }
     }
     
@@ -300,7 +300,7 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
-        cell.config(media.recordCount(mainData), "\(media)")
+        cell.config(media.recordCount(mainMediaData), "\(media)")
         return cell
     }
 }

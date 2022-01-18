@@ -18,7 +18,7 @@ final class MainAPI {
     // MARK: - Network Properties
     
     private let mainProvider = MoyaProvider<MainService>(plugins: [MoyaLoggerPlugin()])
-    public private(set) var mainResponse: MainResponse?
+    public private(set) var mainResponse: BaseResponse<Main>?
     public private(set) var mainData: Main?
     
     // MARK: - GET
@@ -28,9 +28,12 @@ final class MainAPI {
             switch response {
             case .success(let result):
                 do {
-                    self?.mainResponse = try result.map(MainResponse.self)
-                    guard let data = self?.mainResponse?.data else { return }
-                    self?.mainData = self?.mainResponse?.data
+                    self?.mainResponse = try result.map(BaseResponse<Main>.self)
+                    guard let data = self?.mainResponse?.data else {
+                        completion(nil, Error.self as? Error)
+                        return
+                    }
+                    self?.mainData = data
                     
                     completion(data, nil)
                 } catch(let err) {

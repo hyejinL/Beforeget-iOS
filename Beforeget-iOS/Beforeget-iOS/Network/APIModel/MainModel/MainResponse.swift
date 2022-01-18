@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct MainResponse: Codable {
-    let status: Int
-    let success: Bool
-    let message: String
-    let data: Main
-}
-
 struct Main: Codable {
     let movie, book, tv, music: Int
     let webtoon, youtube: Int
