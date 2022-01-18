@@ -59,6 +59,8 @@ final class MediaSelectViewController: UIViewController {
         $0.dataSource = self
     }
     
+    var mediaType: MediaType?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -120,6 +122,7 @@ final class MediaSelectViewController: UIViewController {
     
     @objc func touchupNextButton() {
         let postViewController = PostViewController()
+        postViewController.mediaType = mediaType ?? .movie
         navigationController?.pushViewController(postViewController, animated: true)
     }
 }
@@ -156,6 +159,7 @@ extension MediaSelectViewController: UICollectionViewDataSource {
 
 extension MediaSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        mediaType = MediaType(rawValue: indexPath.item) ?? .movie
         activateNextButton()
     }
 }
