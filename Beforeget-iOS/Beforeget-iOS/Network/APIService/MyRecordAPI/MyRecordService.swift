@@ -1,19 +1,19 @@
 //
-//  MainService.swift
+//  MyRecordService.swift
 //  Beforeget-iOS
 //
-//  Created by soyeon on 2022/01/18.
+//  Created by Thisisme Hi on 2022/01/19.
 //
 
 import Foundation
 
 import Moya
 
-enum MainService {
-    case main
+enum MyRecordService {
+    case myRecord
 }
 
-extension MainService: TargetType {
+extension MyRecordService: TargetType {
     
     var baseURL: URL {
         return URL(string: NetworkConstant.baseURL)!
@@ -21,21 +21,21 @@ extension MainService: TargetType {
     
     var path: String {
         switch self {
-        case .main:
-            return "/home"
+        case .myRecord:
+            return "/post"
         }
     }
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .main:
+        case .myRecord:
             return JSONEncoding.default
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .main:
+        case .myRecord:
             return .get
         }
     }
@@ -46,14 +46,14 @@ extension MainService: TargetType {
     
     var task: Task {
         switch self {
-        case .main:
+        case .myRecord:
             return .requestPlain
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .main:
+        case .myRecord:
             return Token.accessToken
         }
     }

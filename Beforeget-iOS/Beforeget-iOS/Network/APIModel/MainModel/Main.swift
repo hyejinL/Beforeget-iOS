@@ -1,5 +1,5 @@
 //
-//  MainResponse.swift
+//  Main.swift
 //  Beforeget-iOS
 //
 //  Created by soyeon on 2022/01/18.

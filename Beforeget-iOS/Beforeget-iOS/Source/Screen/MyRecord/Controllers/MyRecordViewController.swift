@@ -12,7 +12,13 @@ import Then
 
 final class MyRecordViewController: UIViewController {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
+    
+    private var record: [MyRecord] = []
     
     private var mediaData: String = ""
     private var starData: String = ""
@@ -21,8 +27,6 @@ final class MyRecordViewController: UIViewController {
     private var dateQuery: String = ""
     private var mediaQuery: String = ""
     private var starQuery: String = ""
-    
-    private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .record, isHidden: false)
@@ -54,6 +58,11 @@ final class MyRecordViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        myRecordAPI.getMain { data, err in
+            guard let data = data else { return }
+            self.record = data
+            self.recordTableView.reloadData()
+        }
     }
     
     // MARK: - InitUI
@@ -116,7 +125,7 @@ extension MyRecordViewController: UITableViewDelegate {
 
 extension MyRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return record.getCount()
+        return record.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

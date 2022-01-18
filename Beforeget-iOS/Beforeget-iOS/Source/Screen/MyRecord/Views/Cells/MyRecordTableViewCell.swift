@@ -12,9 +12,11 @@ import Then
 
 class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Properties
+    // MARK: - Network
     
-    private let record = RecordMannager()
+    private let myRecordAPI = MyRecordAPI.shared
+    
+    // MARK: - Properties
     
     private var iconImageView = UIImageView()
     
@@ -103,7 +105,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         onelineLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(20)
         }
         
         starLabel.snp.makeConstraints { make in
@@ -133,17 +135,20 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Custom Method
 
     public func config(index: Int) {
-        onelineLabel.text = record.getData(index: index).oneline[0]
-        titleLabel.text = record.getData(index: index).title
-        starLabel.text = String(record.getStar(index: index))
-        let category = record.getData(index: index).category
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return }
+        titleLabel.text = myRecord[index].title
+        onelineLabel.text = myRecord[index].oneline
+        starLabel.text = String(myRecord[index].star)
+        let categoryImage = myRecord[index].category
         
-        switch category {
+        // MARK: - FIXME 에셋 넘겨주면 이미지 바꾸기
+        switch categoryImage {
+        case 0: return iconImageView.image = Asset.Assets.icnWebtoon.image
         case 1: return iconImageView.image = Asset.Assets.icnWebtoon.image
         case 2: return iconImageView.image = Asset.Assets.icnWebtoon.image
         case 3: return iconImageView.image = Asset.Assets.icnWebtoon.image
         case 4: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 5: return iconImageView.image = Asset.Assets.icnWebtoon.image
         default: return iconImageView.image = Asset.Assets.icnWebtoon.image
         }
     }

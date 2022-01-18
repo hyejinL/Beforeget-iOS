@@ -1,41 +1,39 @@
 //
-//  MainAPI.swift
+//  MyRecordAPI.swift
 //  Beforeget-iOS
 //
-//  Created by soyeon on 2022/01/18.
+//  Created by Thisisme Hi on 2022/01/19.
 //
 
 import Foundation
 
 import Moya
 
-final class MainAPI {
+final class MyRecordAPI {
     
     // MARK: - Static Properties
     
-    static let shared: MainAPI = MainAPI()
+    static let shared: MyRecordAPI = MyRecordAPI()
     private init() { }
     
     // MARK: - Network Properties
     
-    private let mainProvider = MoyaProvider<MainService>(plugins: [MoyaLoggerPlugin()])
-    public private(set) var mainResponse: BaseResponse<Main>?
-    public private(set) var mainData: Main?
+    private let myRecordProvider = MoyaProvider<MyRecordService>(plugins: [MoyaLoggerPlugin()])
+    public private(set) var myRecord: BaseArrayResponseType<MyRecord>?
     
     // MARK: - GET
     
-    func getMain(completion: @escaping ((Main?, Error?) -> ())) {
-        mainProvider.request(.main) { [weak self] response in
+    func getMain(completion: @escaping (([MyRecord]?, Error?) -> ())) {
+        myRecordProvider.request(.myRecord) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let result):
                 do {
-                    self.mainResponse = try result.map(BaseResponse<Main>.self)
-                    guard let data = self.mainResponse?.data else {
+                    self.myRecord = try result.map(BaseArrayResponseType<MyRecord>.self)
+                    guard let data = self.myRecord?.data else {
                         completion(nil, Error.self as? Error)
                         return
                     }
-                    self.mainData = data
                     completion(data, nil)
                     
                 } catch(let err) {
