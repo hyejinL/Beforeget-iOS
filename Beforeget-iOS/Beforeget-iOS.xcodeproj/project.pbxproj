@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D1CD2CF54A73A87687AD682 /* Pods_Beforeget_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D178E4C6C44239CB86074C9B /* Pods_Beforeget_iOS.framework */; };
+		27F75B78F7AFE1CACC07B5AF /* Pods_Beforeget_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */; };
 		5B304B71278824C80054314A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B70278824C80054314A /* swiftgen.yml */; };
 		5B304B752788257F0054314A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B742788257E0054314A /* Colors.xcassets */; };
 		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
@@ -50,7 +50,7 @@
 		5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8F13872795847300385D5E /* CompleteViewController.swift */; };
 		5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114922790B3670063EB3B /* UICollectionView+.swift */; };
 		5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */; };
-		5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */; };
+		5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */; };
 		5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */; };
 		5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */; };
 		5BD114A52790C4570063EB3B /* GenreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */; };
@@ -118,12 +118,18 @@
 		929CFB2A278EEA4600FCA541 /* ReportSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB29278EEA4600FCA541 /* ReportSentenceView.swift */; };
 		E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDAA278F23A900AFA390 /* MediaType.swift */; };
 		E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDB2278F478400AFA390 /* WritingHeaderView.swift */; };
+		E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */; };
+		E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */; };
+		E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */; };
 		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
 		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
+		E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072427940B8900E815E6 /* NotificationName.swift */; };
+		E2F4072727947BD300E815E6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072627947BD300E815E6 /* AddItemViewController.swift */; };
+		E2F407292794840A00E815E6 /* AddItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beforeget_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B304B70278824C80054314A /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		5B304B742788257E0054314A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
@@ -167,7 +173,7 @@
 		5B8F13872795847300385D5E /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		5BD114922790B3670063EB3B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		5BD114972790C1C10063EB3B /* DetailRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewController.swift; sourceTree = "<group>"; };
-		5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommaTableViewCell.swift; sourceTree = "<group>"; };
 		5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,12 +186,16 @@
 		5BD114B7279133710063EB3B /* CellTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTitleLabel.swift; sourceTree = "<group>"; };
 		5BD114B927913AE20063EB3B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordHeaderView.swift; sourceTree = "<group>"; };
+
 		920B5D4027969C94002DE112 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		920B5D4627969D36002DE112 /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResponse.swift; sourceTree = "<group>"; };
 		920B5D4827969D94002DE112 /* MainAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAPI.swift; sourceTree = "<group>"; };
 		920B5D4A27969DAA002DE112 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		920B5D4C27969DCD002DE112 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
+
+		6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
+
 		921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineViewController.swift; sourceTree = "<group>"; };
 		921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -234,12 +244,17 @@
 		929CFB1B278DE13600FCA541 /* RecordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewCell.swift; sourceTree = "<group>"; };
 		929CFB26278EBE6200FCA541 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		929CFB29278EEA4600FCA541 /* ReportSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceView.swift; sourceTree = "<group>"; };
-		D178E4C6C44239CB86074C9B /* Pods_Beforeget_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beforeget_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E206FDAA278F23A900AFA390 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
+		E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineReviewTableViewCell.swift; sourceTree = "<group>"; };
+		E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
 		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
-		F555034342B9AB8CF5ADF840 /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E2F4072427940B8900E815E6 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		E2F4072627947BD300E815E6 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,26 +262,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D1CD2CF54A73A87687AD682 /* Pods_Beforeget_iOS.framework in Frameworks */,
+				27F75B78F7AFE1CACC07B5AF /* Pods_Beforeget_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4773B68531F0409B4C7C965C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D178E4C6C44239CB86074C9B /* Pods_Beforeget_iOS.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		5B304B722788251A0054314A /* Constant */ = {
 			isa = PBXGroup;
 			children = (
 				5B304B782788304B0054314A /* Fonts.swift */,
 				5B304B7627882AF30054314A /* Assets+Generated.swift */,
+				E2F4072427940B8900E815E6 /* NotificationName.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -474,7 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				5B82542E279182E3004BDA5D /* ReviewTagCollectionViewCell.swift */,
-				5BD1149E2790C4390063EB3B /* CommentTableViewCell.swift */,
+				5BD1149E2790C4390063EB3B /* CommentDetailTableViewCell.swift */,
 				5BD114A02790C4440063EB3B /* ImageTableViewCell.swift */,
 				5BD114A22790C44F0063EB3B /* CommaTableViewCell.swift */,
 				5BD114A42790C4570063EB3B /* GenreTableViewCell.swift */,
@@ -493,8 +501,8 @@
 		8BE74230A796E431079FC61E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */,
-				F555034342B9AB8CF5ADF840 /* Pods-Beforeget-iOS.release.xcconfig */,
+				AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */,
+				6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -576,7 +584,7 @@
 				927AF36F27880B820018CC34 /* Beforeget-iOS */,
 				927AF36E27880B820018CC34 /* Products */,
 				8BE74230A796E431079FC61E /* Pods */,
-				4773B68531F0409B4C7C965C /* Frameworks */,
+				CEBE864B6EB4B05BF4709142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -780,6 +788,7 @@
 			children = (
 				927AF3AC2788162E0018CC34 /* PostViewController.swift */,
 				E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */,
+				E2F4072627947BD300E815E6 /* AddItemViewController.swift */,
 				921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */,
 				5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */,
 				5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */,
@@ -867,6 +876,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CEBE864B6EB4B05BF4709142 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				158141424A1465ED3870E972 /* Pods_Beforeget_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E206FDA9278F230B00AFA390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +907,10 @@
 			isa = PBXGroup;
 			children = (
 				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
+				E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */,
+				E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */,
+				E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */,
+				E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */,
 				921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */,
 				921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */,
 				921E62AB2794D188002E6CD1 /* OneLineTextCollectionViewCell.swift */,
@@ -904,20 +925,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 927AF38127880B830018CC34 /* Build configuration list for PBXNativeTarget "Beforeget-iOS" */;
 			buildPhases = (
-				7597565D40553964C622AC2C /* [CP] Check Pods Manifest.lock */,
+				39B4BB462CF3F1F15D540DD4 /* [CP] Check Pods Manifest.lock */,
 				5B304B73278825470054314A /* ShellScript */,
 				927AF36927880B820018CC34 /* Sources */,
 				927AF36A27880B820018CC34 /* Frameworks */,
 				927AF36B27880B820018CC34 /* Resources */,
-				B78E3AA709784E858210CA02 /* [CP] Embed Pods Frameworks */,
+				FCEA452953764A8CA3F6F4A1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Beforeget-iOS";
-			packageProductDependencies = (
-			);
 			productName = "Beforeget-iOS";
 			productReference = 927AF36D27880B820018CC34 /* Beforeget-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -946,8 +965,6 @@
 				Base,
 			);
 			mainGroup = 927AF36427880B820018CC34;
-			packageReferences = (
-			);
 			productRefGroup = 927AF36E27880B820018CC34 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -979,24 +996,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5B304B73278825470054314A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
-		};
-		7597565D40553964C622AC2C /* [CP] Check Pods Manifest.lock */ = {
+		39B4BB462CF3F1F15D540DD4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1018,7 +1018,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B78E3AA709784E858210CA02 /* [CP] Embed Pods Frameworks */ = {
+		5B304B73278825470054314A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
+		};
+		FCEA452953764A8CA3F6F4A1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1047,12 +1064,14 @@
 				920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */,
 				920B5D142795AD05002DE112 /* ReportTopView.swift in Sources */,
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
+				E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
 				5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				5B8F137A279576F600385D5E /* WritingSavePopupView.swift in Sources */,
 				E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */,
 				5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */,
+				E2F4072727947BD300E815E6 /* AddItemViewController.swift in Sources */,
 				929CFB0F278DE06500FCA541 /* RespondingButton.swift in Sources */,
 				929CFB00278DE04200FCA541 /* ReportOnePageViewController.swift in Sources */,
 				5BD114A32790C44F0063EB3B /* CommaTableViewCell.swift in Sources */,
@@ -1070,6 +1089,7 @@
 				E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */,
 				5B83EF33278E388C00D07AC7 /* DatePickerTableViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
+				E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */,
 				5BD114B8279133710063EB3B /* CellTitleLabel.swift in Sources */,
 				5BD114A92790C4680063EB3B /* SongTableViewCell.swift in Sources */,
 				921E62AC2794D188002E6CD1 /* OneLineTextCollectionViewCell.swift in Sources */,
@@ -1086,7 +1106,7 @@
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
-				5BD1149F2790C4390063EB3B /* CommentTableViewCell.swift in Sources */,
+				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
 				5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */,
@@ -1119,12 +1139,17 @@
 				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
+				E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
+
+				E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */,
+
 				5BD114B12790C5BF0063EB3B /* DetailRecordSection.swift in Sources */,
 				5B7BD10C278D870F000BC0FA /* MenuBarView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
 				921E62A82794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift in Sources */,
 				929CFB19278DE11E00FCA541 /* Media.swift in Sources */,
+				E2F407292794840A00E815E6 /* AddItemCollectionViewCell.swift in Sources */,
 				5B82543727918D23004BDA5D /* StampCollectionViewCell.swift in Sources */,
 				5BD114A52790C4570063EB3B /* GenreTableViewCell.swift in Sources */,
 				5BD114AF2790C4A80063EB3B /* StampTableViewCell.swift in Sources */,
@@ -1286,7 +1311,7 @@
 		};
 		927AF38227880B830018CC34 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 357252CD8D62052CA358E50E /* Pods-Beforeget-iOS.debug.xcconfig */;
+			baseConfigurationReference = AC34B233BE4990708382B205 /* Pods-Beforeget-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1317,7 +1342,7 @@
 		};
 		927AF38327880B830018CC34 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F555034342B9AB8CF5ADF840 /* Pods-Beforeget-iOS.release.xcconfig */;
+			baseConfigurationReference = 6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
