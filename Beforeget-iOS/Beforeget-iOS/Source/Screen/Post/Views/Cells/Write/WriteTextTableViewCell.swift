@@ -75,6 +75,10 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        commentTextField.isUserInteractionEnabled = true
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
