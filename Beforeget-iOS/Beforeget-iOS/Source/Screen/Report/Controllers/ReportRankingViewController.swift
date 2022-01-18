@@ -35,7 +35,7 @@ final class ReportRankingViewController: UIViewController {
         reportTopView.monthButton.inputView = monthPicker
         
         reportTopView.reportTitle = "유형별 랭킹"
-        reportTopView.reportDescription = "12월 한 달 기록률이 가장 높은 top 3"
+        reportTopView.reportDescription = "\(addOrSubtractMonth(month: -1)) 한 달 기록률이 가장 높은 top 3"
     }
     
     private func setupLayout() {
@@ -78,6 +78,13 @@ final class ReportRankingViewController: UIViewController {
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월"
+        return dateFormatter.string(from: date)
     }
     
     // MARK: - @objc

@@ -263,7 +263,7 @@ class ReportOnePageView: UIView {
         sentenceView.addSubview(sentenceCollectionView)
         
         sentenceCollectionView.snp.makeConstraints { 
-            $0.width.equalTo(110)
+            $0.width.equalTo(130)
             $0.height.equalTo(UIScreen.main.hasNotch ? 107 : 91)
             $0.centerX.centerY.equalToSuperview()
         }

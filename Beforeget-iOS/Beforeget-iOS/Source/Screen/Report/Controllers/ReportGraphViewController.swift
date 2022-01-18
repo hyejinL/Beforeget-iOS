@@ -36,18 +36,13 @@ final class ReportGraphViewController: UIViewController {
         reportTopView.reportTitle = "월별 그래프"
         reportTopView.reportDescription = "가장 많은 기록을 한 달을 확인해보세요"
         
-        reportDescriptionView.descriptionTitle = "13개의 기록을 남겼어요"
-        reportDescriptionView.descriptionContent = """
-                                                지난달 보다 4개가 늘었네요!
-                                                8월부터 5개월간 가장 많은 기록을 남긴 달은
-                                                10월로, 30개의 기록을 남겼어요!
-                                                다음 달 나의 그래프는 어떤 모양일까요?
-                                                """
-        
         reportGraphView.delegate = self
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
-        reportGraphView.month = "12"
+        
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: Date())
+        reportGraphView.month = String(month)
     }
     
     private func setupLayout() {

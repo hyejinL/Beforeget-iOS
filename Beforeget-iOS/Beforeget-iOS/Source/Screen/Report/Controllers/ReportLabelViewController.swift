@@ -21,6 +21,9 @@ final class ReportLabelViewController: UIViewController {
     var reportDescriptionView = ReportDescriptionView()
     private var monthPicker = MonthYearPickerView()
     
+    var descriptionTitle: String?
+    var descriptionContent: String?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -36,7 +39,7 @@ final class ReportLabelViewController: UIViewController {
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
-        reportTopView.reportTitle = "12월의 땅콩님은?"
+        reportTopView.reportTitle = "\(addOrSubtractMonth(month: -1))의 땅콩님은?"
         reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
     }
     
@@ -80,6 +83,13 @@ final class ReportLabelViewController: UIViewController {
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월"
+        return dateFormatter.string(from: date)
     }
     
     // MARK: - @objc
