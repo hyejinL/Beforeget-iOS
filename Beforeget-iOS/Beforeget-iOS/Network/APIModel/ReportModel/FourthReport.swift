@@ -9,10 +9,10 @@ import Foundation
 
 struct FourthReport: Codable {
     let start: String
-    let oneline: Oneline
+    let oneline: ReportOneline
 }
 
-struct Oneline: Codable {
+struct ReportOneline: Codable {
     let movie, book, tv, music: [String]
     let webtoon, youtube: [String]
 
