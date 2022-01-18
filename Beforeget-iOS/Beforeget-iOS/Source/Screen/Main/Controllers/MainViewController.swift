@@ -293,4 +293,3 @@ extension MainViewController: UICollectionViewDataSource {
         return cell
     }
 }
-

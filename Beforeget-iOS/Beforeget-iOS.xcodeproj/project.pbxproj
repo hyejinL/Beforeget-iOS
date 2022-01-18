@@ -81,7 +81,6 @@
 		927AF37A27880B830018CC34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37927880B830018CC34 /* Assets.xcassets */; };
 		927AF37D27880B830018CC34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37B27880B830018CC34 /* LaunchScreen.storyboard */; };
 		927AF399278810480018CC34 /* BaseResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF398278810480018CC34 /* BaseResponseType.swift */; };
-		927AF39C278810D50018CC34 /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39B278810D50018CC34 /* MockParser.swift */; };
 		927AF39F278812D50018CC34 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39E278812D50018CC34 /* UILabel+.swift */; };
 		927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A2278813A60018CC34 /* UIScreen+.swift */; };
 		927AF3A5278813C00018CC34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A4278813C00018CC34 /* UIView+.swift */; };
@@ -160,12 +159,8 @@
 		5B8F136D2794CA5B00385D5E /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		5B8F136F2794D37D00385D5E /* SettingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFooterView.swift; sourceTree = "<group>"; };
 		5B8F13712794E57500385D5E /* BDSPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSPopupView.swift; sourceTree = "<group>"; };
-		5B8F13752795577D00385D5E /* EditPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupView.swift; sourceTree = "<group>"; };
-		5B8F1377279559E800385D5E /* DetailRecordEditPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordEditPopupViewController.swift; sourceTree = "<group>"; };
 		5B8F1379279576F600385D5E /* WritingSavePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingSavePopupView.swift; sourceTree = "<group>"; };
 		5B8F137B2795776100385D5E /* WritingBackPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingBackPopupView.swift; sourceTree = "<group>"; };
-		5B8F137D279577F500385D5E /* DeletePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePopupView.swift; sourceTree = "<group>"; };
-		5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordDeletePopupViewController.swift; sourceTree = "<group>"; };
 		5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSavePopupViewController.swift; sourceTree = "<group>"; };
 		5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBackPopupViewController.swift; sourceTree = "<group>"; };
 		5B8F13872795847300385D5E /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
@@ -211,7 +206,6 @@
 		927AF39227880ECE0018CC34 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		927AF39327880ECE0018CC34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		927AF398278810480018CC34 /* BaseResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseType.swift; sourceTree = "<group>"; };
-		927AF39B278810D50018CC34 /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
 		927AF39E278812D50018CC34 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		927AF3A2278813A60018CC34 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		927AF3A4278813C00018CC34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -424,17 +418,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5BB7A90327959E240019633B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				5B8F13752795577D00385D5E /* EditPopupView.swift */,
-				5B8F137D279577F500385D5E /* DeletePopupView.swift */,
-				5B8F137F279578BD00385D5E /* DetailRecordDeletePopupViewController.swift */,
-				5B8F1377279559E800385D5E /* DetailRecordEditPopupViewController.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		5BD114942790C1910063EB3B /* DetailRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,7 +540,6 @@
 				927AF36F27880B820018CC34 /* Beforeget-iOS */,
 				927AF36E27880B820018CC34 /* Products */,
 				8BE74230A796E431079FC61E /* Pods */,
-
 				CEBE864B6EB4B05BF4709142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -614,7 +596,6 @@
 		927AF38727880CFC0018CC34 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				927AF39A2788109F0018CC34 /* Mock */,
 				927AF39727880F4E0018CC34 /* Base */,
 			);
 			path = Network;
@@ -708,14 +689,6 @@
 				927AF398278810480018CC34 /* BaseResponseType.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		927AF39A2788109F0018CC34 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				927AF39B278810D50018CC34 /* MockParser.swift */,
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 		927AF39D278811420018CC34 /* Extension */ = {
@@ -1120,7 +1093,6 @@
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
 				E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
-				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */,
 				5BD114B12790C5BF0063EB3B /* DetailRecordSection.swift in Sources */,
 				5B7BD10C278D870F000BC0FA /* MenuBarView.swift in Sources */,
@@ -1134,17 +1106,10 @@
 				5B82543327918CD5004BDA5D /* GenreCollectionViewCell.swift in Sources */,
 				5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */,
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
-				5B6D7F8F278B3BEB00202230 /* BDSNavigationBar.swift in Sources */,
-				929CFB27278EBE6200FCA541 /* BarView.swift in Sources */,
-				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
 				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
 				5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */,
-				929CFB27278EBE6200FCA541 /* BarView.swift in Sources */,
-				929CFB0E278DE06500FCA541 /* ReportTopView.swift in Sources */,
-				5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */,
 				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
 				5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */,
-				5B8F1378279559E800385D5E /* DetailRecordEditPopupViewController.swift in Sources */,
 				9277486B27902CBC00FAAE77 /* ReportOnePageView.swift in Sources */,
 				5B86AEB9278F7B22001C4486 /* MediaCollectionViewCell.swift in Sources */,
 				929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */,

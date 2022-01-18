@@ -139,6 +139,13 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
+    public func setSelectedButton() {
+        selectedMediaArray.forEach {
+            let index = buttonTitle.firstIndex(of: $0) ?? 0
+            mediaButtonList[index].isSelected = true
+        }
+    }
+    
     private func setupAction() {
         mediaButtonList.forEach {
             $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
@@ -149,10 +156,8 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected.toggle()
-        print("sender.isSelected = \(sender.isSelected)")
         let senderIndex = sender.titleLabel?.text ?? "미디어"
         if let index = selectedMediaArray.firstIndex(of: senderIndex) {
-            print("index가 있음")
             selectedMediaArray.remove(at: index)
             print("selectedMediaArray = \(selectedMediaArray)")
         } else {

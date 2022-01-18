@@ -185,7 +185,6 @@ extension MyRecordViewController:
         if filterView.mediaButton.isSelected {
             if media.isEmpty {
                 mediaData = "미디어"
-                filterView.mediaButton.isSelected = false
             } else if media.count == 1 {
                 mediaData = "\(media[0])"
             } else {
@@ -194,7 +193,7 @@ extension MyRecordViewController:
         } else {
             mediaData = "미디어"
         }
-        
+                
         filterView.mediaButton.setTitle(mediaData, for: .normal)
         
         selectedDateIndex = data

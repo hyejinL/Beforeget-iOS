@@ -192,6 +192,12 @@ extension FilterCollectionViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let dateFilterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterButtonCollectionViewCell.className, for: indexPath) as? FilterButtonCollectionViewCell else { return UICollectionViewCell() }
+        print(indexPath.item, selectedDateIndex, "여기")
+        if indexPath.item == selectedDateIndex {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+        } else {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
         dateFilterCell.cellLabel.text = filter.getFilterText(index: indexPath.item)
         return dateFilterCell
     }
@@ -244,7 +250,6 @@ extension FilterCollectionViewCell: UITableViewDataSource {
             datePickerCell.setSelected(false, animated: false)
             datePickerCell.dateSendingClosure = { index, date in
                 self.dateSendingClosure?(index, date)
-                print("datePickerCell.dateSendingClosure")
             }
             return datePickerCell
         } else { // 동일하지 않은 경우 데이트셀을 반환해서 날짜와 제목을 반환

@@ -19,9 +19,7 @@ protocol SendDataDelegate: MyRecordViewController {
 final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
-    
-    var number: Int?
-    
+        
     var selectedDateIndex: Int = -1
     var selectedMediaArray: [String] = ["미디어"]
     var selectedStarArray: [Int] = []
@@ -218,13 +216,11 @@ final class FilterModalViewController: UIViewController {
     
     @objc func touchupApplyButton(_ sender: UIButton) {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
-        sendDataDelegate?.sendData(
+        sendDataDelegate?.sendData (
             data: selectedDateIndex,
             media: selectedMediaArray,
             star: selectedStarArray)
         hideBottomSheetAndGoBack()
-        //        let presentingVC = presentingViewController as? MyRecordViewController
-        //        presentingVC.filterView.dateButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
     }
     
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
@@ -242,7 +238,6 @@ final class FilterModalViewController: UIViewController {
 
 extension FilterModalViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // MARK: - FIXME 13 미니 대응 문제로 실제 상수값 변경 요망
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
         
@@ -280,13 +275,12 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
             filterCell.dateFilterButtonDelegate = self
             // MARK: - 추후 공부할 부분 : Closure
+            filterCell.selectedDateIndex = selectedDateIndex
             filterCell.dateSendingClosure = { index, date in
                 print("dateIndex \(index)")
                 self.recordDateTuple[index] = date.convertToString("YYYY-MM-dd")
                 print(self.recordDateTuple, "날짜모음")
-
             }
-            
             return filterCell
             
         case 1:
@@ -295,16 +289,7 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
             mediaCell.selectedMediaArray = selectedMediaArray
-
-            
-            selectedMediaArray.forEach {_ in
-                guard let numberIndex = number else { return }
-                print("mediaindex \(numberIndex)")
-                // MARK: - FIXME 여기서 해결해줘야 함
-//                mediaCell.mediaButtonList[$0].isSelected = true
-
-                mediaCell.mediaButtonList[numberIndex].isSelected = true
-            }
+            mediaCell.setSelectedButton()
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
@@ -313,10 +298,10 @@ extension FilterModalViewController: UICollectionViewDataSource {
             starCell.starFilterButtonDelegate = self
             starCell.selectedStarArray = selectedStarArray
             selectedStarArray.forEach {
-                print("starindex \($0)")
                 starCell.starButtonList[$0 - 1].isSelected = true
                 if starCell.starButtonList[$0 - 1].isSelected {
                     applyButton.isDisabled = false
+                    print(applyButton.isDisabled, "여기어플라이버튼")
                 } else {
                     applyButton.isDisabled = true
                 }

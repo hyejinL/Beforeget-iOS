@@ -16,6 +16,7 @@ class FilterButtonCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     
     override var isSelected: Bool {
         didSet {
+            print("isSelected",isSelected)
             configUI()
         }
     }
@@ -41,6 +42,11 @@ class FilterButtonCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        isSelected = false
     }
     
     // MARK: - InitUI
