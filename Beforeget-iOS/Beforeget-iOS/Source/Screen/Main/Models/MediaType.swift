@@ -26,7 +26,8 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
         }
     }
     
-    func recordCount(_ media: Media) -> Int {
+    func recordCount(_ media: Main?) -> Int {
+        guard let media = media else { return 0 }
         switch self {
         case .movie: return media.movie
         case .book: return media.book
