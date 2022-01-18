@@ -1,13 +1,20 @@
 //
-//  Media.swift
+//  MainResponse.swift
 //  Beforeget-iOS
 //
-//  Created by 배은서 on 2022/01/09.
+//  Created by soyeon on 2022/01/18.
 //
 
 import Foundation
 
-struct Media: Codable {
+struct MainResponse: Codable {
+    let status: Int
+    let success: Bool
+    let message: String
+    let data: Main
+}
+
+struct Main: Codable {
     let movie, book, tv, music: Int
     let webtoon, youtube: Int
 

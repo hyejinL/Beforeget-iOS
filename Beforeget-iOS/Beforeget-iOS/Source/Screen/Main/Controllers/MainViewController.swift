@@ -128,7 +128,7 @@ final class MainViewController: UIViewController {
     }
     
     private let dummyData: [Media] = [
-        Media(book: 6, music: 6, movie: 6, tv: 6, youtube: 6, webtoon: 6)
+        Media(movie: 0, book: 0, tv: 0, music: 0, webtoon: 0, youtube: 0)
     ]
     
     private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(dummyData[0]) }
@@ -140,6 +140,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        getMainDataWithAPI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -294,3 +295,26 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - Network
+
+extension MainViewController {
+    func getMainDataWithAPI() {
+        MainAPI.shared.getMainData { response in
+            switch response {
+            case .success(let data):
+                print(data)
+                if let mainDatas = data as? MainResponse {
+                    print(mainDatas)
+                }
+            case .requestErr(let message):
+                print("getMainDataWithAPI - requestErr: \(message)")
+            case .pathErr:
+                print("getMainDataWithAPI - pathErr")
+            case .serverErr:
+                print("getMainDataWithAPI - serverErr")
+            case .networkFail:
+                print("getMainDataWithAPI - networkFail")
+            }
+        }
+    }
+}

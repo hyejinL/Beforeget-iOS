@@ -66,6 +66,13 @@
 		920B5D142795AD05002DE112 /* ReportTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB08278DE06500FCA541 /* ReportTopView.swift */; };
 		920B5D152795AD0D002DE112 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB26278EBE6200FCA541 /* BarView.swift */; };
 		920B5D162795AD11002DE112 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
+		920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4027969C94002DE112 /* NetworkResult.swift */; };
+		920B5D4327969CBC002DE112 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4227969CBC002DE112 /* GenericResponse.swift */; };
+		920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */; };
+		920B5D4727969D36002DE112 /* MainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4627969D36002DE112 /* MainResponse.swift */; };
+		920B5D4927969D94002DE112 /* MainAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4827969D94002DE112 /* MainAPI.swift */; };
+		920B5D4B27969DAA002DE112 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4A27969DAA002DE112 /* MainService.swift */; };
+		920B5D4D27969DCD002DE112 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4C27969DCD002DE112 /* NetworkConstant.swift */; };
 		921E62A62794CC8B002E6CD1 /* OneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */; };
 		921E62A82794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */; };
 		921E62AA2794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */; };
@@ -176,6 +183,13 @@
 		5BD114B7279133710063EB3B /* CellTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTitleLabel.swift; sourceTree = "<group>"; };
 		5BD114B927913AE20063EB3B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordHeaderView.swift; sourceTree = "<group>"; };
+		920B5D4027969C94002DE112 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		920B5D4227969CBC002DE112 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
+		920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		920B5D4627969D36002DE112 /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResponse.swift; sourceTree = "<group>"; };
+		920B5D4827969D94002DE112 /* MainAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAPI.swift; sourceTree = "<group>"; };
+		920B5D4A27969DAA002DE112 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
+		920B5D4C27969DCD002DE112 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineViewController.swift; sourceTree = "<group>"; };
 		921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -491,6 +505,39 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		920B5D2A27962E13002DE112 /* APIModel */ = {
+			isa = PBXGroup;
+			children = (
+				920B5D2C27962E8A002DE112 /* MainModel */,
+			);
+			path = APIModel;
+			sourceTree = "<group>";
+		};
+		920B5D2B27962E1F002DE112 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				920B5D2F27962F0E002DE112 /* MainAPI */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		920B5D2C27962E8A002DE112 /* MainModel */ = {
+			isa = PBXGroup;
+			children = (
+				920B5D4627969D36002DE112 /* MainResponse.swift */,
+			);
+			path = MainModel;
+			sourceTree = "<group>";
+		};
+		920B5D2F27962F0E002DE112 /* MainAPI */ = {
+			isa = PBXGroup;
+			children = (
+				920B5D4A27969DAA002DE112 /* MainService.swift */,
+				920B5D4827969D94002DE112 /* MainAPI.swift */,
+			);
+			path = MainAPI;
+			sourceTree = "<group>";
+		};
 		924A3E2927883834006482B1 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,6 +638,8 @@
 		927AF38727880CFC0018CC34 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				920B5D2B27962E1F002DE112 /* APIService */,
+				920B5D2A27962E13002DE112 /* APIModel */,
 				927AF39A2788109F0018CC34 /* Mock */,
 				927AF39727880F4E0018CC34 /* Base */,
 			);
@@ -683,6 +732,10 @@
 			isa = PBXGroup;
 			children = (
 				927AF398278810480018CC34 /* BaseResponseType.swift */,
+				920B5D4027969C94002DE112 /* NetworkResult.swift */,
+				920B5D4227969CBC002DE112 /* GenericResponse.swift */,
+				920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */,
+				920B5D4C27969DCD002DE112 /* NetworkConstant.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1008,6 +1061,7 @@
 			files = (
 				920B5D162795AD11002DE112 /* BDSNavigationBar.swift in Sources */,
 				920B5D152795AD0D002DE112 /* BarView.swift in Sources */,
+				920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */,
 				920B5D142795AD05002DE112 /* ReportTopView.swift in Sources */,
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
@@ -1042,6 +1096,7 @@
 				5B7BD108278CD324000BC0FA /* FilterModalViewController.swift in Sources */,
 				929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
+				920B5D4327969CBC002DE112 /* GenericResponse.swift in Sources */,
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */,
@@ -1061,6 +1116,7 @@
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
 				5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
+				920B5D4727969D36002DE112 /* MainResponse.swift in Sources */,
 				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
@@ -1074,7 +1130,10 @@
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */,
 				5B8F137E279577F500385D5E /* DeletePopupView.swift in Sources */,
+				920B5D4927969D94002DE112 /* MainAPI.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
+				920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */,
+				920B5D4B27969DAA002DE112 /* MainService.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
@@ -1101,6 +1160,7 @@
 				929CFB0C278DE06500FCA541 /* ReportDescriptionView.swift in Sources */,
 				5B304B792788304B0054314A /* Fonts.swift in Sources */,
 				5B8254392791A623004BDA5D /* SongListTableViewCell.swift in Sources */,
+				920B5D4D27969DCD002DE112 /* NetworkConstant.swift in Sources */,
 				5B7BD111278D8B6C000BC0FA /* Menu.swift in Sources */,
 				927AF3AD2788162E0018CC34 /* PostViewController.swift in Sources */,
 			);
