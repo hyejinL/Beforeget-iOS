@@ -15,11 +15,10 @@ final class ReportLabelViewController: UIViewController {
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
-    private var typeImageView = UIImageView().then {
-        // 이미지 추가 
+    var typeImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
-    private var reportDescriptionView = ReportDescriptionView()
+    var reportDescriptionView = ReportDescriptionView()
     private var monthPicker = MonthYearPickerView()
     
     // MARK: - Life Cycle
@@ -39,14 +38,6 @@ final class ReportLabelViewController: UIViewController {
         
         reportTopView.reportTitle = "12월의 땅콩님은?"
         reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
-        
-        reportDescriptionView.descriptionTitle = "티키타카 뮤지션"
-        reportDescriptionView.descriptionContent = """
-                                                하루의 시작과 끝을 음악과 함께하시는군요!
-                                                이번 달 음악 기록이 가장 많은 당신,
-                                                오늘은 어떤 음악이 당신의 하루를 채웠나요?
-                                                다음 달의 땅콩님의 유형을 기대해보세요
-                                                """
     }
     
     private func setupLayout() {

@@ -15,7 +15,7 @@ final class ReportGraphViewController: UIViewController {
     
     private var reportTopView = ReportTopView()
     var reportGraphView = ReportGraphView()
-    private var reportDescriptionView = ReportDescriptionView()
+    var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
     // MARK: - Life Cycle

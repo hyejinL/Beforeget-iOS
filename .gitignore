@@ -112,4 +112,7 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 *.DS_Store
+
+Beforeget-iOS/Beforeget-iOS/Network/Base/Token.swift
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode

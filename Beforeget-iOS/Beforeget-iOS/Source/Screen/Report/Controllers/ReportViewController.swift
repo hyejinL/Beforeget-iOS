@@ -10,7 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
+import Kingfisher
+
 final class ReportViewController: UIPageViewController {
+    
+    // MARK: - Network
+    
+    private let reportAPI = ReportAPI.shared
     
     // MARK: - Properties
     
@@ -75,6 +81,11 @@ final class ReportViewController: UIPageViewController {
         setupLayout()
         setupControllers()
         calculateHeight()
+        
+        getFirstReportData()
+        getThridReportData()
+        getFourthReportData()
+        getTotalReportData()
     }
     
     // MARK: - InitUI
@@ -238,7 +249,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            setupBarAnimation()
+            getSecondReportData()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
@@ -261,6 +272,93 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         }
+    }
+}
+
+// MARK: - Network
+
+extension ReportViewController {
+    func getFirstReportData() {
+        reportAPI.getFirstReport(date: "2021-12", completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page1.reportDescriptionView.descriptionTitle = data.title
+            self.page1.reportDescriptionView.descriptionContent = data.comment
+            
+            let listURL = URL(string: data.poster)
+            self.page1.typeImageView.kf.setImage(with: listURL)
+        })
+    }
+    
+    func getSecondReportData() {
+        reportAPI.getSecondReport(date: "2021-12", count: 5, completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page2.reportGraphView.maxCount = 20
+            self.page2.reportGraphView.midCount = 12
+            
+            self.page2.reportGraphView.barView1.animate(height: CGFloat(data.recordCount[0].count))
+            self.page2.reportGraphView.barView2.animate(height: CGFloat(data.recordCount[1].count))
+            self.page2.reportGraphView.barView3.animate(height: CGFloat(data.recordCount[2].count))
+            self.page2.reportGraphView.barView4.animate(height: CGFloat(data.recordCount[3].count))
+            self.page2.reportGraphView.barView5.animate(height: CGFloat(data.recordCount[4].count))
+            
+            self.page2.reportDescriptionView.descriptionTitle
+            self.page2.reportDescriptionView.descriptionContentLabel.text = data.comment
+        })
+    }
+    
+    func getThridReportData() {
+        reportAPI.getThirdReport(date: "2021-12", completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page3.reportDescriptionView.descriptionTitle = data.title
+            self.page3.reportDescriptionView.descriptionContent = data.label
+            
+            self.page3.reportRankingView.firstCount = data.arr[0].count
+            self.page3.reportRankingView.firstType = data.arr[0].type
+            self.page3.reportRankingView.secondCount = data.arr[1].count
+            self.page3.reportRankingView.secondType = data.arr[1].type
+            self.page3.reportRankingView.thirdCount = data.arr[2].count
+            self.page3.reportRankingView.thirdType = data.arr[2].type
+        })
+    }
+    
+    func getFourthReportData() {
+        reportAPI.getFourth(date: "2021-12", completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page4.movieData = data.oneline.movie
+            self.page4.bookData = data.oneline.book
+            self.page4.tvData = data.oneline.tv
+            self.page4.musicData = data.oneline.music
+            self.page4.webtoonData = data.oneline.webtoon
+        })
+    }
+    
+    func getTotalReportData() {
+        reportAPI.getTotal(date: "2021-12", count: 5, completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            print(data, "1234566789")
+            
+            self.page5.reportOnePageView.sentence = data.oneline
+            
+            self.page5.reportOnePageView.firstRankingMedia = data.media[0].type
+            self.page5.reportOnePageView.firstRankingCount = data.media[0].count
+            self.page5.reportOnePageView.secondRankingMedia = data.media[1].type
+            self.page5.reportOnePageView.secondRankingCount = data.media[1].count
+            self.page5.reportOnePageView.thirdRankingMedia = data.media[2].type
+            self.page5.reportOnePageView.thirdRankingCount = data.media[2].count
+            
+            let listURL = URL(string: data.graphic)
+            self.page5.reportOnePageView.mediaImageView.kf.setImage(with: listURL)
+        })
     }
 }
 

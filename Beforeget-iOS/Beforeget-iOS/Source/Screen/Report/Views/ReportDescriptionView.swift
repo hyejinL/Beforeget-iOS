@@ -14,12 +14,12 @@ class ReportDescriptionView: UIView {
 
     // MARK: - Properties
     
-    private var descriptionTitleLabel = UILabel().then {
+    var descriptionTitleLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.title3
     }
     
-    private var descriptionContentLabel = UILabel().then {
+    var descriptionContentLabel = UILabel().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body1
         $0.numberOfLines = 4

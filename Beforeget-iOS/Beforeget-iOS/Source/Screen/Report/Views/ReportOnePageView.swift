@@ -31,7 +31,7 @@ class ReportOnePageView: UIView {
         $0.spacing = 2
     }
     
-    private var mediaImageView = UIImageView().then {
+    var mediaImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
     

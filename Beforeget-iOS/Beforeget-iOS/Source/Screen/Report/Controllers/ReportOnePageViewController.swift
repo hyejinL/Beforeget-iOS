@@ -24,7 +24,7 @@ final class ReportOnePageViewController: UIViewController {
     var reportOnePageView = ReportOnePageView()
     private var monthPicker = MonthYearPickerView()
     
-    private var sentence: [String] = ["눈물 좔좔 호수", "눈물 좔좔 호수강", "눈물 좔좔 호수짱"]
+    var sentence: [String] = []
     
     // MARK: - Life Cycle
     
@@ -32,7 +32,6 @@ final class ReportOnePageViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
@@ -60,21 +59,6 @@ final class ReportOnePageViewController: UIViewController {
             $0.top.equalTo(monthButton.snp.bottom).offset(UIScreen.main.hasNotch ? 27 : 22)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 54 : 65)
         }
-    }
-    
-    // MARK: - TODO REMOVE
-    
-    private func bind() {
-        reportOnePageView.firstRankingMedia = "Book"
-        reportOnePageView.firstRankingCount = 22
-        
-        reportOnePageView.secondRankingMedia = "Music"
-        reportOnePageView.secondRankingCount = 10
-        
-        reportOnePageView.thirdRankingMedia = "Movie"
-        reportOnePageView.thirdRankingCount = 7
-        
-        reportOnePageView.sentence = sentence
     }
     
     // MARK: - Custom Method
