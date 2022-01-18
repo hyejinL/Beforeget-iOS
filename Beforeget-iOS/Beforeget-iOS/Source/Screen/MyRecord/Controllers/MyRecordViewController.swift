@@ -154,14 +154,12 @@ extension MyRecordViewController:
     
     public func clickDateButton() {
         // MARK: - FIXME
-        print("기간 버튼 열리면서 데이터 전달")
         presentFilterModal()
     }
     
     public func clickMediaButton() {
         // MARK: - FIXME
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
-        print("미디어 버튼 열리면서 데이터 전달")
         presentFilterModal()
     }
     
@@ -169,7 +167,6 @@ extension MyRecordViewController:
         // MARK: - FIXME
         /// 3번째 별점 페이지로 바로 오픈해야 됨
         presentFilterModal()
-        print("스타버튼")
     }
     
     public func sendData(data: Int, media: [String], star: [Int]) {
@@ -182,12 +179,21 @@ extension MyRecordViewController:
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true
-        filterView.starButton.isSelected = (star == [-1]) ?
+        filterView.starButton.isSelected = (star == []) ?
         false : true
-       
-//        guard let data = mediaData[0] else { return }
-        mediaData = filterView.mediaButton.isSelected ?
-        "---" : "미디어"
+
+        if filterView.mediaButton.isSelected {
+            if media.isEmpty {
+                mediaData = "미디어"
+                filterView.mediaButton.isSelected = false
+            } else if media.count == 1 {
+                mediaData = "\(media[0])"
+            } else {
+                mediaData = "\(media[0]) 외 \(media.count-1)"
+            }
+        } else {
+            mediaData = "미디어"
+        }
         
         filterView.mediaButton.setTitle(mediaData, for: .normal)
         

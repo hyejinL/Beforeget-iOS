@@ -161,11 +161,11 @@ class StarCollectionViewCell: UICollectionViewCell,
         sender.isSelected.toggle()
         print("sender.isSelected = \(sender.isSelected)")
         let senderIndex = Int(sender.titleLabel?.text ?? "0") ?? 0
-        if let index = selectedStarArray.firstIndex(of: senderIndex){
+        if let index = selectedStarArray.firstIndex(of: senderIndex) {
             print("index가 있음")
             selectedStarArray.remove(at: index)
             print("selectedStar = \(selectedStarArray)")
-        }else{
+        } else {
             selectedStarArray.append(senderIndex)
             print("selectedStar = \(selectedStarArray)")
         }

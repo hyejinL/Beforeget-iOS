@@ -20,9 +20,11 @@ final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
     
+    var number: Int?
+    
     var selectedDateIndex: Int = -1
-    var selectedMediaArray: [String] = [""]
-    var selectedStarArray: [Int] = [-1]
+    var selectedMediaArray: [String] = ["미디어"]
+    var selectedStarArray: [Int] = []
     
     // MARK: - FIXME 리팩토링시 네이밍 변경
     var recordDateTuple: [String] = ["",""]
@@ -188,10 +190,10 @@ final class FilterModalViewController: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded() }) { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
+                if self.presentingViewController != nil {
+                    self.dismiss(animated: false, completion: nil)
+                }
             }
-        }
     }
     
     private func setupGestureRecognizer() {
@@ -207,7 +209,7 @@ final class FilterModalViewController: UIViewController {
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
     }
-
+    
     // MARK: - @objc
     
     @objc func touchupResetButton(_ sender: UIButton) {
@@ -221,8 +223,8 @@ final class FilterModalViewController: UIViewController {
             media: selectedMediaArray,
             star: selectedStarArray)
         hideBottomSheetAndGoBack()
-//        let presentingVC = presentingViewController as? MyRecordViewController
-//        presentingVC.filterView.dateButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
+        //        let presentingVC = presentingViewController as? MyRecordViewController
+        //        presentingVC.filterView.dateButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
     }
     
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
@@ -279,22 +281,29 @@ extension FilterModalViewController: UICollectionViewDataSource {
             filterCell.dateFilterButtonDelegate = self
             // MARK: - 추후 공부할 부분 : Closure
             filterCell.dateSendingClosure = { index, date in
+                print("dateIndex \(index)")
                 self.recordDateTuple[index] = date.convertToString("YYYY-MM-dd")
-                print(self.recordDateTuple)
+                print(self.recordDateTuple, "날짜모음")
+
             }
+            
             return filterCell
+            
         case 1:
             guard let mediaCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
             mediaCell.selectedMediaArray = selectedMediaArray
-            selectedMediaArray.forEach {
-                print("mediaindex \($0)")
+
+            
+            selectedMediaArray.forEach {_ in
+                guard let numberIndex = number else { return }
+                print("mediaindex \(numberIndex)")
                 // MARK: - FIXME 여기서 해결해줘야 함
-//                mediaCell.mediaButtonList.forEach { _ in
-//
-//                }
+//                mediaCell.mediaButtonList[$0].isSelected = true
+
+                mediaCell.mediaButtonList[numberIndex].isSelected = true
             }
             return mediaCell
         default:
@@ -306,6 +315,11 @@ extension FilterModalViewController: UICollectionViewDataSource {
             selectedStarArray.forEach {
                 print("starindex \($0)")
                 starCell.starButtonList[$0 - 1].isSelected = true
+                if starCell.starButtonList[$0 - 1].isSelected {
+                    applyButton.isDisabled = false
+                } else {
+                    applyButton.isDisabled = true
+                }
             }
             return starCell
         }

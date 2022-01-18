@@ -96,6 +96,7 @@ internal enum Asset {
     internal static let imgSave = ImageAsset(name: "imgSave")
     internal static let imgSentenceBack = ImageAsset(name: "imgSentenceBack")
     internal static let imgSentenceFront = ImageAsset(name: "imgSentenceFront")
+    internal static let imgWriteComplete = ImageAsset(name: "imgWriteComplete")
     internal static let imgExample = ImageAsset(name: "img_example")
     internal static let pageActive = ImageAsset(name: "page_active")
     internal static let pageInactive = ImageAsset(name: "page_inactive")

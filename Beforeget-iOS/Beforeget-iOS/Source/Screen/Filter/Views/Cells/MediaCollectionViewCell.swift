@@ -25,7 +25,6 @@ class MediaCollectionViewCell: UICollectionViewCell,
     /// FilterView에 전달할 선택된 미디어 유형 필터 배열입니다.
     public var selectedMediaArray: [String] = []
     
-    public var buttonTag: [Int] = [1, 2, 3, 4, 5, 6]
     public var buttonTitle: [String] = []
     public var mediaButtonList: [UIButton] = []
     
@@ -70,6 +69,10 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color
+        
+        mediaButtonList.forEach {
+            $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
+        }
     }
     
     private func setupLayout() {
@@ -134,10 +137,6 @@ class MediaCollectionViewCell: UICollectionViewCell,
             mediaButton.configuration = config
             mediaButtonList.append(mediaButton)
         }
-        
-        for mediaIndex in 0..<buttonTitle.count {
-            mediaButtonList[mediaIndex].tag = mediaIndex
-        }
     }
     
     private func setupAction() {
@@ -146,23 +145,17 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
-    private func removeDuplication(in array: [String]) -> [String]{
-        let set = Set(array)
-        let duplicationRemovedArray = Array(set)
-        return duplicationRemovedArray
-    }
-    
     // MARK: - @objc
     
     @objc func touchupMediaButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         print("sender.isSelected = \(sender.isSelected)")
-        let senderIndex = sender.titleLabel?.text ?? ""
-        if let index = selectedMediaArray.firstIndex(of: senderIndex){
+        let senderIndex = sender.titleLabel?.text ?? "미디어"
+        if let index = selectedMediaArray.firstIndex(of: senderIndex) {
             print("index가 있음")
             selectedMediaArray.remove(at: index)
             print("selectedMediaArray = \(selectedMediaArray)")
-        }else{
+        } else {
             selectedMediaArray.append(senderIndex)
             print("selectedMediaArray = \(selectedMediaArray)")
         }

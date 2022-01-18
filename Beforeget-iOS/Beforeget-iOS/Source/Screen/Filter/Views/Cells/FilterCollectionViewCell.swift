@@ -32,8 +32,10 @@ class FilterCollectionViewCell: UICollectionViewCell,
     private var filter = FilterManager()
     
     weak var resetFilterDelegate: ResetFilterDelegate?
-    
     weak var dateFilterButtonDelegate: DateFilterButtonDelegate?
+    
+    /// FilterView에 전달할 선택된 날짜 필터 배열입니다.
+    public var selectedDateIndex: Int = -1
     
     var dateSendingClosure: ((Int, Date) -> ())?
     var inputText: [String] = ["시작", "끝"]
