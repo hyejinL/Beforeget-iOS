@@ -12,11 +12,17 @@ import Then
 
 final class MainViewController: UIViewController {
     
+    // MARK: - Enum
+    
     enum CollectionViewConst {
         static let cellInterval: CGFloat = 4
         static let cellIntervalCount: CGFloat = 5
         static let visibleCellsCount: CGFloat = UIScreen.main.hasNotch ? 2.5 : 2.6
     }
+    
+    // MARK: - Network
+    
+    private let mainAPI = MainAPI.shared
     
     // MARK: - Properties
     
@@ -127,11 +133,9 @@ final class MainViewController: UIViewController {
         $0.dataSource = self
     }
     
-    private let dummyData: [Media] = [
-        Media(movie: 0, book: 0, tv: 0, music: 0, webtoon: 0, youtube: 0)
-    ]
+    private var mainData: Main?
     
-    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(dummyData[0]) }
+    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(mainData) }
         .reduce(0) { $0 + $1 }
     
     // MARK: - Life Cycle
@@ -140,7 +144,13 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        getMainDataWithAPI()
+
+        mainAPI.getMain { data, err in
+            guard let data = data else { return }
+            self.mainData = data
+            self.recordTotalLabel.text = "\(data.movie + data.book + data.music + data.tv + data.youtube + data.webtoon)"
+            self.recordCollectionView.reloadData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -290,31 +300,7 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
-        cell.config(media.recordCount(dummyData[0]), "\(media)")
+        cell.config(media.recordCount(mainData), "\(media)")
         return cell
-    }
-}
-
-// MARK: - Network
-
-extension MainViewController {
-    func getMainDataWithAPI() {
-        MainAPI.shared.getMainData { response in
-            switch response {
-            case .success(let data):
-                print(data)
-                if let mainDatas = data as? MainResponse {
-                    print(mainDatas)
-                }
-            case .requestErr(let message):
-                print("getMainDataWithAPI - requestErr: \(message)")
-            case .pathErr:
-                print("getMainDataWithAPI - pathErr")
-            case .serverErr:
-                print("getMainDataWithAPI - serverErr")
-            case .networkFail:
-                print("getMainDataWithAPI - networkFail")
-            }
-        }
     }
 }

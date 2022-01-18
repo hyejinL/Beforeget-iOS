@@ -67,7 +67,6 @@
 		920B5D152795AD0D002DE112 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929CFB26278EBE6200FCA541 /* BarView.swift */; };
 		920B5D162795AD11002DE112 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
 		920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4027969C94002DE112 /* NetworkResult.swift */; };
-		920B5D4327969CBC002DE112 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4227969CBC002DE112 /* GenericResponse.swift */; };
 		920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */; };
 		920B5D4727969D36002DE112 /* MainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4627969D36002DE112 /* MainResponse.swift */; };
 		920B5D4927969D94002DE112 /* MainAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4827969D94002DE112 /* MainAPI.swift */; };
@@ -86,8 +85,6 @@
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
 		927AF37A27880B830018CC34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37927880B830018CC34 /* Assets.xcassets */; };
 		927AF37D27880B830018CC34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37B27880B830018CC34 /* LaunchScreen.storyboard */; };
-		927AF399278810480018CC34 /* BaseResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF398278810480018CC34 /* BaseResponseType.swift */; };
-		927AF39C278810D50018CC34 /* MockParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39B278810D50018CC34 /* MockParser.swift */; };
 		927AF39F278812D50018CC34 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF39E278812D50018CC34 /* UILabel+.swift */; };
 		927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A2278813A60018CC34 /* UIScreen+.swift */; };
 		927AF3A5278813C00018CC34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF3A4278813C00018CC34 /* UIView+.swift */; };
@@ -184,7 +181,6 @@
 		5BD114B927913AE20063EB3B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		5BD114BB279175680063EB3B /* DetailRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordHeaderView.swift; sourceTree = "<group>"; };
 		920B5D4027969C94002DE112 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
-		920B5D4227969CBC002DE112 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		920B5D4627969D36002DE112 /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResponse.swift; sourceTree = "<group>"; };
 		920B5D4827969D94002DE112 /* MainAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAPI.swift; sourceTree = "<group>"; };
@@ -211,8 +207,6 @@
 		927AF39127880ECE0018CC34 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		927AF39227880ECE0018CC34 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		927AF39327880ECE0018CC34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		927AF398278810480018CC34 /* BaseResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseType.swift; sourceTree = "<group>"; };
-		927AF39B278810D50018CC34 /* MockParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockParser.swift; sourceTree = "<group>"; };
 		927AF39E278812D50018CC34 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		927AF3A2278813A60018CC34 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		927AF3A4278813C00018CC34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -640,7 +634,6 @@
 			children = (
 				920B5D2B27962E1F002DE112 /* APIService */,
 				920B5D2A27962E13002DE112 /* APIModel */,
-				927AF39A2788109F0018CC34 /* Mock */,
 				927AF39727880F4E0018CC34 /* Base */,
 			);
 			path = Network;
@@ -731,21 +724,11 @@
 		927AF39727880F4E0018CC34 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				927AF398278810480018CC34 /* BaseResponseType.swift */,
 				920B5D4027969C94002DE112 /* NetworkResult.swift */,
-				920B5D4227969CBC002DE112 /* GenericResponse.swift */,
 				920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */,
 				920B5D4C27969DCD002DE112 /* NetworkConstant.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		927AF39A2788109F0018CC34 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				927AF39B278810D50018CC34 /* MockParser.swift */,
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 		927AF39D278811420018CC34 /* Extension */ = {
@@ -1096,7 +1079,6 @@
 				5B7BD108278CD324000BC0FA /* FilterModalViewController.swift in Sources */,
 				929CFB15278DE0E800FCA541 /* MainViewController.swift in Sources */,
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
-				920B5D4327969CBC002DE112 /* GenericResponse.swift in Sources */,
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
 				5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */,
@@ -1120,7 +1102,6 @@
 				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
-				927AF399278810480018CC34 /* BaseResponseType.swift in Sources */,
 				929CFB2A278EEA4600FCA541 /* ReportSentenceView.swift in Sources */,
 				5B8F138227957A4A00385D5E /* PostSavePopupViewController.swift in Sources */,
 				5B83EF31278E381200D07AC7 /* DateTableViewCell.swift in Sources */,
@@ -1139,7 +1120,6 @@
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
-				927AF39C278810D50018CC34 /* MockParser.swift in Sources */,
 				5BD114B12790C5BF0063EB3B /* DetailRecordSection.swift in Sources */,
 				5B7BD10C278D870F000BC0FA /* MenuBarView.swift in Sources */,
 				927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */,
