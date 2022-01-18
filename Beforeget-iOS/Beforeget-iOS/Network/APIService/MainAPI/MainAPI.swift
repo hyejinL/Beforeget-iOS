@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import Moya
 
 final class MainAPI {
@@ -20,7 +21,7 @@ final class MainAPI {
     public private(set) var mainResponse: MainResponse?
     public private(set) var mainData: Main?
     
-    // MARK: - GET 
+    // MARK: - GET
     
     func getMain(completion: @escaping ((Main?, Error?) -> ())) {
         mainProvider.request(.main) { [weak self] response in

@@ -14,11 +14,11 @@ enum MainService {
 }
 
 extension MainService: TargetType {
-
+    
     var baseURL: URL {
         return URL(string: NetworkConstant.baseURL)!
     }
-
+    
     var path: String {
         switch self {
         case .main:
@@ -32,25 +32,25 @@ extension MainService: TargetType {
             return JSONEncoding.default
         }
     }
-
+    
     var method: Moya.Method {
         switch self {
         case .main:
             return .get
         }
     }
-
+    
     var sampleData: Data {
         return Data()
     }
-
+    
     var task: Task {
         switch self {
         case .main:
             return .requestPlain
         }
     }
-
+    
     var headers: [String: String]? {
         switch self {
         case .main:
