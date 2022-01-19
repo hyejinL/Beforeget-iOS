@@ -185,6 +185,8 @@ extension DetailRecordViewController: UITableViewDelegate {
                 headerView.titleLabel.text = $0.title
                 headerView.dateLabel.text = $0.date
                 headerView.iconImageView.image =  MediaType.getIconImage(index: $0.category)
+                headerView.reviewArray = $0.oneline
+                headerView.reveiwTagCollectionView.reloadData()
                 let starImage = $0.star
 
                 switch starImage {

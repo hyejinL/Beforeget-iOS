@@ -80,7 +80,7 @@ class DetailRecordHeaderView: UIView {
     
     private let customFlowLayout = LeftAlignmentCollectionViewFlowLayout()
     
-    private lazy var reveiwTagCollectionView = UICollectionView(
+    public lazy var reveiwTagCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: customFlowLayout).then {
             $0.isScrollEnabled = false
             $0.delegate = self
@@ -205,9 +205,6 @@ extension DetailRecordHeaderView: UICollectionViewDataSource {
             for: indexPath) as? ReviewTagCollectionViewCell
         else { return UICollectionViewCell() }
         reviewCell.config(
-//            myRecordAPI.getMyDetailRecord(postId: 23, completion: { data, err in
-//                <#code#>
-//            })
             reviewArray[indexPath.item],
             color: colorArray[indexPath.item],
             fontColor: fontColorArray[indexPath.item])
