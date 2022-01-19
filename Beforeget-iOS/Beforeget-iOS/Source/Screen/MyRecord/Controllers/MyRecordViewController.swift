@@ -58,10 +58,17 @@ final class MyRecordViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        myRecordAPI.getMain { data, err in
+        myRecordAPI.getMyRecord { data, err in
             guard let data = data else { return }
             self.record = data
             self.recordTableView.reloadData()
+        }
+        
+        myRecordAPI.getMyRecordFilter { data, err in
+            guard let data = data else {
+                return
+            }
+            print("필터데이터", data)
         }
     }
     

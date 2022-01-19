@@ -16,6 +16,7 @@
 		5B5FFCC82797406E00336A35 /* MyRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCC72797406E00336A35 /* MyRecordService.swift */; };
 		5B5FFCCB279742ED00336A35 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCCA279742ED00336A35 /* Token.swift */; };
 		5B5FFCCD2797437300336A35 /* MyRecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCCC2797437300336A35 /* MyRecordAPI.swift */; };
+		5B5FFCD0279764D100336A35 /* MyRecordFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCCF279764D100336A35 /* MyRecordFilter.swift */; };
 		5B6D7F80278A2A8F00202230 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F7F278A2A8F00202230 /* BackButton.swift */; };
 		5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F81278A2BCF00202230 /* CloseButton.swift */; };
 		5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BD0F8278C4F69000BC0FA /* MyRecordTableViewCell.swift */; };
@@ -143,6 +144,7 @@
 		5B5FFCC72797406E00336A35 /* MyRecordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordService.swift; sourceTree = "<group>"; };
 		5B5FFCCA279742ED00336A35 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		5B5FFCCC2797437300336A35 /* MyRecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordAPI.swift; sourceTree = "<group>"; };
+		5B5FFCCF279764D100336A35 /* MyRecordFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordFilter.swift; sourceTree = "<group>"; };
 		5B6D7F7F278A2A8F00202230 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		5B6D7F81278A2BCF00202230 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSNavigationBar.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				5B5FFCC427973E7900336A35 /* MyRecord.swift */,
+				5B5FFCCF279764D100336A35 /* MyRecordFilter.swift */,
 			);
 			path = MyRecordModel;
 			sourceTree = "<group>";
@@ -1166,6 +1169,7 @@
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */,
 				920B5D4B27969DAA002DE112 /* MainService.swift in Sources */,
+				5B5FFCD0279764D100336A35 /* MyRecordFilter.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
 				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,

@@ -11,6 +11,8 @@ import Moya
 
 enum MyRecordService {
     case myRecord
+    case filter(date: String, media: String, star: String)
+    case detailRecord(id: Int)
 }
 
 extension MyRecordService: TargetType {
@@ -23,19 +25,23 @@ extension MyRecordService: TargetType {
         switch self {
         case .myRecord:
             return "/post"
+        case .filter(let date, let media, let star):
+            return "/post/filter?date=\(date)&media=\(media)&star=\(star)"
+        case .detailRecord(let id):
+            return "/post/postId=\(id)"
         }
     }
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .myRecord:
+        case .myRecord, .filter, .detailRecord :
             return JSONEncoding.default
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .myRecord:
+        case .myRecord, .filter, .detailRecord :
             return .get
         }
     }
@@ -46,14 +52,14 @@ extension MyRecordService: TargetType {
     
     var task: Task {
         switch self {
-        case .myRecord:
+        case .myRecord, .filter, .detailRecord :
             return .requestPlain
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .myRecord:
+        case .myRecord, .filter, .detailRecord :
             return Token.accessToken
         }
     }
