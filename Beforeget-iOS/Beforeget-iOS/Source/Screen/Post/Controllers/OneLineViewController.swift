@@ -12,6 +12,10 @@ import Then
 
 final class OneLineViewController: UIViewController {
     
+    //MARK: - Network
+    
+    private let postAPI = PostAPI.shared
+    
     // MARK: - Properties
     
     private let dimmedView = UIView().then {
@@ -90,13 +94,12 @@ final class OneLineViewController: UIViewController {
     private let height: CGFloat = 435
     
     private var currentIndex = 0
-    private var count = 0
-    
-    // MARK: - TODO REMOVE
-    private var goodReviews = ["아름다운 영상미", "연기가 훌륭해요", "흥미진진한 줄거리", "OST 맛집", "최고의 반전!", "마음이 따듯해져요", "좋아하는 배우", "인생 영화"]
-    private var badReviews = ["살짝 지루해요", "연기가 별로에요", "내용이 뻔해요", "괜히 봤어요", "결말이 아쉬워요", "개연성이 부족해요"]
+    private var goodReviews: [String] = []
+    private var badReviews: [String] = []
     private var selectedReviews: [String] = []
     private var selectedReviewCount: Int = 0
+    
+    var mediaType: MediaType?
     
     // MARK: - Life Cycle
     
@@ -106,6 +109,13 @@ final class OneLineViewController: UIViewController {
         setupLayout()
         setupGestureRecognizer()
         setupNotification()
+        
+        self.postAPI.getOneLine(mediaId: self.mediaType?.mediaNumber() ?? 1) { [weak self] data, err in
+            guard let data = data else { return }
+            self?.goodReviews = data.good
+            self?.badReviews = data.bad
+            self?.oneLineCollectionView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -130,14 +140,14 @@ final class OneLineViewController: UIViewController {
     private func setupLayout() {
         view.addSubviews([dimmedView, modalView])
         modalView.addSubviews([indicatorView,
-                                   goodLabel,
-                                   badLabel,
-                                   lineView,
-                                   statusMovedView,
-                                   oneLineCollectionView,
-                                   countLabel,
-                                   applyButton,
-                                   resetButton])
+                               goodLabel,
+                               badLabel,
+                               lineView,
+                               statusMovedView,
+                               oneLineCollectionView,
+                               countLabel,
+                               applyButton,
+                               resetButton])
         
         let topConstant =
         view.safeAreaInsets.bottom +
@@ -255,17 +265,17 @@ final class OneLineViewController: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded() }) { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
+                if self.presentingViewController != nil {
+                    self.dismiss(animated: false, completion: nil)
+                }
             }
-        }
     }
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(addOneLineCount), name: Notification.Name.didSelectOneLine, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteOneLineCount), name: Notification.Name.didDeselectOneLine, object: nil)
     }
-        
+    
     private func setupApplyButton() {
         if selectedReviewCount == 0 {
             applyButton.isDisabled = true
@@ -396,6 +406,7 @@ extension OneLineViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoodOneLineCollectionViewCell.className, for: indexPath) as? GoodOneLineCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            cell.reloadCollectionView()
             cell.config(goodReviews: goodReviews)
             cell.selectedGoodReview = { (goodReviews: String) -> () in
                 self.selectedReviews.append(goodReviews)

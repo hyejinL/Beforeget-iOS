@@ -232,6 +232,7 @@ extension PostViewController: UITableViewDataSource {
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
             oneLineCell.presentOneLineViewController = { (_ viewController: OneLineViewController) -> () in
+                viewController.mediaType = self.mediaType
                 self.definesPresentationContext = true
                 self.present(viewController, animated: false, completion: nil)
             }
