@@ -237,7 +237,7 @@ class ReportSentenceView: UIView {
         
         [movieCollectionView, bookCollectionView, tvCollectionView, musicCollectionView, webtoonCollectionView, youtubeCollectionView].forEach {
             $0.snp.makeConstraints {
-                $0.width.equalTo(UIScreen.main.hasNotch ? 120 : 115)
+                $0.width.equalTo(UIScreen.main.hasNotch ? 130 : 120)
                 $0.height.equalTo(UIScreen.main.hasNotch ? 103 : 93)
                 $0.centerX.centerY.equalToSuperview()
             }

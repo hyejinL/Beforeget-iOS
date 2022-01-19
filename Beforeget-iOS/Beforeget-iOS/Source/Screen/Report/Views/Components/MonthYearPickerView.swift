@@ -14,6 +14,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     var years = [Int]()
     var months = [String]()
     
+    var minYear: Int = 0
     var minMonth: Int = 0
     
     var month = Calendar.current.component(.month, from: Date()) {
@@ -51,7 +52,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         
         if years.count == 0 {
             var year = Calendar(identifier: .gregorian).component(.year, from: Date())
-            for _ in 1...10 {
+            for _ in 1...2 {
                 years.append(year)
                 year -= 1
             }
@@ -109,6 +110,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let month = selectedRow(inComponent: 1) + 1
         let year = years[selectedRow(inComponent: 0)]
+        
         if let block = onDateSelected {
             block(year, month)
         }

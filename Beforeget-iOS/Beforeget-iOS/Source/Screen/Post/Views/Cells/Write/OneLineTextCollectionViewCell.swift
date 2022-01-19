@@ -14,7 +14,7 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     
     // MARK: - Properties
     
-    private lazy var onelineLabel = UILabel().then {
+    private lazy var oneLineLabel = UILabel().then {
         $0.font = BDSFont.body8
         $0.textColor = Asset.Colors.gray200.color
     }
@@ -27,11 +27,11 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
             contentView.makeRound(radius: 20)
             
             let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
-            onelineLabel.textColor = textColor
+            oneLineLabel.textColor = textColor
         }
     }
     
-    // MARK: - InitUI
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,9 +54,9 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     }
     
     private func setupLayout() {
-        addSubview(onelineLabel)
+        addSubview(oneLineLabel)
         
-        onelineLabel.snp.makeConstraints {
+        oneLineLabel.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
     }
@@ -64,6 +64,6 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     // MARK: - Custom Method
     
     public func config(oneline: String) {
-        onelineLabel.text = oneline
+        oneLineLabel.text = oneline
     }
 }
