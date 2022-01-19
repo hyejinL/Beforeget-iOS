@@ -21,7 +21,7 @@ final class MyRecordAPI {
     public var date: String = "-1"
     public var media: String = "-1"
     public var star: String = "-1"
-    public var id: Int = 28
+    public var id: Int = 0
     
     // MARK: - Network Properties
     
@@ -30,10 +30,10 @@ final class MyRecordAPI {
     public private(set) var myRecord: BaseArrayResponseType<MyRecord>?
     public private(set) var myRecordFilter: BaseArrayResponseType<MyRecordFilter>?
     public private(set) var myDetailRecord: BaseArrayResponseType<MyDetailRecord>?
-    public private(set) var additional: Additional?
+//    public private(set) var additional: Additional?
 
     
-    // MARK: - GET : Main 가져오기
+    // MARK: - GET : 전체글조회 가져오기
     
     func getMyRecord(completion: @escaping (([MyRecord]?, Error?) -> ())) {
         myRecordProvider.request(.myRecord) { [weak self] response in
@@ -59,10 +59,10 @@ final class MyRecordAPI {
         }
     }
     
-    // MARK: - GET : Main/Filter 가져오기
+    // MARK: - GET : 전체글조회/Filter 가져오기
     
     func getMyRecordFilter(completion: @escaping (([MyRecordFilter]?, Error?) -> ())) {
-        myRecordProvider.request(MyRecordService.filter(date: "1", media: "2", star: "5")) { [weak self] response in
+        myRecordProvider.request(MyRecordService.filter(date: date, media: media, star: star)) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let result):
@@ -70,6 +70,7 @@ final class MyRecordAPI {
                     self.myRecordFilter = try result.map(BaseArrayResponseType<MyRecordFilter>.self)
                     guard let data = self.myRecordFilter?.data else {
                         completion(nil, NetworkResult<Error>.self as? Error)
+                       
                         return
                     }
                     completion(data, nil)
@@ -84,10 +85,10 @@ final class MyRecordAPI {
         }
     }
     
-    // MARK: - GET : Main/Filter 가져오기
+    // MARK: - GET : post/:postId
     
-    func getMyDetailRecord(completion: @escaping (([MyDetailRecord]?, Error?) -> ())) {
-        myRecordProvider.request(MyRecordService.detailRecord(id: id)) { [weak self] response in
+    func getMyDetailRecord(postId: Int, completion: @escaping (([MyDetailRecord]?, Error?) -> ())) {
+        myRecordProvider.request(MyRecordService.detailRecord(id: postId)) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let result):
@@ -96,9 +97,9 @@ final class MyRecordAPI {
                     guard let data = self.myDetailRecord?.data else {
                         completion(nil, NetworkResult<Error>.self as? Error)
                         return
-                    }                    
-                    
-                    completion(data, nil)
+                    }
+                    print(data, "에러메시지 : getMyDetailRecord")
+                     completion(data, nil)
                     
                 } catch(let err) {
                     print(err.localizedDescription, "에러메시지 : getMyDetailRecord")

@@ -26,7 +26,7 @@ extension MyRecordService: TargetType {
         case .myRecord:
             return "/post"
         case .filter(let date, let media, let star):
-            return "/post/filter/\(date)/\(media)/\(star)"
+            return "/post/filter?date=\(date)&media=\(media)&star=\(star)"
         case .detailRecord(let id):
             return "/post/\(id)"
         }

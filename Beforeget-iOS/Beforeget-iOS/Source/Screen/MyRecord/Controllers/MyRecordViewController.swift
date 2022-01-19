@@ -18,7 +18,7 @@ final class MyRecordViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var record: [MyRecord] = []
+    private var recordArray: [MyRecord] = []
     
     private var mediaData: String = ""
     private var starData: String = ""
@@ -60,16 +60,17 @@ final class MyRecordViewController: UIViewController {
         setupLayout()
         myRecordAPI.getMyRecord { data, err in
             guard let data = data else { return }
-            self.record = data
+            self.recordArray = data
             self.recordTableView.reloadData()
         }
         
-        myRecordAPI.getMyRecordFilter { data, err in
-            guard let data = data else {
-                return
-            }
-            print("필터데이터", data)
-        }
+//        myRecordAPI.getMyRecordFilter { data, err in
+//            guard let data = data else {
+//                return
+//            }
+//            self.recordTableView.reloadData()
+//
+//        }
     }
     
     // MARK: - InitUI
@@ -124,6 +125,7 @@ extension MyRecordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let detailRecordViewController = DetailRecordViewController()
+        detailRecordViewController.postId = self.recordArray[indexPath.row].id
         navigationController?.pushViewController(detailRecordViewController, animated: true)
     }
 }
@@ -132,7 +134,7 @@ extension MyRecordViewController: UITableViewDelegate {
 
 extension MyRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return record.count
+        return recordArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

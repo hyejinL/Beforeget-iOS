@@ -29,6 +29,8 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     // MARK: - Properties
     
+    public var postId = 0
+    
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .none, isHidden: false).then {
             $0.backButton.setImageTintColor(.white)
@@ -80,11 +82,7 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        myRecordAPI.getMyDetailRecord { data, err in
-            guard let data = data else { return }
-            print(data, "여기다")
-
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,6 +179,23 @@ extension DetailRecordViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = DetailRecordHeaderView()
+        myRecordAPI.getMyDetailRecord(postId: postId, completion: { data, err in
+            guard let data = data else { return}
+            data.forEach {
+                headerView.titleLabel.text = $0.title
+                headerView.dateLabel.text = $0.date
+                headerView.iconImageView.image =  MediaType.getIconImage(index: $0.category)
+                let starImage = $0.star
+
+                switch starImage {
+                case 1: return headerView.starImageView.image = Asset.Assets.btnStar1.image
+                case 2: return headerView.starImageView.image = Asset.Assets.btnStar2.image
+                case 3: return headerView.starImageView.image = Asset.Assets.btnStar3.image
+                case 4: return headerView.starImageView.image = Asset.Assets.btnStar4.image
+                default : return headerView.starImageView.image = Asset.Assets.btnStar5.image
+                }
+            }
+        })
         return headerView
     }
     

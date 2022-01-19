@@ -92,6 +92,7 @@ final class FilterModalViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupGestureRecognizer()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

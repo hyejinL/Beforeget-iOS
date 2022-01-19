@@ -12,6 +12,10 @@ import Then
 
 class DetailRecordHeaderView: UIView {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
     
     private var fontColorArray: [UIColor] = [
@@ -24,7 +28,7 @@ class DetailRecordHeaderView: UIView {
         Asset.Colors.gray300.color, Asset.Colors.black200.color,
         Asset.Colors.gray400.color, Asset.Colors.black200.color]
     
-    private var reviewArray: [String] = [
+    public var reviewArray: [String] = [
         "흥미진진한 줄거리", "연기가 일품이에요!",
         "인생영화", "아름다운 영상미",
         "마음이 따뜻해져요", "개발자 인생!"]
@@ -33,11 +37,9 @@ class DetailRecordHeaderView: UIView {
         $0.backgroundColor = Asset.Colors.black200.color
     }
     
-    public var iconImageView = UIImageView().then {
-        //        $0.image = 문제 : 에셋이 들어가야 됨
-        $0.backgroundColor = .white
-    }
+    public var iconImageView = UIImageView()
     
+    // MARK: - FIXME
     /// 문제 : 영어로 넘어오면 폰트 어떻게 해야 하나?
     public var titleLabel = UILabel().then {
         $0.text = "왜들그리 다운되어있어 분위기가 겁나싸해 요즘그게 유행인가"
@@ -53,7 +55,8 @@ class DetailRecordHeaderView: UIView {
         $0.layer.borderWidth = 1
     }
     
-    private var dateLabel = UILabel().then {
+    // MARK: - FIXME 날짜 변환
+    public var dateLabel = UILabel().then {
         $0.text = "2022. 01. 10. MON"
         $0.font = BDSFont.enBody7
         $0.textColor = Asset.Colors.white.color
@@ -63,8 +66,7 @@ class DetailRecordHeaderView: UIView {
         $0.backgroundColor = Asset.Colors.black200.color
     }
     
-    /// 문제 : 스타이미지가 별점에 따라 넘겨올 때 다르게 받아져야 됨 분기처리해줘야 하는 것
-    private var starImageView = UIImageView().then {
+    public var starImageView = UIImageView().then {
         $0.image = Asset.Assets.btnStar1.image
     }
     
@@ -96,6 +98,10 @@ class DetailRecordHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override class func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
     }
     
     // MARK: - InitUI
@@ -199,6 +205,9 @@ extension DetailRecordHeaderView: UICollectionViewDataSource {
             for: indexPath) as? ReviewTagCollectionViewCell
         else { return UICollectionViewCell() }
         reviewCell.config(
+//            myRecordAPI.getMyDetailRecord(postId: 23, completion: { data, err in
+//                <#code#>
+//            })
             reviewArray[indexPath.item],
             color: colorArray[indexPath.item],
             fontColor: fontColorArray[indexPath.item])
