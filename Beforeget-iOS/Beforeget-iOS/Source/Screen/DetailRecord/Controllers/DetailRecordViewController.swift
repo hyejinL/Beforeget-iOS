@@ -13,6 +13,10 @@ import Then
 
 final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+
     // MARK: - Dummy Data
     
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
@@ -76,6 +80,11 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        myRecordAPI.getMyDetailRecord { data, err in
+            guard let data = data else { return }
+            print(data, "여기다")
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -21,6 +21,7 @@ final class MyRecordAPI {
     public var date: String = "-1"
     public var media: String = "-1"
     public var star: String = "-1"
+    public var id: Int = 28
     
     // MARK: - Network Properties
     
@@ -28,6 +29,9 @@ final class MyRecordAPI {
     
     public private(set) var myRecord: BaseArrayResponseType<MyRecord>?
     public private(set) var myRecordFilter: BaseArrayResponseType<MyRecordFilter>?
+    public private(set) var myDetailRecord: BaseArrayResponseType<MyDetailRecord>?
+    public private(set) var additional: Additional?
+
     
     // MARK: - GET : Main 가져오기
     
@@ -45,11 +49,11 @@ final class MyRecordAPI {
                     completion(data, nil)
                     
                 } catch(let err) {
-                    print(err.localizedDescription)
+                    print(err.localizedDescription, "에러메시지 : getMyRecord")
                     completion(nil, err)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print(err.localizedDescription, "에러메시지 : getMyRecord")
                 completion(nil, err)
             }
         }
@@ -65,17 +69,43 @@ final class MyRecordAPI {
                 do {
                     self.myRecordFilter = try result.map(BaseArrayResponseType<MyRecordFilter>.self)
                     guard let data = self.myRecordFilter?.data else {
-                        print("안녕")
                         completion(nil, NetworkResult<Error>.self as? Error)
                         return
                     }
                     completion(data, nil)
                 } catch(let err) {
-                    print(err.localizedDescription)
+                    print(err.localizedDescription, "에러메시지 : getMyRecordFilter")
                     completion(nil, err)
                 }
             case .failure(let err):
-                print(err.localizedDescription)
+                print(err.localizedDescription, "에러메시지 : getMyRecordFilter")
+                completion(nil, err)
+            }
+        }
+    }
+    
+    // MARK: - GET : Main/Filter 가져오기
+    
+    func getMyDetailRecord(completion: @escaping (([MyDetailRecord]?, Error?) -> ())) {
+        myRecordProvider.request(MyRecordService.detailRecord(id: id)) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let result):
+                do {
+                    self.myDetailRecord = try result.map(BaseArrayResponseType<MyDetailRecord>.self)
+                    guard let data = self.myDetailRecord?.data else {
+                        completion(nil, NetworkResult<Error>.self as? Error)
+                        return
+                    }                    
+                    
+                    completion(data, nil)
+                    
+                } catch(let err) {
+                    print(err.localizedDescription, "에러메시지 : getMyDetailRecord")
+                    completion(nil, err)
+                }
+            case .failure(let err):
+                print(err.localizedDescription, "에러메시지 : getMyDetailRecord")
                 completion(nil, err)
             }
         }

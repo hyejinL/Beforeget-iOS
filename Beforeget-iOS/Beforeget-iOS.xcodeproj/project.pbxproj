@@ -12,6 +12,7 @@
 		5B304B752788257F0054314A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B304B742788257E0054314A /* Colors.xcassets */; };
 		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
 		5B304B792788304B0054314A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B782788304B0054314A /* Fonts.swift */; };
+		5B44A9C8279790D2002285A7 /* MyDetailRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B44A9C7279790D2002285A7 /* MyDetailRecord.swift */; };
 		5B5FFCC527973E7900336A35 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCC427973E7900336A35 /* MyRecord.swift */; };
 		5B5FFCC82797406E00336A35 /* MyRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCC72797406E00336A35 /* MyRecordService.swift */; };
 		5B5FFCCB279742ED00336A35 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCCA279742ED00336A35 /* Token.swift */; };
@@ -140,6 +141,7 @@
 		5B304B742788257E0054314A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
 		5B304B782788304B0054314A /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		5B44A9C7279790D2002285A7 /* MyDetailRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailRecord.swift; sourceTree = "<group>"; };
 		5B5FFCC427973E7900336A35 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		5B5FFCC72797406E00336A35 /* MyRecordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordService.swift; sourceTree = "<group>"; };
 		5B5FFCCA279742ED00336A35 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				5B5FFCC427973E7900336A35 /* MyRecord.swift */,
 				5B5FFCCF279764D100336A35 /* MyRecordFilter.swift */,
+				5B44A9C7279790D2002285A7 /* MyDetailRecord.swift */,
 			);
 			path = MyRecordModel;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
 				E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
+				5B44A9C8279790D2002285A7 /* MyDetailRecord.swift in Sources */,
 				5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */,
 				927AF39F278812D50018CC34 /* UILabel+.swift in Sources */,
 				5B8F137A279576F600385D5E /* WritingSavePopupView.swift in Sources */,
