@@ -27,7 +27,7 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     }
     
     private var goodReviews = [String]()
-    private var selectedGoodReviews = [String]()
+    var selectedGoodReview: ((_ goodReview: String) -> ())?
     
     // MARK: - Initializser
     
@@ -113,5 +113,13 @@ extension GoodOneLineCollectionViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell else { return UICollectionViewCell() }
         cell.config(oneline: goodReviews[indexPath.item])
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension GoodOneLineCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedGoodReview?(goodReviews[indexPath.item])
     }
 }

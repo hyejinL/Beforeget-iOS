@@ -19,6 +19,22 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         $0.textColor = Asset.Colors.gray200.color
     }
     
+    private let deleteButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnReviewDelete.image, for: .normal)
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(touchupDeleteButton), for: .touchUpInside)
+    }
+    
+    private lazy var oneLineStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 4
+        $0.addArrangedSubviews([oneLineLabel, deleteButton])
+    }
+    
+    var deleteOneLine: (() -> ())?
+    
     override var isSelected: Bool {
         didSet {
             let borderColor = isSelected ? Asset.Colors.black200.color.cgColor : Asset.Colors.gray200.color.cgColor
@@ -28,6 +44,12 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
             
             let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
             oneLineLabel.textColor = textColor
+            
+            if isSelected {
+                NotificationCenter.default.post(name: Notification.Name.didSelectOneLine, object: nil)
+            } else {
+                NotificationCenter.default.post(name: Notification.Name.didDeselectOneLine, object: nil)
+            }
         }
     }
     
@@ -54,9 +76,9 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     }
     
     private func setupLayout() {
-        addSubview(oneLineLabel)
+        addSubview(oneLineStackView)
         
-        oneLineLabel.snp.makeConstraints {
+        oneLineStackView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
     }
@@ -65,5 +87,21 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     
     public func config(oneline: String) {
         oneLineLabel.text = oneline
+    }
+    
+    public func showDeleteButton() {
+        deleteButton.isHidden = false
+    }
+    
+    public func configColor(borderColor: UIColor, textColor: UIColor, backgroundColor: UIColor) {
+        contentView.layer.borderColor = borderColor.cgColor
+        contentView.backgroundColor = backgroundColor
+        oneLineLabel.textColor = textColor
+    }
+    
+    //MARK: - @objc
+    
+    @objc func touchupDeleteButton() {
+        deleteOneLine?()
     }
 }
