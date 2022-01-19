@@ -152,6 +152,8 @@ final class ReportViewController: UIPageViewController {
             let height = totalHeight * data / maxCount
             heights.append(Double(height))
         }
+        
+        isScrollEnabled = true
     }
     
     private func setupBarData() {
@@ -266,7 +268,6 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            getSecondReportData()
             setupBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
@@ -279,12 +280,11 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
+            setupBarData()
             pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            getFirstReportData()
-            setupBarData()
         default:
             pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
@@ -327,8 +327,6 @@ extension ReportViewController {
             self.page2.reportDescriptionView.descriptionTitle = data.title
             self.page2.reportDescriptionView.descriptionContent = data.comment
         })
-        
-        isScrollEnabled = true
     }
     
     func getThridReportData() {
