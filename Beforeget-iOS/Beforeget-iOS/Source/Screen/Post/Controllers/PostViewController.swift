@@ -91,6 +91,7 @@ class PostViewController: UIViewController {
     
     var mediaType: MediaType?
     var additionalItems: [String] = []
+    var oneLines: [String] = []
     
     // MARK: - Life Cycle
     
@@ -99,6 +100,7 @@ class PostViewController: UIViewController {
         configUI()
         setupLayout()
         setupKeyboardNotifications()
+        setupOneLineNotification()
     }
     
     // MARK: - InitUI
@@ -181,10 +183,45 @@ class PostViewController: UIViewController {
         present(addItemViewController, animated: true, completion: nil)
     }
     
+    @objc func addOneLine(_ sender: Notification) {
+        guard let oneLineData = sender.object as? [String] else { return }
+        guard let cell = writingTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? OneLineReviewTableViewCell else { return }
+        cell.oneLines = oneLineData
+        
+        if cell.oneLines.isEmpty == false {
+            cell.reloadCollectionView()
+            cell.isHiddenAddButton(true)
+            cell.isHiddenColletionView(false)
+        }
+        
+        let collectionViewSize = cell.getCollectionViewSize()
+        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: collectionViewSize.width,
+                                                                 height: CGFloat.greatestFiniteMagnitude))
+        if collectionViewSize.height != estimatedSize.height {
+            UIView.setAnimationsEnabled(false)
+            writingTableView.beginUpdates()
+            writingTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
+        
+//        oneLines = oneLineData
+//        cell.reloadCollectionView()
+//        writingTableView.beginUpdates()
+//        writingTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+//        writingTableView.reloadData()
+//        cell.isHiddenAddButton(true)
+//        cell.isHiddenColletionView(false)
+//        writingTableView.endUpdates()
+    }
+    
     //MARK: - Custom Method
     
     func reloadTableView() {
         writingTableView.reloadData()
+    }
+    
+    private func setupOneLineNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addOneLine(_:)), name: NSNotification.Name.didAddOneLine, object: nil)
     }
 }
 
@@ -200,7 +237,20 @@ extension PostViewController: UITableViewDataSource {
         case 0:
             cell = TitleTableViewCell()
         case 1:
-            cell = OneLineReviewTableViewCell()
+            let oneLineCell = OneLineReviewTableViewCell()
+            oneLineCell.oneLines = oneLines
+//            if oneLineCell.oneLines.isEmpty == false {
+//                oneLineCell.reloadCollectionView()
+//                oneLineCell.isHiddenAddButton(true)
+//                oneLineCell.isHiddenColletionView(false)
+//            }
+            
+            oneLineCell.presentOneLineViewController = { (_ viewController: OneLineViewController) -> () in
+                self.definesPresentationContext = true
+                self.present(viewController, animated: false, completion: nil)
+            }
+            oneLineCell.selectionStyle = .none
+            return oneLineCell
         case 2:
             let commentCell = WriteTextTableViewCell()
             commentCell.delegate = self
