@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.5.0)
+  - Gifu (3.3.1)
   - IQKeyboardManagerSwift (6.3.0)
   - Kingfisher (6.3.1)
   - lottie-ios (3.3.0)
@@ -12,6 +13,7 @@ PODS:
   - Then (2.7.0)
 
 DEPENDENCIES:
+  - Gifu
   - IQKeyboardManagerSwift (= 6.3.0)
   - Kingfisher (~> 6.0)
   - lottie-ios
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Gifu
     - IQKeyboardManagerSwift
     - Kingfisher
     - lottie-ios
@@ -33,6 +36,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
@@ -41,6 +45,6 @@ SPEC CHECKSUMS:
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: ec63742c7cd68d741b34d3f8fb085febb8da4dce
+PODFILE CHECKSUM: b22cfceb2e25257bae8ca0a4dbb80e3be5a0420b
 
 COCOAPODS: 1.11.2
