@@ -33,6 +33,7 @@ class ReportOnePageView: UIView {
     
     var mediaImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     
     private var sentenceView = UIView()
