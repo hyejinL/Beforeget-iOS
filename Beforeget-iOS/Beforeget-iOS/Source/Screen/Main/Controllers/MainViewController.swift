@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Gifu
+
 import SnapKit
 import Then
 
@@ -39,8 +41,8 @@ final class MainViewController: UIViewController {
         $0.image = Asset.Assets.icnLogoMain.image
     }
     
-    private let mediaImageView = UIImageView().then {
-        $0.backgroundColor = Asset.Colors.gray300.color
+    private let mediaImageView = GIFImageView().then {
+        $0.animate(withGIFNamed: "mediaImageView")
     }
     
     private let reportButton = UIButton().then {
@@ -168,6 +170,7 @@ final class MainViewController: UIViewController {
         
         messageLabel.addLineSpacing(spacing: 34)
         messageLabel.textAlignment = .center
+        
     }
     
     private func setupLayout() {
