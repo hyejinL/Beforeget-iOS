@@ -29,6 +29,7 @@ class BarView: UIView {
     private var barTitleLabel = UILabel().then {
         $0.textColor = Asset.Colors.white.color
         $0.font = BDSFont.enBody7
+        $0.backgroundColor = Asset.Colors.black200.color
     }
     
     var barTitle: String = "" {

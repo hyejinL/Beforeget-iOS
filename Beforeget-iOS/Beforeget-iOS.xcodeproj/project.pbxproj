@@ -68,12 +68,14 @@
 		920B5D162795AD11002DE112 /* BDSNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6D7F8E278B3BEB00202230 /* BDSNavigationBar.swift */; };
 		920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4027969C94002DE112 /* NetworkResult.swift */; };
 		920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */; };
-		920B5D4727969D36002DE112 /* MainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4627969D36002DE112 /* MainResponse.swift */; };
+		920B5D4727969D36002DE112 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4627969D36002DE112 /* Main.swift */; };
 		920B5D4927969D94002DE112 /* MainAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4827969D94002DE112 /* MainAPI.swift */; };
 		920B5D4B27969DAA002DE112 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4A27969DAA002DE112 /* MainService.swift */; };
 		920B5D4D27969DCD002DE112 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4C27969DCD002DE112 /* NetworkConstant.swift */; };
 		920B5D592796EF6F002DE112 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D582796EF6F002DE112 /* BaseResponse.swift */; };
 		920B5D5B27970D29002DE112 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D5A27970D29002DE112 /* Token.swift */; };
+		920B5D7527972D32002DE112 /* ReportAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D7427972D32002DE112 /* ReportAPI.swift */; };
+		920B5D7727972D51002DE112 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D7627972D51002DE112 /* ReportService.swift */; };
 		921E62A62794CC8B002E6CD1 /* OneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */; };
 		921E62A82794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */; };
 		921E62AA2794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */; };
@@ -83,6 +85,11 @@
 		925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */; };
 		9277486B27902CBC00FAAE77 /* ReportOnePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277486A27902CBC00FAAE77 /* ReportOnePageView.swift */; };
 		9279655727980F5B0063E34C /* mediaImageView.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9279655627980F5B0063E34C /* mediaImageView.gif */; };
+		9279654D27972F7D0063E34C /* FirstReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279654C27972F7D0063E34C /* FirstReport.swift */; };
+		9279654F27972FB50063E34C /* SecondReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279654E27972FB50063E34C /* SecondReport.swift */; };
+		92796551279737800063E34C /* ThirdReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92796550279737800063E34C /* ThirdReport.swift */; };
+		9279655327973D670063E34C /* FourthReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279655227973D670063E34C /* FourthReport.swift */; };
+		92796555279744E10063E34C /* TotalReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92796554279744E10063E34C /* TotalReport.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
@@ -198,12 +205,14 @@
 		6696C21B3D46EDD420E877D4 /* Pods-Beforeget-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beforeget-iOS.release.xcconfig"; path = "Target Support Files/Pods-Beforeget-iOS/Pods-Beforeget-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		920B5D4027969C94002DE112 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		920B5D4427969D0D002DE112 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
-		920B5D4627969D36002DE112 /* MainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResponse.swift; sourceTree = "<group>"; };
+		920B5D4627969D36002DE112 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		920B5D4827969D94002DE112 /* MainAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAPI.swift; sourceTree = "<group>"; };
 		920B5D4A27969DAA002DE112 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		920B5D4C27969DCD002DE112 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		920B5D582796EF6F002DE112 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		920B5D5A27970D29002DE112 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		920B5D7427972D32002DE112 /* ReportAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPI.swift; sourceTree = "<group>"; };
+		920B5D7627972D51002DE112 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineViewController.swift; sourceTree = "<group>"; };
 		921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadOneLineCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -213,6 +222,11 @@
 		925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceCollectionViewCell.swift; sourceTree = "<group>"; };
 		9277486A27902CBC00FAAE77 /* ReportOnePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportOnePageView.swift; sourceTree = "<group>"; };
 		9279655627980F5B0063E34C /* mediaImageView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mediaImageView.gif; sourceTree = "<group>"; };
+		9279654C27972F7D0063E34C /* FirstReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReport.swift; sourceTree = "<group>"; };
+		9279654E27972FB50063E34C /* SecondReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondReport.swift; sourceTree = "<group>"; };
+		92796550279737800063E34C /* ThirdReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdReport.swift; sourceTree = "<group>"; };
+		9279655227973D670063E34C /* FourthReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthReport.swift; sourceTree = "<group>"; };
+		92796554279744E10063E34C /* TotalReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReport.swift; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -526,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				E2FC7630279841E00048909A /* PostModel */,
+				920B5D7327972D17002DE112 /* ReportModel */,
 				920B5D2C27962E8A002DE112 /* MainModel */,
 			);
 			path = APIModel;
@@ -535,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				E2FC762B279815580048909A /* PostAPI */,
+				920B5D7227972D10002DE112 /* ReportAPI */,
 				920B5D2F27962F0E002DE112 /* MainAPI */,
 			);
 			path = APIService;
@@ -543,7 +559,7 @@
 		920B5D2C27962E8A002DE112 /* MainModel */ = {
 			isa = PBXGroup;
 			children = (
-				920B5D4627969D36002DE112 /* MainResponse.swift */,
+				920B5D4627969D36002DE112 /* Main.swift */,
 			);
 			path = MainModel;
 			sourceTree = "<group>";
@@ -555,6 +571,27 @@
 				920B5D4827969D94002DE112 /* MainAPI.swift */,
 			);
 			path = MainAPI;
+			sourceTree = "<group>";
+		};
+		920B5D7227972D10002DE112 /* ReportAPI */ = {
+			isa = PBXGroup;
+			children = (
+				920B5D7627972D51002DE112 /* ReportService.swift */,
+				920B5D7427972D32002DE112 /* ReportAPI.swift */,
+			);
+			path = ReportAPI;
+			sourceTree = "<group>";
+		};
+		920B5D7327972D17002DE112 /* ReportModel */ = {
+			isa = PBXGroup;
+			children = (
+				9279654C27972F7D0063E34C /* FirstReport.swift */,
+				9279654E27972FB50063E34C /* SecondReport.swift */,
+				92796550279737800063E34C /* ThirdReport.swift */,
+				9279655227973D670063E34C /* FourthReport.swift */,
+				92796554279744E10063E34C /* TotalReport.swift */,
+			);
+			path = ReportModel;
 			sourceTree = "<group>";
 		};
 		924A3E2927883834006482B1 /* DesignSystem */ = {
@@ -1147,6 +1184,7 @@
 				929CFB01278DE04200FCA541 /* ReportGraphViewController.swift in Sources */,
 				929CFAFF278DE04200FCA541 /* ReportSentenceViewController.swift in Sources */,
 				5BD114982790C1C20063EB3B /* DetailRecordViewController.swift in Sources */,
+				9279655327973D670063E34C /* FourthReport.swift in Sources */,
 				5BD114AB2790C4730063EB3B /* LineTableViewCell.swift in Sources */,
 				5B8F13762795577D00385D5E /* EditPopupView.swift in Sources */,
 				927AF3A7278813E00018CC34 /* UIViewController+.swift in Sources */,
@@ -1175,6 +1213,8 @@
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
 				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
+				92796555279744E10063E34C /* TotalReport.swift in Sources */,
+				9279654D27972F7D0063E34C /* FirstReport.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
 				5B82542F279182E3004BDA5D /* ReviewTagCollectionViewCell.swift in Sources */,
@@ -1182,11 +1222,13 @@
 				929CFB02278DE04200FCA541 /* ReportLabelViewController.swift in Sources */,
 				5B8F137C2795776100385D5E /* WritingBackPopupView.swift in Sources */,
 				929CFB10278DE06500FCA541 /* ReportGraphView.swift in Sources */,
+				92796551279737800063E34C /* ThirdReport.swift in Sources */,
 				5B6D7F82278A2BCF00202230 /* CloseButton.swift in Sources */,
 				5B7BD118278DA2D2000BC0FA /* FilterCollectionViewCell.swift in Sources */,
 				5B8F13882795847300385D5E /* CompleteViewController.swift in Sources */,
 				927AF3DF27881EC30018CC34 /* UIStackView+.swift in Sources */,
-				920B5D4727969D36002DE112 /* MainResponse.swift in Sources */,
+				920B5D7527972D32002DE112 /* ReportAPI.swift in Sources */,
+				920B5D4727969D36002DE112 /* Main.swift in Sources */,
 				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
@@ -1201,6 +1243,7 @@
 				5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */,
 				5B8F137E279577F500385D5E /* DeletePopupView.swift in Sources */,
 				920B5D4927969D94002DE112 /* MainAPI.swift in Sources */,
+				920B5D7727972D51002DE112 /* ReportService.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */,
 				920B5D4B27969DAA002DE112 /* MainService.swift in Sources */,
@@ -1227,6 +1270,7 @@
 				5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */,
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
 				5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */,
+				9279654F27972FB50063E34C /* SecondReport.swift in Sources */,
 				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
 				5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */,
 				5B8F1378279559E800385D5E /* DetailRecordEditPopupViewController.swift in Sources */,
