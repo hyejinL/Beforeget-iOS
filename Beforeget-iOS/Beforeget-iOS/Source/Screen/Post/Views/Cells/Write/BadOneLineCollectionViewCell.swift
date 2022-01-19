@@ -121,7 +121,6 @@ extension BadOneLineCollectionViewCell: UICollectionViewDataSource {
 
 extension BadOneLineCollectionViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        selectedBadReviews.append(badReviews[indexPath.item])
         selectedBadReview?(badReviews[indexPath.item])
     }
 }

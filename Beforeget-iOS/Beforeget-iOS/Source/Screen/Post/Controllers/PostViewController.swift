@@ -203,15 +203,6 @@ class PostViewController: UIViewController {
             writingTableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }
-        
-//        oneLines = oneLineData
-//        cell.reloadCollectionView()
-//        writingTableView.beginUpdates()
-//        writingTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-//        writingTableView.reloadData()
-//        cell.isHiddenAddButton(true)
-//        cell.isHiddenColletionView(false)
-//        writingTableView.endUpdates()
     }
     
     //MARK: - Custom Method
@@ -239,12 +230,6 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
-//            if oneLineCell.oneLines.isEmpty == false {
-//                oneLineCell.reloadCollectionView()
-//                oneLineCell.isHiddenAddButton(true)
-//                oneLineCell.isHiddenColletionView(false)
-//            }
-            
             oneLineCell.presentOneLineViewController = { (_ viewController: OneLineViewController) -> () in
                 self.definesPresentationContext = true
                 self.present(viewController, animated: false, completion: nil)

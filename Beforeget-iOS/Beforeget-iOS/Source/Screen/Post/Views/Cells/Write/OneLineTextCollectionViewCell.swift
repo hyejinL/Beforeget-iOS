@@ -9,7 +9,6 @@ import UIKit
 
 import SnapKit
 import Then
-import SwiftUI
 
 class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
