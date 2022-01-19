@@ -313,8 +313,8 @@ extension ReportViewController {
             self.calculateHeight()
             
             // MARK: - FIX : 서버 데이터 모델 수정 필요
-            self.page2.reportDescriptionView.descriptionTitle
-            self.page2.reportDescriptionView.descriptionContentLabel.text = data.comment
+            self.page2.reportDescriptionView.descriptionTitle = data.title
+            self.page2.reportDescriptionView.descriptionContent = data.comment
         })
     }
     

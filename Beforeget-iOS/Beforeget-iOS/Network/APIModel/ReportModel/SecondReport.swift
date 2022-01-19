@@ -10,6 +10,7 @@ import Foundation
 struct SecondReport: Codable {
     let start: String
     let recordCount: [RecordCount]
+    let title: String
     let comment: String
 }
 
