@@ -29,7 +29,7 @@ class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegist
     }
     
     private var badReviews = [String]()
-    private var selectedBadReviews = [String]()
+    var selectedBadReview: ((_ badReview: String) -> ())?
     
     // MARK: - Initializser
     
@@ -114,5 +114,13 @@ extension BadOneLineCollectionViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell else { return UICollectionViewCell() }
         cell.config(oneline: badReviews[indexPath.item])
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension BadOneLineCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedBadReview?(badReviews[indexPath.item])
     }
 }
