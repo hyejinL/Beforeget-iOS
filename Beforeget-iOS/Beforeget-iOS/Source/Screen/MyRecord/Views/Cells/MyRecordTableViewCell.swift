@@ -46,17 +46,9 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             [yearLabel, monthLabel, dayLabel])
     }
     
-    private var yearLabel = UILabel().then {
-        $0.text = "2022."
-    }
-    
-    private var monthLabel = UILabel().then {
-        $0.text = "01."
-    }
-    
-    private var dayLabel = UILabel().then {
-        $0.text = "03."
-    }
+    private var yearLabel = UILabel()
+    private var monthLabel = UILabel()
+    private var dayLabel = UILabel()
     
     // MARK: - Initializers
     
@@ -139,6 +131,10 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         guard let myRecord = myRecord else { return }
         titleLabel.text = myRecord[index].title
         onelineLabel.text = myRecord[index].oneline
+        let dateArray = myRecord[index].date.components(separatedBy: "-")
+        yearLabel.text = "\(dateArray[0])."
+        monthLabel.text = "\(dateArray[1])."
+        dayLabel.text = "\(dateArray[2])"
         starLabel.text = String(myRecord[index].star)
         let categoryImage = myRecord[index].category
         
