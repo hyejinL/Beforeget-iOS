@@ -7,16 +7,24 @@
 
 import UIKit
 
+import Gifu
+
 import SnapKit
 import Then
 
 final class MainViewController: UIViewController {
+    
+    // MARK: - Enum
     
     enum CollectionViewConst {
         static let cellInterval: CGFloat = 4
         static let cellIntervalCount: CGFloat = 5
         static let visibleCellsCount: CGFloat = UIScreen.main.hasNotch ? 2.5 : 2.6
     }
+    
+    // MARK: - Network
+    
+    private let mainAPI = MainAPI.shared
     
     // MARK: - Properties
     
@@ -33,8 +41,8 @@ final class MainViewController: UIViewController {
         $0.image = Asset.Assets.icnLogoMain.image
     }
     
-    private let mediaImageView = UIImageView().then {
-        $0.backgroundColor = Asset.Colors.gray300.color
+    private let mediaImageView = GIFImageView().then {
+        $0.animate(withGIFNamed: "mediaImageView")
     }
     
     private let reportButton = UIButton().then {
@@ -127,11 +135,9 @@ final class MainViewController: UIViewController {
         $0.dataSource = self
     }
     
-    private let dummyData: [Media] = [
-        Media(book: 6, music: 6, movie: 6, tv: 6, youtube: 6, webtoon: 6)
-    ]
+    private var mainMediaData: Main?
     
-    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(dummyData[0]) }
+    private lazy var recordTotal = MediaType.allCases.map { $0.recordCount(mainMediaData) }
         .reduce(0) { $0 + $1 }
     
     // MARK: - Life Cycle
@@ -140,6 +146,13 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+
+        mainAPI.getMain { [weak self] data, err in
+            guard let data = data else { return }
+            self?.mainMediaData = data
+            self?.recordTotalLabel.text = "\(data.movie + data.book + data.music + data.tv + data.youtube + data.webtoon)"
+            self?.recordCollectionView.reloadData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -157,6 +170,7 @@ final class MainViewController: UIViewController {
         
         messageLabel.addLineSpacing(spacing: 34)
         messageLabel.textAlignment = .center
+        
     }
     
     private func setupLayout() {
@@ -289,8 +303,7 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         let media: MediaType = MediaType(rawValue: indexPath.item) ?? .movie
-        cell.config(media.recordCount(dummyData[0]), "\(media)")
+        cell.config(media.recordCount(mainMediaData), "\(media)")
         return cell
     }
 }
-
