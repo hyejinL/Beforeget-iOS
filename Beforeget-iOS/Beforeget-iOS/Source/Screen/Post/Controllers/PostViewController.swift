@@ -177,6 +177,7 @@ class PostViewController: UIViewController {
     @objc func touchupAddItemButton() {
         let addItemViewController = AddItemViewController()
         addItemViewController.modalPresentationStyle = .overCurrentContext
+        addItemViewController.mediaType = mediaType
         definesPresentationContext = true
         present(addItemViewController, animated: true, completion: nil)
     }

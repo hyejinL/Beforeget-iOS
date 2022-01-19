@@ -27,6 +27,10 @@ final class AddItemViewController: UIViewController {
         }
     }
     
+    // MARK: - Network
+    
+    private let postAPI = PostAPI.shared
+    
     // MARK: - Properties
     
     private let topBarView = UIView().then {
@@ -113,8 +117,9 @@ final class AddItemViewController: UIViewController {
     var isSelectedAddTextButton: Bool = false
     var isSelectedAddImageButton: Bool = false
     var selectedItemCount: Int = 0
-    var recommendItems: [String] = ["명대사", "감독", "배우", "장르", "줄거리", "OST", "포스터"]
+    var recommendItems: [String] = []
     var selectedItems: [String] = []
+    var mediaType: MediaType?
     
     // MARK: - Life Cycle
     
@@ -122,6 +127,11 @@ final class AddItemViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        postAPI.getRecommendItem(mediaId: mediaType?.mediaNumber() ?? 1) { [weak self] data, err in
+            guard let data = data else { return }
+            self?.recommendItems = data.additional
+            self?.recommendItemCollectionView.reloadData()
+        }
     }
     
     // MARK: - InitUI
