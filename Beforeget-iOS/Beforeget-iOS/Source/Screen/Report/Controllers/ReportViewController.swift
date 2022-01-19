@@ -63,10 +63,11 @@ final class ReportViewController: UIPageViewController {
     private let page4 = ReportSentenceViewController()
     private let page5 = ReportOnePageViewController()
     
-    // MARK: - TODO REMOVE
-    
     private var countData: [Int] = [0, 0, 0, 0, 0]
+    private var sortedCountData: [Int] = [0, 0, 0, 0, 0]
     private var heights = [Double]()
+    
+    private var isScrollEnabled: Bool = false
     
     // MARK: - Life Cycle
     
@@ -77,6 +78,9 @@ final class ReportViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isScrollEnabled = false
+        
         configUI()
         setupLayout()
         setupControllers()
@@ -135,15 +139,15 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func calculateHeight() {
-        guard let maxCount = countData.max() else { return }
+        guard let maxCount = sortedCountData.max() else { return }
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = countData.sorted(by: >)[2]
+        let midCount = sortedCountData.sorted(by: >)[2]
         page2.reportGraphView.midCount = midCount
         page5.reportOnePageView.midCount = midCount
         
-        for data in countData {
+        for data in sortedCountData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
             let height = totalHeight * data / maxCount
             heights.append(Double(height))
@@ -221,11 +225,14 @@ extension ReportViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         
-        if currentIndex == 0 {
-            return pages.last
-        } else {
-            return pages[currentIndex - 1]
+        if isScrollEnabled == true {
+            if currentIndex == 0 {
+                return pages.last
+            } else {
+                return pages[currentIndex - 1]
+            }
         }
+        return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -233,11 +240,14 @@ extension ReportViewController: UIPageViewControllerDataSource {
             return nil
         }
         
-        if currentIndex < pages.count - 1 {
-            return pages[currentIndex + 1]
-        } else {
-            return pages.first
+        if isScrollEnabled == true {
+            if currentIndex < pages.count - 1 {
+                return pages[currentIndex + 1]
+            } else {
+                return pages.first
+            }
         }
+        return nil
     }
 }
 
@@ -256,6 +266,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            getSecondReportData()
             setupBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
@@ -272,6 +283,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
+            getFirstReportData()
             setupBarData()
         default:
             pageImageView1.image = Asset.Assets.pageActive.image
@@ -309,12 +321,14 @@ extension ReportViewController {
             for i in 0...data.recordCount.count-1 {
                 self.countData[i] = data.recordCount[i].count
             }
-            
+            self.sortedCountData = self.countData.reversed()
             self.calculateHeight()
             
             self.page2.reportDescriptionView.descriptionTitle = data.title
             self.page2.reportDescriptionView.descriptionContent = data.comment
         })
+        
+        isScrollEnabled = true
     }
     
     func getThridReportData() {
@@ -366,4 +380,3 @@ extension ReportViewController {
         })
     }
 }
-
