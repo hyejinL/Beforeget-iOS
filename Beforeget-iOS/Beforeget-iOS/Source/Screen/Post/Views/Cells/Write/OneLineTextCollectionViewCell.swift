@@ -54,7 +54,7 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         }
     }
     
-    // MARK: - InitUI
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)

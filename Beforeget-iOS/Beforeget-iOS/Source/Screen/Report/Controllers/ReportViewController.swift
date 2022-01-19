@@ -10,7 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
+import Kingfisher
+
 final class ReportViewController: UIPageViewController {
+    
+    // MARK: - Network
+    
+    private let reportAPI = ReportAPI.shared
     
     // MARK: - Properties
     
@@ -18,7 +24,7 @@ final class ReportViewController: UIPageViewController {
     
     private lazy var downLoadButton = UIButton().then {
         $0.setTitle("", for: .normal)
-        $0.setImage(Asset.Assets.btnDownload.image, for: .normal)
+        $0.setImage(Asset.Assets.btnShare.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupDownLoadButton), for: .touchUpInside)
     }
     
@@ -59,7 +65,7 @@ final class ReportViewController: UIPageViewController {
     
     // MARK: - TODO REMOVE
     
-    private var dumyData: [Int] = [0, 3, 0, 2, 12]
+    private var countData: [Int] = [0, 0, 0, 0, 0]
     private var heights = [Double]()
     
     // MARK: - Life Cycle
@@ -74,7 +80,12 @@ final class ReportViewController: UIPageViewController {
         configUI()
         setupLayout()
         setupControllers()
-        calculateHeight()
+        
+        getFirstReportData()
+        getSecondReportData()
+        getThridReportData()
+        getFourthReportData()
+        getTotalReportData()
     }
     
     // MARK: - InitUI
@@ -124,15 +135,15 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func calculateHeight() {
-        guard let maxCount = dumyData.max() else { return }
+        guard let maxCount = countData.max() else { return }
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = dumyData.sorted(by: >)[2]
+        let midCount = countData.sorted(by: >)[2]
         page2.reportGraphView.midCount = midCount
         page5.reportOnePageView.midCount = midCount
         
-        for data in dumyData {
+        for data in countData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
             let height = totalHeight * data / maxCount
             heights.append(Double(height))
@@ -173,6 +184,13 @@ final class ReportViewController: UIPageViewController {
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM"
+        return dateFormatter.string(from: date)
     }
     
     // MARK: - @objc
@@ -261,6 +279,91 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         }
+    }
+}
+
+// MARK: - Network
+
+extension ReportViewController {
+    func getFirstReportData() {
+        reportAPI.getFirstReport(date: addOrSubtractMonth(month: -1), completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page1.reportDescriptionView.descriptionTitle = data.title
+            self.page1.reportDescriptionView.descriptionContent = data.comment
+            
+            let listURL = URL(string: data.poster)
+            self.page1.typeImageView.kf.setImage(with: listURL)
+        })
+    }
+    
+    func getSecondReportData() {
+        reportAPI.getSecondReport(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page2.reportGraphView.maxCount = 20
+            self.page2.reportGraphView.midCount = 12
+            
+            for i in 0...data.recordCount.count-1 {
+                self.countData[i] = data.recordCount[i].count
+            }
+            
+            self.calculateHeight()
+            
+            self.page2.reportDescriptionView.descriptionTitle = data.title
+            self.page2.reportDescriptionView.descriptionContent = data.comment
+        })
+    }
+    
+    func getThridReportData() {
+        reportAPI.getThirdReport(date: addOrSubtractMonth(month: -1), completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page3.reportDescriptionView.descriptionTitle = data.title
+            self.page3.reportDescriptionView.descriptionContent = data.label
+            
+            self.page3.reportRankingView.firstCount = data.arr[0].count
+            self.page3.reportRankingView.firstType = data.arr[0].type
+            self.page3.reportRankingView.secondCount = data.arr[1].count
+            self.page3.reportRankingView.secondType = data.arr[1].type
+            self.page3.reportRankingView.thirdCount = data.arr[2].count
+            self.page3.reportRankingView.thirdType = data.arr[2].type
+        })
+    }
+    
+    func getFourthReportData() {
+        reportAPI.getFourth(date: addOrSubtractMonth(month: -1), completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page4.movieData = data.oneline.movie
+            self.page4.bookData = data.oneline.book
+            self.page4.tvData = data.oneline.tv
+            self.page4.musicData = data.oneline.music
+            self.page4.webtoonData = data.oneline.webtoon
+        })
+    }
+    
+    func getTotalReportData() {
+        reportAPI.getTotal(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.page5.reportOnePageView.sentence = data.oneline
+            
+            self.page5.reportOnePageView.firstRankingMedia = data.media[0].type
+            self.page5.reportOnePageView.firstRankingCount = data.media[0].count
+            self.page5.reportOnePageView.secondRankingMedia = data.media[1].type
+            self.page5.reportOnePageView.secondRankingCount = data.media[1].count
+            self.page5.reportOnePageView.thirdRankingMedia = data.media[2].type
+            self.page5.reportOnePageView.thirdRankingCount = data.media[2].count
+            
+            let listURL = URL(string: data.graphic)
+            self.page5.reportOnePageView.mediaImageView.kf.setImage(with: listURL)
+        })
     }
 }
 
