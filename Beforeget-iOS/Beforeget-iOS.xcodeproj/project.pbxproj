@@ -129,6 +129,12 @@
 		E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072427940B8900E815E6 /* NotificationName.swift */; };
 		E2F4072727947BD300E815E6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072627947BD300E815E6 /* AddItemViewController.swift */; };
 		E2F407292794840A00E815E6 /* AddItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */; };
+		E2FC762D279815F20048909A /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC762C279815F20048909A /* PostService.swift */; };
+		E2FC762F279816050048909A /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC762E279816050048909A /* PostAPI.swift */; };
+		E2FC7632279841F20048909A /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC7631279841F20048909A /* PostRequest.swift */; };
+		E2FC7636279855D90048909A /* OneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC7635279855D90048909A /* OneLine.swift */; };
+		E2FC76382798563B0048909A /* RecommendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC76372798563B0048909A /* RecommendItem.swift */; };
+		E2FC763A279859B90048909A /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC7639279859B90048909A /* PostResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,6 +264,12 @@
 		E2F4072427940B8900E815E6 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		E2F4072627947BD300E815E6 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		E2FC762C279815F20048909A /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		E2FC762E279816050048909A /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
+		E2FC7631279841F20048909A /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
+		E2FC7635279855D90048909A /* OneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLine.swift; sourceTree = "<group>"; };
+		E2FC76372798563B0048909A /* RecommendItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItem.swift; sourceTree = "<group>"; };
+		E2FC7639279859B90048909A /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -513,6 +525,7 @@
 		920B5D2A27962E13002DE112 /* APIModel */ = {
 			isa = PBXGroup;
 			children = (
+				E2FC7630279841E00048909A /* PostModel */,
 				920B5D2C27962E8A002DE112 /* MainModel */,
 			);
 			path = APIModel;
@@ -521,6 +534,7 @@
 		920B5D2B27962E1F002DE112 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				E2FC762B279815580048909A /* PostAPI */,
 				920B5D2F27962F0E002DE112 /* MainAPI */,
 			);
 			path = APIService;
@@ -948,6 +962,26 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		E2FC762B279815580048909A /* PostAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC762C279815F20048909A /* PostService.swift */,
+				E2FC762E279816050048909A /* PostAPI.swift */,
+			);
+			path = PostAPI;
+			sourceTree = "<group>";
+		};
+		E2FC7630279841E00048909A /* PostModel */ = {
+			isa = PBXGroup;
+			children = (
+				E2FC7631279841F20048909A /* PostRequest.swift */,
+				E2FC7635279855D90048909A /* OneLine.swift */,
+				E2FC76372798563B0048909A /* RecommendItem.swift */,
+				E2FC7639279859B90048909A /* PostResponse.swift */,
+			);
+			path = PostModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1095,6 +1129,7 @@
 				920B5D4527969D0D002DE112 /* MoyaLoggerPlugin.swift in Sources */,
 				920B5D142795AD05002DE112 /* ReportTopView.swift in Sources */,
 				E206FDAB278F23A900AFA390 /* MediaType.swift in Sources */,
+				E2FC762D279815F20048909A /* PostService.swift in Sources */,
 				E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */,
 				5B7BD106278CA2E0000BC0FA /* FilterView.swift in Sources */,
 				5B8F13702794D37D00385D5E /* SettingFooterView.swift in Sources */,
@@ -1132,9 +1167,11 @@
 				927AF3E127881EDA0018CC34 /* UITextField+.swift in Sources */,
 				929CFB04278DE04200FCA541 /* ReportRankingViewController.swift in Sources */,
 				924A3E3027883994006482B1 /* BDSFont.swift in Sources */,
+				E2FC7632279841F20048909A /* PostRequest.swift in Sources */,
 				5B82542D27917F3A004BDA5D /* UIImage+.swift in Sources */,
 				5B8F136B2794C77900385D5E /* SettingTableViewCell.swift in Sources */,
 				924A3E2E2788390E006482B1 /* BDSButton.swift in Sources */,
+				E2FC763A279859B90048909A /* PostResponse.swift in Sources */,
 				929CFB03278DE04200FCA541 /* ReportViewController.swift in Sources */,
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
 				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
@@ -1159,6 +1196,7 @@
 				5B83EF2F278E1E2A00D07AC7 /* FilterButtonCollectionViewCell.swift in Sources */,
 				929CFB0D278DE06500FCA541 /* ReportRankingView.swift in Sources */,
 				5BD114AD2790C4960063EB3B /* LinkTableViewCell.swift in Sources */,
+				E2FC76382798563B0048909A /* RecommendItem.swift in Sources */,
 				927AF3DD27881E000018CC34 /* UITableViewRegisterable.swift in Sources */,
 				5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */,
 				5B8F137E279577F500385D5E /* DeletePopupView.swift in Sources */,
@@ -1167,6 +1205,7 @@
 				920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */,
 				920B5D4B27969DAA002DE112 /* MainService.swift in Sources */,
 				927AF3DB27881DE90018CC34 /* UICollectionViewRegisterable.swift in Sources */,
+				E2FC7636279855D90048909A /* OneLine.swift in Sources */,
 				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
@@ -1184,6 +1223,7 @@
 				5BD114A52790C4570063EB3B /* GenreTableViewCell.swift in Sources */,
 				5BD114AF2790C4A80063EB3B /* StampTableViewCell.swift in Sources */,
 				5B82543327918CD5004BDA5D /* GenreCollectionViewCell.swift in Sources */,
+				E2FC762F279816050048909A /* PostAPI.swift in Sources */,
 				5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */,
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
 				5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */,
