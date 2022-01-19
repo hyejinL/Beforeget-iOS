@@ -9,7 +9,6 @@ import UIKit
 
 import SnapKit
 import Then
-import Lottie
 
 class OneLineReviewTableViewCell: UITableViewCell {
     
