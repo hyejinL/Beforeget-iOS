@@ -77,5 +77,20 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
     
     func config(_ mediaName: String) {
         mediaLabel.text = mediaName
+        
+        switch mediaName {
+        case "Book":
+            mediaImageView.image = Asset.Assets.icnWriteBook.image
+        case "TV":
+            mediaImageView.image = Asset.Assets.icnWriteTv.image
+        case "Music":
+            mediaImageView.image = Asset.Assets.icnWriteMusic.image
+        case "Webtoon":
+            mediaImageView.image = Asset.Assets.icnWriteWebtoon.image
+        case "Youtube":
+            mediaImageView.image = Asset.Assets.icnWriteYoutube.image
+        default:
+            mediaImageView.image = Asset.Assets.icnWriteMovie.image
+        }
     }
 }
