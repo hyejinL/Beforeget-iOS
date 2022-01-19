@@ -130,7 +130,7 @@
 		E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206FDB2278F478400AFA390 /* WritingHeaderView.swift */; };
 		E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */; };
 		E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */; };
-		E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */; };
+		E2B69CDE2790322500F9C2DD /* WriteTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B69CDD2790322500F9C2DD /* WriteTextTableViewCell.swift */; };
 		E2E27799278B52670083AFF5 /* MediaSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */; };
 		E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */; };
 		E2F4072527940B8900E815E6 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F4072427940B8900E815E6 /* NotificationName.swift */; };
@@ -266,7 +266,7 @@
 		E206FDB2278F478400AFA390 /* WritingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingHeaderView.swift; sourceTree = "<group>"; };
 		E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineReviewTableViewCell.swift; sourceTree = "<group>"; };
-		E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		E2B69CDD2790322500F9C2DD /* WriteTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextTableViewCell.swift; sourceTree = "<group>"; };
 		E2E27798278B52670083AFF5 /* MediaSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectViewController.swift; sourceTree = "<group>"; };
 		E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		E2F4072427940B8900E815E6 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -946,17 +946,41 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		E2E2779A278B67590083AFF5 /* Cells */ = {
+		E2AF576C2797162700410136 /* Write */ = {
 			isa = PBXGroup;
 			children = (
-				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
 				E2B69CD9279031E800F9C2DD /* TitleTableViewCell.swift */,
 				E2B69CDB2790321800F9C2DD /* OneLineReviewTableViewCell.swift */,
-				E2B69CDD2790322500F9C2DD /* CommentTableViewCell.swift */,
-				E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */,
+				E2B69CDD2790322500F9C2DD /* WriteTextTableViewCell.swift */,
 				921E62A72794CE3D002E6CD1 /* GoodOneLineCollectionViewCell.swift */,
 				921E62A92794CE48002E6CD1 /* BadOneLineCollectionViewCell.swift */,
 				921E62AB2794D188002E6CD1 /* OneLineTextCollectionViewCell.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		E2AF576D2797163100410136 /* Select */ = {
+			isa = PBXGroup;
+			children = (
+				E2E2779B278B68560083AFF5 /* MediaSelectCollectionViewCell.swift */,
+			);
+			path = Select;
+			sourceTree = "<group>";
+		};
+		E2AF576E2797163800410136 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				E2F407282794840A00E815E6 /* AddItemCollectionViewCell.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		E2E2779A278B67590083AFF5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E2AF576D2797163100410136 /* Select */,
+				E2AF576E2797163800410136 /* Add */,
+				E2AF576C2797162700410136 /* Write */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1189,7 +1213,7 @@
 				5B8254312791895C004BDA5D /* LeftAlignmentCollectionViewFlowLayout.swift in Sources */,
 				5BD114A72790C45F0063EB3B /* TextTableViewCell.swift in Sources */,
 				927AF3A5278813C00018CC34 /* UIView+.swift in Sources */,
-				E2B69CDE2790322500F9C2DD /* CommentTableViewCell.swift in Sources */,
+				E2B69CDE2790322500F9C2DD /* WriteTextTableViewCell.swift in Sources */,
 				5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */,
 				E2B69CDC2790321800F9C2DD /* OneLineReviewTableViewCell.swift in Sources */,
 				5BD114B12790C5BF0063EB3B /* DetailRecordSection.swift in Sources */,
