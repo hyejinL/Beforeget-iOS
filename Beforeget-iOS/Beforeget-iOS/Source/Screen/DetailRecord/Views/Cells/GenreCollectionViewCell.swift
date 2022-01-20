@@ -12,6 +12,10 @@ import Then
 
 class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
     
     public let genreLabel = UILabel().then {
@@ -51,7 +55,10 @@ class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        genreLabel.text = data
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let content = additional[index].content else { return }
+        
+        genreLabel.text = content
     }
 }

@@ -11,6 +11,10 @@ import SnapKit
 import Then
 
 class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
 
     // MARK: - Properties
     
@@ -33,7 +37,6 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.lineBreakStrategy = .hangulWordPriority
         $0.lineBreakMode = .byWordWrapping
     }
-    
     
     // MARK: - Initializer
 
@@ -84,7 +87,11 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let description = additional[index].content else { return }
+        
+        titleLabel.text = additional[index].type
+        descriptionLabel.text = description
     }
 }

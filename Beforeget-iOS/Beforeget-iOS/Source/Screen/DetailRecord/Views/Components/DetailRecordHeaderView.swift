@@ -18,6 +18,8 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - Properties
     
+    public var postId = 0
+    
     private var fontColorArray: [UIColor] = [
         Asset.Colors.white.color, Asset.Colors.black200.color,
         Asset.Colors.black200.color, Asset.Colors.white.color,
@@ -33,16 +35,21 @@ class DetailRecordHeaderView: UIView {
         "인생영화", "아름다운 영상미",
         "마음이 따뜻해져요", "개발자 인생!"]
     
+    private let preferredLanguage = NSLocale.preferredLanguages[0]
+    
     private let blackBackView = UIView().then {
         $0.backgroundColor = Asset.Colors.black200.color
     }
     
-    public var iconImageView = UIImageView()
+    public var iconImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+    }
     
     // MARK: - FIXME
     /// 문제 : 영어로 넘어오면 폰트 어떻게 해야 하나?
-    public var titleLabel = UILabel().then {
-        $0.text = "왜들그리 다운되어있어 분위기가 겁나싸해 요즘그게 유행인가"
+    public lazy var titleLabel = UILabel().then {
+        $0.text = "0"
         $0.numberOfLines = 2
         $0.font = BDSFont.title3
         $0.textColor = Asset.Colors.white.color
@@ -57,7 +64,7 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - FIXME 날짜 변환
     public var dateLabel = UILabel().then {
-        $0.text = "2022. 01. 10. MON"
+        $0.text = "0"
         $0.font = BDSFont.enBody7
         $0.textColor = Asset.Colors.white.color
     }
@@ -89,7 +96,7 @@ class DetailRecordHeaderView: UIView {
         }
     
     // MARK: - Initializer
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
@@ -100,14 +107,15 @@ class DetailRecordHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override class func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-    }
-    
     // MARK: - InitUI
     
     private func configUI() {
         backgroundColor = Asset.Colors.white.color
+        if preferredLanguage == "en" {
+            titleLabel.font = BDSFont.enHead1
+        } else if preferredLanguage == "kr" {
+            titleLabel.font = BDSFont.title3
+        }
     }
     
     private func setupLayout() {
@@ -180,15 +188,10 @@ class DetailRecordHeaderView: UIView {
         reveiwTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(reviewLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(102)
-            make.bottom.equalToSuperview().inset(47)
+            make.height.equalTo(120)
+            // MARK: FIXME - 한줄 리뷰 높이를 1~2 / 3~4 / 5~6 일 때 나눠서 계산해줘야 함
+            make.bottom.equalToSuperview()
         }
-    }
-    
-    // MARK: - Custom Method
-    
-    public func config() {
-        
     }
 }
 
@@ -226,7 +229,7 @@ extension DetailRecordHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let reviewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ReviewTagCollectionViewCell.className,

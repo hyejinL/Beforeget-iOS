@@ -25,8 +25,8 @@ extension MyRecordService: TargetType {
         switch self {
         case .myRecord:
             return "/post"
-        case .filter(let date, let media, let star):
-            return "/post/filter?date=\(date)&media=\(media)&star=\(star)"
+        case .filter:
+            return "/post/filter"
         case .detailRecord(let id):
             return "/post/\(id)"
         }
@@ -52,8 +52,10 @@ extension MyRecordService: TargetType {
     
     var task: Task {
         switch self {
-        case .myRecord, .filter, .detailRecord :
+        case .myRecord, .detailRecord :
             return .requestPlain
+        case let .filter(date, media, star):
+            return .requestParameters(parameters: ["date": date, "media": media, "star": star], encoding: URLEncoding.queryString)
         }
     }
     

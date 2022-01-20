@@ -12,6 +12,10 @@ import Then
 
 class StampCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
     
     public let stampLabel = UILabel().then {
@@ -50,7 +54,10 @@ class StampCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        stampLabel.text = data
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let content = additional[index].content else { return }
+        
+        stampLabel.text = content
     }
 }

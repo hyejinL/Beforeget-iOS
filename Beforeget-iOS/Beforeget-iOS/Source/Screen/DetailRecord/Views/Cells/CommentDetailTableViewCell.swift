@@ -11,6 +11,10 @@ import SnapKit
 import Then
 
 class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
 
     // MARK: - Properties
     
@@ -45,10 +49,15 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        commentLabel.text = nil
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = Asset.Colors.white.color
         
         commentLabel.addLetterSpacing()
         commentLabel.addLineSpacing(spacing: 25)
@@ -81,7 +90,8 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].comment else { return }
+        commentLabel.text = additional
     }
 }

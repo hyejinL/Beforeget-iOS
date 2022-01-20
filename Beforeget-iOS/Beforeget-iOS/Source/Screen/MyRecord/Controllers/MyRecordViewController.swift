@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import Then
+import CoreMedia
 
 final class MyRecordViewController: UIViewController {
     
@@ -31,9 +32,7 @@ final class MyRecordViewController: UIViewController {
     var selectedDateIndex: Int = -1
     var selectedMediaArray: [String] = []
     var selectedStarArray: [Int] = []
-    
-    private let record = RecordMannager()
-    
+        
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .record, isHidden: false)
     
@@ -69,14 +68,6 @@ final class MyRecordViewController: UIViewController {
             self.recordArray = data
             self.recordTableView.reloadData()
         }
-        
-//        myRecordAPI.getMyRecordFilter { data, err in
-//            guard let data = data else {
-//                return
-//            }
-//            self.recordTableView.reloadData()
-//
-//        }
     }
     
     // MARK: - InitUI
@@ -194,6 +185,15 @@ extension MyRecordViewController:
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
         print(data, media, star, "넘어온 값")
+        
+        
+        
+        myRecordAPI.getMyRecordFilter(date: "-1", media: "-1", star: "-1") { data, err in
+            
+            print(data, "이거 필터맞아?")
+        }
+        
+        
         
         filterView.dateButton.isSelected = (data == -1) ?
         false : true

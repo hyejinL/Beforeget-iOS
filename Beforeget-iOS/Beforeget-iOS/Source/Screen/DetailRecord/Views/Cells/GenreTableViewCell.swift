@@ -81,7 +81,7 @@ extension GenreTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.className, for: indexPath) as? GenreCollectionViewCell else { return UICollectionViewCell() }
-        genreCell.config(genreArray[indexPath.item])
+        genreCell.config(indexPath.item)
         return genreCell
     }
 }

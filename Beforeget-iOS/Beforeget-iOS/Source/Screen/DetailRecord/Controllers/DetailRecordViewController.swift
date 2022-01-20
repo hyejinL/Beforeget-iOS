@@ -16,16 +16,21 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     // MARK: - Network
     
     private let myRecordAPI = MyRecordAPI.shared
-
+    
     // MARK: - Dummy Data
     
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
+    
+    public var detailAdditional: [DetailAdditional] = []
+    public var typeArray: [String] = []
     
     private var sectionArray: [DetailRecordSection] = [
         .comment, .image, .comma,
         .genre, .text, .song,
         .line, .link, .stamp
     ]
+    
+    private var type: [String] = []
     
     // MARK: - Properties
     
@@ -82,7 +87,21 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        
+        // MARK: - FIXME 답이 없다...
+        DispatchQueue.main.async {
+//            print(self.postId,"들어와?")
+//            guard let detailData = self.myRecordAPI.myDetailRecord?.data else { return }
+//            print("여기는1",detailData)
+//
+//            detailData.forEach {
+//                guard let detailAdditional = $0.additional else { return }
+//                print(detailAdditional)
+//            }
+//
+//            self.myRecordAPI.getMyDetailRecord(postId: self.postId) { data, err in
+//                self.recordTableView.reloadData()
+//            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -188,7 +207,7 @@ extension DetailRecordViewController: UITableViewDelegate {
                 headerView.reviewArray = $0.oneline
                 headerView.reveiwTagCollectionView.reloadData()
                 let starImage = $0.star
-
+                
                 switch starImage {
                 case 1: return headerView.starImageView.image = Asset.Assets.btnStar1.image
                 case 2: return headerView.starImageView.image = Asset.Assets.btnStar2.image
@@ -218,12 +237,25 @@ extension DetailRecordViewController: UITableViewDelegate {
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionArray.count
+        return 1+detailAdditional.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
         else { return UITableViewCell() }
+        
+//        myRecordAPI.getMyDetailRecord(postId: postId) { [weak self] data, err in
+//            guard let self = self else { return }
+//            guard let data = data else {
+//                return
+//            }
+//            guard let additional = self.myRecordAPI.myDetailRecord?.data?[self.postId].additional else { return }
+//            print(data, additional, "이거다")
+//
+//
+//
+//            self.recordTableView.reloadData()
+//        }
         
         switch detailSection {
         case .comment:
@@ -231,6 +263,8 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: CommentDetailTableViewCell.className,
                 for: indexPath) as? CommentDetailTableViewCell
             else { return UITableViewCell() }
+            commentCell.config(indexPath.item)
+            commentCell.reloadInputViews()
             return commentCell
             
         case .image:
@@ -238,6 +272,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: ImageTableViewCell.className,
                 for: indexPath) as? ImageTableViewCell
             else { return UITableViewCell() }
+            imageCell.config(indexPath.item)
             return imageCell
             
         case .comma:
@@ -283,7 +318,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 for: indexPath) as? LinkTableViewCell
             else { return UITableViewCell() }
             linkCell.linkButtonDelegate = self
-            linkCell.config(linkString)
+            linkCell.config(index: indexPath.row)
             return linkCell
             
         case .stamp:
@@ -292,6 +327,78 @@ extension DetailRecordViewController: UITableViewDataSource {
                 for: indexPath) as? StampTableViewCell
             else { return UITableViewCell() }
             return stampCell
+        }
+    }
+}
+
+// MARK: - Enum
+
+extension DetailRecordViewController {
+    
+    public enum AddType: CustomStringConvertible {
+        case 명대사, 인상깊은구절
+        case 줄거리, 가사, 방송사OTT
+        case 포스터, 표지, 명장면, 앨범커버
+        case 장르, 카테고리
+        case OST, 앨범
+        case 감독, 배우, 가수, 작가, 요일, 플랫폼, 채널, 출판사
+        case 링크
+        case 타임스탬프
+        
+        public var description: String {
+            switch self {
+            case .명대사: return "명대사"
+            case .인상깊은구절: return "인상 깊은 구절"
+            case .줄거리: return "줄거리"
+            case .가사: return "가사"
+            case .방송사OTT: return "방송사(OTT)"
+            case .포스터: return "포스터"
+            case .표지: return "표지"
+            case .명장면: return "명장면"
+            case .앨범커버: return "앨범커버"
+            case .장르: return "장르"
+            case .카테고리: return "카테고리"
+            case .앨범: return "앨범"
+            case .감독: return "감독"
+            case .배우: return "배우"
+            case .가수: return "가수"
+            case .작가: return "작가"
+            case .요일: return "요일"
+            case .플랫폼: return "플랫폼"
+            case .채널: return "채널"
+            case .출판사: return "출판사"
+            case .링크: return "링크"
+            case .타임스탬프: return "타임스탬프"
+            case .OST: return "OST"
+            }
+        }
+        
+        public var type: DetailRecordSection {
+            switch self {
+            case .명대사: return .comment
+            case .인상깊은구절: return .comment
+            case .줄거리: return .text
+            case .가사: return .text
+            case .방송사OTT: return .line
+            case .포스터: return .image
+            case .표지: return .image
+            case .명장면: return .image
+            case .앨범커버: return .image
+            case .장르: return .genre
+            case .카테고리: return .genre
+            case .OST: return .song
+            case .앨범: return .song
+            case .감독: return .line
+            case .배우: return .line
+            case .가수: return .line
+            case .작가: return .line
+            case .요일: return .line
+            case .플랫폼: return .line
+            case .채널: return .line
+            case .출판사: return .line
+            case .링크: return .link
+            case .타임스탬프: return .stamp
+            }
         }
     }
 }

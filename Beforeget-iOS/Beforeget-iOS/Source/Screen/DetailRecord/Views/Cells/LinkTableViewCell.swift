@@ -19,6 +19,10 @@ protocol LinkButtonDelegate: DetailRecordViewController {
 
 class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
     
     weak var linkButtonDelegate: LinkButtonDelegate?
@@ -75,9 +79,11 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
         
-    public func config(_ link: String) {
-        /// 문제 : 나중에 데이터 전달
-        linkString = link
+    public func config(index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let content = additional[index].content else { return }
+        
+        linkString = content
     }
     
     // MARK: - @objc

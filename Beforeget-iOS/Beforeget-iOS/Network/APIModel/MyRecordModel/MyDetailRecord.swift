@@ -17,7 +17,7 @@ struct MyDetailRecord: Codable {
     let star: Int
     let oneline: [String]
     let comment: String?
-    let additional: [Additional]?
+    let additional: [DetailAdditional]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,9 +26,9 @@ struct MyDetailRecord: Codable {
     }
 }
 
-// MARK: - Additional
+// MARK: - DetailAdditional
 
-struct Additional: Codable {
+struct DetailAdditional: Codable {
     let type: String
     let imgUrl1: String?
     let content: String?

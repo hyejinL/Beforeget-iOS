@@ -11,6 +11,10 @@ import SnapKit
 import Then
 
 class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
 
     // MARK: - Properties
     
@@ -74,7 +78,10 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        songLabel.text = data
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let content = additional[index].content else { return }
+        
+        songLabel.text = content
     }
 }

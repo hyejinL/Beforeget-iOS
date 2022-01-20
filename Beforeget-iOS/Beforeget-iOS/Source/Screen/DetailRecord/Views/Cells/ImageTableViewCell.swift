@@ -7,10 +7,15 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
 class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
     
@@ -114,7 +119,11 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ index: Int) {
+        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
+        guard let imgUrl = additional[index].imgUrl1 else { return }
+        
+        titleLabel.text = additional[index].type
+        cellImageView.kf.setImage(with: URL(string: imgUrl))
     }
 }
