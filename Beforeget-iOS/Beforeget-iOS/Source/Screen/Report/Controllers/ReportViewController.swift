@@ -12,6 +12,8 @@ import Then
 
 import Kingfisher
 
+import Lottie
+
 final class ReportViewController: UIPageViewController {
     
     // MARK: - Network
@@ -63,10 +65,13 @@ final class ReportViewController: UIPageViewController {
     private let page4 = ReportSentenceViewController()
     private let page5 = ReportOnePageViewController()
     
-    // MARK: - TODO REMOVE
-    
     private var countData: [Int] = [0, 0, 0, 0, 0]
+    private var sortedCountData: [Int] = [0, 0, 0, 0, 0]
     private var heights = [Double]()
+    
+    private var isScrollEnabled: Bool = false
+    
+    private var reportLoadingView = ReportLoadingView()
     
     // MARK: - Life Cycle
     
@@ -77,6 +82,9 @@ final class ReportViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reportLoadingView.play()
+        
         configUI()
         setupLayout()
         setupControllers()
@@ -96,7 +104,7 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, paginationStackView])
+        view.addSubviews([naviBar, paginationStackView, reportLoadingView])
         naviBar.addSubview(downLoadButton)
         
         naviBar.snp.makeConstraints {
@@ -121,6 +129,10 @@ final class ReportViewController: UIPageViewController {
             $0.height.equalTo(6)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 18 : 26)
         }
+        
+        reportLoadingView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
+        }
     }
     
     private func setupControllers() {
@@ -135,19 +147,21 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func calculateHeight() {
-        guard let maxCount = countData.max() else { return }
+        guard let maxCount = sortedCountData.max() else { return }
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = countData.sorted(by: >)[2]
+        let midCount = sortedCountData.sorted(by: >)[2]
         page2.reportGraphView.midCount = midCount
         page5.reportOnePageView.midCount = midCount
         
-        for data in countData {
+        for data in sortedCountData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
             let height = totalHeight * data / maxCount
             heights.append(Double(height))
         }
+        
+        isScrollEnabled = true
     }
     
     private func setupBarData() {
@@ -221,11 +235,14 @@ extension ReportViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         
-        if currentIndex == 0 {
-            return pages.last
-        } else {
-            return pages[currentIndex - 1]
+        if isScrollEnabled == true {
+            if currentIndex == 0 {
+                return pages.last
+            } else {
+                return pages[currentIndex - 1]
+            }
         }
+        return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -233,11 +250,14 @@ extension ReportViewController: UIPageViewControllerDataSource {
             return nil
         }
         
-        if currentIndex < pages.count - 1 {
-            return pages[currentIndex + 1]
-        } else {
-            return pages.first
+        if isScrollEnabled == true {
+            if currentIndex < pages.count - 1 {
+                return pages[currentIndex + 1]
+            } else {
+                return pages.first
+            }
         }
+        return nil
     }
 }
 
@@ -268,11 +288,11 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
+            setupBarData()
             pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            setupBarData()
         default:
             pageImageView1.image = Asset.Assets.pageActive.image
             [pageImageView2, pageImageView3, pageImageView4, pageImageView5].forEach {
@@ -295,6 +315,9 @@ extension ReportViewController {
             
             let listURL = URL(string: data.poster)
             self.page1.typeImageView.kf.setImage(with: listURL)
+            
+            self.reportLoadingView.stop()
+            self.reportLoadingView.removeFromSuperview()
         })
     }
     
@@ -309,7 +332,7 @@ extension ReportViewController {
             for i in 0...data.recordCount.count-1 {
                 self.countData[i] = data.recordCount[i].count
             }
-            
+            self.sortedCountData = self.countData.reversed()
             self.calculateHeight()
             
             self.page2.reportDescriptionView.descriptionTitle = data.title
@@ -344,6 +367,7 @@ extension ReportViewController {
             self.page4.tvData = data.oneline.tv
             self.page4.musicData = data.oneline.music
             self.page4.webtoonData = data.oneline.webtoon
+            self.page4.youtubeData = data.oneline.youtube
         })
     }
     
@@ -366,4 +390,3 @@ extension ReportViewController {
         })
     }
 }
-

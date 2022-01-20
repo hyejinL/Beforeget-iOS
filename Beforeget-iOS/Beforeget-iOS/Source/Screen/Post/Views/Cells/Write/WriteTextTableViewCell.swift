@@ -30,11 +30,12 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Properties
     
-    private let commentTextField = UITextField().then {
+    private lazy var typeTextField = UITextField().then {
         $0.text = "코멘트"
         $0.placeholder = "추가하고 싶은 항목 이름을 적어주세요"
         $0.font = BDSFont.body2
         $0.textColor = Asset.Colors.black200.color
+        $0.delegate = self
     }
     
     private let placeHolderLabel = UILabel().then {
@@ -43,7 +44,7 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.textColor = Asset.Colors.gray200.color
     }
     
-    private lazy var commentTextView = UITextView().then {
+    private lazy var contentTextView = UITextView().then {
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body6
         $0.isScrollEnabled = false
@@ -62,6 +63,8 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     weak var delegate: WriteTextTableViewCellDelegate?
+    var sendContent: ((String) -> ())?
+    var sendType: ((String) -> ())?
     
     // MARK: - Life Cycle
     
@@ -76,7 +79,7 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     override func prepareForReuse() {
-        commentTextField.isUserInteractionEnabled = true
+        typeTextField.isUserInteractionEnabled = true
     }
     
     // MARK: - InitUI
@@ -86,29 +89,29 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private func setupLayout() {
-        contentView.addSubviews([commentTextField,
-                                 commentTextView,
+        contentView.addSubviews([typeTextField,
+                                 contentTextView,
                                  placeHolderLabel,
                                  letterCountLabel])
         
-        commentTextField.snp.makeConstraints {
+        typeTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(17)
             $0.leading.equalToSuperview()
         }
         
-        commentTextView.snp.makeConstraints {
-            $0.top.equalTo(commentTextField.snp.bottom).offset(18)
+        contentTextView.snp.makeConstraints {
+            $0.top.equalTo(typeTextField.snp.bottom).offset(18)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(46)
         }
         
         placeHolderLabel.snp.makeConstraints {
-            $0.top.equalTo(commentTextView.snp.top).offset(14)
-            $0.leading.equalTo(commentTextView.snp.leading).inset(13)
+            $0.top.equalTo(contentTextView.snp.top).offset(14)
+            $0.leading.equalTo(contentTextView.snp.leading).inset(13)
         }
         
         letterCountLabel.snp.makeConstraints {
-            $0.top.equalTo(commentTextView.snp.bottom).offset(7)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(7)
             $0.bottom.equalToSuperview().inset(14)
             $0.trailing.equalToSuperview()
         }
@@ -117,11 +120,11 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     //MARK: - Custom Method
     
     func setupTitle(title: String) {
-        commentTextField.text = title
+        typeTextField.text = title
     }
     
     func setupTextFieldEditable() {
-        commentTextField.isUserInteractionEnabled.toggle()
+        typeTextField.isUserInteractionEnabled.toggle()
     }
     
     func setupPlaceHolderText(_ mediaText: String) {
@@ -155,24 +158,25 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
 
 extension WriteTextTableViewCell: UITextViewDelegate {
     private func setupTextView() {
-        self.commentTextView.delegate = self
+        self.contentTextView.delegate = self
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
-        commentTextView.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        contentTextView.layer.borderColor = Asset.Colors.gray300.color.cgColor
+        sendContent?(contentTextView.text ?? "")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         placeHolderLabel.isHidden = true
-        commentTextView.layer.borderColor = Asset.Colors.black200.color.cgColor
+        contentTextView.layer.borderColor = Asset.Colors.black200.color.cgColor
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        letterCountLabel.text = "\(commentTextView.text.count) / 100"
+        letterCountLabel.text = "\(contentTextView.text.count) / 100"
         
-        if commentTextView.text.count > 100 {
-            commentTextView.deleteBackward()
+        if contentTextView.text.count > 100 {
+            contentTextView.deleteBackward()
         }
         
         if let delegate = delegate {
@@ -186,5 +190,11 @@ extension WriteTextTableViewCell: UITextViewDelegate {
                 constraint.constant = estimatedSize.height
             }
         }
+    }
+}
+
+extension WriteTextTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        sendType?(typeTextField.text ?? "")
     }
 }

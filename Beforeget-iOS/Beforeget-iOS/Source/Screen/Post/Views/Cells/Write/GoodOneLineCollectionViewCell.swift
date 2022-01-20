@@ -75,6 +75,10 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         self.goodReviews = goodReviews
     }
     
+    func reloadCollectionView() {
+        oneLineTextCollectionView.reloadData()
+    }
+    
     // MARK: - @objc
     
     @objc func touchupResetButton() {
