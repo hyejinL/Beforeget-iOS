@@ -68,6 +68,7 @@ final class ReportViewController: UIPageViewController {
     private var heights = [Double]()
     
     private var isScrollEnabled: Bool = false
+    private var loadingViewController = LoadingViewController()
     
     // MARK: - Life Cycle
     
@@ -79,7 +80,9 @@ final class ReportViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isScrollEnabled = false
+//        isScrollEnabled = false
+        
+        
         
         configUI()
         setupLayout()
@@ -314,6 +317,8 @@ extension ReportViewController {
         reportAPI.getSecondReport(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
             guard let self = self else { return }
             guard let data = data else { return }
+            
+            self.dismiss(animated: true, completion: nil)
             
             self.page2.reportGraphView.maxCount = 20
             self.page2.reportGraphView.midCount = 12

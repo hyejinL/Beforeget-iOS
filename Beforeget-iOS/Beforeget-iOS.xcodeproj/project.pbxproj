@@ -84,12 +84,14 @@
 		924A3E3027883994006482B1 /* BDSFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A3E2F27883994006482B1 /* BDSFont.swift */; };
 		925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */; };
 		9277486B27902CBC00FAAE77 /* ReportOnePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277486A27902CBC00FAAE77 /* ReportOnePageView.swift */; };
-		9279655727980F5B0063E34C /* mediaImageView.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9279655627980F5B0063E34C /* mediaImageView.gif */; };
 		9279654D27972F7D0063E34C /* FirstReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279654C27972F7D0063E34C /* FirstReport.swift */; };
 		9279654F27972FB50063E34C /* SecondReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279654E27972FB50063E34C /* SecondReport.swift */; };
 		92796551279737800063E34C /* ThirdReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92796550279737800063E34C /* ThirdReport.swift */; };
 		9279655327973D670063E34C /* FourthReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279655227973D670063E34C /* FourthReport.swift */; };
 		92796555279744E10063E34C /* TotalReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92796554279744E10063E34C /* TotalReport.swift */; };
+		9279655727980F5B0063E34C /* mediaImageView.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9279655627980F5B0063E34C /* mediaImageView.gif */; };
+		9279655B2798C20D0063E34C /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279655A2798C20D0063E34C /* LoadingViewController.swift */; };
+		9279655F2798C8250063E34C /* threeWhiteLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 9279655E2798C8250063E34C /* threeWhiteLine.json */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
@@ -215,12 +217,14 @@
 		924A3E2F27883994006482B1 /* BDSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDSFont.swift; sourceTree = "<group>"; };
 		925E77F8278F7490009A96FB /* ReportSentenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSentenceCollectionViewCell.swift; sourceTree = "<group>"; };
 		9277486A27902CBC00FAAE77 /* ReportOnePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportOnePageView.swift; sourceTree = "<group>"; };
-		9279655627980F5B0063E34C /* mediaImageView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mediaImageView.gif; sourceTree = "<group>"; };
 		9279654C27972F7D0063E34C /* FirstReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstReport.swift; sourceTree = "<group>"; };
 		9279654E27972FB50063E34C /* SecondReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondReport.swift; sourceTree = "<group>"; };
 		92796550279737800063E34C /* ThirdReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdReport.swift; sourceTree = "<group>"; };
 		9279655227973D670063E34C /* FourthReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthReport.swift; sourceTree = "<group>"; };
 		92796554279744E10063E34C /* TotalReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReport.swift; sourceTree = "<group>"; };
+		9279655627980F5B0063E34C /* mediaImageView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mediaImageView.gif; sourceTree = "<group>"; };
+		9279655A2798C20D0063E34C /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		9279655E2798C8250063E34C /* threeWhiteLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = threeWhiteLine.json; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -734,6 +738,7 @@
 		927AF38C27880DEF0018CC34 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				9279655E2798C8250063E34C /* threeWhiteLine.json */,
 				9279655627980F5B0063E34C /* mediaImageView.gif */,
 				927AF37927880B830018CC34 /* Assets.xcassets */,
 				5B304B742788257E0054314A /* Colors.xcassets */,
@@ -865,6 +870,7 @@
 				929CFAFE278DE04200FCA541 /* ReportRankingViewController.swift */,
 				929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */,
 				929CFAFD278DE04200FCA541 /* ReportViewController.swift */,
+				9279655A2798C20D0063E34C /* LoadingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1057,6 +1063,7 @@
 				927AF3B6278817E40018CC34 /* Pretendard-SemiBold.otf in Resources */,
 				927AF3B8278817E80018CC34 /* PPNeueMachina-Regular.otf in Resources */,
 				927AF37A27880B830018CC34 /* Assets.xcassets in Resources */,
+				9279655F2798C8250063E34C /* threeWhiteLine.json in Resources */,
 				927AF37827880B820018CC34 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1177,6 +1184,7 @@
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
 				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
 				92796555279744E10063E34C /* TotalReport.swift in Sources */,
+				9279655B2798C20D0063E34C /* LoadingViewController.swift in Sources */,
 				9279654D27972F7D0063E34C /* FirstReport.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
