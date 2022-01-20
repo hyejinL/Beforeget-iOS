@@ -216,7 +216,7 @@ extension MyRecordViewController:
         }
         
         myRecordAPI.getMyRecordFilter(date: "\(data)", media: mediaString, star: starString) { data, err in
-            print(data, "이거 필터맞아?")
+            self.recordTableView.reloadData()
         }
         
         filterView.dateButton.isSelected = (data == -1) ?

@@ -127,25 +127,31 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Custom Method
 
     public func config(index: Int) {
+        
         let myRecord = myRecordAPI.myRecord?.data
         guard let myRecord = myRecord else { return }
-        titleLabel.text = myRecord[index].title
-        onelineLabel.text = myRecord[index].oneline
-        let dateArray = myRecord[index].date.components(separatedBy: "-")
-        yearLabel.text = "\(dateArray[0])."
-        monthLabel.text = "\(dateArray[1])."
-        dayLabel.text = "\(dateArray[2])"
-        starLabel.text = String(myRecord[index].star)
-        let categoryImage = myRecord[index].category
         
-        // MARK: - FIXME 에셋 넘겨주면 이미지 바꾸기
-        switch categoryImage {
-        case 0: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 1: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 2: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 3: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 4: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        default: return iconImageView.image = Asset.Assets.icnWebtoon.image
+        if myRecord.isEmpty {
+            print("비어있다")
+        } else {
+            titleLabel.text = myRecord[index].title
+            onelineLabel.text = myRecord[index].oneline
+            let dateArray = myRecord[index].date.components(separatedBy: "-")
+            yearLabel.text = "\(dateArray[0])."
+            monthLabel.text = "\(dateArray[1])."
+            dayLabel.text = "\(dateArray[2])"
+            starLabel.text = String(myRecord[index].star)
+            let categoryImage = myRecord[index].category
+            
+            // MARK: - FIXME 에셋 넘겨주면 이미지 바꾸기
+            switch categoryImage {
+            case 0: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            case 1: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            case 2: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            case 3: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            case 4: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            default: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            }
         }
     }
 }
