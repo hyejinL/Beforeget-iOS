@@ -1,7 +1,7 @@
 # Beforeget-iOS
 
 ![image 8](https://user-images.githubusercontent.com/59593430/150383617-5ba6c1b0-c8fd-44da-888f-55d0fdc1c84c.png)
-![image 9](https://user-images.githubusercontent.com/59593430/150383511-6dd40369-27bc-4ded-bdc7-5dce96352d56.png)
+![image 16](https://user-images.githubusercontent.com/59593430/150388800-2f8dc1ff-4060-48bf-897e-1ba19cb6b898.png)
 ![image 3](https://user-images.githubusercontent.com/59593430/149091824-c9e644f6-f67b-4687-84f8-9429ffc7342c.png)
 ![image 4](https://user-images.githubusercontent.com/59593430/149091830-19cb0117-f272-4fcc-b2d0-a4bbc7afb036.png)
 ![image 5](https://user-images.githubusercontent.com/59593430/149091846-04b776a4-8827-400c-89ca-75261226f1b4.png)

@@ -64,3 +64,21 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
         dateLabel.text = date
     }
 }
+
+// MARK: - Date Formater
+
+extension Date {
+    func convertToString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일"
+        let newDate: String = dateFormatter.string(from: self)
+        return newDate
+    }
+    
+    func convertToString(dateFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        let newDate: String = dateFormatter.string(from: self)
+        return newDate
+    }
+}

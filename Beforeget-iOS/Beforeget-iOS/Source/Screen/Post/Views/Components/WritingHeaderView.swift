@@ -75,6 +75,8 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     
     weak var delegate: WritingHeaderViewDelegate?
     
+    var sendStarCount: ((_ starCount: Int) -> ())?
+    
     // MARK: - Initializer
     
     override init(reuseIdentifier: String?) {
@@ -177,6 +179,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         [star2Button, star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
+        sendStarCount?(1)
     }
     
     @objc func touchupStar2() {
@@ -186,6 +189,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         [star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
+        sendStarCount?(2)
     }
     
     @objc func touchupStar3() {
@@ -195,6 +199,7 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         [star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
+        sendStarCount?(3)
     }
     
     @objc func touchupStar4() {
@@ -204,12 +209,14 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         [star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
         }
+        sendStarCount?(4)
     }
     
     @objc func touchupStar5() {
         [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
             $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
         }
+        sendStarCount?(5)
     }
     
     @objc func touchupDate() {

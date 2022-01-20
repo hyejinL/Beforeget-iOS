@@ -37,4 +37,15 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
         case .youtube: return media.youtube
         }
     }
+    
+    func mediaNumber() -> Int {
+        switch self {
+        case .movie: return 1
+        case .book: return 2
+        case .tv: return 3
+        case .music: return 4
+        case .webtoon: return 5
+        case .youtube: return 6
+        }
+    }
 }
