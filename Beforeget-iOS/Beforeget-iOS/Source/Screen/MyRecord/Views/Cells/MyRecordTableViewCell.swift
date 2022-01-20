@@ -134,8 +134,6 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         
         let myRecord = myRecordAPI.myRecord?.data
         guard let myRecord = myRecord else { return }
-        print(index, "이게모야???", myRecord[index].title)
-        dump(myRecord)
         self.titleLabel.text = myRecord[index].title
         self.onelineLabel.text = myRecord[index].oneline
         let dateArray = myRecord[index].date.components(separatedBy: "-")

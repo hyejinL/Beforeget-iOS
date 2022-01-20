@@ -18,7 +18,7 @@ final class MyRecordViewController: UIViewController {
     private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
-    
+        
     private var recordArray: [MyRecord] = []
     
     private var mediaData: String = ""
@@ -197,35 +197,35 @@ extension MyRecordViewController:
     }
     
     public func sendData(date: [String], data: Int, media: [String], star: [Int]) {
-        // MARK: - FIXME
-        /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
-        /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
-        
         var dateString = date.joined(separator: ",")
-        print(dateString)
-        
         var mediaString = media.joined(separator: ",")
-        
         var mediaArray: [String] = []
         mediaArray.append(mediaString)
-        
         
         media.forEach {
             if $0 == "Movie" {
                 mediaString = "1"
+                mediaArray.append(mediaString)
             } else if $0 == "Book" {
                 mediaString = "2"
+                mediaArray.append(mediaString)
             } else if $0 == "TV" {
                 mediaString = "3"
+                mediaArray.append(mediaString)
             } else if $0 == "Music" {
                 mediaString = "4"
+                mediaArray.append(mediaString)
             } else if $0 == "Webtoon" {
                 mediaString = "5"
+                mediaArray.append(mediaString)
             } else if $0 == "Youtube" {
                 mediaString = "6"
+                mediaArray.append(mediaString)
             }
         }
-                
+        mediaArray.removeFirst()
+        
+        let mediaInt = mediaArray.joined(separator: ",")
         let starArray = star.map { String($0) }
         var starString = starArray.joined(separator: ",")
 
@@ -247,12 +247,11 @@ extension MyRecordViewController:
             starString = "-1"
         }
         
-        myRecordAPI.getMyRecordFilter(date: dateString, media: mediaString, star: starString) { data, err in
+        myRecordAPI.getMyRecordFilter(date: dateString, media: mediaInt, star: starString) { data, err in
+            print("넘어온 값", dateString, mediaInt, starString)
             self.recordTableView.reloadData()
         }
-        
-        print(date, data, media, star, "넘어온 값", dateString, mediaString)
-        
+                
         filterView.dateButton.isSelected = (data == -1) ?
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
