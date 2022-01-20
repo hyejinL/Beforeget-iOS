@@ -97,13 +97,11 @@ class PostViewController: UIViewController {
     private var star: Int = 0
     private var mediaTitle: String?
     private var comment: String?
-    
     private var additionalItemsContent: [String] = []
-    var additionalItems: [Additional] = []
     
-    var mediaType: MediaType?
-//    var additionalItems: [String] = []
+    var additionalItems: [Additional] = []
     var oneLines: [String] = []
+    var mediaType: MediaType?
     
     // MARK: - Life Cycle
     
@@ -199,11 +197,17 @@ class PostViewController: UIViewController {
     @objc func addOneLine(_ sender: Notification) {
         guard let oneLineData = sender.object as? [String] else { return }
         guard let cell = writingTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? OneLineReviewTableViewCell else { return }
-        cell.oneLines = oneLineData
+        
+        oneLineData.forEach {
+            if !cell.oneLines.contains($0) {
+                cell.oneLines.append($0)
+            }
+        }
         
         if cell.oneLines.isEmpty == false {
             cell.reloadCollectionView()
-            cell.isHiddenAddButton(true)
+            cell.isHiddenAddReviewCircleButton(true)
+            cell.isHiddenAddReviewButton(false)
             cell.isHiddenColletionView(false)
         }
         
@@ -246,6 +250,8 @@ class PostViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(addOneLine(_:)), name: NSNotification.Name.didAddOneLine, object: nil)
     }
 }
+
+//MARK: - UITableViewDataSource
 
 extension PostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -307,6 +313,8 @@ extension PostViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
+
 extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = WritingHeaderView()
@@ -329,6 +337,24 @@ extension PostViewController: UITableViewDelegate {
         return 200
     }
 }
+
+//MARK: - WriteTextTableViewCellDelegate
+
+extension PostViewController: WriteTextTableViewCellDelegate {
+    func updateTextViewHeight(_ cell: WriteTextTableViewCell, _ textView: UITextView) {
+        let size = textView.bounds.size
+        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: size.width,
+                                                    height: CGFloat.greatestFiniteMagnitude))
+        if size.height != estimatedSize.height {
+            UIView.setAnimationsEnabled(false)
+            writingTableView.beginUpdates()
+            writingTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+}
+
+//MARK: - KeyboardNotification
 
 extension PostViewController {
     private func setupKeyboardNotifications() {
@@ -356,6 +382,8 @@ extension PostViewController {
     }
 }
 
+//MARK: - WritingHeaderViewDelegate
+
 extension PostViewController: WritingHeaderViewDelegate {
     func touchupDateButton() {
         view.addSubviews([backgroundView, datePicker])
@@ -371,20 +399,6 @@ extension PostViewController: WritingHeaderViewDelegate {
         datePicker.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(21)
             $0.centerY.equalToSuperview()
-        }
-    }
-}
-
-extension PostViewController: WriteTextTableViewCellDelegate {
-    func updateTextViewHeight(_ cell: WriteTextTableViewCell, _ textView: UITextView) {
-        let size = textView.bounds.size
-        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: size.width,
-                                                    height: CGFloat.greatestFiniteMagnitude))
-        if size.height != estimatedSize.height {
-            UIView.setAnimationsEnabled(false)
-            writingTableView.beginUpdates()
-            writingTableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
         }
     }
 }

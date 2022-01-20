@@ -24,21 +24,30 @@ class OneLineReviewTableViewCell: UITableViewCell {
         $0.image = Asset.Assets.icnTextStar.image
     }
     
-    private lazy var addButton = UIButton().then {
+    private lazy var addReviewCircleButton = UIButton().then {
         var config = UIButton.Configuration.plain()
-        config.title = "한 줄 리뷰 추가"
+        config.title = "리뷰 추가"
         config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
             outgoing.font = BDSFont.body8
             outgoing.foregroundColor = Asset.Colors.black200.color
             return outgoing
         }
-        config.contentInsets = NSDirectionalEdgeInsets(top: 9, leading: 22, bottom: 9, trailing: 22)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 35, bottom: 10, trailing: 35)
         
         $0.configuration = config
         $0.layer.cornerRadius = 18
         $0.layer.borderWidth = 1
         $0.layer.borderColor = Asset.Colors.black200.color.cgColor
+        $0.addTarget(self, action: #selector(touchupAddButton), for: .touchUpInside)
+    }
+    
+    private let addReviewButton = UIButton().then {
+        $0.setTitle("+ 리뷰 추가", for: .normal)
+        $0.setTitleColor(Asset.Colors.gray200.color, for: .normal)
+        $0.titleLabel?.font = BDSFont.body7
+        $0.sizeToFit()
+        $0.isHidden = true
         $0.addTarget(self, action: #selector(touchupAddButton), for: .touchUpInside)
     }
     
@@ -81,7 +90,8 @@ class OneLineReviewTableViewCell: UITableViewCell {
         contentView.addSubviews([oneLineReviewLabel,
                                  starImage,
                                  oneLineCollectionView,
-                                 addButton])
+                                 addReviewButton,
+                                 addReviewCircleButton])
         
         oneLineReviewLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(17)
@@ -93,7 +103,12 @@ class OneLineReviewTableViewCell: UITableViewCell {
             $0.leading.equalTo(oneLineReviewLabel.snp.trailing).offset(2)
         }
         
-        addButton.snp.makeConstraints {
+        addReviewButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview()
+            $0.centerY.equalTo(oneLineReviewLabel.snp.centerY)
+        }
+        
+        addReviewCircleButton.snp.makeConstraints {
             $0.top.equalTo(oneLineReviewLabel.snp.bottom).offset(17)
             $0.bottom.equalToSuperview().inset(31)
             $0.centerX.equalToSuperview()
@@ -109,8 +124,12 @@ class OneLineReviewTableViewCell: UITableViewCell {
     
     //MARK: - Custom Method
     
-    func isHiddenAddButton(_ value: Bool) {
-        addButton.isHidden = value
+    func isHiddenAddReviewCircleButton(_ value: Bool) {
+        addReviewCircleButton.isHidden = value
+    }
+    
+    func isHiddenAddReviewButton(_ value: Bool) {
+        addReviewButton.isHidden = value
     }
     
     func isHiddenColletionView(_ value: Bool) {
@@ -130,11 +149,11 @@ class OneLineReviewTableViewCell: UITableViewCell {
         
         oneLineCollectionView.reloadData()
         if oneLines.count <= 2 {
-            height = 39
+            height = 35
         } else if oneLines.count <= 4 {
-            height = 39 * 2 + 10
+            height = 35 * 2 + 10
         } else {
-            height = 39 * 3 + 10 * 2
+            height = 35 * 3 + 10 * 2
         }
         
         oneLineCollectionView.snp.updateConstraints {
@@ -166,6 +185,7 @@ extension OneLineReviewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell
         else { return UICollectionViewCell() }
+        cell.setupCornerRadius(radius: 17)
         cell.config(oneline: oneLines[indexPath.item])
         cell.showDeleteButton()
         cell.configColor(borderColor: Asset.Colors.black200.color, textColor: Asset.Colors.black200.color, backgroundColor: Asset.Colors.white.color)
@@ -177,7 +197,8 @@ extension OneLineReviewTableViewCell: UICollectionViewDataSource {
             NotificationCenter.default.post(name: NSNotification.Name.didAddOneLine, object: self.oneLines)
             
             if self.oneLines.isEmpty {
-                self.addButton.isHidden = false
+                self.addReviewCircleButton.isHidden = false
+                self.addReviewButton.isHidden = true
             }
         }
         
@@ -189,7 +210,7 @@ extension OneLineReviewTableViewCell: UICollectionViewDataSource {
 
 extension OneLineReviewTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: calculateCellWidth(text: oneLines[indexPath.item]) + 10, height: 39)
+        return CGSize(width: calculateCellWidth(text: oneLines[indexPath.item]) + 15, height: 35)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

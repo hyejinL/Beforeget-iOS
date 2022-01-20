@@ -83,6 +83,10 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         }
     }
     
+    func setupCornerRadius(radius: CGFloat) {
+        contentView.makeRound(radius: radius)
+    }
+    
     // MARK: - Custom Method
     
     public func config(oneline: String) {
