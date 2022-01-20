@@ -157,6 +157,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             print("비어있다")
             
         } else {
+            print(index, "이게모야???")
             titleLabel.text = myRecord[index].title
             onelineLabel.text = myRecord[index].oneline
             let dateArray = myRecord[index].date.components(separatedBy: "-")

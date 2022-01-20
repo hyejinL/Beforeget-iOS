@@ -180,17 +180,28 @@ extension MyRecordViewController:
         presentFilterModal()
     }
     
-    public func sendData(data: Int, media: [String], star: [Int]) {
+    public func sendData(date: [String], data: Int, media: [String], star: [Int]) {
         // MARK: - FIXME
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
-        print(data, media, star, "넘어온 값")
+        
+        
+        var dateString = date.joined(separator: ",")
+        print(dateString)
         
         var mediaString = media.joined(separator: ",")
         
         let starArray = star.map { String($0) }
         var starString = starArray.joined(separator: ",")
 
+        if data == 0 {
+            dateString = "0"
+        } else if data == 1 {
+            dateString = "1"
+        } else if data == 2 {
+            dateString = "2"
+        }
+        
         if media.isEmpty {
             mediaString = "-1"
         }
@@ -213,9 +224,11 @@ extension MyRecordViewController:
             mediaString = "6"
         }
         
-        myRecordAPI.getMyRecordFilter(date: "\(data)", media: mediaString, star: starString) { data, err in
+        myRecordAPI.getMyRecordFilter(date: dateString, media: mediaString, star: starString) { data, err in
             self.recordTableView.reloadData()
         }
+        
+        print(date, data, media, star, "넘어온 값", dateString)
         
         filterView.dateButton.isSelected = (data == -1) ?
         false : true

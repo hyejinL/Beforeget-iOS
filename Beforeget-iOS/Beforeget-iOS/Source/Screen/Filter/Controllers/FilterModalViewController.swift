@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [String], star: [Int])
+    func sendData(date: [String], data: Int, media: [String], star: [Int])
 }
 
 final class FilterModalViewController: UIViewController {
@@ -218,6 +218,7 @@ final class FilterModalViewController: UIViewController {
     @objc func touchupApplyButton(_ sender: UIButton) {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
         sendDataDelegate?.sendData (
+            date: recordDateTuple,
             data: selectedDateIndex,
             media: selectedMediaArray,
             star: selectedStarArray)
