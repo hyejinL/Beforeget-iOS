@@ -24,7 +24,7 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private let songIconImageView = UIImageView().then {
-//        $0.image = Asset.Assets.
+        $0.image = Asset.Assets.icnOst.image
         $0.backgroundColor = .white
     }
     

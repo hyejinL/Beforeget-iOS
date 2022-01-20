@@ -54,8 +54,16 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configUI()
-        setupLayout()
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return }
+        
+        if myRecord.isEmpty {
+            configEmptyUI()
+            setupEmptyLayout()
+        } else {
+            configUI()
+            setupLayout()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -63,6 +71,14 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - InitUI
+    
+    private func configEmptyUI() {
+        
+    }
+    
+    private func setupEmptyLayout() {
+        
+    }
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.black200.color
@@ -133,6 +149,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         
         if myRecord.isEmpty {
             print("비어있다")
+            
         } else {
             titleLabel.text = myRecord[index].title
             onelineLabel.text = myRecord[index].oneline
@@ -145,12 +162,12 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             
             // MARK: - FIXME 에셋 넘겨주면 이미지 바꾸기
             switch categoryImage {
-            case 0: return iconImageView.image = Asset.Assets.icnWebtoon.image
-            case 1: return iconImageView.image = Asset.Assets.icnWebtoon.image
-            case 2: return iconImageView.image = Asset.Assets.icnWebtoon.image
-            case 3: return iconImageView.image = Asset.Assets.icnWebtoon.image
-            case 4: return iconImageView.image = Asset.Assets.icnWebtoon.image
-            default: return iconImageView.image = Asset.Assets.icnWebtoon.image
+            case 0: return iconImageView.image = Asset.Assets.icnWriteMovie.image
+            case 1: return iconImageView.image = Asset.Assets.icnWriteBook.image
+            case 2: return iconImageView.image = Asset.Assets.icnWriteTv.image
+            case 3: return iconImageView.image = Asset.Assets.icnWriteMusic.image
+            case 4: return iconImageView.image = Asset.Assets.icnWriteWebtoon.image
+            default: return iconImageView.image = Asset.Assets.icnWriteYoutube.image
             }
         }
     }
