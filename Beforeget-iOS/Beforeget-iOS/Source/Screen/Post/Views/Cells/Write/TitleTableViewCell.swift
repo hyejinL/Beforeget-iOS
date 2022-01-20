@@ -57,6 +57,8 @@ class TitleTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.textColor = Asset.Colors.gray200.color
     }
     
+    var sendTitle: ((_ title: String) -> ())?
+    
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -116,12 +118,6 @@ class TitleTableViewCell: UITableViewCell, UITableViewRegisterable {
     @objc func touchupDeleteButton(_ sender: UIButton) {
         titleTextField.text = ""
     }
-    
-    // MARK: - Custom Method
-    
-    func setupToolBar(_ toolBar: UIToolbar) {
-        titleTextField.inputAccessoryView = toolBar
-    }
 }
 
 extension TitleTableViewCell: UITextFieldDelegate {
@@ -143,5 +139,6 @@ extension TitleTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         deleteButton.isHidden = true
         lineView.backgroundColor = Asset.Colors.gray300.color
+        sendTitle?(textField.text ?? "")
     }
 }
