@@ -12,6 +12,8 @@ import Then
 
 import Kingfisher
 
+import Lottie
+
 final class ReportViewController: UIPageViewController {
     
     // MARK: - Network
@@ -68,7 +70,8 @@ final class ReportViewController: UIPageViewController {
     private var heights = [Double]()
     
     private var isScrollEnabled: Bool = false
-    private var loadingViewController = LoadingViewController()
+    
+    private var reportLoadingView = ReportLoadingView()
     
     // MARK: - Life Cycle
     
@@ -80,9 +83,7 @@ final class ReportViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        isScrollEnabled = false
-        
-        
+        reportLoadingView.play()
         
         configUI()
         setupLayout()
@@ -103,7 +104,7 @@ final class ReportViewController: UIPageViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, paginationStackView])
+        view.addSubviews([naviBar, paginationStackView, reportLoadingView])
         naviBar.addSubview(downLoadButton)
         
         naviBar.snp.makeConstraints {
@@ -127,6 +128,10 @@ final class ReportViewController: UIPageViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(145)
             $0.height.equalTo(6)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 18 : 26)
+        }
+        
+        reportLoadingView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
         }
     }
     
@@ -310,6 +315,9 @@ extension ReportViewController {
             
             let listURL = URL(string: data.poster)
             self.page1.typeImageView.kf.setImage(with: listURL)
+            
+            self.reportLoadingView.stop()
+            self.reportLoadingView.removeFromSuperview()
         })
     }
     
@@ -317,8 +325,6 @@ extension ReportViewController {
         reportAPI.getSecondReport(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
             guard let self = self else { return }
             guard let data = data else { return }
-            
-            self.dismiss(animated: true, completion: nil)
             
             self.page2.reportGraphView.maxCount = 20
             self.page2.reportGraphView.midCount = 12

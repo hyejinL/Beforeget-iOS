@@ -75,7 +75,6 @@
 		920B5D4B27969DAA002DE112 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4A27969DAA002DE112 /* MainService.swift */; };
 		920B5D4D27969DCD002DE112 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D4C27969DCD002DE112 /* NetworkConstant.swift */; };
 		920B5D592796EF6F002DE112 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D582796EF6F002DE112 /* BaseResponse.swift */; };
-		920B5D5B27970D29002DE112 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D5A27970D29002DE112 /* Token.swift */; };
 		920B5D7527972D32002DE112 /* ReportAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D7427972D32002DE112 /* ReportAPI.swift */; };
 		920B5D7727972D51002DE112 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B5D7627972D51002DE112 /* ReportService.swift */; };
 		921E62A62794CC8B002E6CD1 /* OneLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */; };
@@ -92,8 +91,8 @@
 		9279655327973D670063E34C /* FourthReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279655227973D670063E34C /* FourthReport.swift */; };
 		92796555279744E10063E34C /* TotalReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92796554279744E10063E34C /* TotalReport.swift */; };
 		9279655727980F5B0063E34C /* mediaImageView.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9279655627980F5B0063E34C /* mediaImageView.gif */; };
-		9279655B2798C20D0063E34C /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279655A2798C20D0063E34C /* LoadingViewController.swift */; };
 		9279655F2798C8250063E34C /* threeWhiteLine.json in Resources */ = {isa = PBXBuildFile; fileRef = 9279655E2798C8250063E34C /* threeWhiteLine.json */; };
+		9279656127995A6F0063E34C /* ReportLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9279656027995A6F0063E34C /* ReportLoadingView.swift */; };
 		927AF37127880B820018CC34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37027880B820018CC34 /* AppDelegate.swift */; };
 		927AF37327880B820018CC34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927AF37227880B820018CC34 /* SceneDelegate.swift */; };
 		927AF37827880B820018CC34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 927AF37627880B820018CC34 /* Main.storyboard */; };
@@ -210,7 +209,6 @@
 		920B5D4A27969DAA002DE112 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		920B5D4C27969DCD002DE112 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		920B5D582796EF6F002DE112 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
-		920B5D5A27970D29002DE112 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		920B5D7427972D32002DE112 /* ReportAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPI.swift; sourceTree = "<group>"; };
 		920B5D7627972D51002DE112 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineViewController.swift; sourceTree = "<group>"; };
@@ -227,8 +225,8 @@
 		9279655227973D670063E34C /* FourthReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthReport.swift; sourceTree = "<group>"; };
 		92796554279744E10063E34C /* TotalReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalReport.swift; sourceTree = "<group>"; };
 		9279655627980F5B0063E34C /* mediaImageView.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mediaImageView.gif; sourceTree = "<group>"; };
-		9279655A2798C20D0063E34C /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9279655E2798C8250063E34C /* threeWhiteLine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = threeWhiteLine.json; sourceTree = "<group>"; };
+		9279656027995A6F0063E34C /* ReportLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportLoadingView.swift; sourceTree = "<group>"; };
 		927AF36D27880B820018CC34 /* Beforeget-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beforeget-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		927AF37027880B820018CC34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		927AF37227880B820018CC34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -875,7 +873,6 @@
 				929CFAFE278DE04200FCA541 /* ReportRankingViewController.swift */,
 				929CFAF9278DE04200FCA541 /* ReportSentenceViewController.swift */,
 				929CFAFD278DE04200FCA541 /* ReportViewController.swift */,
-				9279655A2798C20D0063E34C /* LoadingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -892,6 +889,7 @@
 				929CFB26278EBE6200FCA541 /* BarView.swift */,
 				929CFB29278EEA4600FCA541 /* ReportSentenceView.swift */,
 				9277486A27902CBC00FAAE77 /* ReportOnePageView.swift */,
+				9279656027995A6F0063E34C /* ReportLoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1192,7 +1190,6 @@
 				5BD114A12790C4440063EB3B /* ImageTableViewCell.swift in Sources */,
 				5BD1149F2790C4390063EB3B /* CommentDetailTableViewCell.swift in Sources */,
 				92796555279744E10063E34C /* TotalReport.swift in Sources */,
-				9279655B2798C20D0063E34C /* LoadingViewController.swift in Sources */,
 				9279654D27972F7D0063E34C /* FirstReport.swift in Sources */,
 				927AF3A3278813A60018CC34 /* UIScreen+.swift in Sources */,
 				925E77F9278F7490009A96FB /* ReportSentenceCollectionViewCell.swift in Sources */,
@@ -1245,7 +1242,7 @@
 				5B82543327918CD5004BDA5D /* GenreCollectionViewCell.swift in Sources */,
 				5BD114BA27913AE20063EB3B /* UIButton+.swift in Sources */,
 				5BD114932790B3680063EB3B /* UICollectionView+.swift in Sources */,
-				5B8F1380279578BD00385D5E /* DetailRecordDeletePopupViewController.swift in Sources */,
+				9279656127995A6F0063E34C /* ReportLoadingView.swift in Sources */,
 				9279654F27972FB50063E34C /* SecondReport.swift in Sources */,
 				5B8F136E2794CA5B00385D5E /* SettingHeaderView.swift in Sources */,
 				5B8F13722794E57500385D5E /* BDSPopupView.swift in Sources */,
