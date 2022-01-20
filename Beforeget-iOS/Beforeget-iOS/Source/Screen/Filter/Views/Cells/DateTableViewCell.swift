@@ -57,21 +57,10 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     func updateText(text: String, date: Date) {
         startEndLabel.text = text
-        dateLabel.text = date.convertToString()
+        dateLabel.text = date.convertToString("YYYY년 MM월 dd일")
     }
     
     func updateDateLabel(date: String) {
         dateLabel.text = date
-    }
-}
-
-// MARK: - Date Formater
-
-extension Date {
-    func convertToString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY년 MM월 dd일"
-        let newDate: String = dateFormatter.string(from: self)
-        return newDate
     }
 }
