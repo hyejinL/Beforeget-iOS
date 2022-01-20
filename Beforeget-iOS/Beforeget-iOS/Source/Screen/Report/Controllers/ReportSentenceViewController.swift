@@ -18,12 +18,14 @@ final class ReportSentenceViewController: UIViewController {
     private var reportSentenceView = ReportSentenceView()
     private lazy var monthPicker = MonthYearPickerView()
     
-    private var movieData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
-    private var bookData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
-    private var tvData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
-    private var musicData: [String] = []
-    private var webtoonData: [String] = []
-    private var youtubeData: [String] = ["너무 웃겨요", "눈물 좔좔 호수수", "눈물 좔좔 호수수"]
+    // MARK: - TODO REMOVE
+    
+    var movieData: [String] = []
+    var bookData: [String] = []
+    var tvData: [String] = []
+    var musicData: [String] = []
+    var webtoonData: [String] = []
+    var youtubeData: [String] = []
     
     // MARK: - Life Cycle
     

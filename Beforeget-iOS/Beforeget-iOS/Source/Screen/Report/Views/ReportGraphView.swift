@@ -210,7 +210,7 @@ class ReportGraphView: UIView {
         }
         
         if month == 5 {
-            [barView3, barView4, barView5].forEach {
+            [barView1, barView2, barView3, barView4, barView5].forEach {
                 barStackView.removeArrangedSubview($0)
             }
             

@@ -2,7 +2,7 @@
 //  Token.swift
 //  Beforeget-iOS
 //
-//  Created by Thisisme Hi on 2022/01/19.
+//  Created by soyeon on 2022/01/18.
 //
 
 import Foundation

@@ -105,6 +105,7 @@ internal enum Asset {
     internal static let icnTextStar = ImageAsset(name: "icnTextStar")
     internal static let icnLittleStarBlack = ImageAsset(name: "icn_littleStar_black")
     internal static let icnLittleStarWhite = ImageAsset(name: "icn_littleStar_white")
+    internal static let icnSplash = ImageAsset(name: "icn_splash")
     internal static let icnStarBlack = ImageAsset(name: "icn_star_black")
     internal static let icnStarGreen = ImageAsset(name: "icn_star_green")
     internal static let icnWebtoon = ImageAsset(name: "icn_webtoon")

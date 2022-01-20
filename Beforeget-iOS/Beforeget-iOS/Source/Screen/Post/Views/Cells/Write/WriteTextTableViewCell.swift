@@ -1,5 +1,5 @@
 //
-//  CommentTableViewCell.swift
+//  WriteTextTableViewCell.swift
 //  Beforeget-iOS
 //
 //  Created by 배은서 on 2022/01/13.
@@ -12,16 +12,27 @@ import Then
 
 //MARK: - protocol
 
-protocol CommentTableViewCellDelegate: AnyObject {
-    func updateTextViewHeight(_ cell: CommentTableViewCell,_ textView: UITextView)
+protocol WriteTextTableViewCellDelegate: AnyObject {
+    func updateTextViewHeight(_ cell: WriteTextTableViewCell,_ textView: UITextView)
 }
 
-class CommentTableViewCell: UITableViewCell {
+class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    enum MovieRecommendItem {
+        static let qutoes = "명대사"
+        static let director = "감독"
+        static let actor = "배우"
+        static let genre = "장르"
+        static let summary = "줄거리"
+        static let ost = "OST"
+        static let text = "text"
+    }
     
     // MARK: - Properties
     
-    private let commentLabel = UILabel().then {
+    private let commentTextField = UITextField().then {
         $0.text = "코멘트"
+        $0.placeholder = "추가하고 싶은 항목 이름을 적어주세요"
         $0.font = BDSFont.body2
         $0.textColor = Asset.Colors.black200.color
     }
@@ -50,7 +61,7 @@ class CommentTableViewCell: UITableViewCell {
         $0.textColor = Asset.Colors.gray200.color
     }
     
-    weak var delegate: CommentTableViewCellDelegate?
+    weak var delegate: WriteTextTableViewCellDelegate?
     
     // MARK: - Life Cycle
     
@@ -64,6 +75,10 @@ class CommentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        commentTextField.isUserInteractionEnabled = true
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
@@ -71,18 +86,18 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        contentView.addSubviews([commentLabel,
+        contentView.addSubviews([commentTextField,
                                  commentTextView,
                                  placeHolderLabel,
                                  letterCountLabel])
         
-        commentLabel.snp.makeConstraints {
+        commentTextField.snp.makeConstraints {
             $0.top.equalToSuperview().inset(17)
             $0.leading.equalToSuperview()
         }
         
         commentTextView.snp.makeConstraints {
-            $0.top.equalTo(commentLabel.snp.bottom).offset(18)
+            $0.top.equalTo(commentTextField.snp.bottom).offset(18)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(46)
         }
@@ -98,9 +113,47 @@ class CommentTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview()
         }
     }
+    
+    //MARK: - Custom Method
+    
+    func setupTitle(title: String) {
+        commentTextField.text = title
+    }
+    
+    func setupTextFieldEditable() {
+        commentTextField.isUserInteractionEnabled.toggle()
+    }
+    
+    func setupPlaceHolderText(_ mediaText: String) {
+        var placeHolderText: String
+        switch mediaText {
+        case MovieRecommendItem.qutoes:
+            placeHolderText = "어떤 대사가 기억에 남나요?"
+        case MovieRecommendItem.director:
+            placeHolderText = "영화의 감독은 누구인가요?"
+        case MovieRecommendItem.actor:
+            placeHolderText = "누가 영화에 출연했나요?"
+        case MovieRecommendItem.genre:
+            placeHolderText = "영화의 장르는 무엇인가요?"
+        case MovieRecommendItem.summary:
+            placeHolderText = "영화의 줄거리는 무엇인가요?"
+        case MovieRecommendItem.ost:
+            placeHolderText = "마음에 드는 영화의 OST는 무엇이었나요?"
+        case MovieRecommendItem.text:
+            placeHolderText = "어떤 내용을 추가하고 싶나요?"
+        default:
+            placeHolderText = ""
+        }
+        
+        placeHolderLabel.text = placeHolderText
+    }
+    
+    func hideLetterCountLabel() {
+        letterCountLabel.isHidden = true
+    }
 }
 
-extension CommentTableViewCell: UITextViewDelegate {
+extension WriteTextTableViewCell: UITextViewDelegate {
     private func setupTextView() {
         self.commentTextView.delegate = self
     }
