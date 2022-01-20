@@ -72,5 +72,21 @@ final class RecordCollectionViewCell: UICollectionViewCell, UICollectionViewRegi
     func config(_ count: Int, _ media: String) {
         countLabel.text = "\(count)"
         mediaLabel.text = media
+        
+        switch media {
+        case "Book":
+            mediaImageView.image = Asset.Assets.icnMainBook.image
+        case "TV":
+            mediaImageView.image = Asset.Assets.icnMainTv.image
+        case "Music":
+            mediaImageView.image = Asset.Assets.icnMainMusic.image
+        case "Webtoon":
+            mediaImageView.image = Asset.Assets.icnMainWebtoon.image
+        case "Youtube":
+            mediaImageView.image = Asset.Assets.icnMainYoutube.image
+        default:
+            mediaImageView.image = Asset.Assets.icnMainMovie.image
+        }
+        
     }
 }

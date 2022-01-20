@@ -57,7 +57,7 @@ class DateTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     func updateText(text: String, date: Date) {
         startEndLabel.text = text
-        dateLabel.text = date.convertToString()
+        dateLabel.text = date.convertToString("YYYY년 MM월 dd일")
     }
     
     func updateDateLabel(date: String) {
