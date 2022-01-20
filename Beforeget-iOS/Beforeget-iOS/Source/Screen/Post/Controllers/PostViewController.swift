@@ -12,6 +12,8 @@ import Then
 
 class PostViewController: UIViewController {
     
+    //MARK: - Network
+    
     private let postAPI = PostAPI.shared
     
     // MARK: - Properties

@@ -34,11 +34,7 @@ extension PostService: TargetType {
     
     var parameterEncoding: ParameterEncoding {
         switch self {
-        case .oneLine:
-            return JSONEncoding.default
-        case .item:
-            return JSONEncoding.default
-        case .post:
+        case .oneLine, .item, .post:
             return JSONEncoding.default
         }
     }
