@@ -24,11 +24,6 @@ final class MyRecordViewController: UIViewController {
     private var mediaData: String = ""
     private var starData: String = ""
     
-    /// 서버한테 보내야 될 값들
-    private var dateQuery: String = ""
-    private var mediaQuery: String = ""
-    private var starQuery: String = ""
-    
     var selectedDateIndex: Int = -1
     var selectedMediaArray: [String] = []
     var selectedStarArray: [Int] = []
@@ -137,7 +132,9 @@ extension MyRecordViewController: UITableViewDataSource {
         if myRecord.isEmpty {
             return 1
         } else {
-            return recordArray.count
+            print(recordArray.count, "123123123/", myRecord.count)
+            return myRecord.count
+            
         }
     }
     
@@ -149,7 +146,6 @@ extension MyRecordViewController: UITableViewDataSource {
                 withIdentifier: MyRecordEmptyTableViewCell.className,
                 for: indexPath) as? MyRecordEmptyTableViewCell
             else { return UITableViewCell() }
-            
             emptyCell.selectionStyle = .none
             return emptyCell
             
@@ -158,7 +154,8 @@ extension MyRecordViewController: UITableViewDataSource {
                 withIdentifier: MyRecordTableViewCell.className,
                 for: indexPath) as? MyRecordTableViewCell
             else { return UITableViewCell() }
-            recordCell.config(index: indexPath.item)
+            recordCell.selectionStyle = .none
+            recordCell.config(index: indexPath.row)
             return recordCell
         }
     }
@@ -204,16 +201,14 @@ extension MyRecordViewController:
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
         
-        
         var dateString = date.joined(separator: ",")
         print(dateString)
         
         var mediaString = media.joined(separator: ",")
-        print(mediaString, "미디어스트링")
+        
         var mediaArray: [String] = []
         mediaArray.append(mediaString)
         
-        print(media, "미디어스트링이들어간미디어어레이")
         
         media.forEach {
             if $0 == "Movie" {

@@ -134,24 +134,24 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         
         let myRecord = myRecordAPI.myRecord?.data
         guard let myRecord = myRecord else { return }
-        
-        print(index, "이게모야???", myRecord.count)
-        titleLabel.text = myRecord[index].title
-        onelineLabel.text = myRecord[index].oneline
+        print(index, "이게모야???", myRecord[index].title)
+        dump(myRecord)
+        self.titleLabel.text = myRecord[index].title
+        self.onelineLabel.text = myRecord[index].oneline
         let dateArray = myRecord[index].date.components(separatedBy: "-")
-        yearLabel.text = "\(dateArray[0])."
-        monthLabel.text = "\(dateArray[1])."
-        dayLabel.text = "\(dateArray[2])"
-        starLabel.text = String(myRecord[index].star)
+        self.yearLabel.text = "\(dateArray[0])."
+        self.monthLabel.text = "\(dateArray[1])."
+        self.dayLabel.text = "\(dateArray[2])"
+        self.starLabel.text = String(myRecord[index].star)
         let categoryImage = myRecord[index].category
         
         switch categoryImage {
-        case 0: return iconImageView.image = Asset.Assets.icnWriteMovie.image
-        case 1: return iconImageView.image = Asset.Assets.icnWriteBook.image
-        case 2: return iconImageView.image = Asset.Assets.icnWriteTv.image
-        case 3: return iconImageView.image = Asset.Assets.icnWriteMusic.image
-        case 4: return iconImageView.image = Asset.Assets.icnWriteWebtoon.image
-        default: return iconImageView.image = Asset.Assets.icnWriteYoutube.image
+        case 0: return self.iconImageView.image = Asset.Assets.icnWriteMovie.image
+        case 1: return self.iconImageView.image = Asset.Assets.icnWriteBook.image
+        case 2: return self.iconImageView.image = Asset.Assets.icnWriteTv.image
+        case 3: return self.iconImageView.image = Asset.Assets.icnWriteMusic.image
+        case 4: return self.iconImageView.image = Asset.Assets.icnWriteWebtoon.image
+        default: return self.iconImageView.image = Asset.Assets.icnWriteYoutube.image
         }
     }
 }

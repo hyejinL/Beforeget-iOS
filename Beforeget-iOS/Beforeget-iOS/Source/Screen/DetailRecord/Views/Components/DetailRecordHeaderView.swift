@@ -187,7 +187,8 @@ class DetailRecordHeaderView: UIView {
         
         reveiwTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(reviewLabel.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(70)
             make.height.equalTo(120)
             // MARK: FIXME - 한줄 리뷰 높이를 1~2 / 3~4 / 5~6 일 때 나눠서 계산해줘야 함
             make.bottom.equalToSuperview()
