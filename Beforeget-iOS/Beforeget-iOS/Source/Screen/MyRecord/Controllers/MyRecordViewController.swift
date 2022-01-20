@@ -186,14 +186,38 @@ extension MyRecordViewController:
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
         print(data, media, star, "넘어온 값")
         
+        var mediaString = media.joined(separator: ",")
+        print(mediaString, "이거미디어어레이")
         
-        
-        myRecordAPI.getMyRecordFilter(date: "-1", media: "-1", star: "-1") { data, err in
-            
-            print(data, "이거 필터맞아?")
+        let starArray = star.map { String($0) }
+        var starString = starArray.joined(separator: "")
+        print(starString, "이거스타어레이")
+
+        if media.isEmpty {
+            mediaString = "-1"
         }
         
+        if star.isEmpty {
+            starString = "-1"
+        }
         
+        if mediaString == "Movie" {
+            mediaString = "1"
+        } else if mediaString == "Book" {
+            mediaString = "2"
+        } else if mediaString == "TV" {
+            mediaString = "3"
+        } else if mediaString == "Music" {
+            mediaString = "4"
+        } else if mediaString == "Webtoon" {
+            mediaString = "5"
+        } else if mediaString == "Youtube" {
+            mediaString = "6"
+        }
+        
+        myRecordAPI.getMyRecordFilter(date: "\(data)", media: mediaString, star: starString) { data, err in
+            print(data, "이거 필터맞아?")
+        }
         
         filterView.dateButton.isSelected = (data == -1) ?
         false : true
@@ -215,7 +239,6 @@ extension MyRecordViewController:
         }
                 
         filterView.mediaButton.setTitle(mediaData, for: .normal)
-        
         selectedDateIndex = data
         selectedMediaArray = media
         selectedStarArray = star
