@@ -80,17 +80,17 @@ final class MediaSelectCollectionViewCell: UICollectionViewCell, UICollectionVie
         
         switch mediaName {
         case "Book":
-            mediaImageView.image = Asset.Assets.icnWriteBook.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectBook.image
         case "TV":
-            mediaImageView.image = Asset.Assets.icnWriteTv.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectTv.image
         case "Music":
-            mediaImageView.image = Asset.Assets.icnWriteMusic.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectMusic.image
         case "Webtoon":
-            mediaImageView.image = Asset.Assets.icnWriteWebtoon.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectWebtoon.image
         case "Youtube":
-            mediaImageView.image = Asset.Assets.icnWriteYoutube.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectYoutube.image
         default:
-            mediaImageView.image = Asset.Assets.icnWriteMovie.image
+            mediaImageView.image = Asset.Assets.icnMediaSelectMovie.image
         }
     }
 }

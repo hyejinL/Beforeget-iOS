@@ -367,6 +367,7 @@ extension ReportViewController {
             self.page4.tvData = data.oneline.tv
             self.page4.musicData = data.oneline.music
             self.page4.webtoonData = data.oneline.webtoon
+            self.page4.youtubeData = data.oneline.youtube
         })
     }
     
