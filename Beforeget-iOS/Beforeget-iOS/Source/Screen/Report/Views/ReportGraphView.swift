@@ -144,6 +144,7 @@ class ReportGraphView: UIView {
         monthLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(25)
             $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 31 : 21)
+            $0.height.equalTo(18)
         }
         
         threeMonthButton.snp.makeConstraints {

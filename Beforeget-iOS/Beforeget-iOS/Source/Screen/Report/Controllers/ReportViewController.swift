@@ -315,9 +315,6 @@ extension ReportViewController {
             
             let listURL = URL(string: data.poster)
             self.page1.typeImageView.kf.setImage(with: listURL)
-            
-            self.reportLoadingView.stop()
-            self.reportLoadingView.removeFromSuperview()
         })
     }
     
@@ -337,6 +334,10 @@ extension ReportViewController {
             
             self.page2.reportDescriptionView.descriptionTitle = data.title
             self.page2.reportDescriptionView.descriptionContent = data.comment
+            
+            self.reportLoadingView.stop()
+            self.reportLoadingView.removeFromSuperview()
+            self.isScrollEnabled = true
         })
     }
     
