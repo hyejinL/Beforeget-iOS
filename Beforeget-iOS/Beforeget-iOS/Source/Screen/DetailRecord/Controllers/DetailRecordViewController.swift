@@ -187,6 +187,8 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         optionMenu.addAction(cancel)
         self.present(optionMenu, animated: true, completion: nil)
     }
+    
+    
 }
 
 // MARK: - UITableViewDelegate

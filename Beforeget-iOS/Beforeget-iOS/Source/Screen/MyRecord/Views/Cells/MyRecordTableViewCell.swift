@@ -18,6 +18,10 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Properties
     
+    private var emptyStateImageView = UIImageView().then {
+        $0.image = Asset.Assets.icnRecordEmpty.image
+    }
+    
     private var iconImageView = UIImageView()
     
     private var titleLabel = UILabel().then {
@@ -58,7 +62,6 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         guard let myRecord = myRecord else { return }
         
         if myRecord.isEmpty {
-            configEmptyUI()
             setupEmptyLayout()
         } else {
             configUI()
@@ -71,13 +74,16 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - InitUI
-    
-    private func configEmptyUI() {
-        
-    }
-    
+
     private func setupEmptyLayout() {
+        contentView.addSubview(emptyStateImageView)
         
+        emptyStateImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(189)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(104)
+            make.height.equalTo(114)
+        }
     }
     
     private func configUI() {

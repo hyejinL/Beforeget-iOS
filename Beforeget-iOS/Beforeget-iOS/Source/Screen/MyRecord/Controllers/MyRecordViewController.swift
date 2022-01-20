@@ -187,11 +187,9 @@ extension MyRecordViewController:
         print(data, media, star, "넘어온 값")
         
         var mediaString = media.joined(separator: ",")
-        print(mediaString, "이거미디어어레이")
         
         let starArray = star.map { String($0) }
         var starString = starArray.joined(separator: ",")
-        print(starString, "이거스타어레이")
 
         if media.isEmpty {
             mediaString = "-1"

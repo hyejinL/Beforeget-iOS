@@ -13,6 +13,7 @@
 		5B304B7727882AF30054314A /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B7627882AF30054314A /* Assets+Generated.swift */; };
 		5B304B792788304B0054314A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B304B782788304B0054314A /* Fonts.swift */; };
 		5B44A9C8279790D2002285A7 /* MyDetailRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B44A9C7279790D2002285A7 /* MyDetailRecord.swift */; };
+		5B44A9CE27996B33002285A7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B44A9CD27996B32002285A7 /* String+.swift */; };
 		5B5FFCC527973E7900336A35 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCC427973E7900336A35 /* MyRecord.swift */; };
 		5B5FFCC82797406E00336A35 /* MyRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCC72797406E00336A35 /* MyRecordService.swift */; };
 		5B5FFCCB279742ED00336A35 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FFCCA279742ED00336A35 /* Token.swift */; };
@@ -150,6 +151,7 @@
 		5B304B7627882AF30054314A /* Assets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
 		5B304B782788304B0054314A /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		5B44A9C7279790D2002285A7 /* MyDetailRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailRecord.swift; sourceTree = "<group>"; };
+		5B44A9CD27996B32002285A7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5B5FFCC427973E7900336A35 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		5B5FFCC72797406E00336A35 /* MyRecordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordService.swift; sourceTree = "<group>"; };
 		5B5FFCCA279742ED00336A35 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 				5B82542C27917F3A004BDA5D /* UIImage+.swift */,
 				5BD114922790B3670063EB3B /* UICollectionView+.swift */,
 				5B8F13662794655400385D5E /* Date+.swift */,
+				5B44A9CD27996B32002285A7 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1244,6 +1247,7 @@
 				5B7BD0F9278C4F69000BC0FA /* MyRecordTableViewCell.swift in Sources */,
 				920B5D4927969D94002DE112 /* MainAPI.swift in Sources */,
 				920B5D7727972D51002DE112 /* ReportService.swift in Sources */,
+				5B44A9CE27996B33002285A7 /* String+.swift in Sources */,
 				927AF37127880B820018CC34 /* AppDelegate.swift in Sources */,
 				920B5D4127969C94002DE112 /* NetworkResult.swift in Sources */,
 				920B5D4B27969DAA002DE112 /* MainService.swift in Sources */,

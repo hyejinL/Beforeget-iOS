@@ -43,17 +43,17 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
     func getIconImage(index: Int) -> UIImage? {
         switch self {
         case .movie:
-            return Asset.Assets.icnEdit.image
+            return Asset.Assets.icnWriteMovie.image
         case .book:
-            return Asset.Assets.icnEdit.image
+            return Asset.Assets.icnWriteBook.image
         case .tv:
-            return Asset.Assets.icnEdit.image
+            return Asset.Assets.icnWriteTv.image
         case .music:
-            return Asset.Assets.icnEdit.image
+            return Asset.Assets.icnWriteMusic.image
         case .webtoon:
             return Asset.Assets.icnWebtoon.image
         case .youtube:
-            return Asset.Assets.icnEdit.image
+            return Asset.Assets.icnWriteYoutube.image
         }
     }
     
