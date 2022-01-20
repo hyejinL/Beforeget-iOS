@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "boxActiveBook.png",
+      "filename" : "imgWriteComplete.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "boxActiveBook@2x.png",
+      "filename" : "imgWriteComplete@2x.png",
       "scale" : "2x"
     },
     {
       "scale" : "3x",
-      "idiom" : "universal",
-      "filename" : "boxActiveBook@3x.png"
+      "filename" : "imgWriteComplete@3x.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

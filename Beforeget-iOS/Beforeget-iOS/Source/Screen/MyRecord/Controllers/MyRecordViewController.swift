@@ -22,6 +22,10 @@ final class MyRecordViewController: UIViewController {
     private var mediaQuery: String = ""
     private var starQuery: String = ""
     
+    var selectedDateIndex: Int = -1
+    var selectedMediaArray: [String] = []
+    var selectedStarArray: [Int] = []
+    
     private let record = RecordMannager()
     
     private lazy var navigationBar = BDSNavigationBar(
@@ -142,53 +146,58 @@ extension MyRecordViewController:
         let filterModalViewController = FilterModalViewController()
         filterModalViewController.modalPresentationStyle = .overFullScreen
         filterModalViewController.sendDataDelegate = self
+        filterModalViewController.selectedDateIndex = selectedDateIndex
+        filterModalViewController.selectedMediaArray = selectedMediaArray
+        filterModalViewController.selectedStarArray = selectedStarArray
         present(filterModalViewController, animated: false, completion: nil)
     }
     
     public func clickDateButton() {
         // MARK: - FIXME
         presentFilterModal()
-        print("기간버튼")
     }
     
     public func clickMediaButton() {
         // MARK: - FIXME
         /// 2번째 미디어 페이지로 바로 오픈해야 됨
         presentFilterModal()
-        print("미디어버튼")
     }
     
     public func clickStarButton() {
         // MARK: - FIXME
         /// 3번째 별점 페이지로 바로 오픈해야 됨
         presentFilterModal()
-        print("스타버튼")
     }
     
-    public func sendData(data: Int, media: [String], star: [String]) {
+    public func sendData(data: Int, media: [String], star: [Int]) {
         // MARK: - FIXME
-        /// 문제 : 미디어 부분에서 여러개 선택했을 때 설정처리 + 기간일 경우 int가 0부터 넘어옴..;;;
         /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
         /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
         print(data, media, star, "넘어온 값")
         
-        filterView.dateButton.isSelected = (data == 0) ?
+        filterView.dateButton.isSelected = (data == -1) ?
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true
-        filterView.starButton.isSelected = (star == ["별점"]) ?
+        filterView.starButton.isSelected = (star == []) ?
         false : true
-        
-        mediaData = filterView.mediaButton.isSelected ?
-        "\(media[0]) 외 \(media.count)" : "미디어"
-        
+
+        if filterView.mediaButton.isSelected {
+            if media.isEmpty {
+                mediaData = "미디어"
+            } else if media.count == 1 {
+                mediaData = "\(media[0])"
+            } else {
+                mediaData = "\(media[0]) 외 \(media.count-1)"
+            }
+        } else {
+            mediaData = "미디어"
+        }
+                
         filterView.mediaButton.setTitle(mediaData, for: .normal)
         
-        switch data {
-        case 0: dateQuery = "14"
-        case 1: dateQuery = "1"
-        case 2: dateQuery = "3"
-        default: dateQuery = "날짜"
-        }
+        selectedDateIndex = data
+        selectedMediaArray = media
+        selectedStarArray = star
     }
 }

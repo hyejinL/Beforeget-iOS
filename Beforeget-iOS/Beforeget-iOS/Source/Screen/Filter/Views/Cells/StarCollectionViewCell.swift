@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol StarFilterButtonDelegate: FilterModalViewController {
-    func selectStarFilter(index: [String])
+    func selectStarFilter(indexList: [Int])
 }
 
 class StarCollectionViewCell: UICollectionViewCell,
@@ -23,12 +23,12 @@ class StarCollectionViewCell: UICollectionViewCell,
     // MARK: - Properties
         
     /// FilterView에 전달할 선택된 별점 필터 배열입니다.
-    private var selectedStar: [String] = []
+    public var selectedStarArray: [Int] = []
+        
+    private var buttonTitle: [String] = []
+    public lazy var starButtonList: [UIButton] = []
     
     weak var starFilterButtonDelegate: StarFilterButtonDelegate?
-    
-    private var buttonTitle: [String] = []
-    private lazy var starButtonList: [UIButton] = []
     
     private lazy var firstButtonStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -155,21 +155,18 @@ class StarCollectionViewCell: UICollectionViewCell,
         }
     }
     
-    private func removeDuplication(in array: [String]) -> [String]{
-        let set = Set(array)
-        let duplicationRemovedArray = Array(set)
-        return duplicationRemovedArray
-    }
-    
     // MARK: - @objc
     
     @objc func touchupStarButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        
-        if sender.isSelected {
-            selectedStar.append(sender.titleLabel?.text ?? "")
+        sender.isSelected.toggle()
+        let senderIndex = Int(sender.titleLabel?.text ?? "0") ?? 0
+        if let index = selectedStarArray.firstIndex(of: senderIndex) {
+            selectedStarArray.remove(at: index)
+            print("selectedStar = \(selectedStarArray)")
+        } else {
+            selectedStarArray.append(senderIndex)
+            print("selectedStar = \(selectedStarArray)")
         }
-        
-        starFilterButtonDelegate?.selectStarFilter(index: removeDuplication(in: selectedStar))
+        starFilterButtonDelegate?.selectStarFilter(indexList: selectedStarArray)
     }
 }
