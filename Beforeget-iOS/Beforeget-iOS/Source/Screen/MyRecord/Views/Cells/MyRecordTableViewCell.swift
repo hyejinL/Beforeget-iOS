@@ -58,15 +58,8 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let myRecord = myRecordAPI.myRecord?.data
-        guard let myRecord = myRecord else { return }
-        
-        if myRecord.isEmpty {
-            setupEmptyLayout()
-        } else {
-            configUI()
-            setupLayout()
-        }
+        configUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -74,19 +67,8 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - InitUI
-
-    private func setupEmptyLayout() {
-        contentView.addSubview(emptyStateImageView)
-        
-        emptyStateImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(189)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(104)
-            make.height.equalTo(114)
-        }
-    }
     
-    private func configUI() {
+    public func configUI() {
         contentView.backgroundColor = Asset.Colors.black200.color
         
         [starLabel, yearLabel, monthLabel, dayLabel].forEach {
@@ -95,7 +77,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         }
     }
     
-    private func setupLayout() {
+    public func setupLayout() {
         contentView.addSubviews([
             iconImageView,
             titleLabel,
@@ -147,35 +129,29 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - Custom Method
-
+    
     public func config(index: Int) {
         
         let myRecord = myRecordAPI.myRecord?.data
         guard let myRecord = myRecord else { return }
         
-        if myRecord.isEmpty {
-            print("비어있다")
-            
-        } else {
-            print(index, "이게모야???")
-            titleLabel.text = myRecord[index].title
-            onelineLabel.text = myRecord[index].oneline
-            let dateArray = myRecord[index].date.components(separatedBy: "-")
-            yearLabel.text = "\(dateArray[0])."
-            monthLabel.text = "\(dateArray[1])."
-            dayLabel.text = "\(dateArray[2])"
-            starLabel.text = String(myRecord[index].star)
-            let categoryImage = myRecord[index].category
-            
-            // MARK: - FIXME 에셋 넘겨주면 이미지 바꾸기
-            switch categoryImage {
-            case 0: return iconImageView.image = Asset.Assets.icnWriteMovie.image
-            case 1: return iconImageView.image = Asset.Assets.icnWriteBook.image
-            case 2: return iconImageView.image = Asset.Assets.icnWriteTv.image
-            case 3: return iconImageView.image = Asset.Assets.icnWriteMusic.image
-            case 4: return iconImageView.image = Asset.Assets.icnWriteWebtoon.image
-            default: return iconImageView.image = Asset.Assets.icnWriteYoutube.image
-            }
+        print(index, "이게모야???", myRecord.count)
+        titleLabel.text = myRecord[index].title
+        onelineLabel.text = myRecord[index].oneline
+        let dateArray = myRecord[index].date.components(separatedBy: "-")
+        yearLabel.text = "\(dateArray[0])."
+        monthLabel.text = "\(dateArray[1])."
+        dayLabel.text = "\(dateArray[2])"
+        starLabel.text = String(myRecord[index].star)
+        let categoryImage = myRecord[index].category
+        
+        switch categoryImage {
+        case 0: return iconImageView.image = Asset.Assets.icnWriteMovie.image
+        case 1: return iconImageView.image = Asset.Assets.icnWriteBook.image
+        case 2: return iconImageView.image = Asset.Assets.icnWriteTv.image
+        case 3: return iconImageView.image = Asset.Assets.icnWriteMusic.image
+        case 4: return iconImageView.image = Asset.Assets.icnWriteWebtoon.image
+        default: return iconImageView.image = Asset.Assets.icnWriteYoutube.image
         }
     }
 }

@@ -54,6 +54,7 @@ final class MyRecordViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
+        MyRecordEmptyTableViewCell.register(target: $0)
         MyRecordTableViewCell.register(target: $0)
     }
     
@@ -131,17 +132,35 @@ extension MyRecordViewController: UITableViewDelegate {
 
 extension MyRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recordArray.count
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return 0 }
+        if myRecord.isEmpty {
+            return 1
+        } else {
+            return recordArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let recordCell = tableView.dequeueReusableCell(
-            withIdentifier: MyRecordTableViewCell.className,
-            for: indexPath) as? MyRecordTableViewCell
-        else { return UITableViewCell() }
-        recordCell.selectionStyle = .none
-        recordCell.config(index: indexPath.item)
-        return recordCell
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return UITableViewCell() }
+        if myRecord.isEmpty {
+            guard let emptyCell = tableView.dequeueReusableCell(
+                withIdentifier: MyRecordEmptyTableViewCell.className,
+                for: indexPath) as? MyRecordEmptyTableViewCell
+            else { return UITableViewCell() }
+            
+            emptyCell.selectionStyle = .none
+            return emptyCell
+            
+        } else {
+            guard let recordCell = tableView.dequeueReusableCell(
+                withIdentifier: MyRecordTableViewCell.className,
+                for: indexPath) as? MyRecordTableViewCell
+            else { return UITableViewCell() }
+            recordCell.config(index: indexPath.item)
+            return recordCell
+        }
     }
 }
 
@@ -190,7 +209,28 @@ extension MyRecordViewController:
         print(dateString)
         
         var mediaString = media.joined(separator: ",")
+        print(mediaString, "미디어스트링")
+        var mediaArray: [String] = []
+        mediaArray.append(mediaString)
         
+        print(media, "미디어스트링이들어간미디어어레이")
+        
+        media.forEach {
+            if $0 == "Movie" {
+                mediaString = "1"
+            } else if $0 == "Book" {
+                mediaString = "2"
+            } else if $0 == "TV" {
+                mediaString = "3"
+            } else if $0 == "Music" {
+                mediaString = "4"
+            } else if $0 == "Webtoon" {
+                mediaString = "5"
+            } else if $0 == "Youtube" {
+                mediaString = "6"
+            }
+        }
+                
         let starArray = star.map { String($0) }
         var starString = starArray.joined(separator: ",")
 
@@ -200,6 +240,8 @@ extension MyRecordViewController:
             dateString = "1"
         } else if data == 2 {
             dateString = "2"
+        } else if data == -1 {
+            dateString = "-1"
         }
         
         if media.isEmpty {
@@ -210,25 +252,11 @@ extension MyRecordViewController:
             starString = "-1"
         }
         
-        if mediaString == "Movie" {
-            mediaString = "1"
-        } else if mediaString == "Book" {
-            mediaString = "2"
-        } else if mediaString == "TV" {
-            mediaString = "3"
-        } else if mediaString == "Music" {
-            mediaString = "4"
-        } else if mediaString == "Webtoon" {
-            mediaString = "5"
-        } else if mediaString == "Youtube" {
-            mediaString = "6"
-        }
-        
         myRecordAPI.getMyRecordFilter(date: dateString, media: mediaString, star: starString) { data, err in
             self.recordTableView.reloadData()
         }
         
-        print(date, data, media, star, "넘어온 값", dateString)
+        print(date, data, media, star, "넘어온 값", dateString, mediaString)
         
         filterView.dateButton.isSelected = (data == -1) ?
         false : true
