@@ -22,8 +22,8 @@ final class CompleteViewController: UIViewController {
     }
     
     private let completeImageView = UIImageView().then {
-        // MARK: - FIXME 에셋 수정하기
-//        $0.image = Asset
+        $0.contentMode = .scaleAspectFill
+        $0.image = Asset.Assets.imgWriteComplete.image
         $0.backgroundColor = .lightGray
     }
     

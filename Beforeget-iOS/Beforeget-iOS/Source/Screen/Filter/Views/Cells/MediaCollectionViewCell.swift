@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol MediaFilterButtonDelegate: FilterModalViewController {
-    func selectMediaFilter(index: [String])
+    func selectMediaFilter(indexList: [String])
 }
 
 class MediaCollectionViewCell: UICollectionViewCell,
@@ -23,7 +23,7 @@ class MediaCollectionViewCell: UICollectionViewCell,
     // MARK: - Properties
         
     /// FilterView에 전달할 선택된 미디어 유형 필터 배열입니다.
-    private var selectedMedia: [String] = []
+    public var selectedMediaArray: [String] = []
     
     public var buttonTitle: [String] = []
     public var mediaButtonList: [UIButton] = []
@@ -69,6 +69,10 @@ class MediaCollectionViewCell: UICollectionViewCell,
     
     private func configUI() {
         contentView.backgroundColor = Asset.Colors.white.color
+        
+        mediaButtonList.forEach {
+            $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
+        }
     }
     
     private func setupLayout() {
@@ -135,27 +139,31 @@ class MediaCollectionViewCell: UICollectionViewCell,
         }
     }
     
+    public func setSelectedButton() {
+        selectedMediaArray.forEach {
+            let index = buttonTitle.firstIndex(of: $0) ?? 0
+            mediaButtonList[index].isSelected = true
+        }
+    }
+    
     private func setupAction() {
         mediaButtonList.forEach {
             $0.addTarget(self, action: #selector(touchupMediaButton(_:)), for: .touchUpInside)
         }
     }
     
-    private func removeDuplication(in array: [String]) -> [String]{
-        let set = Set(array)
-        let duplicationRemovedArray = Array(set)
-        return duplicationRemovedArray
-    }
-    
     // MARK: - @objc
     
     @objc func touchupMediaButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-
-        if sender.isSelected {
-            selectedMedia.append(sender.titleLabel?.text ?? "")
+        sender.isSelected.toggle()
+        let senderIndex = sender.titleLabel?.text ?? "미디어"
+        if let index = selectedMediaArray.firstIndex(of: senderIndex) {
+            selectedMediaArray.remove(at: index)
+            print("selectedMediaArray = \(selectedMediaArray)")
+        } else {
+            selectedMediaArray.append(senderIndex)
+            print("selectedMediaArray = \(selectedMediaArray)")
         }
-        
-        mediaFilterButtonDelegate?.selectMediaFilter(index: removeDuplication(in: selectedMedia))
+        mediaFilterButtonDelegate?.selectMediaFilter(indexList: selectedMediaArray)
     }
 }

@@ -32,9 +32,12 @@ class FilterCollectionViewCell: UICollectionViewCell,
     private var filter = FilterManager()
     
     weak var resetFilterDelegate: ResetFilterDelegate?
-    
     weak var dateFilterButtonDelegate: DateFilterButtonDelegate?
     
+    /// FilterView에 전달할 선택된 날짜 필터 배열입니다.
+    public var selectedDateIndex: Int = -1
+    
+    var dateSendingClosure: ((Int, Date) -> ())?
     var inputText: [String] = ["시작", "끝"]
     var inputDates: [Date] = []
     var datePickerIndexPath: IndexPath?
@@ -49,6 +52,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     
     public lazy var dateTableView = UITableView(frame: .zero).then {
         $0.backgroundColor = Asset.Colors.white.color
+        $0.isHidden = true
         $0.delegate = self
         $0.dataSource = self
         $0.isScrollEnabled = false
@@ -76,7 +80,7 @@ class FilterCollectionViewCell: UICollectionViewCell,
     // MARK: - InitUI
     
     private func configUI() {
-        backgroundColor = .white
+        backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
@@ -121,6 +125,10 @@ class FilterCollectionViewCell: UICollectionViewCell,
     // MARK: - Custom Method
     
     func clickResetButton() {
+        UIView.animate(withDuration: 0.5) {
+            self.dateTableView.alpha = 1
+            self.dateTableView.isHidden = true
+        }
         dateCollectionView.deselectAllItems(animated: false)
     }
 }
@@ -158,16 +166,18 @@ extension FilterCollectionViewCell {
 // MARK: - UICollectionViewDelegate
 
 extension FilterCollectionViewCell: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item, "이게몬데")
-        
-        if indexPath.item != 3 {
-            dateTableView.allowsSelection = false
-        } else {
-            dateTableView.isUserInteractionEnabled = true
-            dateTableView.allowsSelection = true
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
+        if indexPath.item == 3 {
             dateTableView.deselectRow(at: indexPath, animated: true)
+            UIView.animate(withDuration: 0.5) {
+                self.dateTableView.alpha = 1
+                self.dateTableView.isHidden = false
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.dateTableView.alpha = 0
+                self.dateTableView.isHidden = true
+            }
         }
         dateFilterButtonDelegate?.selectDateFilter(index: indexPath.item)
     }
@@ -182,6 +192,12 @@ extension FilterCollectionViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let dateFilterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterButtonCollectionViewCell.className, for: indexPath) as? FilterButtonCollectionViewCell else { return UICollectionViewCell() }
+        print(indexPath.item, selectedDateIndex, "여기")
+        if indexPath.item == selectedDateIndex {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+        } else {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
         dateFilterCell.cellLabel.text = filter.getFilterText(index: indexPath.item)
         return dateFilterCell
     }
@@ -232,6 +248,9 @@ extension FilterCollectionViewCell: UITableViewDataSource {
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
             datePickerCell.datePickerDelegate = self
             datePickerCell.setSelected(false, animated: false)
+            datePickerCell.dateSendingClosure = { index, date in
+                self.dateSendingClosure?(index, date)
+            }
             return datePickerCell
         } else { // 동일하지 않은 경우 데이트셀을 반환해서 날짜와 제목을 반환
             guard let dateCell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.className, for: indexPath) as? DateTableViewCell else { return UITableViewCell() }

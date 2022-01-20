@@ -13,17 +13,19 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [String], star: [String])
+    func sendData(data: Int, media: [String], star: [Int])
 }
 
 final class FilterModalViewController: UIViewController {
     
     // MARK: - Properties
+        
+    var selectedDateIndex: Int = -1
+    var selectedMediaArray: [String] = ["미디어"]
+    var selectedStarArray: [Int] = []
     
-    /// 0이면 아무 것도 선택하지 않은 경우 -> -1 로 바꿔달라고 요청할 것
-    var selectedDateIndex: Int = 0
-    var selectedMediaIndex: [String] = ["미디어"]
-    var selectedStarIndex: [String] = ["별점"]
+    // MARK: - FIXME 리팩토링시 네이밍 변경
+    var recordDateTuple: [String] = ["",""]
     
     weak var sendDataDelegate: SendDataDelegate?
     
@@ -187,10 +189,10 @@ final class FilterModalViewController: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded() }) { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
+                if self.presentingViewController != nil {
+                    self.dismiss(animated: false, completion: nil)
+                }
             }
-        }
     }
     
     private func setupGestureRecognizer() {
@@ -206,7 +208,7 @@ final class FilterModalViewController: UIViewController {
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
     }
-
+    
     // MARK: - @objc
     
     @objc func touchupResetButton(_ sender: UIButton) {
@@ -215,10 +217,10 @@ final class FilterModalViewController: UIViewController {
     
     @objc func touchupApplyButton(_ sender: UIButton) {
         // 필터 선택 시에 데이터값 전달하는 로직 작성
-        sendDataDelegate?.sendData(
+        sendDataDelegate?.sendData (
             data: selectedDateIndex,
-            media: selectedMediaIndex,
-            star: selectedStarIndex)
+            media: selectedMediaArray,
+            star: selectedStarArray)
         hideBottomSheetAndGoBack()
     }
     
@@ -237,7 +239,6 @@ final class FilterModalViewController: UIViewController {
 
 extension FilterModalViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // MARK: - FIXME 13 미니 대응 문제로 실제 상수값 변경 요망
         let menuWidth = (UIScreen.main.bounds.width - 75*2 - 39*2)/3
         let menuIndex = round(scrollView.contentOffset.x)/(UIScreen.main.bounds.width)
         
@@ -274,19 +275,38 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 withReuseIdentifier: FilterCollectionViewCell.className,
                 for: indexPath) as? FilterCollectionViewCell else { return UICollectionViewCell() }
             filterCell.dateFilterButtonDelegate = self
+            // MARK: - 추후 공부할 부분 : Closure
+            filterCell.selectedDateIndex = selectedDateIndex
+            filterCell.dateSendingClosure = { index, date in
+                print("dateIndex \(index)")
+                self.recordDateTuple[index] = date.convertToString("YYYY-MM-dd")
+                print(self.recordDateTuple, "날짜모음")
+            }
             return filterCell
+            
         case 1:
             guard let mediaCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MediaCollectionViewCell.className,
                 for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
             mediaCell.mediaFilterButtonDelegate = self
-        
+            mediaCell.selectedMediaArray = selectedMediaArray
+            mediaCell.setSelectedButton()
             return mediaCell
         default:
             guard let starCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: StarCollectionViewCell.className,
                 for: indexPath) as? StarCollectionViewCell else { return UICollectionViewCell() }
             starCell.starFilterButtonDelegate = self
+            starCell.selectedStarArray = selectedStarArray
+            selectedStarArray.forEach {
+                starCell.starButtonList[$0 - 1].isSelected = true
+                if starCell.starButtonList[$0 - 1].isSelected {
+                    applyButton.isDisabled = false
+                    print(applyButton.isDisabled, "여기어플라이버튼")
+                } else {
+                    applyButton.isDisabled = true
+                }
+            }
             return starCell
         }
     }
@@ -329,15 +349,15 @@ extension FilterModalViewController:
         applyButton.isDisabled = false
     }
     
-    func selectMediaFilter(index: [String]) {
-        selectedMediaIndex = index
-        print(selectedMediaIndex, "이것은 미디어다!!")
+    func selectMediaFilter(indexList: [String]) {
+        selectedMediaArray = indexList
+        print(selectedMediaArray, "이것은 미디어다!!")
         applyButton.isDisabled = false
     }
     
-    func selectStarFilter(index: [String]) {
-        selectedStarIndex = index
-        print(selectedStarIndex, "이것은 별점이다!!!")
+    func selectStarFilter(indexList: [Int]) {
+        selectedStarArray = indexList
+        print(selectedStarArray, "이것은 별점이다!!!")
         applyButton.isDisabled = false
     }
 }
