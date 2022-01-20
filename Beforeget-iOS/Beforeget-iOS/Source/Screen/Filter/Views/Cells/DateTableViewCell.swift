@@ -74,4 +74,11 @@ extension Date {
         let newDate: String = dateFormatter.string(from: self)
         return newDate
     }
+    
+    func convertToString(dateFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        let newDate: String = dateFormatter.string(from: self)
+        return newDate
+    }
 }

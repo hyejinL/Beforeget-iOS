@@ -14,10 +14,11 @@ struct PostRequest: Codable {
     let star: Int
     let title: String
     let oneline: [String]
+    let comment: String
     let additional: [Additional]
 }
 
 // MARK: - Additional
 struct Additional: Codable {
-    let type, content: String
+    var type, content: String
 }

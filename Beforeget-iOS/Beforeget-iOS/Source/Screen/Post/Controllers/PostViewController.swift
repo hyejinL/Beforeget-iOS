@@ -12,6 +12,8 @@ import Then
 
 class PostViewController: UIViewController {
     
+    private let postAPI = PostAPI.shared
+    
     // MARK: - Properties
     
     private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false, mediaType: mediaType ?? .movie)
@@ -19,6 +21,7 @@ class PostViewController: UIViewController {
     private let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
         $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.addTarget(self, action: #selector(touchupDoneButton), for: .touchUpInside)
     }
     
     private lazy var writingTableView = UITableView(frame: .zero, style: .grouped).then {
@@ -89,8 +92,15 @@ class PostViewController: UIViewController {
         $0.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
     }
     
+    private var star: Int = 0
+    private var mediaTitle: String?
+    private var comment: String?
+    
+    private var additionalItemsContent: [String] = []
+    var additionalItems: [Additional] = []
+    
     var mediaType: MediaType?
-    var additionalItems: [String] = []
+//    var additionalItems: [String] = []
     var oneLines: [String] = []
     
     // MARK: - Life Cycle
@@ -206,6 +216,24 @@ class PostViewController: UIViewController {
         }
     }
     
+    @objc func touchupDoneButton() {
+        let totalAdditionalItems = additionalItems.filter { !$0.type.isEmpty }
+                                                  .filter { !$0.content.isEmpty }
+        definesPresentationContext = true
+        
+        postAPI.postRecord(record: PostRequest(media: mediaType?.mediaNumber() ?? 1,
+                                               date: datePicker.date.convertToString(dateFormat: "YYYY-MM-dd"),
+                                               star: star,
+                                               title: mediaTitle ?? "",
+                                               oneline: oneLines,
+                                               comment: comment ?? "",
+                                               additional: totalAdditionalItems)) { data, err in
+            guard let data = data else { return }
+            print(data)
+        }
+        navigationController?.pushViewController(CompleteViewController(), animated: true)
+    }
+    
     //MARK: - Custom Method
     
     func reloadTableView() {
@@ -223,11 +251,14 @@ extension PostViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell?
-        
         switch indexPath.row {
         case 0:
-            cell = TitleTableViewCell()
+            let titleCell = TitleTableViewCell()
+            titleCell.sendTitle = { title in
+                self.mediaTitle = title
+            }
+            titleCell.selectionStyle = .none
+            return titleCell
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
@@ -243,27 +274,34 @@ extension PostViewController: UITableViewDataSource {
             commentCell.delegate = self
             commentCell.setupTextFieldEditable()
             commentCell.selectionStyle = .none
+            commentCell.sendContent = { comment in
+                self.comment = comment
+            }
             return commentCell
         default:
             guard let textCell = tableView.dequeueReusableCell(withIdentifier: WriteTextTableViewCell.className, for: indexPath) as? WriteTextTableViewCell else { return UITableViewCell() }
             textCell.delegate = self
             textCell.hideLetterCountLabel()
-            textCell.setupPlaceHolderText(additionalItems[indexPath.row-3])
+            textCell.setupPlaceHolderText(additionalItems[indexPath.row-3].type)
             textCell.selectionStyle = .none
             
-            if additionalItems[indexPath.row - 3] == "text" {
+            if additionalItems[indexPath.row-3].type == "text" {
                 textCell.setupTitle(title: "")
             } else {
-                textCell.setupTitle(title: additionalItems[indexPath.row-3])
+                textCell.setupTitle(title: additionalItems[indexPath.row-3].type)
                 textCell.setupTextFieldEditable()
+            }
+            
+            textCell.sendContent = { content in
+                self.additionalItems[indexPath.row-3].content = content
+            }
+            
+            textCell.sendType = { type in
+                self.additionalItems[indexPath.row-3].type = type
             }
             
             return textCell
         }
-        
-        cell?.selectionStyle = .none
-        
-        return cell ?? UITableViewCell()
     }
 }
 
@@ -271,6 +309,9 @@ extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = WritingHeaderView()
         headerView.delegate = self
+        headerView.sendStarCount = { starCount in
+            self.star = starCount
+        }
         return headerView
     }
     

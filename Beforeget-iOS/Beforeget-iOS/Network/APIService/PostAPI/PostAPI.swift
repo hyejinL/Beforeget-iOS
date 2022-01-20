@@ -41,7 +41,6 @@ final class PostAPI {
                         completion(nil, Error.self as? Error)
                         return
                     }
-                    self?.oneLineData = data
                     completion(data, nil)
                 } catch(let err) {
                     print(err.localizedDescription)
@@ -64,8 +63,29 @@ final class PostAPI {
                         completion(nil, Error.self as? Error)
                         return
                     }
-                    self?.recommendItemData = data
-                    
+                    completion(data, nil)
+                } catch(let err) {
+                    print(err.localizedDescription)
+                    completion(nil, err)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(nil, err)
+            }
+        }
+    }
+    
+    func postRecord(record: PostRequest, completion: @escaping ((PostResponse?, Error?) -> ())) {
+        let param = record
+        postProvider.request(.post(param: param)) { response in
+            switch response {
+            case .success(let result):
+                do {
+                    self.postResponse = try result.map(BaseResponse<PostResponse>.self)
+                    guard let data = self.postResponse?.data else {
+                        completion(nil, Error.self as? Error)
+                        return
+                    }
                     completion(data, nil)
                 } catch(let err) {
                     print(err.localizedDescription)

@@ -114,11 +114,12 @@ final class AddItemViewController: UIViewController {
         $0.addTarget(self, action: #selector(touchupAddButton), for: .touchUpInside)
     }
     
-    var isSelectedAddTextButton: Bool = false
-    var isSelectedAddImageButton: Bool = false
-    var selectedItemCount: Int = 0
-    var recommendItems: [String] = []
-    var selectedItems: [String] = []
+    private var isSelectedAddTextButton: Bool = false
+    private var isSelectedAddImageButton: Bool = false
+    private var selectedItemCount: Int = 0
+    private var recommendItems: [String] = []
+    private var selectedItemsType: [String] = []
+    
     var mediaType: MediaType?
     
     // MARK: - Life Cycle
@@ -228,10 +229,14 @@ final class AddItemViewController: UIViewController {
         let postViewController = presentingViewController as? PostViewController
         
         if isSelectedAddTextButton {
-            selectedItems.append("text")
+            selectedItemsType.append("text")
         }
         
-        postViewController?.additionalItems.append(contentsOf: selectedItems)
+        let additionalItems = selectedItemsType.map {
+            Additional(type: $0, content: "")
+        }
+        
+        postViewController?.additionalItems.append(contentsOf: additionalItems)
         postViewController?.reloadTableView()
         dismiss(animated: true)
     }
@@ -284,15 +289,15 @@ extension AddItemViewController: UICollectionViewDataSource {
 
 extension AddItemViewController: ItemcellDelegate {
     func itemCellSelected(_ cell: AddItemCollectionViewCell) {
-        selectedItems.append(cell.item)
+        selectedItemsType.append(cell.item)
         addButton.backgroundColor = Asset.Colors.black200.color
         addButton.isEnabled = true
         selectedItemCount += 1
     }
     
     func itemCellUnselected(_ cell: AddItemCollectionViewCell, unselectedItemName: String) {
-        let deletingIndex = selectedItems.firstIndex(of: unselectedItemName) ?? -1
-        selectedItems.remove(at: deletingIndex)
+        let deletingIndex = selectedItemsType.firstIndex(of: unselectedItemName) ?? -1
+        selectedItemsType.remove(at: deletingIndex)
         selectedItemCount -= 1
         
         if selectedItemCount == 0 {
