@@ -39,7 +39,7 @@ final class ReportLabelViewController: UIViewController {
         reportTopView.monthButton.inputAccessoryView = setupToolbar()
         reportTopView.monthButton.inputView = monthPicker
         
-        reportTopView.reportTitle = "\(addOrSubtractMonth(month: -1))의 땅콩님은?"
+        reportTopView.reportTitle = "\(addOrSubtractMonth(month: -1))의 밴토리님은?"
         reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
     }
     
@@ -49,12 +49,12 @@ final class ReportLabelViewController: UIViewController {
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
-            $0.height.equalTo(146)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 146 : 142)
         }
         
         typeImageView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            $0.top.equalTo(reportTopView.snp.bottom).offset(UIScreen.main.hasNotch ? 20 : 15)
+            $0.top.equalTo(reportTopView.snp.bottom)
             $0.height.equalTo(UIScreen.main.hasNotch ? 290 : 242)
         }
         
