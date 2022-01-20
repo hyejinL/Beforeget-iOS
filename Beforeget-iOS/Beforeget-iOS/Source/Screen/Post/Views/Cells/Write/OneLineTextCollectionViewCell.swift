@@ -14,10 +14,26 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     
     // MARK: - Properties
     
-    private lazy var onelineLabel = UILabel().then {
+    private lazy var oneLineLabel = UILabel().then {
         $0.font = BDSFont.body8
         $0.textColor = Asset.Colors.gray200.color
     }
+    
+    private let deleteButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnReviewDelete.image, for: .normal)
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(touchupDeleteButton), for: .touchUpInside)
+    }
+    
+    private lazy var oneLineStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 4
+        $0.addArrangedSubviews([oneLineLabel, deleteButton])
+    }
+    
+    var deleteOneLine: (() -> ())?
     
     override var isSelected: Bool {
         didSet {
@@ -27,11 +43,17 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
             contentView.makeRound(radius: 20)
             
             let textColor = isSelected ? Asset.Colors.black200.color : Asset.Colors.gray200.color
-            onelineLabel.textColor = textColor
+            oneLineLabel.textColor = textColor
+            
+            if isSelected {
+                NotificationCenter.default.post(name: Notification.Name.didSelectOneLine, object: nil)
+            } else {
+                NotificationCenter.default.post(name: Notification.Name.didDeselectOneLine, object: nil)
+            }
         }
     }
     
-    // MARK: - InitUI
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,9 +76,9 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     }
     
     private func setupLayout() {
-        addSubview(onelineLabel)
+        addSubview(oneLineStackView)
         
-        onelineLabel.snp.makeConstraints {
+        oneLineStackView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
     }
@@ -64,6 +86,22 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
     // MARK: - Custom Method
     
     public func config(oneline: String) {
-        onelineLabel.text = oneline
+        oneLineLabel.text = oneline
+    }
+    
+    public func showDeleteButton() {
+        deleteButton.isHidden = false
+    }
+    
+    public func configColor(borderColor: UIColor, textColor: UIColor, backgroundColor: UIColor) {
+        contentView.layer.borderColor = borderColor.cgColor
+        contentView.backgroundColor = backgroundColor
+        oneLineLabel.textColor = textColor
+    }
+    
+    //MARK: - @objc
+    
+    @objc func touchupDeleteButton() {
+        deleteOneLine?()
     }
 }

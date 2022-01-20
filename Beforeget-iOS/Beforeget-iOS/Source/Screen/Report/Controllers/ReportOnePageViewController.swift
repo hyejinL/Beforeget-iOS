@@ -15,7 +15,6 @@ final class ReportOnePageViewController: UIViewController {
     // MARK: - Properties
     
     private var monthButton = RespondingButton().then {
-        $0.setTitle("2021년 12월", for: .normal)
         $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
         $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
         $0.titleLabel?.font = BDSFont.enBody7
@@ -24,7 +23,7 @@ final class ReportOnePageViewController: UIViewController {
     var reportOnePageView = ReportOnePageView()
     private var monthPicker = MonthYearPickerView()
     
-    private var sentence: [String] = ["눈물 좔좔 호수", "눈물 좔좔 호수강", "눈물 좔좔 호수짱"]
+    var sentence: [String] = []
     
     // MARK: - Life Cycle
     
@@ -32,7 +31,6 @@ final class ReportOnePageViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
@@ -44,6 +42,9 @@ final class ReportOnePageViewController: UIViewController {
         monthButton.layer.borderWidth = 1
         monthButton.layer.borderColor = Asset.Colors.gray200.color.cgColor
         monthButton.makeRound(radius: 31 / 2)
+        
+        let month = addOrSubtractMonth(month: -1)
+        monthButton.setTitle("\(month)", for: .normal)
     }
     
     private func setupLayout() {
@@ -62,21 +63,6 @@ final class ReportOnePageViewController: UIViewController {
         }
     }
     
-    // MARK: - TODO REMOVE
-    
-    private func bind() {
-        reportOnePageView.firstRankingMedia = "Book"
-        reportOnePageView.firstRankingCount = 22
-        
-        reportOnePageView.secondRankingMedia = "Music"
-        reportOnePageView.secondRankingCount = 10
-        
-        reportOnePageView.thirdRankingMedia = "Movie"
-        reportOnePageView.thirdRankingCount = 7
-        
-        reportOnePageView.sentence = sentence
-    }
-    
     // MARK: - Custom Method
     
     private func setupToolbar() -> UIToolbar {
@@ -91,6 +77,13 @@ final class ReportOnePageViewController: UIViewController {
         toolbar.setItems([flexibleSpace, doneButton], animated: true)
         
         return toolbar
+    }
+    
+    private func addOrSubtractMonth(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월"
+        return dateFormatter.string(from: date)
     }
     
     // MARK: - @objc

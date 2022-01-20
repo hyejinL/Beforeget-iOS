@@ -1,5 +1,5 @@
 //
-//  PostModalGoodCollectionViewCell.swift
+//  PostModalBadCollectionViewCell.swift
 //  Beforeget-iOS
 //
 //  Created by soyeon on 2022/01/17.
@@ -10,11 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
+class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterable {
     
     // MARK: - Properties
     
-    private let reviewTextLayout = LeftAlignmentCollectionViewFlowLayout()
+    private let reviewTextLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+    }
     
     private lazy var oneLineTextCollectionView = UICollectionView(frame: .zero, collectionViewLayout: reviewTextLayout).then {
         $0.backgroundColor = Asset.Colors.white.color
@@ -26,8 +28,8 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         $0.allowsMultipleSelection = true
     }
     
-    private var goodReviews = [String]()
-    private var selectedGoodReviews = [String]()
+    private var badReviews = [String]()
+    var selectedBadReview: ((_ badReview: String) -> ())?
     
     // MARK: - Initializser
     
@@ -52,8 +54,7 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         addSubview(oneLineTextCollectionView)
         
         oneLineTextCollectionView.snp.makeConstraints {
-            $0.trailing.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().inset(21)
+            $0.leading.trailing.top.bottom.equalToSuperview()
         }
     }
     
@@ -71,8 +72,8 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         NotificationCenter.default.addObserver(self, selector: #selector(touchupResetButton), name: NSNotification.Name("touchupOneLineResetButton"), object: nil)
     }
     
-    public func config(goodReviews: [String]) {
-        self.goodReviews = goodReviews
+    public func config(badReviews: [String]) {
+        self.badReviews = badReviews
     }
     
     // MARK: - @objc
@@ -84,13 +85,13 @@ class GoodOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
 
 // MARK: - UICollectionViewDelegate FlowLayout
 
-extension GoodOneLineCollectionViewCell: UICollectionViewDelegateFlowLayout {
+extension BadOneLineCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: calculateCellWidth(text: goodReviews[indexPath.item]), height: 39)
+        return CGSize(width: calculateCellWidth(text: badReviews[indexPath.item]), height: 39)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 25, left: 21, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -104,14 +105,22 @@ extension GoodOneLineCollectionViewCell: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UICollectionViewDataSource
 
-extension GoodOneLineCollectionViewCell: UICollectionViewDataSource {
+extension BadOneLineCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return goodReviews.count
+        return badReviews.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell else { return UICollectionViewCell() }
-        cell.config(oneline: goodReviews[indexPath.item])
+        cell.config(oneline: badReviews[indexPath.item])
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDelegate
+
+extension BadOneLineCollectionViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedBadReview?(badReviews[indexPath.item])
     }
 }

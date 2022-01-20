@@ -26,7 +26,7 @@ final class AddItemViewController: UIViewController {
             return isRemainder ? CGFloat((recommendItemsCount / 3) + 1) : CGFloat(recommendItemsCount / 3)
         }
     }
-
+    
     // MARK: - Properties
     
     private let topBarView = UIView().then {
@@ -35,6 +35,7 @@ final class AddItemViewController: UIViewController {
     
     private let closeButton = UIButton().then {
         $0.setImage(Asset.Assets.btnClose.image, for: .normal)
+        $0.addTarget(self, action: #selector(touchupCloseButton), for: .touchUpInside)
     }
     
     private let recommendMessageLabel = UILabel().then {
@@ -75,7 +76,8 @@ final class AddItemViewController: UIViewController {
         $0.configuration = config
         $0.makeRound()
         $0.layer.borderColor = Asset.Colors.gray400.color.cgColor
-        $0.layer.borderWidth = 1
+        $0.layer.borderWidth = 2
+        $0.addTarget(self, action: #selector(touchupAddTextButton), for: .touchUpInside)
     }
     
     private let addImageButton = UIButton().then {
@@ -90,22 +92,29 @@ final class AddItemViewController: UIViewController {
         $0.configuration = config
         $0.makeRound()
         $0.layer.borderColor = Asset.Colors.gray400.color.cgColor
-        $0.layer.borderWidth = 1
+        $0.layer.borderWidth = 2
     }
     
     private let exampleImageView = UIImageView().then {
         $0.image = Asset.Assets.imgExample.image
+        $0.isHidden = true
     }
     
     private let addButton = UIButton().then {
-        $0.backgroundColor = Asset.Colors.black200.color
+        $0.backgroundColor = Asset.Colors.gray300.color
         $0.setTitle("추가", for: .normal)
         $0.setTitleColor(Asset.Colors.white.color, for: .normal)
         $0.titleLabel?.font = BDSFont.title6
         $0.makeRound(radius: 4)
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(touchupAddButton), for: .touchUpInside)
     }
     
+    var isSelectedAddTextButton: Bool = false
+    var isSelectedAddImageButton: Bool = false
+    var selectedItemCount: Int = 0
     var recommendItems: [String] = ["명대사", "감독", "배우", "장르", "줄거리", "OST", "포스터"]
+    var selectedItems: [String] = []
     
     // MARK: - Life Cycle
     
@@ -180,6 +189,56 @@ final class AddItemViewController: UIViewController {
             $0.height.equalTo(54)
         }
     }
+    
+    //MARK: - @objc
+    
+    @objc func touchupAddTextButton() {
+        isSelectedAddTextButton.toggle()
+        if isSelectedAddTextButton {
+            addTextButton.setImage(Asset.Assets.icnCheckActive.image, for: .normal)
+            addTextButton.layer.borderColor = Asset.Colors.black200.color.cgColor
+            selectedItemCount += 1
+            addButton.backgroundColor = Asset.Colors.black200.color
+            addButton.isEnabled = true
+        } else {
+            addTextButton.setImage(Asset.Assets.icnCheckInactive.image, for: .normal)
+            addTextButton.layer.borderColor = Asset.Colors.gray400.color.cgColor
+            selectedItemCount -= 1
+            
+            if selectedItemCount == 0 {
+                addButton.backgroundColor = Asset.Colors.gray300.color
+                addButton.isEnabled = false
+            }
+        }
+        
+        setupExampleImageView()
+    }
+    
+    @objc func touchupAddButton() {
+        let postViewController = presentingViewController as? PostViewController
+        
+        if isSelectedAddTextButton {
+            selectedItems.append("text")
+        }
+        
+        postViewController?.additionalItems.append(contentsOf: selectedItems)
+        postViewController?.reloadTableView()
+        dismiss(animated: true)
+    }
+    
+    @objc func touchupCloseButton() {
+        dismiss(animated: true)
+    }
+    
+    //MARK: - Custom Method
+    
+    private func setupExampleImageView() {
+        if isSelectedAddTextButton || isSelectedAddImageButton {
+            exampleImageView.isHidden = false
+        } else {
+            exampleImageView.isHidden = true
+        }
+    }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -205,8 +264,30 @@ extension AddItemViewController: UICollectionViewDataSource {
         
         cell.config(recommendItems[indexPath.row])
         cell.item = recommendItems[indexPath.row]
+        cell.itemDelegate = self
         
         return cell
     }
 }
 
+//MARK: - ItemcellDelegate
+
+extension AddItemViewController: ItemcellDelegate {
+    func itemCellSelected(_ cell: AddItemCollectionViewCell) {
+        selectedItems.append(cell.item)
+        addButton.backgroundColor = Asset.Colors.black200.color
+        addButton.isEnabled = true
+        selectedItemCount += 1
+    }
+    
+    func itemCellUnselected(_ cell: AddItemCollectionViewCell, unselectedItemName: String) {
+        let deletingIndex = selectedItems.firstIndex(of: unselectedItemName) ?? -1
+        selectedItems.remove(at: deletingIndex)
+        selectedItemCount -= 1
+        
+        if selectedItemCount == 0 {
+            addButton.backgroundColor = Asset.Colors.gray300.color
+            addButton.isEnabled = false
+        }
+    }
+}

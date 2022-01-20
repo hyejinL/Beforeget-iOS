@@ -31,8 +31,9 @@ class ReportOnePageView: UIView {
         $0.spacing = 2
     }
     
-    private var mediaImageView = UIImageView().then {
+    var mediaImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     
     private var sentenceView = UIView()
@@ -263,7 +264,7 @@ class ReportOnePageView: UIView {
         sentenceView.addSubview(sentenceCollectionView)
         
         sentenceCollectionView.snp.makeConstraints { 
-            $0.width.equalTo(110)
+            $0.width.equalTo(130)
             $0.height.equalTo(UIScreen.main.hasNotch ? 107 : 91)
             $0.centerX.centerY.equalToSuperview()
         }
