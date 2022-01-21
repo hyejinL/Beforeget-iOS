@@ -202,21 +202,27 @@ class PostViewController: UIViewController {
     
     @objc func touchupAddItemButton() {
         let addItemViewController = AddItemViewController()
+        definesPresentationContext = true
         addItemViewController.modalPresentationStyle = .overCurrentContext
         addItemViewController.mediaType = mediaType
-        definesPresentationContext = true
         present(addItemViewController, animated: true, completion: nil)
     }
     
     @objc func addOneLine(_ sender: Notification) {
-        guard let oneLineData = sender.object as? [String] else { return }
         guard let cell = writingTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? OneLineReviewTableViewCell else { return }
         
-        oneLineData.forEach {
-            if !cell.oneLines.contains($0) {
-                cell.oneLines.append($0)
+        if let oneLineData = sender.object as? [String] {
+            oneLineData.forEach {
+                if !cell.oneLines.contains($0) {
+                    cell.oneLines.append($0)
+                    oneLines = oneLineData
+                }
             }
-        }
+        } else if let deletingOneLine = sender.object as? String {
+            let deletingIndex = self.oneLines.firstIndex(of: deletingOneLine)
+            self.oneLines.remove(at: deletingIndex ?? -1)
+            cell.oneLines.remove(at: deletingIndex ?? -1)
+        } else { return }
         
         if cell.oneLines.isEmpty == false {
             cell.reloadCollectionView()
