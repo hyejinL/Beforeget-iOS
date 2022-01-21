@@ -19,6 +19,8 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     // MARK: - Dummy Data
     
+    public var formatterDate = DateFormatter()
+    
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
     
     public var myDetailRecordArray: [MyDetailRecord] = []
@@ -180,6 +182,16 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         optionMenu.addAction(cancel)
         self.present(optionMenu, animated: true, completion: nil)
     }
+    
+    public func setupDate(_ date: String) -> String {
+        formatterDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatterDate.timeZone = NSTimeZone(name: "UTD") as TimeZone?
+        if let date = formatterDate.date(from: date) {
+            return date.convertToString("yyyy. MM. dd E")
+        } else {
+            return ""
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -195,12 +207,12 @@ extension DetailRecordViewController: UITableViewDelegate {
             guard let data = data else { return}
             data.forEach {
                 headerView.titleLabel.text = $0.title
-                headerView.dateLabel.text = $0.date
+                let dateArray = $0.date.components(separatedBy: "-")
+                headerView.dateLabel.text = "\(dateArray[0]). \(dateArray[1]). \(dateArray[2])"
                 headerView.iconImageView.image =  MediaType.getIconImage(index: $0.category)
                 headerView.reviewArray = $0.oneline
                 headerView.reveiwTagCollectionView.reloadData()
                 let starImage = $0.star
-                
                 switch starImage {
                 case 1: return headerView.starImageView.image = Asset.Assets.btnStar1.image
                 case 2: return headerView.starImageView.image = Asset.Assets.btnStar2.image
@@ -214,15 +226,17 @@ extension DetailRecordViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        let view = UIView()
+        view.backgroundColor = Asset.Colors.white.color
+        return view
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 300
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension + 47
+        return UITableView.automaticDimension
     }
 }
 
@@ -423,7 +437,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 }
             }
         }
-
+        
         //
         //        guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
         //        else { return UITableViewCell() }

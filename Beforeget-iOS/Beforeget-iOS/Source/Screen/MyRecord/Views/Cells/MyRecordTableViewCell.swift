@@ -117,7 +117,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         }
         
         dateStackView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(15)
+            make.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(19.7)
             make.height.equalTo(13)
         }

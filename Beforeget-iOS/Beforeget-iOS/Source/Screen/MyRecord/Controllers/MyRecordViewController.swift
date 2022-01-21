@@ -9,8 +9,7 @@ import UIKit
 
 import SnapKit
 import Then
-import CoreMedia
-
+ 
 final class MyRecordViewController: UIViewController {
     
     // MARK: - Network
@@ -18,6 +17,8 @@ final class MyRecordViewController: UIViewController {
     private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
+    
+    public var mediaID = -1
         
     private var recordArray: [MyRecord] = []
     
@@ -62,6 +63,9 @@ final class MyRecordViewController: UIViewController {
         myRecordAPI.getMyRecord { data, err in
             guard let data = data else { return }
             self.recordArray = data
+            self.recordTableView.reloadData()
+        }
+        myRecordAPI.getMyRecordFilter(date: "-1", media: "\(mediaID)", star: "-1") { data, err in
             self.recordTableView.reloadData()
         }
     }
@@ -247,19 +251,23 @@ extension MyRecordViewController:
         
         myRecordAPI.getMyRecordFilter(date: dateString, media: mediaInt, star: starString) { data, err in
             print("넘어온 값", dateString, mediaInt, starString)
+            
             self.recordTableView.reloadData()
         }
                 
         filterView.dateButton.isSelected = (data == -1) ?
         false : true
+        
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
         false : true
+        
         filterView.starButton.isSelected = (star == []) ?
         false : true
 
         if filterView.mediaButton.isSelected {
             if media.isEmpty {
                 mediaData = "미디어"
+                filterView.mediaButton.isSelected = false
             } else if media.count == 1 {
                 mediaData = "\(media[0])"
             } else {

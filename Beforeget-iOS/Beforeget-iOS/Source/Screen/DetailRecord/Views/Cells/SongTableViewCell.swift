@@ -14,14 +14,14 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Dummy Data
     
-    public var songArray: [String] = ["소코도모 - 인생은 회전목마", "잔나비 - 꿈과 책과 힘과 벽과 개발과 코딩", "AllIWannaDo"]
+    public var songArray: [String] = ["뭐가 되고 싶어 - 원슈타인"]
 
     // MARK: - Properties
     
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
-        $0.title = "노래제목"
+        $0.title = "OST"
     }
     
     public lazy var songListTableView = UITableView(frame: frame, style: .plain).then {
