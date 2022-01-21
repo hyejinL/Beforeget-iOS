@@ -199,11 +199,9 @@ extension OneLineReviewTableViewCell: UICollectionViewDataSource {
         cell.deleteOneLine = {
             collectionView.deleteItems(at: [IndexPath(row: indexPath.item, section: 0)])
             
-            let deletingIndex = self.oneLines.firstIndex(of: self.oneLines[indexPath.item]) ?? -1
-            self.oneLines.remove(at: deletingIndex)
-            self.reloadCollectionView()
+            NotificationCenter.default.post(name: NSNotification.Name.didAddOneLine, object: self.oneLines[indexPath.item])
             
-            NotificationCenter.default.post(name: NSNotification.Name.didAddOneLine, object: self.oneLines)
+            self.reloadCollectionView()
             
             if self.oneLines.isEmpty {
                 self.addReviewCircleButton.isHidden = false
