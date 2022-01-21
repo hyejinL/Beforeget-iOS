@@ -63,8 +63,11 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         
         var months: [String] = []
         var month = 0
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM"
         for _ in 1...12 {
-            months.append(DateFormatter().monthSymbols[month].capitalized)
+            months.append(dateFormatter.monthSymbols[month].localizedCapitalized)
             month += 1
         }
         

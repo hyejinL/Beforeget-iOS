@@ -32,7 +32,7 @@ class ReportOnePageView: UIView {
     }
     
     var mediaImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = UIScreen.main.hasNotch ? .scaleAspectFill : .center
         $0.clipsToBounds = true
     }
     

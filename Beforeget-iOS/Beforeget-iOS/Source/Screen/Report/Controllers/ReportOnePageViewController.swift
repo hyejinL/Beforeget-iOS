@@ -16,7 +16,6 @@ final class ReportOnePageViewController: UIViewController {
     
     private var monthButton = RespondingButton().then {
         $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
-        $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
         $0.titleLabel?.font = BDSFont.enBody7
     }
     
@@ -87,10 +86,6 @@ final class ReportOnePageViewController: UIViewController {
     }
     
     // MARK: - @objc
-    
-    @objc func touchupMonthButton() {
-        
-    }
     
     @objc func touchupDoneButton() {
         monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)

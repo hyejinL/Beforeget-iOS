@@ -14,9 +14,7 @@ class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegist
     
     // MARK: - Properties
     
-    private let reviewTextLayout = UICollectionViewFlowLayout().then {
-        $0.scrollDirection = .horizontal
-    }
+    private let reviewTextLayout = LeftAlignmentCollectionViewFlowLayout()
     
     private lazy var oneLineTextCollectionView = UICollectionView(frame: .zero, collectionViewLayout: reviewTextLayout).then {
         $0.backgroundColor = Asset.Colors.white.color
@@ -54,7 +52,8 @@ class BadOneLineCollectionViewCell: UICollectionViewCell, UICollectionViewRegist
         addSubview(oneLineTextCollectionView)
         
         oneLineTextCollectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.trailing.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().inset(21)
         }
     }
     
@@ -91,7 +90,7 @@ extension BadOneLineCollectionViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 25, left: 21, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

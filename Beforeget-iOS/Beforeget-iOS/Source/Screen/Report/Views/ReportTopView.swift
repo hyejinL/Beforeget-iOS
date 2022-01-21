@@ -116,8 +116,7 @@ class ReportTopView: UIView {
     
     // MARK: - @objc
     
-    @objc
-    func touchupMonthButton() {
+    @objc func touchupMonthButton() {
         monthButton.becomeFirstResponder()
         delegate?.touchupMonthButton()
     }

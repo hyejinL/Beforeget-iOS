@@ -11,6 +11,10 @@ import SnapKit
 import Then
 
 final class ReportSentenceViewController: UIViewController {
+    
+    // MARK: - Network
+    
+    private let reportAPI = ReportAPI.shared
 
     // MARK: - Properties
     
@@ -95,14 +99,29 @@ final class ReportSentenceViewController: UIViewController {
     @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
-    }
-}
-
-// MARK: - ReportTopView Delegate
-
-extension ReportSentenceViewController: ReportTopViewDelegate {
-    func touchupMonthButton() {
         
+        reportAPI.getFourthReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            // MARK: - TODO : 데이터 초기화 및 리로드
+
+            self.musicData.removeAll()
+            self.bookData.removeAll()
+            self.tvData.removeAll()
+            self.musicData.removeAll()
+            self.webtoonData.removeAll()
+            self.youtubeData.removeAll()
+            
+            self.movieData = data.oneline.movie
+            self.bookData = data.oneline.book
+            self.tvData = data.oneline.tv
+            self.musicData = data.oneline.music
+            self.webtoonData = data.oneline.webtoon
+            self.youtubeData = data.oneline.youtube
+            
+            self.reportSentenceView.reloadCollectionView()
+        }
     }
 }
 
@@ -162,4 +181,10 @@ extension ReportSentenceViewController: ReportSentenceViewDelegate {
         }
         UIView.transition(with: reportSentenceView.youtubeImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
+}
+
+// MARK: - ReportTopView Delegate
+
+extension ReportSentenceViewController: ReportTopViewDelegate {
+    func touchupMonthButton() { }
 }
