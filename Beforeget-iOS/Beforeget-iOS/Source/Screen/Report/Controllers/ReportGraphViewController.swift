@@ -11,6 +11,10 @@ import SnapKit
 
 final class ReportGraphViewController: UIViewController {
     
+    // MARK: - Network
+    
+    private let reportAPI = ReportAPI.shared
+    
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
@@ -105,15 +109,23 @@ final class ReportGraphViewController: UIViewController {
     @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
+        
+        reportAPI.getSecondReport(date: "\(monthPicker.year)년 \(monthPicker.month)월", count: 5) { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.reportDescriptionView.descriptionTitle = data.title
+            self.reportDescriptionView.descriptionContent = data.comment
+            
+            // MARK: - TODO : 통계 그래프 높이 계산 
+        }
     }
 }
 
 // MARK: - ReportTopView Delegate
 
 extension ReportGraphViewController: ReportTopViewDelegate {
-    func touchupMonthButton() {
-        
-    }
+    func touchupMonthButton() { }
 }
 
 // MARK: - ReportGraphView Delegate

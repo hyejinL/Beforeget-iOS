@@ -12,6 +12,10 @@ import Then
 
 final class ReportLabelViewController: UIViewController {
     
+    // MARK: - Network
+    
+    private var reportAPI = ReportAPI.shared
+    
     // MARK: - Properties
     
     private var reportTopView = ReportTopView()
@@ -65,12 +69,12 @@ final class ReportLabelViewController: UIViewController {
         }
     }
     
-    // MARK: - Custom Method
-    
     private func bind() {
         reportTopView.delegate = self
     }
     
+    // MARK: - Custom Method
+
     private func setupToolbar() -> UIToolbar {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -94,17 +98,27 @@ final class ReportLabelViewController: UIViewController {
     
     // MARK: - @objc
     
-    @objc
-    func touchupDoneButton() {
+    @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
+        
+        reportAPI.getFirstReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.reportDescriptionView.descriptionTitle = data.title
+            self.reportDescriptionView.descriptionContent = data.comment
+            
+            let listURL = URL(string: data.poster)
+            self.typeImageView.kf.setImage(with: listURL)
+            
+            self.reportTopView.reportTitle = "\(self.monthPicker.month)월의 밴토리님은?"
+        }
     }
 }
 
 // MARK: - ReportTopView Delegate
 
 extension ReportLabelViewController: ReportTopViewDelegate {
-    func touchupMonthButton() {
-        
-    }
+    func touchupMonthButton() { }
 }

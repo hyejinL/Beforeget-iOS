@@ -10,7 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
+import Kingfisher
+
 final class ReportRankingViewController: UIViewController {
+    
+    // MARK: - Network
+    
+    private let reportAPI = ReportAPI.shared
     
     // MARK: - Properties
     
@@ -25,7 +31,6 @@ final class ReportRankingViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
@@ -92,13 +97,31 @@ final class ReportRankingViewController: UIViewController {
     @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
+        
+        // MARK: - TODO: 01~09월의 데이터 통신 
+        
+        reportAPI.getThirdReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
+            guard let self = self else { return }
+            guard let data = data else { return }
+            
+            self.reportTopView.reportDescription = "\(self.monthPicker.month)월 한 달 기록률이 가장 높은 top3"
+            
+            self.reportRankingView.firstType = data.arr[0].type
+            self.reportRankingView.firstCount = data.arr[0].count
+            self.reportRankingView.secondType = data.arr[1].type
+            self.reportRankingView.secondCount = data.arr[1].count
+            self.reportRankingView.thirdType = data.arr[2].type
+            self.reportRankingView.thirdCount = data.arr[2].count
+            
+            self.reportDescriptionView.descriptionTitle = data.title
+            self.reportDescriptionView.descriptionContent = data.label
+        }
     }
 }
 
 // MARK: - ReportTopView Delegate
 
 extension ReportRankingViewController: ReportTopViewDelegate {
-    func touchupMonthButton() {
-        
-    }
+    func touchupMonthButton() { }
 }
+

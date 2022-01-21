@@ -359,7 +359,7 @@ extension ReportViewController {
     }
     
     func getFourthReportData() {
-        reportAPI.getFourth(date: addOrSubtractMonth(month: -1), completion: { [weak self] data, err in
+        reportAPI.getFourthReport(date: addOrSubtractMonth(month: -1), completion: { [weak self] data, err in
             guard let self = self else { return }
             guard let data = data else { return }
             
@@ -373,7 +373,7 @@ extension ReportViewController {
     }
     
     func getTotalReportData() {
-        reportAPI.getTotal(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
+        reportAPI.getTotalReport(date: addOrSubtractMonth(month: -1), count: 5, completion: { [weak self] data, err in
             guard let self = self else { return }
             guard let data = data else { return }
             
