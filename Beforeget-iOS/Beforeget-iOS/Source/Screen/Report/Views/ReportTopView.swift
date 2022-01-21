@@ -10,21 +10,9 @@ import UIKit
 import SnapKit
 import Then
 
-// MARK: - Protocol
-
-protocol ReportTopViewDelegate: AnyObject {
-    func touchupMonthButton()
-}
-
 class ReportTopView: UIView {
 
     // MARK: - Properties
-    
-    var monthButton = RespondingButton().then {
-        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
-        $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
-        $0.titleLabel?.font = BDSFont.enBody7
-    }
     
     private var starImageView = UIImageView().then {
         $0.image = Asset.Assets.icnStarBlack.image
@@ -53,8 +41,6 @@ class ReportTopView: UIView {
         }
     }
     
-    weak var delegate: ReportTopViewDelegate?
-    
     // MARK: - Initializer
     
     init() {
@@ -71,27 +57,14 @@ class ReportTopView: UIView {
     // MARK: - InitUI
     
     private func configUI() {
-        backgroundColor = .white
-        
-        monthButton.layer.borderWidth = 1
-        monthButton.layer.borderColor = Asset.Colors.gray200.color.cgColor
-        monthButton.makeRound(radius: 31 / 2)
-        
-        let month = addOrSubtractMonth(month: -1)
-        monthButton.setTitle("\(month)", for: .normal)
+        backgroundColor = Asset.Colors.white.color
     }
     
     private func setupLayout() {
-        addSubviews([monthButton, starImageView, reportTitleLabel, reportDescriptionLabel])
-        
-        monthButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(UIScreen.main.hasNotch ? 23 : 13)
-            $0.leading.trailing.equalToSuperview().inset(133)
-            $0.height.equalTo(31)
-        }
+        addSubviews([starImageView, reportTitleLabel, reportDescriptionLabel])
         
         starImageView.snp.makeConstraints {
-            $0.top.equalTo(monthButton.snp.bottom).offset(27)
+            $0.top.equalToSuperview().inset(3)
             $0.leading.equalToSuperview().inset(20)
             $0.width.height.equalTo(18)
         }
@@ -105,19 +78,5 @@ class ReportTopView: UIView {
             $0.leading.equalToSuperview().inset(20)
             $0.top.equalTo(reportTitleLabel.snp.bottom).offset(7)
         }
-    }
-    
-    private func addOrSubtractMonth(month:Int) -> String {
-        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY년 MM월"
-        return dateFormatter.string(from: date)
-    }
-    
-    // MARK: - @objc
-    
-    @objc func touchupMonthButton() {
-        monthButton.becomeFirstResponder()
-        delegate?.touchupMonthButton()
     }
 }

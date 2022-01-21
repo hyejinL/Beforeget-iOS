@@ -30,8 +30,17 @@ final class ReportViewController: UIPageViewController {
         $0.addTarget(self, action: #selector(touchupDownLoadButton), for: .touchUpInside)
     }
     
+    private var monthButton = RespondingButton().then {
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
+        $0.titleLabel?.font = BDSFont.enBody7
+    }
+    
+    private var monthPicker = MonthYearPickerView()
+    
     private var pages = [UIViewController]()
     private let initialPage = 0
+    private var currentPageIndex = 0
     
     private let paginationStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -101,21 +110,36 @@ final class ReportViewController: UIPageViewController {
     private func configUI() {
         setupStatusBar(Asset.Colors.white.color)
         view.backgroundColor = Asset.Colors.white.color
+        
+        monthButton.layer.borderWidth = 1
+        monthButton.layer.borderColor = Asset.Colors.gray200.color.cgColor
+        monthButton.makeRound(radius: 31 / 2)
+        
+        let month = subtractMonthButton(month: -1)
+        monthButton.setTitle("\(month)", for: .normal)
+        
+        monthButton.inputAccessoryView = setupToolbar()
+        monthButton.inputView = monthPicker
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, paginationStackView, reportLoadingView])
+        view.addSubviews([naviBar, monthButton, paginationStackView, reportLoadingView])
         naviBar.addSubview(downLoadButton)
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-//            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview()
             $0.width.height.equalTo(44)
+        }
+        
+        monthButton.snp.makeConstraints { 
+            $0.top.equalTo(naviBar.snp.bottom).offset(UIScreen.main.hasNotch ? 23 : 13)
+            $0.leading.trailing.equalToSuperview().inset(133)
+            $0.height.equalTo(31)
         }
         
         paginationStackView.addArrangedSubviews([pageImageView1,
@@ -164,14 +188,6 @@ final class ReportViewController: UIPageViewController {
         isScrollEnabled = true
     }
     
-    private func setupBarData() {
-        page5.reportOnePageView.barView1.setupBarHeight(height: CGFloat(heights[0]))
-        page5.reportOnePageView.barView2.setupBarHeight(height: CGFloat(heights[1]))
-        page5.reportOnePageView.barView3.setupBarHeight(height: CGFloat(heights[2]))
-        page5.reportOnePageView.barView4.setupBarHeight(height: CGFloat(heights[3]))
-        page5.reportOnePageView.barView5.setupBarHeight(height: CGFloat(heights[4]))
-    }
-    
     private func setupBarAnimation() {
         page2.reportGraphView.barView1.animate(height: CGFloat(heights[0]))
         page2.reportGraphView.barView2.animate(height: CGFloat(heights[1]))
@@ -206,11 +222,32 @@ final class ReportViewController: UIPageViewController {
         }
     }
     
+    private func subtractMonthButton(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월"
+        return dateFormatter.string(from: date)
+    }
+    
     private func addOrSubtractMonth(month:Int) -> String {
         guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM"
         return dateFormatter.string(from: date)
+    }
+    
+    private func setupToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.backgroundColor = Asset.Colors.white.color
+        toolbar.tintColor = Asset.Colors.black200.color
+        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        
+        return toolbar
     }
     
     // MARK: - @objc
@@ -232,6 +269,31 @@ final class ReportViewController: UIPageViewController {
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
         
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @objc func touchupDoneButton() {
+        monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
+        view.endEditing(true)
+        
+        if currentPageIndex == 0 {
+            reportAPI.getFirstReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page1.reportDescriptionView.descriptionTitle = data.title
+                self.page1.reportDescriptionView.descriptionContent = data.comment
+                
+                let listURL = URL(string: data.poster)
+                self.page1.typeImageView.kf.setImage(with: listURL)
+                
+                self.page1.reportTopView.reportTitle = "\(self.monthPicker.month)월의 밴토리님은?"
+            }
+        }
+    }
+    
+    @objc func touchupMonthButton() {
+        monthButton.becomeFirstResponder()
+        
     }
 }
 
@@ -275,6 +337,8 @@ extension ReportViewController: UIPageViewControllerDelegate {
             let viewController = pageViewController.viewControllers?.first,
             let currentIndex = pages.firstIndex(of: viewController)
         else { return }
+        
+        currentPageIndex = currentIndex
         
         switch currentIndex {
         case 1:
