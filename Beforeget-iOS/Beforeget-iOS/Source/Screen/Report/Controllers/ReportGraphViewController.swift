@@ -22,6 +22,8 @@ final class ReportGraphViewController: UIViewController {
     var reportDescriptionView = ReportDescriptionView()
     private lazy var monthPicker = MonthYearPickerView()
     
+    private var months = [String]()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -104,20 +106,29 @@ final class ReportGraphViewController: UIViewController {
         return dateFormatter.string(from: date)
     }
     
+    private func setBarTitle(monts: [String]) {
+        reportGraphView.barView1.barTitle = monts[0]
+        reportGraphView.barView2.barTitle = monts[1]
+        reportGraphView.barView3.barTitle = monts[2]
+        reportGraphView.barView4.barTitle = monts[3]
+        reportGraphView.barView5.barTitle = monts[4]
+    }
+    
     // MARK: - @objc
     
     @objc func touchupDoneButton() {
         reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
         view.endEditing(true)
         
-        reportAPI.getSecondReport(date: "\(monthPicker.year)년 \(monthPicker.month)월", count: 5) { [weak self] data, err in
+        reportAPI.getSecondReport(date: "\(monthPicker.year)-\(monthPicker.month)", count: 5) { [weak self] data, err in
             guard let self = self else { return }
             guard let data = data else { return }
             
             self.reportDescriptionView.descriptionTitle = data.title
             self.reportDescriptionView.descriptionContent = data.comment
             
-            // MARK: - TODO : 통계 그래프 높이 계산 
+            // MARK: - TODO : 통계 그래프 높이 계산
+            
         }
     }
 }
