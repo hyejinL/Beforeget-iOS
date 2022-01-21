@@ -227,13 +227,14 @@ final class OneLineViewController: UIViewController {
     // MARK: - Custom Method
     
     private func setupGestureRecognizer() {
-        let tapGoodLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToGood))
-        goodLabel.addGestureRecognizer(tapGoodLabelGesture)
-        goodLabel.isUserInteractionEnabled = true
-        
-        let tapBadLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToBad))
-        badLabel.addGestureRecognizer(tapBadLabelGesture)
-        badLabel.isUserInteractionEnabled = true
+        // MARK: - FIX ME : 드래그 막음
+//        let tapGoodLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToGood))
+//        goodLabel.addGestureRecognizer(tapGoodLabelGesture)
+//        goodLabel.isUserInteractionEnabled = true
+//
+//        let tapBadLabelGesture = UITapGestureRecognizer(target: self, action: #selector(dragToBad))
+//        badLabel.addGestureRecognizer(tapBadLabelGesture)
+//        badLabel.isUserInteractionEnabled = true
         
         let dimmedTap = UITapGestureRecognizer(
             target: self, action: #selector(dimmedViewTapped(_:)))
@@ -352,24 +353,24 @@ final class OneLineViewController: UIViewController {
 // MARK: - UICollectionView Delegate
 
 extension OneLineViewController: UICollectionViewDelegate {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let targetIndex = targetContentOffset.pointee.x / scrollView.frame.size.width
-        if targetIndex == 1 && currentIndex == 0 {
-            UIView.animate(withDuration: 0.5) {
-                self.statusMovedView.transform = CGAffineTransform(translationX: (self.view.frame.width - 40) / 2, y: 0)
-            }
-            currentIndex = 1
-            self.goodLabel.textColor = Asset.Colors.gray300.color
-            self.badLabel.textColor = Asset.Colors.black200.color
-        } else if targetIndex == 0 && currentIndex == 1 {
-            UIView.animate(withDuration: 0.5) {
-                self.statusMovedView.transform = .identity
-            }
-            currentIndex = 0
-            self.goodLabel.textColor = Asset.Colors.black200.color
-            self.badLabel.textColor = Asset.Colors.gray300.color
-        }
-    }
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let targetIndex = targetContentOffset.pointee.x / scrollView.frame.size.width
+//        if targetIndex == 1 && currentIndex == 0 {
+//            UIView.animate(withDuration: 0.5) {
+//                self.statusMovedView.transform = CGAffineTransform(translationX: (self.view.frame.width - 40) / 2, y: 0)
+//            }
+//            currentIndex = 1
+//            self.goodLabel.textColor = Asset.Colors.gray300.color
+//            self.badLabel.textColor = Asset.Colors.black200.color
+//        } else if targetIndex == 0 && currentIndex == 1 {
+//            UIView.animate(withDuration: 0.5) {
+//                self.statusMovedView.transform = .identity
+//            }
+//            currentIndex = 0
+//            self.goodLabel.textColor = Asset.Colors.black200.color
+//            self.badLabel.textColor = Asset.Colors.gray300.color
+//        }
+//    }
 }
 
 // MARK: - UICollectionView DelegateFlowLayout
@@ -398,7 +399,8 @@ extension OneLineViewController: UICollectionViewDelegateFlowLayout {
 
 extension OneLineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
+//        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -412,16 +414,17 @@ extension OneLineViewController: UICollectionViewDataSource {
                 self.selectedReviews.append(goodReviews)
             }
             return cell
-        } else if indexPath.row == 1 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BadOneLineCollectionViewCell.className, for: indexPath) as? BadOneLineCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            cell.config(badReviews: badReviews)
-            cell.selectedBadReview = { (badReviews: String) -> () in
-                self.selectedReviews.append(badReviews)
-            }
-            return cell
         }
+//        else if indexPath.row == 1 {
+//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BadOneLineCollectionViewCell.className, for: indexPath) as? BadOneLineCollectionViewCell else {
+//                return UICollectionViewCell()
+//            }
+//            cell.config(badReviews: badReviews)
+//            cell.selectedBadReview = { (badReviews: String) -> () in
+//                self.selectedReviews.append(badReviews)
+//            }
+//            return cell
+//        }
         return UICollectionViewCell()
     }
 }
