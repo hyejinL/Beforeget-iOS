@@ -81,7 +81,7 @@ extension StampTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let stampCell = collectionView.dequeueReusableCell(withReuseIdentifier: StampCollectionViewCell.className, for: indexPath) as? StampCollectionViewCell else { return UICollectionViewCell() }
-        stampCell.config(stampArray[indexPath.item])
+        stampCell.config(stampArray[indexPath.row])
         return stampCell
     }
 }

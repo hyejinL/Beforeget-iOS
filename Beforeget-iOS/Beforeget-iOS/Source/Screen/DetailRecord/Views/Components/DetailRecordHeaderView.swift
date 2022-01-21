@@ -14,6 +14,8 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - Properties
     
+    public var postId = 0
+    
     private var fontColorArray: [UIColor] = [
         Asset.Colors.white.color, Asset.Colors.black200.color,
         Asset.Colors.black200.color, Asset.Colors.white.color,
@@ -24,24 +26,27 @@ class DetailRecordHeaderView: UIView {
         Asset.Colors.gray300.color, Asset.Colors.black200.color,
         Asset.Colors.gray400.color, Asset.Colors.black200.color]
     
-    private var reviewArray: [String] = [
+    public var reviewArray: [String] = [
         "흥미진진한 줄거리", "연기가 일품이에요!",
         "인생영화", "아름다운 영상미",
         "마음이 따뜻해져요", "개발자 인생!"]
+    
+    public var formatterDate = DateFormatter()
+    
+    private let preferredLanguage = NSLocale.preferredLanguages[0]
     
     private let blackBackView = UIView().then {
         $0.backgroundColor = Asset.Colors.black200.color
     }
     
     public var iconImageView = UIImageView().then {
-        //        $0.image = 문제 : 에셋이 들어가야 됨
-        $0.backgroundColor = .white
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
     }
     
-    /// 문제 : 영어로 넘어오면 폰트 어떻게 해야 하나?
-    public var titleLabel = UILabel().then {
-        $0.text = "왜들그리 다운되어있어 분위기가 겁나싸해 요즘그게 유행인가"
-        $0.numberOfLines = 2
+    public lazy var titleLabel = UILabel().then {
+        $0.text = "0"
+        $0.numberOfLines = 0
         $0.font = BDSFont.title3
         $0.textColor = Asset.Colors.white.color
         $0.textAlignment = .center
@@ -53,8 +58,9 @@ class DetailRecordHeaderView: UIView {
         $0.layer.borderWidth = 1
     }
     
-    private var dateLabel = UILabel().then {
-        $0.text = "2022. 01. 10. MON"
+    // MARK: - FIXME 날짜 변환
+    public var dateLabel = UILabel().then {
+        $0.text = "0"
         $0.font = BDSFont.enBody7
         $0.textColor = Asset.Colors.white.color
     }
@@ -63,8 +69,7 @@ class DetailRecordHeaderView: UIView {
         $0.backgroundColor = Asset.Colors.black200.color
     }
     
-    /// 문제 : 스타이미지가 별점에 따라 넘겨올 때 다르게 받아져야 됨 분기처리해줘야 하는 것
-    private var starImageView = UIImageView().then {
+    public var starImageView = UIImageView().then {
         $0.image = Asset.Assets.btnStar1.image
     }
     
@@ -78,7 +83,7 @@ class DetailRecordHeaderView: UIView {
     
     private let customFlowLayout = LeftAlignmentCollectionViewFlowLayout()
     
-    private lazy var reveiwTagCollectionView = UICollectionView(
+    public lazy var reveiwTagCollectionView = UICollectionView(
         frame: .zero, collectionViewLayout: customFlowLayout).then {
             $0.isScrollEnabled = false
             $0.delegate = self
@@ -87,9 +92,10 @@ class DetailRecordHeaderView: UIView {
         }
     
     // MARK: - Initializer
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupDate()
         configUI()
         setupLayout()
     }
@@ -102,6 +108,21 @@ class DetailRecordHeaderView: UIView {
     
     private func configUI() {
         backgroundColor = Asset.Colors.white.color
+        if preferredLanguage == "en" {
+            titleLabel.font = BDSFont.enHead1
+        } else if preferredLanguage == "kr" {
+            titleLabel.font = BDSFont.title3
+        }
+        
+//        if titleLabel.text.count < 19 {
+//            titleLabel.snp.updateConstraints { make in
+//                make.height.equalTo(23)
+//            }
+//        } else {
+//            titleLabel.snp.updateConstraints { make in
+//                make.height.equalTo(50)
+//            }
+//        }
     }
     
     private func setupLayout() {
@@ -128,6 +149,7 @@ class DetailRecordHeaderView: UIView {
             make.top.equalTo(iconImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(23)
         }
         
         dateView.snp.makeConstraints { make in
@@ -169,20 +191,26 @@ class DetailRecordHeaderView: UIView {
         reviewLabel.snp.makeConstraints { make in
             make.top.equalTo(starImageView.snp.bottom).offset(48)
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         reveiwTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(reviewLabel.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(102)
-            make.bottom.equalToSuperview().inset(47)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(70)
+            make.height.equalTo(120)
+            // MARK: FIXME - 한줄 리뷰 높이를 1~2 / 3~4 / 5~6 일 때 나눠서 계산해줘야 함
+            make.bottom.equalToSuperview()
         }
     }
     
     // MARK: - Custom Method
     
-    public func config() {
-        
+    private func setupDate() {
+        formatterDate.locale = Locale(identifier: "ko_KR")
+        formatterDate.dateFormat = "YYYY. MM. dd E"
+        let currentFormatterDate = formatterDate.string(from: Date())
+        dateLabel.text = currentFormatterDate
     }
 }
 
@@ -220,7 +248,7 @@ extension DetailRecordHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let reviewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ReviewTagCollectionViewCell.className,

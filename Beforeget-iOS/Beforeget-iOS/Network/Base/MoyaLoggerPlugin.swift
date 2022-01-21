@@ -45,7 +45,7 @@ final class MoyaLoggerPlugin: PluginType {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
         let statusCode = response.statusCode
-        var log = "------------------- 네트워크 통신 성공 -------------------"
+        var log = "------------------- 네트워크 통신 성공했는가? -------------------"
         log.append("\n3️⃣[\(statusCode)] \(url)\n----------------------------------------------------\n")
         log.append("response: \n")
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {

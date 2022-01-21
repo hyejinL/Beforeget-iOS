@@ -10,6 +10,7 @@ import Foundation
 import Moya
 
 final class MainAPI {
+    
     // MARK: - Static Properties
     
     static let shared: MainAPI = MainAPI()
@@ -25,17 +26,18 @@ final class MainAPI {
     
     func getMain(completion: @escaping ((Main?, Error?) -> ())) {
         mainProvider.request(.main) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let result):
                 do {
-                    self?.mainResponse = try result.map(BaseResponse<Main>.self)
-                    guard let data = self?.mainResponse?.data else {
+                    self.mainResponse = try result.map(BaseResponse<Main>.self)
+                    guard let data = self.mainResponse?.data else {
                         completion(nil, Error.self as? Error)
                         return
                     }
-                    self?.mainData = data
-                    
+                    self.mainData = data
                     completion(data, nil)
+                    
                 } catch(let err) {
                     print(err.localizedDescription)
                     completion(nil, err)

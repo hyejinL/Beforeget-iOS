@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
-
+    
     // MARK: - Properties
     
     private let backView = UIView().then {
@@ -20,7 +20,7 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     private let songIconImageView = UIImageView().then {
-//        $0.image = Asset.Assets.
+        $0.image = Asset.Assets.icnOst.image
         $0.backgroundColor = .white
     }
     
@@ -74,7 +74,7 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        songLabel.text = data
+    public func config(_ song: String) {
+        songLabel.text = song
     }
 }

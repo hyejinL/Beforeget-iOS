@@ -50,7 +50,7 @@ class StampCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        stampLabel.text = data
+    public func config(_ stamp: String) {
+        stampLabel.text = stamp
     }
 }

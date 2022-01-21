@@ -15,7 +15,7 @@ final class CompleteViewController: UIViewController {
     // MARK: - Properties
     
     private let completeLabel = UILabel().then {
-        $0.text = "새로운 기록이 쌓였어요.\n확인해 보세요!"
+        $0.text = "새로운 기록이 쌓였어요\n확인해 보세요!"
         $0.font = BDSFont.title2
         $0.textColor = Asset.Colors.black200.color
         $0.numberOfLines = 0
@@ -61,7 +61,7 @@ final class CompleteViewController: UIViewController {
     private func configUI() {
         view.backgroundColor = Asset.Colors.white.color
         completeLabel.addLetterSpacing()
-        completeLabel.addLineSpacing(spacing: 34)
+        completeLabel.addLineSpacing(spacing: 32)
         completeLabel.textAlignment = .center
     }
     
@@ -76,13 +76,13 @@ final class CompleteViewController: UIViewController {
         }
         
         completeImageView.snp.makeConstraints { make in
-            make.top.equalTo(completeLabel.snp.bottom).offset(UIScreen.main.hasNotch ? 24 : 16)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
             make.height.equalTo(305)
         }
         
         buttonStackView.snp.makeConstraints { make in
-            make.top.equalTo(completeImageView.snp.bottom).offset(UIScreen.main.hasNotch ? 122 : 49)
+            make.top.equalTo(completeImageView.snp.bottom).offset(UIScreen.main.hasNotch ? 116 : 49)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(UIScreen.main.hasNotch ? 115 : 114)
         }

@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
-
+    
     // MARK: - Properties
     
     private var cellMargin: CGFloat = 47
@@ -33,7 +33,6 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
         $0.lineBreakStrategy = .hangulWordPriority
         $0.lineBreakMode = .byWordWrapping
     }
-    
     
     // MARK: - Initializer
 
@@ -72,6 +71,7 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalTo(lineView.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(50)
+            make.height.equalTo(23)
         }
         
         descriptionLabel.snp.makeConstraints { make in
@@ -84,7 +84,8 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ title: String, description: String) {
+        titleLabel.text = title
+        descriptionLabel.text = description
     }
 }

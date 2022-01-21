@@ -12,9 +12,15 @@ import Then
 
 class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
     
-    private let record = RecordMannager()
+    private var emptyStateImageView = UIImageView().then {
+        $0.image = Asset.Assets.icnRecordEmpty.image
+    }
     
     private var iconImageView = UIImageView()
     
@@ -44,17 +50,9 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             [yearLabel, monthLabel, dayLabel])
     }
     
-    private var yearLabel = UILabel().then {
-        $0.text = "2022."
-    }
-    
-    private var monthLabel = UILabel().then {
-        $0.text = "01."
-    }
-    
-    private var dayLabel = UILabel().then {
-        $0.text = "03."
-    }
+    private var yearLabel = UILabel()
+    private var monthLabel = UILabel()
+    private var dayLabel = UILabel()
     
     // MARK: - Initializers
     
@@ -70,7 +68,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - InitUI
     
-    private func configUI() {
+    public func configUI() {
         contentView.backgroundColor = Asset.Colors.black200.color
         
         [starLabel, yearLabel, monthLabel, dayLabel].forEach {
@@ -79,7 +77,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         }
     }
     
-    private func setupLayout() {
+    public func setupLayout() {
         contentView.addSubviews([
             iconImageView,
             titleLabel,
@@ -103,7 +101,8 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         onelineLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(20)
+            make.height.equalTo(17)
         }
         
         starLabel.snp.makeConstraints { make in
@@ -131,20 +130,26 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - Custom Method
-
+    
     public func config(index: Int) {
-        onelineLabel.text = record.getData(index: index).oneline[0]
-        titleLabel.text = record.getData(index: index).title
-        starLabel.text = String(record.getStar(index: index))
-        let category = record.getData(index: index).category
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return }
+        self.titleLabel.text = myRecord[index].title
+        self.onelineLabel.text = myRecord[index].oneline
+        let dateArray = myRecord[index].date.components(separatedBy: "-")
+        self.yearLabel.text = "\(dateArray[0])."
+        self.monthLabel.text = "\(dateArray[1])."
+        self.dayLabel.text = "\(dateArray[2])"
+        self.starLabel.text = String(myRecord[index].star)
+        let categoryImage = myRecord[index].category
         
-        switch category {
-        case 1: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 2: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 3: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 4: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        case 5: return iconImageView.image = Asset.Assets.icnWebtoon.image
-        default: return iconImageView.image = Asset.Assets.icnWebtoon.image
+        switch categoryImage {
+        case 1: return self.iconImageView.image = Asset.Assets.icnWriteMovie.image
+        case 2: return self.iconImageView.image = Asset.Assets.icnWriteBook.image
+        case 3: return self.iconImageView.image = Asset.Assets.icnWriteTv.image
+        case 4: return self.iconImageView.image = Asset.Assets.icnWriteMusic.image
+        case 5: return self.iconImageView.image = Asset.Assets.icnWriteWebtoon.image
+        default: return self.iconImageView.image = Asset.Assets.icnWriteYoutube.image
         }
     }
 }
