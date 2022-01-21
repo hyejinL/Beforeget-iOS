@@ -246,6 +246,7 @@ class PostViewController: UIViewController {
         if !mediaTitle.isEmpty || !oneLines.isEmpty || !comment.isEmpty || !additionalItems.isEmpty {
             let backPopupViewController = PostBackPopupViewController()
             backPopupViewController.modalPresentationStyle = .overCurrentContext
+            backPopupViewController.modalTransitionStyle = .crossDissolve
             definesPresentationContext = true
             present(backPopupViewController, animated: true)
         } else {
