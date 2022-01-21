@@ -18,6 +18,8 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Properties
     
+    private let preferredLanguage = NSLocale.preferredLanguages[0]
+    
     private var emptyStateImageView = UIImageView().then {
         $0.image = Asset.Assets.icnRecordEmpty.image
     }
@@ -96,6 +98,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalTo(iconImageView.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(150)
+            make.height.equalTo(23)
         }
         
         onelineLabel.snp.makeConstraints { make in
@@ -120,6 +123,16 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(19.7)
             make.height.equalTo(13)
+        }
+        
+        if preferredLanguage == "en" {
+            titleLabel.snp.updateConstraints { make in
+                make.height.equalTo(28)
+            }
+        } else if preferredLanguage == "kr" {
+            titleLabel.snp.updateConstraints { make in
+                make.height.equalTo(23)
+            }
         }
     }
     
