@@ -106,7 +106,7 @@ final class BDSNavigationBar: UIView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Metric.titleTop)
+            make.bottom.equalToSuperview().inset(9)
             make.centerX.equalToSuperview()
         }
         

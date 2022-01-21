@@ -109,7 +109,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
+//            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
@@ -151,7 +151,7 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = sortedCountData.sorted(by: >)[2]
+        let midCount: Int = maxCount / 2
         page2.reportGraphView.midCount = midCount
         page5.reportOnePageView.midCount = midCount
         
