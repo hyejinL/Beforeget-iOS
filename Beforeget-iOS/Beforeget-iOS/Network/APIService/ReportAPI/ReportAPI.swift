@@ -118,7 +118,7 @@ final class ReportAPI {
     
     // MARK: - GET Fourth
     
-    func getFourth(date: String, completion: @escaping ((FourthReport?, Error?) -> ())) {
+    func getFourthReport(date: String, completion: @escaping ((FourthReport?, Error?) -> ())) {
         reportProvider.request(.fourth(date: date)) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -145,7 +145,7 @@ final class ReportAPI {
     
     // MARK: - GET Total
     
-    func getTotal(date: String, count: Int, completion: @escaping ((TotalReport?, Error?) -> ())) {
+    func getTotalReport(date: String, count: Int, completion: @escaping ((TotalReport?, Error?) -> ())) {
         reportProvider.request(.total(date: date, count: count)) { [weak self] response in
             guard let self = self else { return }
             switch response {

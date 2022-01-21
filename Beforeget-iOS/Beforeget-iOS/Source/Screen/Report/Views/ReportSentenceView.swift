@@ -275,7 +275,6 @@ class ReportSentenceView: UIView {
         [movieCollectionView, bookCollectionView, tvCollectionView, musicCollectionView, webtoonCollectionView, youtubeCollectionView].forEach {
             $0.delegate = self
             $0.dataSource = self
-            $0.reloadData()
         }
     }
     
@@ -288,89 +287,13 @@ class ReportSentenceView: UIView {
     }
     
     private func setCollectionViewLayout() {
-//        if movieData.count == 1 {
-//            movieCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(oneDataHeight)
-//            }
-//        } else if movieData.count == 2 {
-//            movieCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(twoDataHeight)
-//            }
-//        } else if movieData.count == 3 {
-//            movieCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(threeDataHeight)
-//            }
-//        }
-//
-//        if bookData.count == 1 {
-//            bookCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(oneDataHeight)
-//            }
-//        } else if bookData.count == 2 {
-//            bookCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(twoDataHeight)
-//            }
-//        } else if bookData.count == 3 {
-//            bookCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(threeDataHeight)
-//            }
-//        }
-//
-        if tvData.count == 1 {
-            tvCollectionView.snp.updateConstraints {
-                $0.height.equalTo(oneDataHeight)
-            }
-        } else if tvData.count == 2 {
-            tvCollectionView.snp.updateConstraints {
-                $0.height.equalTo(twoDataHeight)
-            }
-        } else if tvData.count == 3 {
-            tvCollectionView.snp.updateConstraints {
-                $0.height.equalTo(threeDataHeight)
-            }
+        // MARK: - TODO : 한줄리뷰 개수에 따른 레이아웃 분기 처리 
+    }
+    
+    func reloadCollectionView() {
+        [movieCollectionView, bookCollectionView, tvCollectionView, musicCollectionView, webtoonCollectionView, youtubeCollectionView].forEach {
+            $0.reloadData()
         }
-//
-//        if musicData.count == 1 {
-//            musicCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(oneDataHeight)
-//            }
-//        } else if musicData.count == 2 {
-//            musicCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(twoDataHeight)
-//            }
-//        } else if musicData.count == 3 {
-//            musicCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(threeDataHeight)
-//            }
-//        }
-//
-//        if webtoonData.count == 1 {
-//            webtoonCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(oneDataHeight)
-//            }
-//        } else if webtoonData.count == 2 {
-//            webtoonCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(twoDataHeight)
-//            }
-//        } else if webtoonData.count == 3 {
-//            webtoonCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(threeDataHeight)
-//            }
-//        }
-//
-//        if youtubeData.count == 1 {
-//            youtubeCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(oneDataHeight)
-//            }
-//        } else if youtubeData.count == 2 {
-//            youtubeCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(twoDataHeight)
-//            }
-//        } else if youtubeData.count == 3 {
-//            youtubeCollectionView.snp.updateConstraints {
-//                $0.height.equalTo(threeDataHeight)
-//            }
-//        }
     }
     
     // MARK: - @objc
