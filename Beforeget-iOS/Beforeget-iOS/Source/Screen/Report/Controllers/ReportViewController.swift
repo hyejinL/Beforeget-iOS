@@ -172,6 +172,12 @@ final class ReportViewController: UIPageViewController {
     
     private func calculateHeight() {
         guard let maxCount = sortedCountData.max() else { return }
+        // 기록이 없을 경우
+        if maxCount == 0 {
+            heights = [0, 0, 0, 0 ,0]
+            return
+        }
+        
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
@@ -179,6 +185,7 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.midCount = Int(midCount)
         page5.reportOnePageView.midCount = Int( midCount)
         
+        heights.removeAll()
         for data in sortedCountData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
             let height = totalHeight * data / maxCount
@@ -188,13 +195,15 @@ final class ReportViewController: UIPageViewController {
         isScrollEnabled = true
     }
     
-    private func setupBarAnimation() {
+    private func setupSecondReportBarAnimation() {
         page2.reportGraphView.barView1.animate(height: CGFloat(heights[0]))
         page2.reportGraphView.barView2.animate(height: CGFloat(heights[1]))
         page2.reportGraphView.barView3.animate(height: CGFloat(heights[2]))
         page2.reportGraphView.barView4.animate(height: CGFloat(heights[3]))
         page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
-        
+    }
+    
+    private func setupFiveReportBarAnimation() {
         page5.reportOnePageView.barView1.animate(height: CGFloat(heights[0]))
         page5.reportOnePageView.barView2.animate(height: CGFloat(heights[1]))
         page5.reportOnePageView.barView3.animate(height: CGFloat(heights[2]))
@@ -289,6 +298,47 @@ final class ReportViewController: UIPageViewController {
                 self.page1.reportTopView.reportTitle = "\(self.monthPicker.month)월의 밴토리님은?"
             }
         }
+        
+        if currentPageIndex == 1 {
+            reportAPI.getSecondReport(date: "\(monthPicker.year)-\(monthPicker.month)", count: 5, completion: { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page2.reportDescriptionView.descriptionTitle = data.title
+                self.page2.reportDescriptionView.descriptionContent = data.comment
+                
+                self.page2.reportGraphView.barView1.barTitle = "\(data.recordCount[4].month)월"
+                self.page2.reportGraphView.barView2.barTitle = "\(data.recordCount[3].month)월"
+                self.page2.reportGraphView.barView3.barTitle = "\(data.recordCount[2].month)월"
+                self.page2.reportGraphView.barView4.barTitle = "\(data.recordCount[1].month)월"
+                self.page2.reportGraphView.barView5.barTitle = "\(data.recordCount[0].month)월"
+                
+                for i in 0...data.recordCount.count-1 {
+                    self.countData[i] = data.recordCount[i].count
+                }
+                self.sortedCountData = self.countData.reversed()
+                
+                self.calculateHeight()
+                self.setupSecondReportBarAnimation()
+            })
+        }
+        
+        if currentPageIndex == 2 {
+            reportAPI.getThirdReport(date: "\(monthPicker.year)-\(monthPicker.month)", completion: { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page3.reportDescriptionView.descriptionTitle = data.title
+                self.page3.reportDescriptionView.descriptionContent = data.label
+                
+                self.page3.reportRankingView.firstCount = data.arr[0].count
+                self.page3.reportRankingView.firstType = data.arr[0].type
+                self.page3.reportRankingView.secondCount = data.arr[1].count
+                self.page3.reportRankingView.secondType = data.arr[1].type
+                self.page3.reportRankingView.thirdCount = data.arr[2].count
+                self.page3.reportRankingView.thirdType = data.arr[2].type
+            })
+        }
     }
     
     @objc func touchupMonthButton() {
@@ -346,7 +396,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            setupBarAnimation()
+            setupSecondReportBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
@@ -358,7 +408,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
-            setupBarAnimation()
+            setupFiveReportBarAnimation()
             pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
@@ -393,9 +443,6 @@ extension ReportViewController {
             guard let self = self else { return }
             guard let data = data else { return }
             
-            self.page2.reportGraphView.maxCount = 20
-            self.page2.reportGraphView.midCount = 12
-            
             for i in 0...data.recordCount.count-1 {
                 self.countData[i] = data.recordCount[i].count
             }
@@ -404,6 +451,12 @@ extension ReportViewController {
             
             self.page2.reportDescriptionView.descriptionTitle = data.title
             self.page2.reportDescriptionView.descriptionContent = data.comment
+            
+            self.page2.reportGraphView.barView1.barTitle = "\(data.recordCount[4].month)월"
+            self.page2.reportGraphView.barView2.barTitle = "\(data.recordCount[3].month)월"
+            self.page2.reportGraphView.barView3.barTitle = "\(data.recordCount[2].month)월"
+            self.page2.reportGraphView.barView4.barTitle = "\(data.recordCount[1].month)월"
+            self.page2.reportGraphView.barView5.barTitle = "\(data.recordCount[0].month)월"
             
             self.reportLoadingView.stop()
             self.reportLoadingView.removeFromSuperview()

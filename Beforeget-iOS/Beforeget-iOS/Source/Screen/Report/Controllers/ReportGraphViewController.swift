@@ -30,7 +30,6 @@ final class ReportGraphViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
@@ -70,27 +69,11 @@ final class ReportGraphViewController: UIViewController {
     
     // MARK: - Custom Method
     
-    private func bind() {
-        reportGraphView.barView1.barTitle = addOrSubtractMonth(month: -5)
-        reportGraphView.barView2.barTitle = addOrSubtractMonth(month: -4)
-        reportGraphView.barView3.barTitle = addOrSubtractMonth(month: -3)
-        reportGraphView.barView4.barTitle = addOrSubtractMonth(month: -2)
-        reportGraphView.barView5.barTitle = addOrSubtractMonth(month: -1)
-    }
-    
     private func addOrSubtractMonth(month:Int) -> String {
         guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M월"
         return dateFormatter.string(from: date)
-    }
-    
-    private func setBarTitle(monts: [String]) {
-        reportGraphView.barView1.barTitle = monts[0]
-        reportGraphView.barView2.barTitle = monts[1]
-        reportGraphView.barView3.barTitle = monts[2]
-        reportGraphView.barView4.barTitle = monts[3]
-        reportGraphView.barView5.barTitle = monts[4]
     }
 }
 
