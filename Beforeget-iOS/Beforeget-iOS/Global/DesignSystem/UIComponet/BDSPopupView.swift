@@ -20,6 +20,7 @@ public enum PopupText {
     static let save = "기록을 저장할까요?"
     static let edit = "기록을 수정할까요?"
     static let delete = "정말로 삭제하시겠어요?"
+    static let requiredField = "필수 항목을 입력해주세요."
 }
 
 public class BDSPopupView: UIView {

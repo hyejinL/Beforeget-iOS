@@ -145,6 +145,8 @@
 		E2FC7636279855D90048909A /* OneLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC7635279855D90048909A /* OneLine.swift */; };
 		E2FC76382798563B0048909A /* RecommendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC76372798563B0048909A /* RecommendItem.swift */; };
 		E2FC763A279859B90048909A /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC7639279859B90048909A /* PostResponse.swift */; };
+		E2FC763C279A86FB0048909A /* WritingRequiredFieldPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC763B279A86FB0048909A /* WritingRequiredFieldPopupView.swift */; };
+		E2FC763E279A8B890048909A /* PostRequiredFieldPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC763D279A8B890048909A /* PostRequiredFieldPopupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -290,6 +292,8 @@
 		E2FC7635279855D90048909A /* OneLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLine.swift; sourceTree = "<group>"; };
 		E2FC76372798563B0048909A /* RecommendItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendItem.swift; sourceTree = "<group>"; };
 		E2FC7639279859B90048909A /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
+		E2FC763B279A86FB0048909A /* WritingRequiredFieldPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingRequiredFieldPopupView.swift; sourceTree = "<group>"; };
+		E2FC763D279A8B890048909A /* PostRequiredFieldPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequiredFieldPopupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -857,6 +861,7 @@
 				921E62A52794CC8B002E6CD1 /* OneLineViewController.swift */,
 				5B8F138127957A4A00385D5E /* PostSavePopupViewController.swift */,
 				5B8F138327957A5A00385D5E /* PostBackPopupViewController.swift */,
+				E2FC763D279A8B890048909A /* PostRequiredFieldPopupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -965,6 +970,7 @@
 				E206FDB2278F478400AFA390 /* WritingHeaderView.swift */,
 				5B8F1379279576F600385D5E /* WritingSavePopupView.swift */,
 				5B8F137B2795776100385D5E /* WritingBackPopupView.swift */,
+				E2FC763B279A86FB0048909A /* WritingRequiredFieldPopupView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1206,6 +1212,7 @@
 				E206FDB3278F478400AFA390 /* WritingHeaderView.swift in Sources */,
 				5B83EF33278E388C00D07AC7 /* DatePickerTableViewCell.swift in Sources */,
 				927AF3B0278816400018CC34 /* MyRecordViewController.swift in Sources */,
+				E2FC763E279A8B890048909A /* PostRequiredFieldPopupViewController.swift in Sources */,
 				E2B69CDA279031E800F9C2DD /* TitleTableViewCell.swift in Sources */,
 				5BD114B8279133710063EB3B /* CellTitleLabel.swift in Sources */,
 				5BD114A92790C4680063EB3B /* SongTableViewCell.swift in Sources */,
@@ -1246,6 +1253,7 @@
 				5B8F138427957A5A00385D5E /* PostBackPopupViewController.swift in Sources */,
 				5B7BD10E278D8AE9000BC0FA /* MenuBarCollectionViewCell.swift in Sources */,
 				E2E2779C278B68560083AFF5 /* MediaSelectCollectionViewCell.swift in Sources */,
+				E2FC763C279A86FB0048909A /* WritingRequiredFieldPopupView.swift in Sources */,
 				929CFB2A278EEA4600FCA541 /* ReportSentenceView.swift in Sources */,
 				5B8F138227957A4A00385D5E /* PostSavePopupViewController.swift in Sources */,
 				5B83EF31278E381200D07AC7 /* DateTableViewCell.swift in Sources */,

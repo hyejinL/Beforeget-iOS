@@ -94,9 +94,9 @@ class PostViewController: UIViewController {
         $0.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
     }
     
-    private var star: Int = 0
-    private var mediaTitle: String?
-    private var comment: String?
+    private var starRating: Int = 0
+    private var mediaTitle: String = ""
+    private var comment: String = ""
     
     var additionalItems: [Additional] = []
     var oneLines: [String] = []
@@ -222,16 +222,24 @@ class PostViewController: UIViewController {
     }
     
     @objc func touchupDoneButton() {
+
+        if starRating == 0 || mediaTitle.isEmpty || oneLines.isEmpty {
+            let requiredFieldPopupViewController = PostRequiredFieldPopupViewController()
+            requiredFieldPopupViewController.modalPresentationStyle = .overCurrentContext
+            present(requiredFieldPopupViewController, animated: true)
+            return
+        }
+        
         let totalAdditionalItems = additionalItems.filter { !$0.type.isEmpty }
                                                   .filter { !$0.content.isEmpty }
         definesPresentationContext = true
         
         postAPI.postRecord(record: PostRequest(media: mediaType?.mediaNumber() ?? 1,
                                                date: datePicker.date.convertToString(dateFormat: "YYYY-MM-dd"),
-                                               star: star,
-                                               title: mediaTitle ?? "",
+                                               star: starRating,
+                                               title: mediaTitle,
                                                oneline: oneLines,
-                                               comment: comment ?? "",
+                                               comment: comment,
                                                additional: totalAdditionalItems)) { data, err in
             guard let data = data else { return }
             print(data)
@@ -267,7 +275,7 @@ extension PostViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let titleCell = TitleTableViewCell()
-            titleCell.configContent(content: mediaTitle ?? "")
+            titleCell.configContent(content: mediaTitle)
             titleCell.sendTitle = { title in
                 self.mediaTitle = title
             }
@@ -288,7 +296,7 @@ extension PostViewController: UITableViewDataSource {
             commentCell.delegate = self
             commentCell.configTextFieldEditable()
             commentCell.selectionStyle = .none
-            commentCell.configContent(content: comment ?? "")
+            commentCell.configContent(content: comment)
             commentCell.sendContent = { comment in
                 self.comment = comment
             }
@@ -328,9 +336,9 @@ extension PostViewController: UITableViewDelegate {
         let headerView = WritingHeaderView()
         headerView.delegate = self
         headerView.configDate(date: datePicker.date)
-        headerView.configStarButtonImage(starRating: star)
+        headerView.configStarButtonImage(starRating: starRating)
         headerView.sendStarRating = { starRating in
-            self.star = starRating
+            self.starRating = starRating
         }
         return headerView
     }
