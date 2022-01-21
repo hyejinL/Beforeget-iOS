@@ -31,7 +31,7 @@ final class CompleteViewController: UIViewController {
         $0.distribution = .fillEqually
         $0.axis = .vertical
         $0.spacing = (UIScreen.main.hasNotch ? 7 : 6)
-        $0.addArrangedSubviews([detailRecordButton, mainButton])
+        $0.addArrangedSubviews([mainButton])
     }
     
     private let detailRecordButton = BDSButton().then {
