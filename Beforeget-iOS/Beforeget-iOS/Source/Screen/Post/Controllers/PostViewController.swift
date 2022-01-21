@@ -18,7 +18,15 @@ class PostViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false, mediaType: mediaType ?? .movie)
+    private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false, mediaType: mediaType ?? .movie).then {
+        $0.backButton.isHidden = true
+    }
+    
+    private let backButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnBack.image, for: .normal)
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.addTarget(self, action: #selector(touchupBackButton), for: .touchUpInside)
+    }
     
     private let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -94,16 +102,14 @@ class PostViewController: UIViewController {
         $0.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
     }
     
-    private var star: Int = 0
-    private var mediaTitle: String?
-    private var comment: String?
+    private var starRating: Int = 0
+    private var mediaTitle: String = ""
+    private var comment: String = ""
     
-    private var additionalItemsContent: [String] = []
     var additionalItems: [Additional] = []
-    
-    var mediaType: MediaType?
-//    var additionalItems: [String] = []
     var oneLines: [String] = []
+    var mediaType: MediaType?
+    var oneLineCellHeight: CGFloat = 117
     
     // MARK: - Life Cycle
     
@@ -124,6 +130,7 @@ class PostViewController: UIViewController {
     private func setupLayout() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubviews([navigationBar,
+                          backButton,
                           doneButton,
                           writingTableView,
                           bottomBarStackView,
@@ -133,6 +140,11 @@ class PostViewController: UIViewController {
         
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.leading.equalTo(navigationBar.snp.leading).inset(4)
         }
         
         doneButton.snp.makeConstraints {
@@ -199,12 +211,18 @@ class PostViewController: UIViewController {
     @objc func addOneLine(_ sender: Notification) {
         guard let oneLineData = sender.object as? [String] else { return }
         guard let cell = writingTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? OneLineReviewTableViewCell else { return }
-        cell.oneLines = oneLineData
+        
+        oneLineData.forEach {
+            if !cell.oneLines.contains($0) {
+                cell.oneLines.append($0)
+            }
+        }
         
         if cell.oneLines.isEmpty == false {
             cell.reloadCollectionView()
-            cell.isHiddenAddButton(true)
-            cell.isHiddenColletionView(false)
+            cell.setupHidden(addReviewCircleButtonIsHidden: true,
+                             addReviewButtonIsHidden: false,
+                             oneLineCollectionViewIsHidden: false)
         }
         
         let collectionViewSize = cell.getCollectionViewSize()
@@ -218,22 +236,46 @@ class PostViewController: UIViewController {
         }
     }
     
+    @objc func touchupBackButton() {
+        if !mediaTitle.isEmpty || !oneLines.isEmpty || !comment.isEmpty || !additionalItems.isEmpty {
+            let backPopupViewController = PostBackPopupViewController()
+            backPopupViewController.modalPresentationStyle = .overCurrentContext
+            definesPresentationContext = true
+            present(backPopupViewController, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
     @objc func touchupDoneButton() {
+        if starRating == 0 || mediaTitle.isEmpty || oneLines.isEmpty {
+            let alert = UIAlertController(title: PopupText.requiredField, message: "", preferredStyle: UIAlertController.Style.alert)
+            let doneAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(doneAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
         let totalAdditionalItems = additionalItems.filter { !$0.type.isEmpty }
                                                   .filter { !$0.content.isEmpty }
-        definesPresentationContext = true
         
         postAPI.postRecord(record: PostRequest(media: mediaType?.mediaNumber() ?? 1,
                                                date: datePicker.date.convertToString(dateFormat: "YYYY-MM-dd"),
-                                               star: star,
-                                               title: mediaTitle ?? "",
+                                               star: starRating,
+                                               title: mediaTitle,
                                                oneline: oneLines,
-                                               comment: comment ?? "",
+                                               comment: comment,
                                                additional: totalAdditionalItems)) { data, err in
             guard let data = data else { return }
             print(data)
         }
         navigationController?.pushViewController(CompleteViewController(), animated: true)
+    }
+    
+    @objc func hideDatePicker() {
+        [backgroundView, datePicker].forEach {
+            $0.isHidden = true
+        }
     }
     
     //MARK: - Custom Method
@@ -247,6 +289,8 @@ class PostViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDataSource
+
 extension PostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3 + additionalItems.count
@@ -256,6 +300,7 @@ extension PostViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let titleCell = TitleTableViewCell()
+            titleCell.configContent(content: mediaTitle)
             titleCell.sendTitle = { title in
                 self.mediaTitle = title
             }
@@ -264,6 +309,9 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
+            oneLineCell.setupHidden(addReviewCircleButtonIsHidden: !oneLines.isEmpty ? true : false,
+                                    addReviewButtonIsHidden: oneLines.isEmpty ? true : false,
+                                    oneLineCollectionViewIsHidden: oneLines.isEmpty ? true : false)
             oneLineCell.presentOneLineViewController = { (_ viewController: OneLineViewController) -> () in
                 viewController.mediaType = self.mediaType
                 self.definesPresentationContext = true
@@ -274,8 +322,9 @@ extension PostViewController: UITableViewDataSource {
         case 2:
             let commentCell = WriteTextTableViewCell()
             commentCell.delegate = self
-            commentCell.setupTextFieldEditable()
+            commentCell.configTextFieldEditable()
             commentCell.selectionStyle = .none
+            commentCell.configContent(content: comment)
             commentCell.sendContent = { comment in
                 self.comment = comment
             }
@@ -284,14 +333,15 @@ extension PostViewController: UITableViewDataSource {
             guard let textCell = tableView.dequeueReusableCell(withIdentifier: WriteTextTableViewCell.className, for: indexPath) as? WriteTextTableViewCell else { return UITableViewCell() }
             textCell.delegate = self
             textCell.hideLetterCountLabel()
-            textCell.setupPlaceHolderText(additionalItems[indexPath.row-3].type)
+            textCell.configPlaceHolderText(additionalItems[indexPath.row-3].type)
             textCell.selectionStyle = .none
             
+            textCell.configContent(content: additionalItems[indexPath.row-3].content)
             if additionalItems[indexPath.row-3].type == "text" {
-                textCell.setupTitle(title: "")
+                textCell.configTitle(title: "")
             } else {
-                textCell.setupTitle(title: additionalItems[indexPath.row-3].type)
-                textCell.setupTextFieldEditable()
+                textCell.configTitle(title: additionalItems[indexPath.row-3].type)
+                textCell.configTextFieldEditable()
             }
             
             textCell.sendContent = { content in
@@ -307,12 +357,16 @@ extension PostViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
+
 extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = WritingHeaderView()
         headerView.delegate = self
-        headerView.sendStarCount = { starCount in
-            self.star = starCount
+        headerView.configDate(date: datePicker.date)
+        headerView.configStarButtonImage(starRating: starRating)
+        headerView.sendStarRating = { starRating in
+            self.starRating = starRating
         }
         return headerView
     }
@@ -329,6 +383,24 @@ extension PostViewController: UITableViewDelegate {
         return 200
     }
 }
+
+//MARK: - WriteTextTableViewCellDelegate
+
+extension PostViewController: WriteTextTableViewCellDelegate {
+    func updateTextViewHeight(_ cell: WriteTextTableViewCell, _ textView: UITextView) {
+        let size = textView.bounds.size
+        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: size.width,
+                                                    height: CGFloat.greatestFiniteMagnitude))
+        if size.height != estimatedSize.height {
+            UIView.setAnimationsEnabled(false)
+            writingTableView.beginUpdates()
+            writingTableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+}
+
+//MARK: - KeyboardNotification
 
 extension PostViewController {
     private func setupKeyboardNotifications() {
@@ -356,9 +428,15 @@ extension PostViewController {
     }
 }
 
+//MARK: - WritingHeaderViewDelegate
+
 extension PostViewController: WritingHeaderViewDelegate {
     func touchupDateButton() {
         view.addSubviews([backgroundView, datePicker])
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideDatePicker))
+        tap.cancelsTouchesInView = false
+        backgroundView.addGestureRecognizer(tap)
         
         [backgroundView, datePicker].forEach {
             $0.isHidden = false
@@ -371,20 +449,6 @@ extension PostViewController: WritingHeaderViewDelegate {
         datePicker.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(21)
             $0.centerY.equalToSuperview()
-        }
-    }
-}
-
-extension PostViewController: WriteTextTableViewCellDelegate {
-    func updateTextViewHeight(_ cell: WriteTextTableViewCell, _ textView: UITextView) {
-        let size = textView.bounds.size
-        let estimatedSize = writingTableView.sizeThatFits(CGSize(width: size.width,
-                                                    height: CGFloat.greatestFiniteMagnitude))
-        if size.height != estimatedSize.height {
-            UIView.setAnimationsEnabled(false)
-            writingTableView.beginUpdates()
-            writingTableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
         }
     }
 }

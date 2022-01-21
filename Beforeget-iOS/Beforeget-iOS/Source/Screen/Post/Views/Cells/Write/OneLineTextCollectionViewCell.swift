@@ -89,14 +89,12 @@ class OneLineTextCollectionViewCell: UICollectionViewCell, UICollectionViewRegis
         oneLineLabel.text = oneline
     }
     
-    public func showDeleteButton() {
+    public func configPostOneLineCell() {
+        contentView.makeRound(radius: 17)
+        contentView.layer.borderColor = Asset.Colors.black200.color.cgColor
+        contentView.backgroundColor = Asset.Colors.white.color
+        oneLineLabel.textColor = Asset.Colors.black200.color
         deleteButton.isHidden = false
-    }
-    
-    public func configColor(borderColor: UIColor, textColor: UIColor, backgroundColor: UIColor) {
-        contentView.layer.borderColor = borderColor.cgColor
-        contentView.backgroundColor = backgroundColor
-        oneLineLabel.textColor = textColor
     }
     
     //MARK: - @objc

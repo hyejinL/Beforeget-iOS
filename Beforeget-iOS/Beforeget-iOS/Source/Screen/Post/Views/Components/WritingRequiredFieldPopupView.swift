@@ -1,27 +1,27 @@
 //
-//  WritingBackPopupView.swift
+//  WritingRequiredFieldPopupView.swift
 //  Beforeget-iOS
 //
-//  Created by Thisisme Hi on 2022/01/17.
+//  Created by 배은서 on 2022/01/21.
 //
 
 import UIKit
 
 import SnapKit
+import Then
 
-final class WritingBackPopupView: UIView {
+final class WritingRequiredFieldPopupView: UIView {
     
     // MARK: - Properties
     
     weak var viewController: UIViewController?
     
     private var popupView = BDSPopupView(
-        image: Asset.Assets.imgBack.image,
-        title: PopupText.back,
-        info: PopupText.subBack).then {
-            $0.leftText = "취소"
+        image: Asset.Assets.imgSave.image,
+        title: PopupText.requiredField,
+        info: .none).then {
+            $0.leftButton.isHidden = true
             $0.rightText = "확인"
-            $0.leftButton.addTarget(self, action: #selector(touchupLeftButton(_:)), for: .touchUpInside)
             $0.rightButton.addTarget(self, action: #selector(touchupRightButton(_:)), for: .touchUpInside)
         }
     
@@ -54,14 +54,7 @@ final class WritingBackPopupView: UIView {
     
     // MARK: - @objc
     
-    @objc func touchupLeftButton(_ sender: UIButton) {
-        viewController?.dismiss(animated: true, completion: nil)
-    }
-    
     @objc func touchupRightButton(_ sender: UIButton) {
-        guard let postViewController = viewController?.presentingViewController else { return }
-        viewController?.dismiss(animated: true) {
-            postViewController.navigationController?.popViewController(animated: true)
-        }
+        viewController?.dismiss(animated: true, completion: nil)
     }
 }
