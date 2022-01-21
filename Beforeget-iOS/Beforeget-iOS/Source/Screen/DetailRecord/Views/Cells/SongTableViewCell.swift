@@ -12,10 +12,6 @@ import Then
 
 class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-    
     // MARK: - Dummy Data
     
     public var songArray: [String] = ["소코도모 - 인생은 회전목마", "잔나비 - 꿈과 책과 힘과 벽과 개발과 코딩", "AllIWannaDo"]
@@ -90,7 +86,7 @@ extension SongTableViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let songListCell = tableView.dequeueReusableCell(withIdentifier: SongListTableViewCell.className, for: indexPath) as? SongListTableViewCell else { return UITableViewCell() }
-        songListCell.config(indexPath.row)
+        songListCell.config(songArray[indexPath.row])
         return songListCell
     }
 }

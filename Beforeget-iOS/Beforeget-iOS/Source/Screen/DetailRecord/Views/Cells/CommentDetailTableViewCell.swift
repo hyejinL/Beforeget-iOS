@@ -12,10 +12,6 @@ import Then
 
 class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-
     // MARK: - Properties
     
     private var cellMargin: CGFloat = 47
@@ -38,7 +34,7 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - Initializer
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
@@ -49,8 +45,8 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
         commentLabel.text = nil
     }
     
@@ -91,8 +87,7 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ index: Int) {
-        guard let additional = myRecordAPI.myDetailRecord?.data?[index].comment else { return }
-        commentLabel.text = additional
+    public func config(_ comment: String) {
+        commentLabel.text = comment
     }
 }

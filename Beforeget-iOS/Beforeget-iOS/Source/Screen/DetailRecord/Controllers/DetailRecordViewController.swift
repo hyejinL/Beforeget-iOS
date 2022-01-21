@@ -21,12 +21,13 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
     
-    public var myRecordArray: [MyDetailRecord] = []
-    public var myAdditionalArray: [Additional] = []
+    public var myDetailRecordArray: [MyDetailRecord] = []
+    public var myAdditionalArray = [DetailAdditional]()
+    
     public var typeArray: [String] = []
     
-    private var sectionArray: [DetailRecordSection] = []
-        
+    private var sectionArray: [DetailRecordSection] = [.comment, .comma, .line, .image]
+    
     // MARK: - Properties
     
     public var postId = 0
@@ -82,19 +83,23 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        // MARK: - FIXME 답이 없다...
-        print(self.postId,"들어와?")
         myRecordAPI.getMyDetailRecord(postId: postId) { data, err in
             guard let data = data else { return }
-            self.myRecordArray = data
-            print(self.myRecordArray,"아ㅏㅏ")
+            self.myDetailRecordArray = data
+            print(self.myDetailRecordArray,"통신 시작")
             self.recordTableView.reloadData()
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.isNavigationBarHidden = true
+        recordTableView.reloadData()
     }
     
     // MARK: - InitUI
@@ -102,10 +107,6 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     private func configUI() {
         view.backgroundColor = Asset.Colors.white.color
         setupStatusBar(Asset.Colors.black200.color)
-        myRecordAPI.getMyDetailRecord(postId: postId) { data, err in
-            guard let data = data else { return }
-            self.recordTableView.reloadData()
-        }
     }
     
     private func setupLayout() {
@@ -229,235 +230,293 @@ extension DetailRecordViewController: UITableViewDelegate {
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         let myRecordDetail = myRecordAPI.myDetailRecord?.data
-//        myRecordDetail[section].add
-//        myRecordDetail[section].comment
         guard let myRecordDetail = myRecordDetail else { return 0 }
-        guard let additionalArray = myRecordDetail[section].additional else {
-            print("안들어옴")
-            return 0 }
         
-        let myComment = myRecordDetail[section].comment
-        guard let myComment = myComment else { print("안들어옴")
-            return 1 }
-        print(myComment)
-        
-                
-        if myComment == "" {
-            return 1 + additionalArray.count
+        if myRecordDetail[section].comment == "" {
+            return myRecordDetail[section].additional.count
         } else {
-            return 1 + additionalArray.count
+            return myRecordDetail[section].additional.count + 1
         }
-        
-//
-//        guard let comment = myRecordDetail[section].comment else { return 0 }
-//
-//
-////        typeArray = additionalArray[section]
-//        print(myRecordDetail, "????????????")
-//        print(comment, "코멘트ㅡㅡㅡㅡㅡㅡ")
-//        print(addArray, additionalArray.count, "개수@@@@@@@@@@@@@@@@", typeArray.count)
-//
-//        dump(additionalArray)
-//        print("#################################")
-//        print(myRecordDetail[section].comment, "코멘트잇니")
-//
-//        if myRecordDetail[section].comment == nil || myRecordDetail[section].comment == "" {
-//            return 1 + additionalArray.count
-//        } else {
-//            return additionalArray.count
-//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
-        else { return UITableViewCell() }
         
         let myRecordDetail = myRecordAPI.myDetailRecord?.data
         guard let myRecordDetail = myRecordDetail else { return UITableViewCell() }
-        guard let additionalArray = myRecordDetail[indexPath.section].additional else { return UITableViewCell() }
         
-        
-
-        dump(additionalArray)
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        dump(typeArray)
-        
-        
-        
-        switch detailSection {
-        case .comment:
-            guard let commentCell = tableView.dequeueReusableCell(
-                withIdentifier: CommentDetailTableViewCell.className,
-                for: indexPath) as? CommentDetailTableViewCell
-            else { return UITableViewCell() }
-            commentCell.config(indexPath.row)
-            commentCell.reloadInputViews()
-            return commentCell
+        // MARK: - FIXME : 추후 과제 제출하고 수정합니다.
+        if myRecordDetail[0].additional.isEmpty { // 추가 작성이 비어있는 경우
+            if myRecordDetail[0].comment == "" {
+                return UITableViewCell()
+            } else {
+                guard let commentCell = tableView.dequeueReusableCell(
+                    withIdentifier: CommentDetailTableViewCell.className,
+                    for: indexPath) as? CommentDetailTableViewCell
+                else { return UITableViewCell() }
+                commentCell.config(myRecordDetail[0].comment)
+                commentCell.reloadInputViews()
+                return commentCell
+            }
             
-        case .image:
-            guard let imageCell = tableView.dequeueReusableCell(
-                withIdentifier: ImageTableViewCell.className,
-                for: indexPath) as? ImageTableViewCell
-            else { return UITableViewCell() }
-//            imageCell.config(indexPath.row)
-            return imageCell
-            
-        case .comma:
-            guard let commaCell = tableView.dequeueReusableCell(
-                withIdentifier: CommaTableViewCell.className,
-                for: indexPath) as? CommaTableViewCell
-            else { return UITableViewCell() }
-//            commaCell.config(indexPath.row)
-            return commaCell
-            
-        case .genre:
-            guard let genreCell = tableView.dequeueReusableCell(
-                withIdentifier: GenreTableViewCell.className,
-                for: indexPath) as? GenreTableViewCell
-            else { return UITableViewCell() }
-            return genreCell
-            
-        case .text:
-            guard let textCell = tableView.dequeueReusableCell(
-                withIdentifier: TextTableViewCell.className,
-                for: indexPath) as? TextTableViewCell
-            else { return UITableViewCell() }
-//            textCell.config(indexPath.row)
-            return textCell
-            
-        case .song:
-            guard let songCell = tableView.dequeueReusableCell(
-                withIdentifier: SongTableViewCell.className,
-                for: indexPath) as? SongTableViewCell
-            else { return UITableViewCell() }
-            songCell.layoutIfNeeded()
-            songCell.songListTableView.contentSize.height = CGFloat(songCell.songArray.count*56)
-            return songCell
-            
-        case .line:
-            guard let lineCell = tableView.dequeueReusableCell(
-                withIdentifier: LineTableViewCell.className,
-                for: indexPath) as? LineTableViewCell
-            else { return UITableViewCell() }
-//            lineCell.config(indexPath.row)
-            return lineCell
-            
-        case .link:
-            guard let linkCell = tableView.dequeueReusableCell(
-                withIdentifier: LinkTableViewCell.className,
-                for: indexPath) as? LinkTableViewCell
-            else { return UITableViewCell() }
-            linkCell.linkButtonDelegate = self
-//            linkCell.config(indexPath.row)
-            return linkCell
-            
-        case .stamp:
-            guard let stampCell = tableView.dequeueReusableCell(
-                withIdentifier: StampTableViewCell.className,
-                for: indexPath) as? StampTableViewCell
-            else { return UITableViewCell() }
-            return stampCell
-        }
-    }
-}
-
-// MARK: - Enum
-
-extension DetailRecordViewController {
-    
-    public enum AddType: CustomStringConvertible, CaseIterable {
-        case 명대사, 인상깊은구절
-        case 줄거리, 가사, 방송사OTT
-        case 포스터, 표지, 명장면, 앨범커버
-        case 장르, 카테고리
-        case OST, 앨범
-        case 감독, 배우, 가수, 작가, 요일, 플랫폼, 채널, 출판사
-        case 링크
-        case 타임스탬프
-        
-        public var description: String {
-            switch self {
-            case .명대사: return "명대사"
-            case .인상깊은구절: return "인상 깊은 구절"
-            case .줄거리: return "줄거리"
-            case .가사: return "가사"
-            case .방송사OTT: return "방송사(OTT)"
-            case .포스터: return "포스터"
-            case .표지: return "표지"
-            case .명장면: return "명장면"
-            case .앨범커버: return "앨범커버"
-            case .장르: return "장르"
-            case .카테고리: return "카테고리"
-            case .앨범: return "앨범"
-            case .감독: return "감독"
-            case .배우: return "배우"
-            case .가수: return "가수"
-            case .작가: return "작가"
-            case .요일: return "요일"
-            case .플랫폼: return "플랫폼"
-            case .채널: return "채널"
-            case .출판사: return "출판사"
-            case .링크: return "링크"
-            case .타임스탬프: return "타임스탬프"
-            case .OST: return "OST"
+        } else { // 추가 작성이 있는 경우
+            if myRecordDetail[0].comment == "" { // 추가작성이 있는데 코멘트가 없는 경우
+                if myRecordDetail[0].additional[indexPath.row].type == "명대사" ||
+                    myRecordDetail[0].additional[indexPath.row].type == "인상 깊은 구절" {
+                    guard let commaCell = tableView.dequeueReusableCell(
+                        withIdentifier: CommaTableViewCell.className,
+                        for: indexPath) as? CommaTableViewCell
+                    else { return UITableViewCell() }
+                    commaCell.config(myRecordDetail[0].additional[indexPath.row].type, quote: myRecordDetail[0].additional[indexPath.row].content)
+                    return commaCell
+                    
+                } else if myRecordDetail[0].additional[indexPath.row].type == "표지" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "명장면" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "앨범커버" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "포스터" {
+                    guard let imageCell = tableView.dequeueReusableCell(
+                        withIdentifier: ImageTableViewCell.className,
+                        for: indexPath) as? ImageTableViewCell
+                    else { return UITableViewCell() }
+                    imageCell.config(myRecordDetail[0].additional[indexPath.row].type,
+                                     myRecordDetail[0].additional[indexPath.row].imgUrl1)
+                    return imageCell
+                    
+                } else if myRecordDetail[0].additional[indexPath.row].type == "줄거리" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "가사" {
+                    guard let textCell = tableView.dequeueReusableCell(
+                        withIdentifier: TextTableViewCell.className,
+                        for: indexPath) as? TextTableViewCell
+                    else { return UITableViewCell() }
+                    textCell.config(myRecordDetail[0].additional[indexPath.row].type,
+                                    description: myRecordDetail[0].additional[indexPath.row].content)
+                    return textCell
+                    
+                } else if myRecordDetail[0].additional[indexPath.row].type == "장르" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "카테고리" {
+                    guard let genreCell = tableView.dequeueReusableCell(
+                        withIdentifier: GenreTableViewCell.className,
+                        for: indexPath) as? GenreTableViewCell
+                    else { return UITableViewCell() }
+                    return genreCell
+                    
+                } else if myRecordDetail[0].additional[indexPath.row].type == "OST" ||
+                            myRecordDetail[0].additional[indexPath.row].type == "앨범" {
+                    guard let songCell = tableView.dequeueReusableCell(
+                        withIdentifier: SongTableViewCell.className,
+                        for: indexPath) as? SongTableViewCell
+                    else { return UITableViewCell() }
+                    songCell.layoutIfNeeded()
+                    songCell.songListTableView.contentSize.height = CGFloat(songCell.songArray.count*56)
+                    return songCell
+                    
+                } else if myRecordDetail[0].additional[indexPath.row].type == "링크" {
+                    guard let linkCell = tableView.dequeueReusableCell(
+                        withIdentifier: LinkTableViewCell.className,
+                        for: indexPath) as? LinkTableViewCell
+                    else { return UITableViewCell() }
+                    linkCell.linkButtonDelegate = self
+                    linkCell.config(myRecordDetail[0].additional[indexPath.row-1].content)
+                    return linkCell
+                } else if myRecordDetail[0].additional[indexPath.row].type == "타임스탬프" {
+                    guard let stampCell = tableView.dequeueReusableCell(
+                        withIdentifier: StampTableViewCell.className,
+                        for: indexPath) as? StampTableViewCell
+                    else { return UITableViewCell() }
+                    return stampCell
+                    
+                } else {
+                    guard let lineCell = tableView.dequeueReusableCell(
+                        withIdentifier: LineTableViewCell.className,
+                        for: indexPath) as? LineTableViewCell
+                    else { return UITableViewCell() }
+                    lineCell.config(myRecordDetail[0].additional[indexPath.row].type,
+                                    description: myRecordDetail[0].additional[indexPath.row].content)
+                    return lineCell
+                }
+                
+            } else { // 추가작성이 있는데 코멘트가 있는 경우
+                if indexPath.row == 0  {
+                    guard let commentCell = tableView.dequeueReusableCell(
+                        withIdentifier: CommentDetailTableViewCell.className,
+                        for: indexPath) as? CommentDetailTableViewCell
+                    else { return UITableViewCell() }
+                    commentCell.config(myRecordDetail[0].comment)
+                    commentCell.reloadInputViews()
+                    return commentCell
+                    
+                } else {
+                    if myRecordDetail[0].additional[indexPath.row-1].type == "명대사" ||
+                        myRecordDetail[0].additional[indexPath.row-1].type == "인상 깊은 구절" {
+                        guard let commaCell = tableView.dequeueReusableCell(
+                            withIdentifier: CommaTableViewCell.className,
+                            for: indexPath) as? CommaTableViewCell
+                        else { return UITableViewCell() }
+                        commaCell.config(myRecordDetail[0].additional[indexPath.row-1].type, quote: myRecordDetail[0].additional[indexPath.row-1].content)
+                        return commaCell
+                        
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "표지" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "명장면" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "앨범커버" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "포스터" {
+                        guard let imageCell = tableView.dequeueReusableCell(
+                            withIdentifier: ImageTableViewCell.className,
+                            for: indexPath) as? ImageTableViewCell
+                        else { return UITableViewCell() }
+                        imageCell.config(myRecordDetail[0].additional[indexPath.row-1].type,
+                                         myRecordDetail[0].additional[indexPath.row-1].imgUrl1)
+                        return imageCell
+                        
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "줄거리" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "가사" {
+                        guard let textCell = tableView.dequeueReusableCell(
+                            withIdentifier: TextTableViewCell.className,
+                            for: indexPath) as? TextTableViewCell
+                        else { return UITableViewCell() }
+                        textCell.config(myRecordDetail[0].additional[indexPath.row-1].type,
+                                        description: myRecordDetail[0].additional[indexPath.row-1].content)
+                        return textCell
+                        
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "장르" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "카테고리" {
+                        guard let genreCell = tableView.dequeueReusableCell(
+                            withIdentifier: GenreTableViewCell.className,
+                            for: indexPath) as? GenreTableViewCell
+                        else { return UITableViewCell() }
+                        return genreCell
+                        
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "OST" ||
+                                myRecordDetail[0].additional[indexPath.row-1].type == "앨범" {
+                        guard let songCell = tableView.dequeueReusableCell(
+                            withIdentifier: SongTableViewCell.className,
+                            for: indexPath) as? SongTableViewCell
+                        else { return UITableViewCell() }
+                        songCell.layoutIfNeeded()
+                        songCell.songListTableView.contentSize.height = CGFloat(songCell.songArray.count*56)
+                        return songCell
+                        
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "링크" {
+                        guard let linkCell = tableView.dequeueReusableCell(
+                            withIdentifier: LinkTableViewCell.className,
+                            for: indexPath) as? LinkTableViewCell
+                        else { return UITableViewCell() }
+                        linkCell.linkButtonDelegate = self
+                        linkCell.config(myRecordDetail[0].additional[indexPath.row-1].content)
+                        return linkCell
+                    } else if myRecordDetail[0].additional[indexPath.row-1].type == "타임스탬프" {
+                        guard let stampCell = tableView.dequeueReusableCell(
+                            withIdentifier: StampTableViewCell.className,
+                            for: indexPath) as? StampTableViewCell
+                        else { return UITableViewCell() }
+                        return stampCell
+                        
+                    } else {
+                        guard let lineCell = tableView.dequeueReusableCell(
+                            withIdentifier: LineTableViewCell.className,
+                            for: indexPath) as? LineTableViewCell
+                        else { return UITableViewCell() }
+                        lineCell.config(myRecordDetail[0].additional[indexPath.row-1].type,
+                                        description: myRecordDetail[0].additional[indexPath.row-1].content)
+                        return lineCell
+                    }
+                }
             }
         }
-        
-        public var type: DetailRecordSection {
-            switch self {
-            case .명대사: return .comment
-            case .인상깊은구절: return .comment
-            case .줄거리: return .text
-            case .가사: return .text
-            case .방송사OTT: return .line
-            case .포스터: return .image
-            case .표지: return .image
-            case .명장면: return .image
-            case .앨범커버: return .image
-            case .장르: return .genre
-            case .카테고리: return .genre
-            case .OST: return .song
-            case .앨범: return .song
-            case .감독: return .line
-            case .배우: return .line
-            case .가수: return .line
-            case .작가: return .line
-            case .요일: return .line
-            case .플랫폼: return .line
-            case .채널: return .line
-            case .출판사: return .line
-            case .링크: return .link
-            case .타임스탬프: return .stamp
-            }
-        }
-        
-        func getCellType() -> UITableViewCell {
-            switch self {
-            case .명대사: return CommentDetailTableViewCell()
-            case .인상깊은구절: return CommentDetailTableViewCell()
-            case .줄거리: return TextTableViewCell()
-            case .가사: return TextTableViewCell()
-            case .방송사OTT: return LineTableViewCell()
-            case .포스터: return ImageTableViewCell()
-            case .표지: return ImageTableViewCell()
-            case .명장면: return ImageTableViewCell()
-            case .앨범커버: return ImageTableViewCell()
-            case .장르: return GenreTableViewCell()
-            case .카테고리: return GenreTableViewCell()
-            case .OST: return SongTableViewCell()
-            case .앨범: return SongTableViewCell()
-            case .감독: return LineTableViewCell()
-            case .배우: return LineTableViewCell()
-            case .가수: return LineTableViewCell()
-            case .작가: return LineTableViewCell()
-            case .요일: return LineTableViewCell()
-            case .플랫폼: return LineTableViewCell()
-            case .채널: return LineTableViewCell()
-            case .출판사: return LineTableViewCell()
-            case .링크: return LinkTableViewCell()
-            case .타임스탬프: return StampTableViewCell()
-            }
-        }
+
+        //
+        //        guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
+        //        else { return UITableViewCell() }
+        //
+        //            switch detailSection {
+        //            case .comment:
+        //                guard let commentCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: CommentDetailTableViewCell.className,
+        //                    for: indexPath) as? CommentDetailTableViewCell
+        //                else { return UITableViewCell() }
+        //                commentCell.config(myRecordDetail[indexPath.row].comment)
+        //                commentCell.reloadInputViews()
+        //                return commentCell
+        //
+        //            case .image:
+        //                guard let imageCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: ImageTableViewCell.className,
+        //                    for: indexPath) as? ImageTableViewCell
+        //                else { return UITableViewCell() }
+        //                imageCell.config(myRecordDetail[indexPath.row].additional[indexPath.row].type,
+        //                                 myRecordDetail[indexPath.row].additional[indexPath.row].imgUrl1)
+        //                return imageCell
+        //
+        //            case .comma:
+        //                guard let commaCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: CommaTableViewCell.className,
+        //                    for: indexPath) as? CommaTableViewCell
+        //                else { return UITableViewCell() }
+        //                //            commaCell.config(indexPath.row)
+        //                return commaCell
+        //
+        //            case .genre:
+        //                guard let genreCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: GenreTableViewCell.className,
+        //                    for: indexPath) as? GenreTableViewCell
+        //                else { return UITableViewCell() }
+        //                return genreCell
+        //
+        //            case .text:
+        //                guard let textCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: TextTableViewCell.className,
+        //                    for: indexPath) as? TextTableViewCell
+        //                else { return UITableViewCell() }
+        //                //            textCell.config(indexPath.row)
+        //                return textCell
+        //
+        //            case .song:
+        //                guard let songCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: SongTableViewCell.className,
+        //                    for: indexPath) as? SongTableViewCell
+        //                else { return UITableViewCell() }
+        //                songCell.layoutIfNeeded()
+        //                songCell.songListTableView.contentSize.height = CGFloat(songCell.songArray.count*56)
+        //                return songCell
+        //
+        //            case .line:
+        //                guard let lineCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: LineTableViewCell.className,
+        //                    for: indexPath) as? LineTableViewCell
+        //                else { return UITableViewCell() }
+        //                //            lineCell.config(indexPath.row)
+        //                return lineCell
+        //
+        //            case .link:
+        //                guard let linkCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: LinkTableViewCell.className,
+        //                    for: indexPath) as? LinkTableViewCell
+        //                else { return UITableViewCell() }
+        //                linkCell.linkButtonDelegate = self
+        //                //            linkCell.config(<#T##link: String##String#>)
+        //                return linkCell
+        //
+        //            case .stamp:
+        //                guard let stampCell = tableView.dequeueReusableCell(
+        //                    withIdentifier: StampTableViewCell.className,
+        //                    for: indexPath) as? StampTableViewCell
+        //                else { return UITableViewCell() }
+        //                return stampCell
+        //            }
+        //
+        //        if myRecordDetail[0].comment == "" {
+        //
+        //            return UITableViewCell()
+        //
+        //        } else {
+        //            guard let commentCell = tableView.dequeueReusableCell(
+        //                withIdentifier: CommentDetailTableViewCell.className,
+        //                for: indexPath) as? CommentDetailTableViewCell
+        //            else { return UITableViewCell() }
+        //            commentCell.prepareForReuse()
+        //            commentCell.config(myRecordDetail[indexPath.row].comment)
+        //            return commentCell
+        //        }
+        //
     }
 }

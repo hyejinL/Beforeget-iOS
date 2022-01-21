@@ -42,6 +42,9 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
         setupLayout()
+        DispatchQueue.main.async {
+            self.genreCollectionView.reloadData()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +64,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(23)
+//            make.height.equalTo(23)
         }
         
         genreCollectionView.snp.makeConstraints { make in
@@ -82,7 +85,7 @@ extension GenreTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.className, for: indexPath) as? GenreCollectionViewCell else { return UICollectionViewCell() }
-        genreCell.config(indexPath.item)
+        genreCell.config(genreArray[indexPath.row])
         return genreCell
     }
 }

@@ -12,10 +12,6 @@ import Then
 
 class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-
     // MARK: - Properties
     
     private let backView = UIView().then {
@@ -78,10 +74,7 @@ class SongListTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ index: Int) {
-        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
-        guard let content = additional[index].content else { return }
-        
-        songLabel.text = content
+    public func config(_ song: String) {
+        songLabel.text = song
     }
 }

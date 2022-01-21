@@ -19,10 +19,6 @@ protocol LinkButtonDelegate: DetailRecordViewController {
 
 class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-    
     // MARK: - Properties
     
     weak var linkButtonDelegate: LinkButtonDelegate?
@@ -80,11 +76,8 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
         
-    public func config(_ index: Int) {
-        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
-        guard let content = additional[index].content else { return }
-        
-        linkString = content
+    public func config(_ link: String) {
+        linkString = link
     }
     
     // MARK: - @objc

@@ -12,10 +12,6 @@ import Then
 
 class DetailRecordHeaderView: UIView {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-    
     // MARK: - Properties
     
     public var postId = 0
@@ -50,7 +46,7 @@ class DetailRecordHeaderView: UIView {
     
     public lazy var titleLabel = UILabel().then {
         $0.text = "0"
-        $0.numberOfLines = 2
+        $0.numberOfLines = 0
         $0.font = BDSFont.title3
         $0.textColor = Asset.Colors.white.color
         $0.textAlignment = .center
@@ -117,6 +113,16 @@ class DetailRecordHeaderView: UIView {
         } else if preferredLanguage == "kr" {
             titleLabel.font = BDSFont.title3
         }
+        
+//        if titleLabel.text.count < 19 {
+//            titleLabel.snp.updateConstraints { make in
+//                make.height.equalTo(23)
+//            }
+//        } else {
+//            titleLabel.snp.updateConstraints { make in
+//                make.height.equalTo(50)
+//            }
+//        }
     }
     
     private func setupLayout() {
@@ -143,7 +149,7 @@ class DetailRecordHeaderView: UIView {
             make.top.equalTo(iconImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(25)
+            make.height.equalTo(23)
         }
         
         dateView.snp.makeConstraints { make in

@@ -10,12 +10,13 @@ import UIKit
 import Kingfisher
 import SnapKit
 import Then
+import CoreAudio
 
 class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Network
     
-    private let myRecordAPI = MyRecordAPI.shared
+//    private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
     
@@ -120,12 +121,22 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ index: Int) {
-        guard let additionalArray = myRecordAPI.additionalArray else { return }
-        guard let imgUrl = additionalArray[index].imgUrl1 else { return }
-        
-        titleLabel.text = additionalArray[index].type
-        if let image = URL(string: imgUrl) {
+//    public func config(_ index: Int) {
+//
+//        let myRecordDetail = myRecordAPI.myDetailRecord?.data
+//        guard let myRecordDetail = myRecordDetail else { return }
+//
+//        titleLabel.text = myRecordDetail[index].additional[index].type
+//        if let image = URL(string: myRecordDetail[index].additional[index].imgUrl1) {
+//            cellImageView.kf.setImage(with: image)
+//        }
+//    }
+    
+    public func config(_ title: String, _ image: String) {
+    
+        titleLabel.text = title
+//        cellImageView.image = image
+        if let image = URL(string: image) {
             cellImageView.kf.setImage(with: image)
         }
     }

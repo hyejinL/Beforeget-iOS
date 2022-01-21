@@ -29,6 +29,11 @@ class ReviewTagCollectionViewCell: UICollectionViewCell, UICollectionViewRegiste
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reviewLabel.text = nil
+    }
 
     // MARK: - InitUI
     

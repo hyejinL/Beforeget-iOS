@@ -12,10 +12,6 @@ import Then
 
 class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     
-    // MARK: - Network
-    
-    private let myRecordAPI = MyRecordAPI.shared
-    
     // MARK: - Properties
     
     private var cellMargin: CGFloat = 47
@@ -106,11 +102,8 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config(_ index: Int) {
-        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
-        guard let content = additional[index].content else { return }
-        
-        titleLabel.text = additional[index].type
-        quoteLabel.text = content
+    public func config(_ title: String, quote: String) {
+        titleLabel.text = title
+        quoteLabel.text = quote
     }
 }

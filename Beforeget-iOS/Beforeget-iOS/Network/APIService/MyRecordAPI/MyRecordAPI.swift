@@ -23,6 +23,21 @@ final class MyRecordAPI {
     public var star: String = "-1"
     public var id: Int = 0
     
+    public var detailDate: String = "-1"
+    public var detailMedia: String = "-1"
+    public var detailStar: String = "-1"
+    public var detailId: Int = 0
+    public var detailComment: String = ""
+    public var detailOneline: [String] = [""]
+    
+    public private(set) var detailIds: [Int] = []
+    public private(set) var detailTitles:  [String] = []
+    public private(set) var detailCategories: [Int] = []
+    public private(set) var detailDates: [String] = []
+    public private(set) var detailStars:  [Int] = []
+    public private(set) var detailOnelines:  [String] = []
+    public private(set) var detailComments: [String] = []
+    
     // MARK: - Network Properties
     
     private let myRecordProvider = MoyaProvider<MyRecordService>(plugins: [MoyaLoggerPlugin()])
@@ -31,9 +46,9 @@ final class MyRecordAPI {
     public private(set) var myDetailRecord: BaseArrayResponseType<MyDetailRecord>?
 
     public private(set) var dates: [String] = []
-    public private(set) var stars: [Int] = []
-    public private(set) var titles: [String] = []
-    public private(set) var onelines: [String] = []
+    public private(set) var stars:  [Int] = []
+    public private(set) var titles:  [String] = []
+    public private(set) var onelines:  [String] = []
     
     // MARK: - Custom Method
     
@@ -42,6 +57,15 @@ final class MyRecordAPI {
         stars.removeAll()
         titles.removeAll()
         onelines.removeAll()
+    }
+    
+    func removeDetailData() {
+        detailDates.removeAll()
+        detailTitles.removeAll()
+        detailCategories.removeAll()
+        detailStars.removeAll()
+        detailOnelines.removeAll()
+        detailComments.removeAll()
     }
     
     // MARK: - GET : 전체글조회 가져오기
@@ -116,12 +140,24 @@ final class MyRecordAPI {
             case .success(let result):
                 do {
                     self.myDetailRecord = try result.map(BaseArrayResponseType<MyDetailRecord>.self)
-                    
+                    self.removeDetailData()
                     guard let data = self.myDetailRecord?.data else {
                         completion(nil, NetworkResult<Error>.self as? Error)
                         return
                     }
-//                    print(data, "에러메시지 : getMyDetailRecord")
+                    
+                    if !data.isEmpty {
+                        for i in 0..<data.count {
+                            self.detailDates.append(data[i].date)
+                            self.detailStars.append(data[i].star)
+                            self.detailTitles.append(data[i].title)
+                            self.detailOnelines = data[i].oneline
+                            self.detailCategories.append(data[i].category)
+                            self.detailComments.append(data[i].comment)
+                        }
+                    }
+                    
+                    print(data, "에러메시지 : getMyDetailRecord")
                      completion(data, nil)
                     
                 } catch(let err) {
