@@ -136,6 +136,14 @@ class OneLineReviewTableViewCell: UITableViewCell {
         oneLineCollectionView.isHidden = value
     }
     
+    func setupHidden(addReviewCircleButtonIsHidden: Bool,
+                     addReviewButtonIsHidden: Bool,
+                     oneLineCollectionViewIsHidden: Bool) {
+        addReviewCircleButton.isHidden = addReviewCircleButtonIsHidden
+        addReviewButton.isHidden = addReviewButtonIsHidden
+        oneLineCollectionView.isHidden = oneLineCollectionViewIsHidden
+    }
+    
     private func calculateCellWidth(text: String) -> CGFloat {
         let label = UILabel()
         label.text = text

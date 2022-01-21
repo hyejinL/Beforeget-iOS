@@ -109,6 +109,7 @@ class PostViewController: UIViewController {
     var additionalItems: [Additional] = []
     var oneLines: [String] = []
     var mediaType: MediaType?
+    var oneLineCellHeight: CGFloat = 117
     
     // MARK: - Life Cycle
     
@@ -219,9 +220,9 @@ class PostViewController: UIViewController {
         
         if cell.oneLines.isEmpty == false {
             cell.reloadCollectionView()
-            cell.isHiddenAddReviewCircleButton(true)
-            cell.isHiddenAddReviewButton(false)
-            cell.isHiddenColletionView(false)
+            cell.setupHidden(addReviewCircleButtonIsHidden: true,
+                             addReviewButtonIsHidden: false,
+                             oneLineCollectionViewIsHidden: false)
         }
         
         let collectionViewSize = cell.getCollectionViewSize()
@@ -248,15 +249,15 @@ class PostViewController: UIViewController {
     
     @objc func touchupDoneButton() {
         if starRating == 0 || mediaTitle.isEmpty || oneLines.isEmpty {
-            let requiredFieldPopupViewController = PostRequiredFieldPopupViewController()
-            requiredFieldPopupViewController.modalPresentationStyle = .overCurrentContext
-            present(requiredFieldPopupViewController, animated: true)
+            let alert = UIAlertController(title: PopupText.requiredField, message: "", preferredStyle: UIAlertController.Style.alert)
+            let doneAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(doneAction)
+            present(alert, animated: true, completion: nil)
             return
         }
         
         let totalAdditionalItems = additionalItems.filter { !$0.type.isEmpty }
                                                   .filter { !$0.content.isEmpty }
-        definesPresentationContext = true
         
         postAPI.postRecord(record: PostRequest(media: mediaType?.mediaNumber() ?? 1,
                                                date: datePicker.date.convertToString(dateFormat: "YYYY-MM-dd"),
@@ -308,6 +309,9 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
+            oneLineCell.setupHidden(addReviewCircleButtonIsHidden: !oneLines.isEmpty ? true : false,
+                                    addReviewButtonIsHidden: oneLines.isEmpty ? true : false,
+                                    oneLineCollectionViewIsHidden: oneLines.isEmpty ? true : false)
             oneLineCell.presentOneLineViewController = { (_ viewController: OneLineViewController) -> () in
                 viewController.mediaType = self.mediaType
                 self.definesPresentationContext = true
