@@ -25,6 +25,7 @@ final class MainViewController: UIViewController {
     // MARK: - Network
     
     private let mainAPI = MainAPI.shared
+    private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
     
@@ -277,20 +278,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recordViewController = MyRecordViewController()
-        // MARK: - TODO 필터링된 미디어 유형 1~6을 보내주면 됨.
-        if indexPath.item == 0 {
-            recordViewController.mediaID = 1
-        } else if indexPath.item == 1 {
-            recordViewController.mediaID = 2
-        } else if indexPath.item == 2 {
-            recordViewController.mediaID = 3
-        } else if indexPath.item == 3 {
-            recordViewController.mediaID = 4
-        } else if indexPath.item == 4 {
-            recordViewController.mediaID = 5
-        } else {
-            recordViewController.mediaID = 6
-        }
+        recordViewController.mediaID = indexPath.item+1
         navigationController?.pushViewController(recordViewController, animated: true)
     }
 }

@@ -63,10 +63,11 @@ final class MyRecordViewController: UIViewController {
         myRecordAPI.getMyRecord { data, err in
             guard let data = data else { return }
             self.recordArray = data
-            self.recordTableView.reloadData()
-        }
-        myRecordAPI.getMyRecordFilter(date: "-1", media: "\(mediaID)", star: "-1") { data, err in
-            self.recordTableView.reloadData()
+            self.myRecordAPI.getMyRecordFilter(date: "-1", media: "\(self.mediaID)", star: "-1") { data, err in
+                DispatchQueue.main.async {
+                    self.recordTableView.reloadData()
+                }
+            }
         }
     }
     
