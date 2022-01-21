@@ -51,7 +51,7 @@ class GenreCollectionViewCell: UICollectionViewCell, UICollectionViewRegisterabl
     
     // MARK: - Custom Method
     
-    public func config(_ data: String) {
-        genreLabel.text = data
+    public func config(_ genre: String) {
+        genreLabel.text = genre
     }
 }

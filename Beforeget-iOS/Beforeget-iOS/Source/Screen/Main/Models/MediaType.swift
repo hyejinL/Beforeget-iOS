@@ -5,6 +5,8 @@
 //  Created by 배은서 on 2022/01/12.
 //
 
+import UIKit
+
 enum MediaType: Int, CustomStringConvertible, CaseIterable {
     case movie
     case book
@@ -46,6 +48,34 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
         case .music: return 4
         case .webtoon: return 5
         case .youtube: return 6
+        }
+    }
+    
+    func getIconImage(index: Int) -> UIImage? {
+        switch self {
+        case .movie:
+            return Asset.Assets.icnWriteMovie.image
+        case .book:
+            return Asset.Assets.icnWriteBook.image
+        case .tv:
+            return Asset.Assets.icnWriteTv.image
+        case .music:
+            return Asset.Assets.icnWriteMusic.image
+        case .webtoon:
+            return Asset.Assets.icnWebtoon.image
+        case .youtube:
+            return Asset.Assets.icnWriteYoutube.image
+        }
+    }
+    
+    static func getIconImage(index: Int) -> UIImage? {
+        switch index {
+        case 1: return Asset.Assets.icnWriteMovie.image
+        case 2: return Asset.Assets.icnWriteBook.image
+        case 3: return Asset.Assets.icnWriteTv.image
+        case 4: return Asset.Assets.icnWriteMusic.image
+        case 5: return Asset.Assets.icnWriteWebtoon.image
+        default: return Asset.Assets.icnWriteYoutube.image
         }
     }
 }

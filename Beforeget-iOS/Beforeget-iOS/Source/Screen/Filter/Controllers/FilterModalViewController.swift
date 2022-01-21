@@ -13,7 +13,7 @@ import Then
 // MARK: - Delegate
 
 protocol SendDataDelegate: MyRecordViewController {
-    func sendData(data: Int, media: [String], star: [Int])
+    func sendData(date: [String], data: Int, media: [String], star: [Int])
 }
 
 final class FilterModalViewController: UIViewController {
@@ -94,6 +94,7 @@ final class FilterModalViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupGestureRecognizer()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -215,8 +216,8 @@ final class FilterModalViewController: UIViewController {
     }
     
     @objc func touchupApplyButton(_ sender: UIButton) {
-        // 필터 선택 시에 데이터값 전달하는 로직 작성
         sendDataDelegate?.sendData (
+            date: recordDateTuple,
             data: selectedDateIndex,
             media: selectedMediaArray,
             star: selectedStarArray)
@@ -277,9 +278,7 @@ extension FilterModalViewController: UICollectionViewDataSource {
             // MARK: - 추후 공부할 부분 : Closure
             filterCell.selectedDateIndex = selectedDateIndex
             filterCell.dateSendingClosure = { index, date in
-                print("dateIndex \(index)")
                 self.recordDateTuple[index] = date.convertToString("YYYY-MM-dd")
-                print(self.recordDateTuple, "날짜모음")
             }
             return filterCell
             
@@ -301,7 +300,6 @@ extension FilterModalViewController: UICollectionViewDataSource {
                 starCell.starButtonList[$0 - 1].isSelected = true
                 if starCell.starButtonList[$0 - 1].isSelected {
                     applyButton.isDisabled = false
-                    print(applyButton.isDisabled, "여기어플라이버튼")
                 } else {
                     applyButton.isDisabled = true
                 }
@@ -344,19 +342,16 @@ extension FilterModalViewController:
     
     func selectDateFilter(index: Int) {
         selectedDateIndex = index
-        print(selectedDateIndex, "이것은 날짜다!!")
         applyButton.isDisabled = false
     }
     
     func selectMediaFilter(indexList: [String]) {
         selectedMediaArray = indexList
-        print(selectedMediaArray, "이것은 미디어다!!")
         applyButton.isDisabled = false
     }
     
     func selectStarFilter(indexList: [Int]) {
         selectedStarArray = indexList
-        print(selectedStarArray, "이것은 별점이다!!!")
         applyButton.isDisabled = false
     }
 }

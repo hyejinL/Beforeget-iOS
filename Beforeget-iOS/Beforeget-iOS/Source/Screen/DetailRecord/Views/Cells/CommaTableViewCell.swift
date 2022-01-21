@@ -50,6 +50,11 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        quoteLabel.text = nil
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
@@ -68,6 +73,7 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         [firstCommaImageView, secondCommaImageView].forEach {
@@ -96,7 +102,8 @@ class CommaTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ title: String, quote: String) {
+        titleLabel.text = title
+        quoteLabel.text = quote
     }
 }

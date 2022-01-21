@@ -9,25 +9,25 @@ import UIKit
 
 import SnapKit
 import Then
+import CoreMedia
 
 final class MyRecordViewController: UIViewController {
     
+    // MARK: - Network
+    
+    private let myRecordAPI = MyRecordAPI.shared
+    
     // MARK: - Properties
+        
+    private var recordArray: [MyRecord] = []
     
     private var mediaData: String = ""
     private var starData: String = ""
     
-    /// 서버한테 보내야 될 값들
-    private var dateQuery: String = ""
-    private var mediaQuery: String = ""
-    private var starQuery: String = ""
-    
     var selectedDateIndex: Int = -1
     var selectedMediaArray: [String] = []
     var selectedStarArray: [Int] = []
-    
-    private let record = RecordMannager()
-    
+        
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .record, isHidden: false)
     
@@ -49,6 +49,7 @@ final class MyRecordViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
+        MyRecordEmptyTableViewCell.register(target: $0)
         MyRecordTableViewCell.register(target: $0)
     }
     
@@ -58,6 +59,11 @@ final class MyRecordViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
+        myRecordAPI.getMyRecord { data, err in
+            guard let data = data else { return }
+            self.recordArray = data
+            self.recordTableView.reloadData()
+        }
     }
     
     // MARK: - InitUI
@@ -112,6 +118,7 @@ extension MyRecordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let detailRecordViewController = DetailRecordViewController()
+        detailRecordViewController.postId = self.recordArray[indexPath.row].id
         navigationController?.pushViewController(detailRecordViewController, animated: true)
     }
 }
@@ -120,17 +127,35 @@ extension MyRecordViewController: UITableViewDelegate {
 
 extension MyRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return record.getCount()
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return 0 }
+        if myRecord.isEmpty {
+            return 1
+        } else {
+            return myRecord.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let recordCell = tableView.dequeueReusableCell(
-            withIdentifier: MyRecordTableViewCell.className,
-            for: indexPath) as? MyRecordTableViewCell
-        else { return UITableViewCell() }
-        recordCell.selectionStyle = .none
-        recordCell.config(index: indexPath.item)
-        return recordCell
+        let myRecord = myRecordAPI.myRecord?.data
+        guard let myRecord = myRecord else { return UITableViewCell() }
+        if myRecord.isEmpty {
+            guard let emptyCell = tableView.dequeueReusableCell(
+                withIdentifier: MyRecordEmptyTableViewCell.className,
+                for: indexPath) as? MyRecordEmptyTableViewCell
+            else { return UITableViewCell() }
+            emptyCell.selectionStyle = .none
+            return emptyCell
+            
+        } else {
+            guard let recordCell = tableView.dequeueReusableCell(
+                withIdentifier: MyRecordTableViewCell.className,
+                for: indexPath) as? MyRecordTableViewCell
+            else { return UITableViewCell() }
+            recordCell.selectionStyle = .none
+            recordCell.config(index: indexPath.row)
+            return recordCell
+        }
     }
 }
 
@@ -169,12 +194,62 @@ extension MyRecordViewController:
         presentFilterModal()
     }
     
-    public func sendData(data: Int, media: [String], star: [Int]) {
-        // MARK: - FIXME
-        /// 서버한테 넘겨주려고 변수를 만들어뒀습니다!
-        /// 추후에 서버 통신 시 위 파라미터를 통해 값을 넘겨주면 됩니다!!!!
-        print(data, media, star, "넘어온 값")
+    public func sendData(date: [String], data: Int, media: [String], star: [Int]) {
+        var dateString = date.joined(separator: ",")
+        var mediaString = media.joined(separator: ",")
+        var mediaArray: [String] = []
+        mediaArray.append(mediaString)
         
+        media.forEach {
+            if $0 == "Movie" {
+                mediaString = "1"
+                mediaArray.append(mediaString)
+            } else if $0 == "Book" {
+                mediaString = "2"
+                mediaArray.append(mediaString)
+            } else if $0 == "TV" {
+                mediaString = "3"
+                mediaArray.append(mediaString)
+            } else if $0 == "Music" {
+                mediaString = "4"
+                mediaArray.append(mediaString)
+            } else if $0 == "Webtoon" {
+                mediaString = "5"
+                mediaArray.append(mediaString)
+            } else if $0 == "Youtube" {
+                mediaString = "6"
+                mediaArray.append(mediaString)
+            }
+        }
+        mediaArray.removeFirst()
+        
+        let mediaInt = mediaArray.joined(separator: ",")
+        let starArray = star.map { String($0) }
+        var starString = starArray.joined(separator: ",")
+
+        if data == 0 {
+            dateString = "0"
+        } else if data == 1 {
+            dateString = "1"
+        } else if data == 2 {
+            dateString = "2"
+        } else if data == -1 {
+            dateString = "-1"
+        }
+        
+        if media.isEmpty {
+            mediaString = "-1"
+        }
+        
+        if star.isEmpty {
+            starString = "-1"
+        }
+        
+        myRecordAPI.getMyRecordFilter(date: dateString, media: mediaInt, star: starString) { data, err in
+            print("넘어온 값", dateString, mediaInt, starString)
+            self.recordTableView.reloadData()
+        }
+                
         filterView.dateButton.isSelected = (data == -1) ?
         false : true
         filterView.mediaButton.isSelected = (media == ["미디어"]) ?
@@ -195,7 +270,6 @@ extension MyRecordViewController:
         }
                 
         filterView.mediaButton.setTitle(mediaData, for: .normal)
-        
         selectedDateIndex = data
         selectedMediaArray = media
         selectedStarArray = star

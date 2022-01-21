@@ -58,5 +58,3 @@ extension MainService: TargetType {
         }
     }
 }
-
-

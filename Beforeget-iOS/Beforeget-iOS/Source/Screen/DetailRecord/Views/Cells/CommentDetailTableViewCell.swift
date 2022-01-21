@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
-
+    
     // MARK: - Properties
     
     private var cellMargin: CGFloat = 47
@@ -34,7 +34,7 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     }
     
     // MARK: - Initializer
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configUI()
@@ -45,10 +45,15 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        commentLabel.text = nil
+    }
+    
     // MARK: - InitUI
     
     private func configUI() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = Asset.Colors.white.color
         
         commentLabel.addLetterSpacing()
         commentLabel.addLineSpacing(spacing: 25)
@@ -62,6 +67,7 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         commentLabel.snp.makeConstraints { make in
@@ -81,7 +87,7 @@ class CommentDetailTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+    public func config(_ comment: String) {
+        commentLabel.text = comment
     }
 }

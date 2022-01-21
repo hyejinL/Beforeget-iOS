@@ -63,6 +63,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(50)
+            make.height.equalTo(23)
         }
         
         linkButton.snp.makeConstraints { make in
@@ -76,7 +77,6 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Custom Method
         
     public func config(_ link: String) {
-        /// 문제 : 나중에 데이터 전달
         linkString = link
     }
     

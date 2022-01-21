@@ -7,10 +7,16 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
+import CoreAudio
 
 class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
+    
+    // MARK: - Network
+    
+//    private let myRecordAPI = MyRecordAPI.shared
     
     // MARK: - Properties
     
@@ -73,6 +79,7 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         [leftLineView, rightLineView, bottomLineView].forEach {
@@ -114,7 +121,23 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
     
-    public func config() {
-       /// 문제 : 나중에 데이터 전달
+//    public func config(_ index: Int) {
+//
+//        let myRecordDetail = myRecordAPI.myDetailRecord?.data
+//        guard let myRecordDetail = myRecordDetail else { return }
+//
+//        titleLabel.text = myRecordDetail[index].additional[index].type
+//        if let image = URL(string: myRecordDetail[index].additional[index].imgUrl1) {
+//            cellImageView.kf.setImage(with: image)
+//        }
+//    }
+    
+    public func config(_ title: String, _ image: String) {
+    
+        titleLabel.text = title
+//        cellImageView.image = image
+        if let image = URL(string: image) {
+            cellImageView.kf.setImage(with: image)
+        }
     }
 }
