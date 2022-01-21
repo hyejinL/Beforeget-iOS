@@ -113,6 +113,11 @@ class PostViewController: UIViewController {
     
     // MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -125,10 +130,10 @@ class PostViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .white
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setupLayout() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubviews([navigationBar,
                           backButton,
                           doneButton,
@@ -143,12 +148,13 @@ class PostViewController: UIViewController {
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.top.equalTo(navigationBar.snp.top)
             $0.leading.equalTo(navigationBar.snp.leading).inset(4)
+            $0.width.height.equalTo(44)
         }
         
         doneButton.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.centerY.equalTo(backButton.snp.centerY)
             $0.trailing.equalTo(navigationBar.snp.trailing).inset(13)
         }
         
@@ -240,6 +246,7 @@ class PostViewController: UIViewController {
         if !mediaTitle.isEmpty || !oneLines.isEmpty || !comment.isEmpty || !additionalItems.isEmpty {
             let backPopupViewController = PostBackPopupViewController()
             backPopupViewController.modalPresentationStyle = .overCurrentContext
+            backPopupViewController.modalTransitionStyle = .crossDissolve
             definesPresentationContext = true
             present(backPopupViewController, animated: true)
         } else {

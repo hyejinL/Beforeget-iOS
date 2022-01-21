@@ -73,6 +73,9 @@ final class MediaSelectViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = Asset.Colors.white.color
+        
+        messageLabel.addLineSpacing(spacing: 34)
+        messageLabel.textAlignment = .center
     }
     
     private func setupLayout() {

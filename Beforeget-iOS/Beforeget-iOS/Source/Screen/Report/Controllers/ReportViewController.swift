@@ -109,7 +109,7 @@ final class ReportViewController: UIPageViewController {
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
+//            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
@@ -151,9 +151,9 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = sortedCountData.sorted(by: >)[2]
-        page2.reportGraphView.midCount = midCount
-        page5.reportOnePageView.midCount = midCount
+        let midCount = ceil(Double(maxCount) / 2)
+        page2.reportGraphView.midCount = Int(midCount)
+        page5.reportOnePageView.midCount = Int( midCount)
         
         for data in sortedCountData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
@@ -178,6 +178,12 @@ final class ReportViewController: UIPageViewController {
         page2.reportGraphView.barView3.animate(height: CGFloat(heights[2]))
         page2.reportGraphView.barView4.animate(height: CGFloat(heights[3]))
         page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
+        
+        page5.reportOnePageView.barView1.animate(height: CGFloat(heights[0]))
+        page5.reportOnePageView.barView2.animate(height: CGFloat(heights[1]))
+        page5.reportOnePageView.barView3.animate(height: CGFloat(heights[2]))
+        page5.reportOnePageView.barView4.animate(height: CGFloat(heights[3]))
+        page5.reportOnePageView.barView5.animate(height: CGFloat(heights[4]))
     }
     
     private func saveImageOnPhone(image: UIImage, image_name: String) -> URL? {
@@ -288,7 +294,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
-            setupBarData()
+            setupBarAnimation()
             pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
