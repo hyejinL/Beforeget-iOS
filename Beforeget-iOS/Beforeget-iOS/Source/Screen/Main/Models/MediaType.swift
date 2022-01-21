@@ -40,6 +40,17 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
         }
     }
     
+    func mediaNumber() -> Int {
+        switch self {
+        case .movie: return 1
+        case .book: return 2
+        case .tv: return 3
+        case .music: return 4
+        case .webtoon: return 5
+        case .youtube: return 6
+        }
+    }
+    
     func getIconImage(index: Int) -> UIImage? {
         switch self {
         case .movie:
@@ -58,13 +69,13 @@ enum MediaType: Int, CustomStringConvertible, CaseIterable {
     }
     
     static func getIconImage(index: Int) -> UIImage? {
-         switch index {
-         case 0: return Asset.Assets.icnWriteMovie.image
-         case 1: return Asset.Assets.icnWriteBook.image
-         case 2: return Asset.Assets.icnWriteTv.image
-         case 3: return Asset.Assets.icnWriteMusic.image
-         case 4: return Asset.Assets.icnWriteWebtoon.image
-         default: return Asset.Assets.icnWriteYoutube.image
-         }
-     }
+        switch index {
+        case 1: return Asset.Assets.icnWriteMovie.image
+        case 2: return Asset.Assets.icnWriteBook.image
+        case 3: return Asset.Assets.icnWriteTv.image
+        case 4: return Asset.Assets.icnWriteMusic.image
+        case 5: return Asset.Assets.icnWriteWebtoon.image
+        default: return Asset.Assets.icnWriteYoutube.image
+        }
+    }
 }

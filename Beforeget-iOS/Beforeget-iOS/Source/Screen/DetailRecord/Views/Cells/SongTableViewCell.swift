@@ -63,6 +63,7 @@ class SongTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         songListTableView.snp.makeConstraints { make in

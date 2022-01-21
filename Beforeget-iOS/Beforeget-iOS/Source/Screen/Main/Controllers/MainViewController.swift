@@ -74,7 +74,7 @@ final class MainViewController: UIViewController {
     }
     
     private let nameLabel = UILabel().then {
-        $0.text = "홍길동"
+        $0.text = "밴토리"
         $0.textColor = Asset.Colors.black200.color
         $0.font = BDSFont.body3
     }

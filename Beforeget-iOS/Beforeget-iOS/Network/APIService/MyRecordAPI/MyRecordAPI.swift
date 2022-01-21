@@ -29,8 +29,6 @@ final class MyRecordAPI {
     
     public private(set) var myRecord: BaseArrayResponseType<MyRecord>?
     public private(set) var myDetailRecord: BaseArrayResponseType<MyDetailRecord>?
-    
-    public private(set) var additional: [DetailAdditional]?
 
     public private(set) var dates: [String] = []
     public private(set) var stars: [Int] = []
@@ -95,6 +93,7 @@ final class MyRecordAPI {
                         completion(nil, NetworkResult<Error>.self as? Error)
                         return
                     }
+                    
                     print(data, "에러메시지 : getMyRecordFilter")
                     completion(data, nil)
                 } catch(let err) {
@@ -122,7 +121,7 @@ final class MyRecordAPI {
                         completion(nil, NetworkResult<Error>.self as? Error)
                         return
                     }
-                    
+//                    print(data, "에러메시지 : getMyDetailRecord")
                      completion(data, nil)
                     
                 } catch(let err) {

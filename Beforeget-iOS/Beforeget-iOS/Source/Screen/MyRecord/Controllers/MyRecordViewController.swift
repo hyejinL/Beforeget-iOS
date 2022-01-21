@@ -132,9 +132,7 @@ extension MyRecordViewController: UITableViewDataSource {
         if myRecord.isEmpty {
             return 1
         } else {
-            print(recordArray.count, "123123123/", myRecord.count)
             return myRecord.count
-            
         }
     }
     

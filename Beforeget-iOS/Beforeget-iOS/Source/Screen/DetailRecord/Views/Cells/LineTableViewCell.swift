@@ -75,6 +75,7 @@ class LineTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalTo(lineView.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(50)
+            make.height.equalTo(23)
         }
         
         descriptionLabel.snp.makeConstraints { make in

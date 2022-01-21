@@ -35,6 +35,8 @@ class DetailRecordHeaderView: UIView {
         "인생영화", "아름다운 영상미",
         "마음이 따뜻해져요", "개발자 인생!"]
     
+    public var formatterDate = DateFormatter()
+    
     private let preferredLanguage = NSLocale.preferredLanguages[0]
     
     private let blackBackView = UIView().then {
@@ -46,8 +48,6 @@ class DetailRecordHeaderView: UIView {
         $0.clipsToBounds = true
     }
     
-    // MARK: - FIXME
-    /// 문제 : 영어로 넘어오면 폰트 어떻게 해야 하나?
     public lazy var titleLabel = UILabel().then {
         $0.text = "0"
         $0.numberOfLines = 2
@@ -99,6 +99,7 @@ class DetailRecordHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupDate()
         configUI()
         setupLayout()
     }
@@ -142,6 +143,7 @@ class DetailRecordHeaderView: UIView {
             make.top.equalTo(iconImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(25)
         }
         
         dateView.snp.makeConstraints { make in
@@ -183,6 +185,7 @@ class DetailRecordHeaderView: UIView {
         reviewLabel.snp.makeConstraints { make in
             make.top.equalTo(starImageView.snp.bottom).offset(48)
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         reveiwTagCollectionView.snp.makeConstraints { make in
@@ -193,6 +196,15 @@ class DetailRecordHeaderView: UIView {
             // MARK: FIXME - 한줄 리뷰 높이를 1~2 / 3~4 / 5~6 일 때 나눠서 계산해줘야 함
             make.bottom.equalToSuperview()
         }
+    }
+    
+    // MARK: - Custom Method
+    
+    private func setupDate() {
+        formatterDate.locale = Locale(identifier: "ko_KR")
+        formatterDate.dateFormat = "YYYY. MM. dd E"
+        let currentFormatterDate = formatterDate.string(from: Date())
+        dateLabel.text = currentFormatterDate
     }
 }
 

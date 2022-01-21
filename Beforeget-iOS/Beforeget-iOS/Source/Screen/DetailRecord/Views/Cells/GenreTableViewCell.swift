@@ -61,6 +61,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         genreCollectionView.snp.makeConstraints { make in

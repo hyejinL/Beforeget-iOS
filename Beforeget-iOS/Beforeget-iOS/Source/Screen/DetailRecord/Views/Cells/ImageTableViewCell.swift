@@ -78,6 +78,7 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
+            make.height.equalTo(23)
         }
         
         [leftLineView, rightLineView, bottomLineView].forEach {
@@ -120,10 +121,12 @@ class ImageTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Custom Method
     
     public func config(_ index: Int) {
-        guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
-        guard let imgUrl = additional[index].imgUrl1 else { return }
+        guard let additionalArray = myRecordAPI.additionalArray else { return }
+        guard let imgUrl = additionalArray[index].imgUrl1 else { return }
         
-        titleLabel.text = additional[index].type
-        cellImageView.kf.setImage(with: URL(string: imgUrl))
+        titleLabel.text = additionalArray[index].type
+        if let image = URL(string: imgUrl) {
+            cellImageView.kf.setImage(with: image)
+        }
     }
 }

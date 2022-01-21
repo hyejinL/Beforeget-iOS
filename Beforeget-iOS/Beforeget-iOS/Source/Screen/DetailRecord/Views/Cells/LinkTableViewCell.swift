@@ -67,6 +67,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(50)
+            make.height.equalTo(23)
         }
         
         linkButton.snp.makeConstraints { make in
@@ -79,7 +80,7 @@ class LinkTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Custom Method
         
-    public func config(index: Int) {
+    public func config(_ index: Int) {
         guard let additional = myRecordAPI.myDetailRecord?.data?[index].additional else { return }
         guard let content = additional[index].content else { return }
         

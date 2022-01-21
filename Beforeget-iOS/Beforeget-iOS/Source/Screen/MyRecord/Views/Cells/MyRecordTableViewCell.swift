@@ -102,6 +102,7 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(20)
+            make.height.equalTo(17)
         }
         
         starLabel.snp.makeConstraints { make in
@@ -131,7 +132,6 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
     // MARK: - Custom Method
     
     public func config(index: Int) {
-        
         let myRecord = myRecordAPI.myRecord?.data
         guard let myRecord = myRecord else { return }
         self.titleLabel.text = myRecord[index].title
@@ -144,11 +144,11 @@ class MyRecordTableViewCell: UITableViewCell, UITableViewRegisterable {
         let categoryImage = myRecord[index].category
         
         switch categoryImage {
-        case 0: return self.iconImageView.image = Asset.Assets.icnWriteMovie.image
-        case 1: return self.iconImageView.image = Asset.Assets.icnWriteBook.image
-        case 2: return self.iconImageView.image = Asset.Assets.icnWriteTv.image
-        case 3: return self.iconImageView.image = Asset.Assets.icnWriteMusic.image
-        case 4: return self.iconImageView.image = Asset.Assets.icnWriteWebtoon.image
+        case 1: return self.iconImageView.image = Asset.Assets.icnWriteMovie.image
+        case 2: return self.iconImageView.image = Asset.Assets.icnWriteBook.image
+        case 3: return self.iconImageView.image = Asset.Assets.icnWriteTv.image
+        case 4: return self.iconImageView.image = Asset.Assets.icnWriteMusic.image
+        case 5: return self.iconImageView.image = Asset.Assets.icnWriteWebtoon.image
         default: return self.iconImageView.image = Asset.Assets.icnWriteYoutube.image
         }
     }

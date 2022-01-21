@@ -21,17 +21,12 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
     
-    public var detailAdditional: [DetailAdditional] = []
+    public var myRecordArray: [MyDetailRecord] = []
+    public var myAdditionalArray: [Additional] = []
     public var typeArray: [String] = []
     
-    private var sectionArray: [DetailRecordSection] = [
-        .comment, .image, .comma,
-        .genre, .text, .song,
-        .line, .link, .stamp
-    ]
-    
-    private var type: [String] = []
-    
+    private var sectionArray: [DetailRecordSection] = []
+        
     // MARK: - Properties
     
     public var postId = 0
@@ -88,19 +83,12 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         configUI()
         setupLayout()
         // MARK: - FIXME 답이 없다...
-        DispatchQueue.main.async {
-//            print(self.postId,"들어와?")
-//            guard let detailData = self.myRecordAPI.myDetailRecord?.data else { return }
-//            print("여기는1",detailData)
-//
-//            detailData.forEach {
-//                guard let detailAdditional = $0.additional else { return }
-//                print(detailAdditional)
-//            }
-//
-//            self.myRecordAPI.getMyDetailRecord(postId: self.postId) { data, err in
-//                self.recordTableView.reloadData()
-//            }
+        print(self.postId,"들어와?")
+        myRecordAPI.getMyDetailRecord(postId: postId) { data, err in
+            guard let data = data else { return }
+            self.myRecordArray = data
+            print(self.myRecordArray,"아ㅏㅏ")
+            self.recordTableView.reloadData()
         }
     }
     
@@ -114,6 +102,10 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     private func configUI() {
         view.backgroundColor = Asset.Colors.white.color
         setupStatusBar(Asset.Colors.black200.color)
+        myRecordAPI.getMyDetailRecord(postId: postId) { data, err in
+            guard let data = data else { return }
+            self.recordTableView.reloadData()
+        }
     }
     
     private func setupLayout() {
@@ -237,25 +229,61 @@ extension DetailRecordViewController: UITableViewDelegate {
 
 extension DetailRecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1+detailAdditional.count
+        let myRecordDetail = myRecordAPI.myDetailRecord?.data
+//        myRecordDetail[section].add
+//        myRecordDetail[section].comment
+        guard let myRecordDetail = myRecordDetail else { return 0 }
+        guard let additionalArray = myRecordDetail[section].additional else {
+            print("안들어옴")
+            return 0 }
+        
+        let myComment = myRecordDetail[section].comment
+        guard let myComment = myComment else { print("안들어옴")
+            return 1 }
+        print(myComment)
+        
+                
+        if myComment == "" {
+            return 1 + additionalArray.count
+        } else {
+            return 1 + additionalArray.count
+        }
+        
+//
+//        guard let comment = myRecordDetail[section].comment else { return 0 }
+//
+//
+////        typeArray = additionalArray[section]
+//        print(myRecordDetail, "????????????")
+//        print(comment, "코멘트ㅡㅡㅡㅡㅡㅡ")
+//        print(addArray, additionalArray.count, "개수@@@@@@@@@@@@@@@@", typeArray.count)
+//
+//        dump(additionalArray)
+//        print("#################################")
+//        print(myRecordDetail[section].comment, "코멘트잇니")
+//
+//        if myRecordDetail[section].comment == nil || myRecordDetail[section].comment == "" {
+//            return 1 + additionalArray.count
+//        } else {
+//            return additionalArray.count
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let detailSection = DetailRecordSection(rawValue: indexPath.row)
         else { return UITableViewCell() }
         
-//        myRecordAPI.getMyDetailRecord(postId: postId) { [weak self] data, err in
-//            guard let self = self else { return }
-//            guard let data = data else {
-//                return
-//            }
-//            guard let additional = self.myRecordAPI.myDetailRecord?.data?[self.postId].additional else { return }
-//            print(data, additional, "이거다")
-//
-//
-//
-//            self.recordTableView.reloadData()
-//        }
+        let myRecordDetail = myRecordAPI.myDetailRecord?.data
+        guard let myRecordDetail = myRecordDetail else { return UITableViewCell() }
+        guard let additionalArray = myRecordDetail[indexPath.section].additional else { return UITableViewCell() }
+        
+        
+
+        dump(additionalArray)
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        dump(typeArray)
+        
+        
         
         switch detailSection {
         case .comment:
@@ -263,7 +291,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: CommentDetailTableViewCell.className,
                 for: indexPath) as? CommentDetailTableViewCell
             else { return UITableViewCell() }
-            commentCell.config(indexPath.item)
+            commentCell.config(indexPath.row)
             commentCell.reloadInputViews()
             return commentCell
             
@@ -272,7 +300,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: ImageTableViewCell.className,
                 for: indexPath) as? ImageTableViewCell
             else { return UITableViewCell() }
-            imageCell.config(indexPath.item)
+//            imageCell.config(indexPath.row)
             return imageCell
             
         case .comma:
@@ -280,6 +308,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: CommaTableViewCell.className,
                 for: indexPath) as? CommaTableViewCell
             else { return UITableViewCell() }
+//            commaCell.config(indexPath.row)
             return commaCell
             
         case .genre:
@@ -294,6 +323,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: TextTableViewCell.className,
                 for: indexPath) as? TextTableViewCell
             else { return UITableViewCell() }
+//            textCell.config(indexPath.row)
             return textCell
             
         case .song:
@@ -310,6 +340,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 withIdentifier: LineTableViewCell.className,
                 for: indexPath) as? LineTableViewCell
             else { return UITableViewCell() }
+//            lineCell.config(indexPath.row)
             return lineCell
             
         case .link:
@@ -318,7 +349,7 @@ extension DetailRecordViewController: UITableViewDataSource {
                 for: indexPath) as? LinkTableViewCell
             else { return UITableViewCell() }
             linkCell.linkButtonDelegate = self
-            linkCell.config(index: indexPath.row)
+//            linkCell.config(indexPath.row)
             return linkCell
             
         case .stamp:
@@ -335,7 +366,7 @@ extension DetailRecordViewController: UITableViewDataSource {
 
 extension DetailRecordViewController {
     
-    public enum AddType: CustomStringConvertible {
+    public enum AddType: CustomStringConvertible, CaseIterable {
         case 명대사, 인상깊은구절
         case 줄거리, 가사, 방송사OTT
         case 포스터, 표지, 명장면, 앨범커버
@@ -398,6 +429,34 @@ extension DetailRecordViewController {
             case .출판사: return .line
             case .링크: return .link
             case .타임스탬프: return .stamp
+            }
+        }
+        
+        func getCellType() -> UITableViewCell {
+            switch self {
+            case .명대사: return CommentDetailTableViewCell()
+            case .인상깊은구절: return CommentDetailTableViewCell()
+            case .줄거리: return TextTableViewCell()
+            case .가사: return TextTableViewCell()
+            case .방송사OTT: return LineTableViewCell()
+            case .포스터: return ImageTableViewCell()
+            case .표지: return ImageTableViewCell()
+            case .명장면: return ImageTableViewCell()
+            case .앨범커버: return ImageTableViewCell()
+            case .장르: return GenreTableViewCell()
+            case .카테고리: return GenreTableViewCell()
+            case .OST: return SongTableViewCell()
+            case .앨범: return SongTableViewCell()
+            case .감독: return LineTableViewCell()
+            case .배우: return LineTableViewCell()
+            case .가수: return LineTableViewCell()
+            case .작가: return LineTableViewCell()
+            case .요일: return LineTableViewCell()
+            case .플랫폼: return LineTableViewCell()
+            case .채널: return LineTableViewCell()
+            case .출판사: return LineTableViewCell()
+            case .링크: return LinkTableViewCell()
+            case .타임스탬프: return StampTableViewCell()
             }
         }
     }
