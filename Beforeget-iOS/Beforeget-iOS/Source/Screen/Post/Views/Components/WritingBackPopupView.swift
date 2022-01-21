@@ -59,10 +59,9 @@ final class WritingBackPopupView: UIView {
     }
     
     @objc func touchupRightButton(_ sender: UIButton) {
-        // MARK: - FIXME 화면 연결 후 플로우 확인 후 수정
-        guard let pvc = viewController?.presentingViewController else { return }
+        guard let postViewController = viewController?.presentingViewController else { return }
         viewController?.dismiss(animated: true) {
-            pvc.dismiss(animated: true, completion: nil)
+            postViewController.navigationController?.popViewController(animated: true)
         }
     }
 }

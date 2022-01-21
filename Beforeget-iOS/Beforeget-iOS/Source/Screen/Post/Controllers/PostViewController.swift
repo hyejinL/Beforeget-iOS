@@ -18,7 +18,15 @@ class PostViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false, mediaType: mediaType ?? .movie)
+    private lazy var navigationBar = BDSNavigationBar(self, view: .write, isHidden: false, mediaType: mediaType ?? .movie).then {
+        $0.backButton.isHidden = true
+    }
+    
+    private let backButton = UIButton().then {
+        $0.setImage(Asset.Assets.btnBack.image, for: .normal)
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.addTarget(self, action: #selector(touchupBackButton), for: .touchUpInside)
+    }
     
     private let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -121,6 +129,7 @@ class PostViewController: UIViewController {
     private func setupLayout() {
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubviews([navigationBar,
+                          backButton,
                           doneButton,
                           writingTableView,
                           bottomBarStackView,
@@ -130,6 +139,11 @@ class PostViewController: UIViewController {
         
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.leading.equalTo(navigationBar.snp.leading).inset(4)
         }
         
         doneButton.snp.makeConstraints {
@@ -221,8 +235,18 @@ class PostViewController: UIViewController {
         }
     }
     
+    @objc func touchupBackButton() {
+        if !mediaTitle.isEmpty || !oneLines.isEmpty || !comment.isEmpty || !additionalItems.isEmpty {
+            let backPopupViewController = PostBackPopupViewController()
+            backPopupViewController.modalPresentationStyle = .overCurrentContext
+            definesPresentationContext = true
+            present(backPopupViewController, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
     @objc func touchupDoneButton() {
-
         if starRating == 0 || mediaTitle.isEmpty || oneLines.isEmpty {
             let requiredFieldPopupViewController = PostRequiredFieldPopupViewController()
             requiredFieldPopupViewController.modalPresentationStyle = .overCurrentContext

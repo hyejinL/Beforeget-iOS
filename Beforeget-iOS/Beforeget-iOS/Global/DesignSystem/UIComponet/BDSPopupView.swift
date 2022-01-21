@@ -51,6 +51,8 @@ public class BDSPopupView: UIView {
     
     private var infoLabel = UILabel().then {
         $0.font = BDSFont.body9
+        $0.numberOfLines = 2
+        $0.textAlignment = .center
     }
     
     private var lineView = UIView().then {
