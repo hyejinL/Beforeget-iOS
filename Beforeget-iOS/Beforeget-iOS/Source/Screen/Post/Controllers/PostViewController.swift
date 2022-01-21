@@ -202,8 +202,8 @@ class PostViewController: UIViewController {
     
     @objc func touchupAddItemButton() {
         let addItemViewController = AddItemViewController()
-        definesPresentationContext = true
         addItemViewController.modalPresentationStyle = .overCurrentContext
+        definesPresentationContext = true
         addItemViewController.mediaType = mediaType
         present(addItemViewController, animated: true, completion: nil)
     }
@@ -315,6 +315,7 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
+            oneLineCell.reloadCollectionView()
             oneLineCell.setupHidden(addReviewCircleButtonIsHidden: !oneLines.isEmpty ? true : false,
                                     addReviewButtonIsHidden: oneLines.isEmpty ? true : false,
                                     oneLineCollectionViewIsHidden: oneLines.isEmpty ? true : false)
