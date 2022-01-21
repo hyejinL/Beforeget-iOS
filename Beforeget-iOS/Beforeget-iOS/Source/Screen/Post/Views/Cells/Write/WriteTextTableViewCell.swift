@@ -119,15 +119,24 @@ class WriteTextTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     //MARK: - Custom Method
     
-    func setupTitle(title: String) {
+    func configTitle(title: String) {
         typeTextField.text = title
     }
     
-    func setupTextFieldEditable() {
+    func configContent(content: String) {
+        contentTextView.text = content
+        letterCountLabel.text = "\(content.count) / 100"
+        
+        if content.count != 0 {
+            placeHolderLabel.isHidden = true
+        }
+    }
+    
+    func configTextFieldEditable() {
         typeTextField.isUserInteractionEnabled.toggle()
     }
     
-    func setupPlaceHolderText(_ mediaText: String) {
+    func configPlaceHolderText(_ mediaText: String) {
         var placeHolderText: String
         switch mediaText {
         case MovieRecommendItem.qutoes:

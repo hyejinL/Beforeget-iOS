@@ -75,7 +75,8 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
     
     weak var delegate: WritingHeaderViewDelegate?
     
-    var sendStarCount: ((_ starCount: Int) -> ())?
+    var starRating: Int = 0
+    var sendStarRating: ((_ starRating: Int) -> ())?
     
     // MARK: - Initializer
     
@@ -172,51 +173,79 @@ final class WritingHeaderView: UITableViewHeaderFooterView {
         return "\(dateString) \(weekday)"
     }
     
+    func configDate(date: Date) {
+        dateButton.setTitle(formatDate(date), for: .normal)
+    }
+    
+    func configStarButtonImage(starRating: Int) {
+        switch starRating {
+        case 1:
+            star1Button.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+            [star2Button, star3Button, star4Button, star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+            }
+        case 2:
+            [star1Button, star2Button].forEach {
+                $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+            }
+            [star3Button, star4Button, star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+            }
+        case 3:
+            [star1Button, star2Button, star3Button].forEach {
+                $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+            }
+            [star4Button, star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+            }
+        case 4:
+            [star1Button, star2Button, star3Button, star4Button].forEach {
+                $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+            }
+            [star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+            }
+        case 5:
+            [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
+            }
+        default:
+            [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
+                $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
+            }
+        }
+    }
+    
     // MARK: - @objc
     
     @objc func touchupStar1() {
-        star1Button.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        [star2Button, star3Button, star4Button, star5Button].forEach {
-            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
-        }
-        sendStarCount?(1)
+        starRating = 1
+        configStarButtonImage(starRating: starRating)
+        sendStarRating?(starRating)
     }
     
     @objc func touchupStar2() {
-        [star1Button, star2Button].forEach {
-            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        }
-        [star3Button, star4Button, star5Button].forEach {
-            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
-        }
-        sendStarCount?(2)
+        starRating = 2
+        configStarButtonImage(starRating: starRating)
+        sendStarRating?(starRating)
     }
     
     @objc func touchupStar3() {
-        [star1Button, star2Button, star3Button].forEach {
-            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        }
-        [star4Button, star5Button].forEach {
-            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
-        }
-        sendStarCount?(3)
+        starRating = 3
+        configStarButtonImage(starRating: starRating)
+        sendStarRating?(starRating)
     }
     
     @objc func touchupStar4() {
-        [star1Button, star2Button, star3Button, star4Button].forEach {
-            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        }
-        [star5Button].forEach {
-            $0.setImage(Asset.Assets.bigstarInactive.image, for: .normal)
-        }
-        sendStarCount?(4)
+        starRating = 4
+        configStarButtonImage(starRating: starRating)
+        sendStarRating?(starRating)
     }
     
     @objc func touchupStar5() {
-        [star1Button, star2Button, star3Button, star4Button, star5Button].forEach {
-            $0.setImage(Asset.Assets.bigstarActive.image, for: .normal)
-        }
-        sendStarCount?(5)
+        starRating = 5
+        configStarButtonImage(starRating: starRating)
+        sendStarRating?(starRating)
     }
     
     @objc func touchupDate() {

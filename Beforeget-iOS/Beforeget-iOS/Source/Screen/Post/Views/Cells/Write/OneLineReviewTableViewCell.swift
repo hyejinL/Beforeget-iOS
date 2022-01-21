@@ -110,8 +110,8 @@ class OneLineReviewTableViewCell: UITableViewCell {
         
         addReviewCircleButton.snp.makeConstraints {
             $0.top.equalTo(oneLineReviewLabel.snp.bottom).offset(17)
-            $0.bottom.equalToSuperview().inset(31)
             $0.centerX.equalToSuperview()
+            $0.height.equalTo(35)
         }
         
         oneLineCollectionView.snp.makeConstraints {
@@ -185,15 +185,16 @@ extension OneLineReviewTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneLineTextCollectionViewCell.className, for: indexPath) as? OneLineTextCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.setupCornerRadius(radius: 17)
+        
+        cell.configPostOneLineCell()
         cell.config(oneline: oneLines[indexPath.item])
-        cell.showDeleteButton()
-        cell.configColor(borderColor: Asset.Colors.black200.color, textColor: Asset.Colors.black200.color, backgroundColor: Asset.Colors.white.color)
         cell.deleteOneLine = {
             collectionView.deleteItems(at: [IndexPath(row: indexPath.item, section: 0)])
+            
             let deletingIndex = self.oneLines.firstIndex(of: self.oneLines[indexPath.item]) ?? -1
             self.oneLines.remove(at: deletingIndex)
             self.reloadCollectionView()
+            
             NotificationCenter.default.post(name: NSNotification.Name.didAddOneLine, object: self.oneLines)
             
             if self.oneLines.isEmpty {

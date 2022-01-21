@@ -97,7 +97,6 @@ class PostViewController: UIViewController {
     private var star: Int = 0
     private var mediaTitle: String?
     private var comment: String?
-    private var additionalItemsContent: [String] = []
     
     var additionalItems: [Additional] = []
     var oneLines: [String] = []
@@ -240,6 +239,12 @@ class PostViewController: UIViewController {
         navigationController?.pushViewController(CompleteViewController(), animated: true)
     }
     
+    @objc func hideDatePicker() {
+        [backgroundView, datePicker].forEach {
+            $0.isHidden = true
+        }
+    }
+    
     //MARK: - Custom Method
     
     func reloadTableView() {
@@ -262,6 +267,7 @@ extension PostViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let titleCell = TitleTableViewCell()
+            titleCell.configContent(content: mediaTitle ?? "")
             titleCell.sendTitle = { title in
                 self.mediaTitle = title
             }
@@ -280,8 +286,9 @@ extension PostViewController: UITableViewDataSource {
         case 2:
             let commentCell = WriteTextTableViewCell()
             commentCell.delegate = self
-            commentCell.setupTextFieldEditable()
+            commentCell.configTextFieldEditable()
             commentCell.selectionStyle = .none
+            commentCell.configContent(content: comment ?? "")
             commentCell.sendContent = { comment in
                 self.comment = comment
             }
@@ -290,14 +297,15 @@ extension PostViewController: UITableViewDataSource {
             guard let textCell = tableView.dequeueReusableCell(withIdentifier: WriteTextTableViewCell.className, for: indexPath) as? WriteTextTableViewCell else { return UITableViewCell() }
             textCell.delegate = self
             textCell.hideLetterCountLabel()
-            textCell.setupPlaceHolderText(additionalItems[indexPath.row-3].type)
+            textCell.configPlaceHolderText(additionalItems[indexPath.row-3].type)
             textCell.selectionStyle = .none
             
+            textCell.configContent(content: additionalItems[indexPath.row-3].content)
             if additionalItems[indexPath.row-3].type == "text" {
-                textCell.setupTitle(title: "")
+                textCell.configTitle(title: "")
             } else {
-                textCell.setupTitle(title: additionalItems[indexPath.row-3].type)
-                textCell.setupTextFieldEditable()
+                textCell.configTitle(title: additionalItems[indexPath.row-3].type)
+                textCell.configTextFieldEditable()
             }
             
             textCell.sendContent = { content in
@@ -319,8 +327,10 @@ extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = WritingHeaderView()
         headerView.delegate = self
-        headerView.sendStarCount = { starCount in
-            self.star = starCount
+        headerView.configDate(date: datePicker.date)
+        headerView.configStarButtonImage(starRating: star)
+        headerView.sendStarRating = { starRating in
+            self.star = starRating
         }
         return headerView
     }
@@ -387,6 +397,10 @@ extension PostViewController {
 extension PostViewController: WritingHeaderViewDelegate {
     func touchupDateButton() {
         view.addSubviews([backgroundView, datePicker])
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideDatePicker))
+        tap.cancelsTouchesInView = false
+        backgroundView.addGestureRecognizer(tap)
         
         [backgroundView, datePicker].forEach {
             $0.isHidden = false

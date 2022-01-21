@@ -118,6 +118,13 @@ class TitleTableViewCell: UITableViewCell, UITableViewRegisterable {
     @objc func touchupDeleteButton(_ sender: UIButton) {
         titleTextField.text = ""
     }
+    
+    //MARK: - Custom Method
+    
+    func configContent(content: String) {
+        titleTextField.text = content
+        letterCountLabel.text = "\(content.count) / 20"
+    }
 }
 
 extension TitleTableViewCell: UITextFieldDelegate {
