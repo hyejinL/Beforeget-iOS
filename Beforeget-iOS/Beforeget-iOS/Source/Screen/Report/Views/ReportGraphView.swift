@@ -80,7 +80,7 @@ class ReportGraphView: UIView {
     
     var month: String = "" {
         didSet {
-            monthLabel.text = "\(month)월"
+            monthLabel.text = "\(month)"
         }
     }
     
