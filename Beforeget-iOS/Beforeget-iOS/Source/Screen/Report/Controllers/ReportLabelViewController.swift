@@ -18,7 +18,7 @@ final class ReportLabelViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var reportTopView = ReportTopView()
+    var reportTopView = ReportTopView()
     var typeImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
@@ -34,15 +34,11 @@ final class ReportLabelViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
     
     private func configUI() {
-        reportTopView.monthButton.inputAccessoryView = setupToolbar()
-        reportTopView.monthButton.inputView = monthPicker
-        
         reportTopView.reportTitle = "\(addOrSubtractMonth(month: -1))의 밴토리님은?"
         reportTopView.reportDescription = "이번 달 나의 소비 유형을 알아보세요"
     }
@@ -52,8 +48,8 @@ final class ReportLabelViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
-            $0.height.equalTo(UIScreen.main.hasNotch ? 146 : 142)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 126 : 115)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 70 : 66)
         }
         
         typeImageView.snp.makeConstraints {
@@ -69,25 +65,7 @@ final class ReportLabelViewController: UIViewController {
         }
     }
     
-    private func bind() {
-        reportTopView.delegate = self
-    }
-    
     // MARK: - Custom Method
-
-    private func setupToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        toolbar.backgroundColor = .white
-        toolbar.tintColor = Asset.Colors.black200.color
-        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        
-        return toolbar
-    }
     
     private func addOrSubtractMonth(month:Int) -> String {
         guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
@@ -95,30 +73,4 @@ final class ReportLabelViewController: UIViewController {
         dateFormatter.dateFormat = "M월"
         return dateFormatter.string(from: date)
     }
-    
-    // MARK: - @objc
-    
-    @objc func touchupDoneButton() {
-        reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-        view.endEditing(true)
-        
-        reportAPI.getFirstReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
-            guard let self = self else { return }
-            guard let data = data else { return }
-            
-            self.reportDescriptionView.descriptionTitle = data.title
-            self.reportDescriptionView.descriptionContent = data.comment
-            
-            let listURL = URL(string: data.poster)
-            self.typeImageView.kf.setImage(with: listURL)
-            
-            self.reportTopView.reportTitle = "\(self.monthPicker.month)월의 밴토리님은?"
-        }
-    }
-}
-
-// MARK: - ReportTopView Delegate
-
-extension ReportLabelViewController: ReportTopViewDelegate {
-    func touchupMonthButton() { }
 }

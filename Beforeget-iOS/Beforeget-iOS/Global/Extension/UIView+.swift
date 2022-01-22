@@ -38,7 +38,7 @@ extension UIView {
     func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.layer.frame.size, false, UIScreen.main.scale)
         
-        drawHierarchy(in: CGRect(x: 0, y: UIScreen.main.hasNotch ? 44 : 50, width: frame.width, height: 647), afterScreenUpdates: true)
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
         UIGraphicsEndImageContext()

@@ -43,9 +43,6 @@ final class ReportSentenceViewController: UIViewController {
     // MARK: - InitUI
     
     private func configUI() {
-        reportTopView.monthButton.inputAccessoryView = setupToolbar()
-        reportTopView.monthButton.inputView = monthPicker
-        
         reportTopView.reportTitle = "유형별 한 줄 리뷰 순위"
         reportTopView.reportDescription = "유형 카드를 탭하여 확인해보세요"
     }
@@ -55,8 +52,8 @@ final class ReportSentenceViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
-            $0.height.equalTo(UIScreen.main.hasNotch ? 146 : 142)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 126 : 115)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 70 : 66)
         }
         
         reportSentenceView.snp.makeConstraints {
@@ -69,7 +66,6 @@ final class ReportSentenceViewController: UIViewController {
     // MARK: - Custom Method
     
     private func bind() {
-        reportTopView.delegate = self
         reportSentenceView.delegate = self
         
         reportSentenceView.movieData = movieData
@@ -78,50 +74,6 @@ final class ReportSentenceViewController: UIViewController {
         reportSentenceView.musicData = musicData
         reportSentenceView.webtoonData = webtoonData
         reportSentenceView.youtubeData = youtubeData
-    }
-    
-    private func setupToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        toolbar.backgroundColor = Asset.Colors.white.color
-        toolbar.tintColor = Asset.Colors.black200.color
-        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        
-        return toolbar
-    }
-    
-    // MARK: - @objc
-
-    @objc func touchupDoneButton() {
-        reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-        view.endEditing(true)
-        
-        reportAPI.getFourthReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
-            guard let self = self else { return }
-            guard let data = data else { return }
-            
-            // MARK: - TODO : 데이터 초기화 및 리로드
-
-            self.musicData.removeAll()
-            self.bookData.removeAll()
-            self.tvData.removeAll()
-            self.musicData.removeAll()
-            self.webtoonData.removeAll()
-            self.youtubeData.removeAll()
-            
-            self.movieData = data.oneline.movie
-            self.bookData = data.oneline.book
-            self.tvData = data.oneline.tv
-            self.musicData = data.oneline.music
-            self.webtoonData = data.oneline.webtoon
-            self.youtubeData = data.oneline.youtube
-            
-            self.reportSentenceView.reloadCollectionView()
-        }
     }
 }
 
@@ -181,10 +133,4 @@ extension ReportSentenceViewController: ReportSentenceViewDelegate {
         }
         UIView.transition(with: reportSentenceView.youtubeImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
     }
-}
-
-// MARK: - ReportTopView Delegate
-
-extension ReportSentenceViewController: ReportTopViewDelegate {
-    func touchupMonthButton() { }
 }

@@ -30,8 +30,17 @@ final class ReportViewController: UIPageViewController {
         $0.addTarget(self, action: #selector(touchupDownLoadButton), for: .touchUpInside)
     }
     
+    private var monthButton = RespondingButton().then {
+        $0.setTitleColor(Asset.Colors.black200.color, for: .normal)
+        $0.addTarget(self, action: #selector(touchupMonthButton), for: .touchUpInside)
+        $0.titleLabel?.font = BDSFont.enBody7
+    }
+    
+    private var monthPicker = MonthYearPickerView()
+    
     private var pages = [UIViewController]()
     private let initialPage = 0
+    private var currentPageIndex = 0
     
     private let paginationStackView = UIStackView().then {
         $0.axis = .horizontal
@@ -101,21 +110,36 @@ final class ReportViewController: UIPageViewController {
     private func configUI() {
         setupStatusBar(Asset.Colors.white.color)
         view.backgroundColor = Asset.Colors.white.color
+        
+        monthButton.layer.borderWidth = 1
+        monthButton.layer.borderColor = Asset.Colors.gray200.color.cgColor
+        monthButton.makeRound(radius: 31 / 2)
+        
+        let month = subtractMonthButton(month: -1)
+        monthButton.setTitle("\(month)", for: .normal)
+        
+        monthButton.inputAccessoryView = setupToolbar()
+        monthButton.inputView = monthPicker
     }
     
     private func setupLayout() {
-        view.addSubviews([naviBar, paginationStackView, reportLoadingView])
+        view.addSubviews([naviBar, monthButton, paginationStackView, reportLoadingView])
         naviBar.addSubview(downLoadButton)
         
         naviBar.snp.makeConstraints {
             $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(UIScreen.main.hasNotch ? 44 : 50)
         }
         
         downLoadButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview()
             $0.width.height.equalTo(44)
+        }
+        
+        monthButton.snp.makeConstraints { 
+            $0.top.equalTo(naviBar.snp.bottom).offset(UIScreen.main.hasNotch ? 23 : 13)
+            $0.leading.trailing.equalToSuperview().inset(133)
+            $0.height.equalTo(31)
         }
         
         paginationStackView.addArrangedSubviews([pageImageView1,
@@ -148,13 +172,20 @@ final class ReportViewController: UIPageViewController {
     
     private func calculateHeight() {
         guard let maxCount = sortedCountData.max() else { return }
+        // 기록이 없을 경우
+        if maxCount == 0 {
+            heights = [0, 0, 0, 0 ,0]
+            return
+        }
+        
         page2.reportGraphView.maxCount = maxCount
         page5.reportOnePageView.maxCount = maxCount
         
-        let midCount = sortedCountData.sorted(by: >)[2]
-        page2.reportGraphView.midCount = midCount
-        page5.reportOnePageView.midCount = midCount
+        let midCount = ceil(Double(maxCount) / 2)
+        page2.reportGraphView.midCount = Int(midCount)
+        page5.reportOnePageView.midCount = Int( midCount)
         
+        heights.removeAll()
         for data in sortedCountData {
             let totalHeight = UIScreen.main.hasNotch ? 150 : 130
             let height = totalHeight * data / maxCount
@@ -164,20 +195,20 @@ final class ReportViewController: UIPageViewController {
         isScrollEnabled = true
     }
     
-    private func setupBarData() {
-        page5.reportOnePageView.barView1.setupBarHeight(height: CGFloat(heights[0]))
-        page5.reportOnePageView.barView2.setupBarHeight(height: CGFloat(heights[1]))
-        page5.reportOnePageView.barView3.setupBarHeight(height: CGFloat(heights[2]))
-        page5.reportOnePageView.barView4.setupBarHeight(height: CGFloat(heights[3]))
-        page5.reportOnePageView.barView5.setupBarHeight(height: CGFloat(heights[4]))
-    }
-    
-    private func setupBarAnimation() {
+    private func setupSecondReportBarAnimation() {
         page2.reportGraphView.barView1.animate(height: CGFloat(heights[0]))
         page2.reportGraphView.barView2.animate(height: CGFloat(heights[1]))
         page2.reportGraphView.barView3.animate(height: CGFloat(heights[2]))
         page2.reportGraphView.barView4.animate(height: CGFloat(heights[3]))
         page2.reportGraphView.barView5.animate(height: CGFloat(heights[4]))
+    }
+    
+    private func setupFiveReportBarAnimation() {
+        page5.reportOnePageView.barView1.animate(height: CGFloat(heights[0]))
+        page5.reportOnePageView.barView2.animate(height: CGFloat(heights[1]))
+        page5.reportOnePageView.barView3.animate(height: CGFloat(heights[2]))
+        page5.reportOnePageView.barView4.animate(height: CGFloat(heights[3]))
+        page5.reportOnePageView.barView5.animate(height: CGFloat(heights[4]))
     }
     
     private func saveImageOnPhone(image: UIImage, image_name: String) -> URL? {
@@ -200,11 +231,32 @@ final class ReportViewController: UIPageViewController {
         }
     }
     
+    private func subtractMonthButton(month:Int) -> String {
+        guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월"
+        return dateFormatter.string(from: date)
+    }
+    
     private func addOrSubtractMonth(month:Int) -> String {
         guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM"
         return dateFormatter.string(from: date)
+    }
+    
+    private func setupToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.backgroundColor = Asset.Colors.white.color
+        toolbar.tintColor = Asset.Colors.black200.color
+        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        
+        return toolbar
     }
     
     // MARK: - @objc
@@ -226,6 +278,72 @@ final class ReportViewController: UIPageViewController {
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
         
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @objc func touchupDoneButton() {
+        monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
+        view.endEditing(true)
+        
+        if currentPageIndex == 0 {
+            reportAPI.getFirstReport(date: "\(monthPicker.year)-\(monthPicker.month)") { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page1.reportDescriptionView.descriptionTitle = data.title
+                self.page1.reportDescriptionView.descriptionContent = data.comment
+                
+                let listURL = URL(string: data.poster)
+                self.page1.typeImageView.kf.setImage(with: listURL)
+                
+                self.page1.reportTopView.reportTitle = "\(self.monthPicker.month)월의 밴토리님은?"
+            }
+        }
+        
+        if currentPageIndex == 1 {
+            reportAPI.getSecondReport(date: "\(monthPicker.year)-\(monthPicker.month)", count: 5, completion: { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page2.reportDescriptionView.descriptionTitle = data.title
+                self.page2.reportDescriptionView.descriptionContent = data.comment
+                
+                self.page2.reportGraphView.barView1.barTitle = "\(data.recordCount[4].month)월"
+                self.page2.reportGraphView.barView2.barTitle = "\(data.recordCount[3].month)월"
+                self.page2.reportGraphView.barView3.barTitle = "\(data.recordCount[2].month)월"
+                self.page2.reportGraphView.barView4.barTitle = "\(data.recordCount[1].month)월"
+                self.page2.reportGraphView.barView5.barTitle = "\(data.recordCount[0].month)월"
+                
+                for i in 0...data.recordCount.count-1 {
+                    self.countData[i] = data.recordCount[i].count
+                }
+                self.sortedCountData = self.countData.reversed()
+                
+                self.calculateHeight()
+                self.setupSecondReportBarAnimation()
+            })
+        }
+        
+        if currentPageIndex == 2 {
+            reportAPI.getThirdReport(date: "\(monthPicker.year)-\(monthPicker.month)", completion: { [weak self] data, err in
+                guard let self = self else { return }
+                guard let data = data else { return }
+                
+                self.page3.reportDescriptionView.descriptionTitle = data.title
+                self.page3.reportDescriptionView.descriptionContent = data.label
+                
+                self.page3.reportRankingView.firstCount = data.arr[0].count
+                self.page3.reportRankingView.firstType = data.arr[0].type
+                self.page3.reportRankingView.secondCount = data.arr[1].count
+                self.page3.reportRankingView.secondType = data.arr[1].type
+                self.page3.reportRankingView.thirdCount = data.arr[2].count
+                self.page3.reportRankingView.thirdType = data.arr[2].type
+            })
+        }
+    }
+    
+    @objc func touchupMonthButton() {
+        monthButton.becomeFirstResponder()
+        
     }
 }
 
@@ -270,13 +388,15 @@ extension ReportViewController: UIPageViewControllerDelegate {
             let currentIndex = pages.firstIndex(of: viewController)
         else { return }
         
+        currentPageIndex = currentIndex
+        
         switch currentIndex {
         case 1:
             pageImageView2.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView3, pageImageView4, pageImageView5].forEach {
                 $0.image = Asset.Assets.pageInactive.image
             }
-            setupBarAnimation()
+            setupSecondReportBarAnimation()
         case 2:
             pageImageView3.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView4, pageImageView5].forEach {
@@ -288,7 +408,7 @@ extension ReportViewController: UIPageViewControllerDelegate {
                 $0.image = Asset.Assets.pageInactive.image
             }
         case 4:
-            setupBarData()
+            setupFiveReportBarAnimation()
             pageImageView5.image = Asset.Assets.pageActive.image
             [pageImageView1, pageImageView2, pageImageView3, pageImageView4].forEach {
                 $0.image = Asset.Assets.pageInactive.image
@@ -323,9 +443,6 @@ extension ReportViewController {
             guard let self = self else { return }
             guard let data = data else { return }
             
-            self.page2.reportGraphView.maxCount = 20
-            self.page2.reportGraphView.midCount = 12
-            
             for i in 0...data.recordCount.count-1 {
                 self.countData[i] = data.recordCount[i].count
             }
@@ -334,6 +451,12 @@ extension ReportViewController {
             
             self.page2.reportDescriptionView.descriptionTitle = data.title
             self.page2.reportDescriptionView.descriptionContent = data.comment
+            
+            self.page2.reportGraphView.barView1.barTitle = "\(data.recordCount[4].month)월"
+            self.page2.reportGraphView.barView2.barTitle = "\(data.recordCount[3].month)월"
+            self.page2.reportGraphView.barView3.barTitle = "\(data.recordCount[2].month)월"
+            self.page2.reportGraphView.barView4.barTitle = "\(data.recordCount[1].month)월"
+            self.page2.reportGraphView.barView5.barTitle = "\(data.recordCount[0].month)월"
             
             self.reportLoadingView.stop()
             self.reportLoadingView.removeFromSuperview()

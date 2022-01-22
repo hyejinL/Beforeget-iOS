@@ -113,6 +113,11 @@ class PostViewController: UIViewController {
     
     // MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -125,10 +130,10 @@ class PostViewController: UIViewController {
     
     private func configUI() {
         view.backgroundColor = .white
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setupLayout() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubviews([navigationBar,
                           backButton,
                           doneButton,
@@ -143,12 +148,13 @@ class PostViewController: UIViewController {
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.top.equalTo(navigationBar.snp.top)
             $0.leading.equalTo(navigationBar.snp.leading).inset(4)
+            $0.width.height.equalTo(44)
         }
         
         doneButton.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.top).inset(6)
+            $0.centerY.equalTo(backButton.snp.centerY)
             $0.trailing.equalTo(navigationBar.snp.trailing).inset(13)
         }
         
@@ -203,20 +209,26 @@ class PostViewController: UIViewController {
     @objc func touchupAddItemButton() {
         let addItemViewController = AddItemViewController()
         addItemViewController.modalPresentationStyle = .overCurrentContext
-        addItemViewController.mediaType = mediaType
         definesPresentationContext = true
+        addItemViewController.mediaType = mediaType
         present(addItemViewController, animated: true, completion: nil)
     }
     
     @objc func addOneLine(_ sender: Notification) {
-        guard let oneLineData = sender.object as? [String] else { return }
         guard let cell = writingTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? OneLineReviewTableViewCell else { return }
         
-        oneLineData.forEach {
-            if !cell.oneLines.contains($0) {
-                cell.oneLines.append($0)
+        if let oneLineData = sender.object as? [String] {
+            oneLineData.forEach {
+                if !cell.oneLines.contains($0) {
+                    cell.oneLines.append($0)
+                    oneLines = oneLineData
+                }
             }
-        }
+        } else if let deletingOneLine = sender.object as? String {
+            let deletingIndex = self.oneLines.firstIndex(of: deletingOneLine)
+            self.oneLines.remove(at: deletingIndex ?? -1)
+            cell.oneLines.remove(at: deletingIndex ?? -1)
+        } else { return }
         
         if cell.oneLines.isEmpty == false {
             cell.reloadCollectionView()
@@ -240,6 +252,7 @@ class PostViewController: UIViewController {
         if !mediaTitle.isEmpty || !oneLines.isEmpty || !comment.isEmpty || !additionalItems.isEmpty {
             let backPopupViewController = PostBackPopupViewController()
             backPopupViewController.modalPresentationStyle = .overCurrentContext
+            backPopupViewController.modalTransitionStyle = .crossDissolve
             definesPresentationContext = true
             present(backPopupViewController, animated: true)
         } else {
@@ -309,6 +322,7 @@ extension PostViewController: UITableViewDataSource {
         case 1:
             let oneLineCell = OneLineReviewTableViewCell()
             oneLineCell.oneLines = oneLines
+            oneLineCell.reloadCollectionView()
             oneLineCell.setupHidden(addReviewCircleButtonIsHidden: !oneLines.isEmpty ? true : false,
                                     addReviewButtonIsHidden: oneLines.isEmpty ? true : false,
                                     oneLineCollectionViewIsHidden: oneLines.isEmpty ? true : false)

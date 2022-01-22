@@ -30,15 +30,11 @@ final class ReportGraphViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         setupLayout()
-        bind()
     }
     
     // MARK: - InitUI
     
     private func configUI() {
-        reportTopView.monthButton.inputAccessoryView = setupToolbar()
-        reportTopView.monthButton.inputView = monthPicker
-        
         reportTopView.reportTitle = "월별 그래프"
         reportTopView.reportDescription = "가장 많은 기록을 한 달을 확인해보세요"
         
@@ -46,9 +42,7 @@ final class ReportGraphViewController: UIViewController {
         reportGraphView.threeMonthSelected = false
         reportGraphView.fiveMonthSelected = true
         
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: Date())
-        reportGraphView.month = String(month)
+        reportGraphView.month = addOrSubtractMonth(month: -1)
     }
     
     private func setupLayout() {
@@ -56,8 +50,8 @@ final class ReportGraphViewController: UIViewController {
         
         reportTopView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(44)
-            $0.height.equalTo(146)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(UIScreen.main.hasNotch ? 126 : 115)
+            $0.height.equalTo(UIScreen.main.hasNotch ? 70 : 66)
         }
         
         reportGraphView.snp.makeConstraints {
@@ -75,68 +69,12 @@ final class ReportGraphViewController: UIViewController {
     
     // MARK: - Custom Method
     
-    private func bind() {
-        reportTopView.delegate = self
-        
-        reportGraphView.barView1.barTitle = addOrSubtractMonth(month: -5)
-        reportGraphView.barView2.barTitle = addOrSubtractMonth(month: -4)
-        reportGraphView.barView3.barTitle = addOrSubtractMonth(month: -3)
-        reportGraphView.barView4.barTitle = addOrSubtractMonth(month: -2)
-        reportGraphView.barView5.barTitle = addOrSubtractMonth(month: -1)
-    }
-    
-    private func setupToolbar() -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        toolbar.backgroundColor = Asset.Colors.white.color
-        toolbar.tintColor = Asset.Colors.black200.color
-        toolbar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(touchupDoneButton))
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        
-        return toolbar
-    }
-    
     private func addOrSubtractMonth(month:Int) -> String {
         guard let date = Calendar.current.date(byAdding: .month, value: month, to: Date()) else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M월"
         return dateFormatter.string(from: date)
     }
-    
-    private func setBarTitle(monts: [String]) {
-        reportGraphView.barView1.barTitle = monts[0]
-        reportGraphView.barView2.barTitle = monts[1]
-        reportGraphView.barView3.barTitle = monts[2]
-        reportGraphView.barView4.barTitle = monts[3]
-        reportGraphView.barView5.barTitle = monts[4]
-    }
-    
-    // MARK: - @objc
-    
-    @objc func touchupDoneButton() {
-        reportTopView.monthButton.setTitle("\(monthPicker.year)년 \(monthPicker.month)월", for: .normal)
-        view.endEditing(true)
-        
-        reportAPI.getSecondReport(date: "\(monthPicker.year)-\(monthPicker.month)", count: 5) { [weak self] data, err in
-            guard let self = self else { return }
-            guard let data = data else { return }
-            
-            self.reportDescriptionView.descriptionTitle = data.title
-            self.reportDescriptionView.descriptionContent = data.comment
-            
-            // MARK: - TODO : 통계 그래프 높이 계산
-            
-        }
-    }
-}
-
-// MARK: - ReportTopView Delegate
-
-extension ReportGraphViewController: ReportTopViewDelegate {
-    func touchupMonthButton() { }
 }
 
 // MARK: - ReportGraphView Delegate
