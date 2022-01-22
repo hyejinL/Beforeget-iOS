@@ -26,9 +26,7 @@ class DetailRecordHeaderView: UIView {
         Asset.Colors.gray300.color, Asset.Colors.black200.color,
         Asset.Colors.gray400.color, Asset.Colors.black200.color]
     
-    public var reviewArray: [String] = [
-        "흥미진진한 줄거리", "연기가 일품이에요!",
-        "인생영화", "아름다운 영상미"]
+    public var reviewArray: [String] = ["-"]
     
     public var formatterDate = DateFormatter()
     

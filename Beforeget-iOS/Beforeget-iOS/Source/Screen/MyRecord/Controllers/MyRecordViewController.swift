@@ -22,6 +22,11 @@ final class MyRecordViewController: UIViewController {
         
     private var recordArray: [MyRecord] = []
     
+    /// 여기에 필터 선택 시에 전달된 데이터가 저장되어서 디테일뷰로 이동
+    private var storedDate: String = ""
+    private var storedMedia: String = ""
+    private var storedStar: String = ""
+    
     private var mediaData: String = ""
     private var starData: String = ""
     
@@ -63,11 +68,12 @@ final class MyRecordViewController: UIViewController {
         myRecordAPI.getMyRecord { data, err in
             guard let data = data else { return }
             self.recordArray = data
-            self.myRecordAPI.getMyRecordFilter(date: "-1", media: "\(self.mediaID)", star: "-1") { data, err in
-                DispatchQueue.main.async {
-                    self.recordTableView.reloadData()
-                }
+            DispatchQueue.main.async {
+                self.recordTableView.reloadData()
             }
+//            self.myRecordAPI.getMyRecordFilter(date: "-1", media: "\(self.mediaID)", star: "-1") { data, err in
+//
+//            }
         }
     }
     
@@ -124,6 +130,12 @@ extension MyRecordViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         let detailRecordViewController = DetailRecordViewController()
         detailRecordViewController.postId = self.recordArray[indexPath.row].id
+        
+//        myRecordAPI.getMyRecordFilter(date: storedDate, media: storedMedia, star: storedStar) { filteredData, err in
+//            // MARK: - 이 포스트아이디에는 필터링된 후 리로드 된 테이블뷰의 데이터의 id가 들어가져야 한다.
+//            guard let filteredData = filteredData else { return }
+//            detailRecordViewController.postId = filteredData[indexPath.row].id
+//        }
         navigationController?.pushViewController(detailRecordViewController, animated: true)
     }
 }
@@ -249,11 +261,15 @@ extension MyRecordViewController:
         if star.isEmpty {
             starString = "-1"
         }
+//
+//        storedDate = dateString
+//        storedMedia = mediaInt
+//        storedStar = starString
         
         myRecordAPI.getMyRecordFilter(date: dateString, media: mediaInt, star: starString) { data, err in
             print("넘어온 값", dateString, mediaInt, starString)
-            
             self.recordTableView.reloadData()
+            
         }
                 
         filterView.dateButton.isSelected = (data == -1) ?

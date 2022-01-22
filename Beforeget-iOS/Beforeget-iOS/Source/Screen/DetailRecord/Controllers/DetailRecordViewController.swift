@@ -19,20 +19,21 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
     
     // MARK: - Dummy Data
     
-    public var formatterDate = DateFormatter()
-    
     private var linkString: String = "https://www.youtube.com/watch?v=qZFo0PYkHFo"
+        
+    // MARK: - Properties
+    
+    public var dateFilter: String = "-1"
+    public var mediaFilter: String = "-1"
+    public var starFilter: String = "-1"
     
     public var myDetailRecordArray: [MyDetailRecord] = []
     public var myAdditionalArray = [DetailAdditional]()
-    
     public var typeArray: [String] = []
     
-    private var sectionArray: [DetailRecordSection] = [.comment, .comma, .line, .image]
-    
-    // MARK: - Properties
-    
     public var postId = 0
+    
+    public var formatterDate = DateFormatter()
     
     private lazy var navigationBar = BDSNavigationBar(
         self, view: .none, isHidden: false).then {
@@ -88,8 +89,9 @@ final class DetailRecordViewController: UIViewController, LinkButtonDelegate {
         myRecordAPI.getMyDetailRecord(postId: postId) { data, err in
             guard let data = data else { return }
             self.myDetailRecordArray = data
-            print(self.myDetailRecordArray,"통신 시작")
-            self.recordTableView.reloadData()
+            DispatchQueue.main.async {
+                self.recordTableView.reloadData()
+            }
         }
     }
     
