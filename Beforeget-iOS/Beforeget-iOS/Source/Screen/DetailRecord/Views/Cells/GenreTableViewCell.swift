@@ -14,12 +14,12 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
     
     // MARK: - Properties
     
-    private var genreArray: [String] = ["액션느와르", "로맨스코미디", "스릴러", "SF공상과학", "하이퍼리얼리즘", "모험"]
+    private var genreArray: [String] = ["에세이"]
     
     private var cellMargin: CGFloat = 47
     
     public var titleLabel = CellTitleLabel().then {
-        $0.title = "장르제목"
+        $0.title = "장르"
     }
     
     private let customFlowLayout = LeftAlignmentCollectionViewFlowLayout()
@@ -64,7 +64,7 @@ class GenreTableViewCell: UITableViewCell, UITableViewRegisterable {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(20)
-//            make.height.equalTo(23)
+            make.height.equalTo(23)
         }
         
         genreCollectionView.snp.makeConstraints { make in

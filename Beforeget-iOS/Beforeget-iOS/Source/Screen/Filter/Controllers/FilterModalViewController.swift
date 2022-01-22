@@ -77,9 +77,11 @@ final class FilterModalViewController: UIViewController {
     }
     
     public var resetButton = UIButton(type: .system).then {
-        $0.tintColor = Asset.Colors.black200.color
+        $0.tintColor = Asset.Colors.gray300.color
         $0.setImage(Asset.Assets.btnRefreshDate.image, for: .normal)
         $0.addTarget(self, action: #selector(touchupResetButton(_:)), for: .touchUpInside)
+        // MARK: - FIXME 데모데이 때는 구현 안함
+        $0.isUserInteractionEnabled = false
     }
     
     public var applyButton = BDSButton().then {

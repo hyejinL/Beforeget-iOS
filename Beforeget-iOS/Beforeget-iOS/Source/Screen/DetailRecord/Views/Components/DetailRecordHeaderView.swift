@@ -19,17 +19,14 @@ class DetailRecordHeaderView: UIView {
     private var fontColorArray: [UIColor] = [
         Asset.Colors.white.color, Asset.Colors.black200.color,
         Asset.Colors.black200.color, Asset.Colors.white.color,
-        Asset.Colors.black200.color, Asset.Colors.white.color,]
+        Asset.Colors.black200.color, Asset.Colors.white.color]
     
     private var colorArray: [UIColor] = [
         Asset.Colors.black200.color, Asset.Colors.gray400.color,
         Asset.Colors.gray300.color, Asset.Colors.black200.color,
         Asset.Colors.gray400.color, Asset.Colors.black200.color]
     
-    public var reviewArray: [String] = [
-        "흥미진진한 줄거리", "연기가 일품이에요!",
-        "인생영화", "아름다운 영상미",
-        "마음이 따뜻해져요", "개발자 인생!"]
+    public var reviewArray: [String] = ["-"]
     
     public var formatterDate = DateFormatter()
     
@@ -45,8 +42,8 @@ class DetailRecordHeaderView: UIView {
     }
     
     public lazy var titleLabel = UILabel().then {
-        $0.text = "0"
-        $0.numberOfLines = 0
+        $0.text = "-"
+        $0.numberOfLines = 2
         $0.font = BDSFont.title3
         $0.textColor = Asset.Colors.white.color
         $0.textAlignment = .center
@@ -60,7 +57,7 @@ class DetailRecordHeaderView: UIView {
     
     // MARK: - FIXME 날짜 변환
     public var dateLabel = UILabel().then {
-        $0.text = "0"
+        $0.text = "-"
         $0.font = BDSFont.enBody7
         $0.textColor = Asset.Colors.white.color
     }
@@ -95,9 +92,9 @@ class DetailRecordHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupDate()
         configUI()
         setupLayout()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -107,22 +104,13 @@ class DetailRecordHeaderView: UIView {
     // MARK: - InitUI
     
     private func configUI() {
+        titleLabel.numberOfLines = 0
         backgroundColor = Asset.Colors.white.color
         if preferredLanguage == "en" {
             titleLabel.font = BDSFont.enHead1
         } else if preferredLanguage == "kr" {
             titleLabel.font = BDSFont.title3
         }
-        
-//        if titleLabel.text.count < 19 {
-//            titleLabel.snp.updateConstraints { make in
-//                make.height.equalTo(23)
-//            }
-//        } else {
-//            titleLabel.snp.updateConstraints { make in
-//                make.height.equalTo(50)
-//            }
-//        }
     }
     
     private func setupLayout() {
@@ -149,14 +137,14 @@ class DetailRecordHeaderView: UIView {
             make.top.equalTo(iconImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(23)
+            make.height.equalTo(25)
         }
         
         dateView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-35)
-            make.height.equalTo(32)
+            make.bottom.equalToSuperview().inset(35)
+            make.height.equalTo(33)
         }
         
         dateLabel.snp.makeConstraints { make in
@@ -164,7 +152,7 @@ class DetailRecordHeaderView: UIView {
             make.leading.equalToSuperview().inset(18)
             make.bottom.equalToSuperview().inset(8)
             make.centerX.equalToSuperview()
-            make.height.equalTo(14)
+//            make.height.equalTo(14)
         }
         
         leftLineView.snp.makeConstraints { make in
@@ -198,19 +186,9 @@ class DetailRecordHeaderView: UIView {
             make.top.equalTo(reviewLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(70)
-            make.height.equalTo(120)
-            // MARK: FIXME - 한줄 리뷰 높이를 1~2 / 3~4 / 5~6 일 때 나눠서 계산해줘야 함
-            make.bottom.equalToSuperview()
+            make.height.equalTo(102)
+            make.bottom.equalToSuperview().inset(47)
         }
-    }
-    
-    // MARK: - Custom Method
-    
-    private func setupDate() {
-        formatterDate.locale = Locale(identifier: "ko_KR")
-        formatterDate.dateFormat = "YYYY. MM. dd E"
-        let currentFormatterDate = formatterDate.string(from: Date())
-        dateLabel.text = currentFormatterDate
     }
 }
 
